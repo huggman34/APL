@@ -14,7 +14,7 @@
     session_start();
 
     $_SESSION["username"] = $username;
-    header('Location: adminpage.php');
+    header('Location: hugo functions.php');
     //echo "<p>inloggad som: $username</p>";
 
   } else {
