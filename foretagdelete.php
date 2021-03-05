@@ -2,8 +2,7 @@
 <body>
 <?php
     require_once 'foretaglista.php';
-
-    include('connection.php');
+    include_once 'connection.php';
 
 ?>
 <?php
