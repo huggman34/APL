@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  include_once "db.php";
+  include_once "connection.php";
 
   $username = $_POST["username"];
   $password = $_POST["password"];
@@ -14,7 +14,7 @@
     session_start();
 
     $_SESSION["username"] = $username;
-    header('Location: adminpage.php');
+    header('Location: hugo functions.php');
     //echo "<p>inloggad som: $username</p>";
 
   } else {

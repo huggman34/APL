@@ -1,5 +1,5 @@
 <?php
-include_once "db.php";
+include_once "connection.php";
 session_start();
 $username=$_SESSION['username'];
 
@@ -25,9 +25,14 @@ $username=$_SESSION['username'];
  if (isset($_POST['submin'])) {
      periodgeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
 
-     $t=strtotime($_POST['startdatum']);
+    /* $t=strtotime($_POST['startdatum']);
      $g=strtotime($_POST['slutdatum']);
-     echo ceil(($g-$t)/60/60/24);
+     $pp=ceil(($g-$t)/60/60/24);
+     for ($i=0; $i < $pp; $i++) { 
+        $b=strtotime($i);
+         $donut=date($startdatum,$b);
+         $j++;
+    }*/
  }
 
  function elevRegistreing($conn,$fornamn,$efternamn){
@@ -38,9 +43,9 @@ $conn->query($sql);
 return "har lagts till";
      
  }
- function periodgeneration($conn,$startdatum,$slutdatum){
-    /*$sql="INSERT INTO period(namn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
-     $conn->query($sql);*/
+ function periodgeneration($conn,$periodNamn,$startdatum,$slutdatum){
+    $sql="INSERT INTO period(namn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
+     $conn->query($sql);
      $t=strtotime($startdatum);
      $g=strtotime($slutdatum);
      $pp=ceil(($g-$t)/60/60/24);
@@ -50,7 +55,7 @@ return "har lagts till";
           date($startdatum,$b);
           $j++;
      }
-     
+     return "period har skapats";
      /*$sql="INSERT INTO perioddag(dagID,periodID) SELECT dag.dagID,period.periodID FROM dag, period WHERE dag.datum>=period.startdatum AND dag.datum<=period.slutdatum";
      $conn->query($sql);
      return"sos";*/
