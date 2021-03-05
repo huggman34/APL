@@ -1,12 +1,9 @@
 <?php
+include_once "db.php";
 session_start();
 $username=$_SESSION['username'];
 
-$conn = new mysqli('localhost', 'root','','apl');
-$conn->set_charset("utf8");
-if ($conn->connect_error) {
- die("Connection failed: " . $conn->connect_error);
- } 
+
  echo'
  <form action="hugo functions.php" method="post">
  <input type="text" name="förnamn">
