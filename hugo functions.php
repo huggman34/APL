@@ -6,12 +6,13 @@ $conn = new mysqli('localhost', 'root','','apl');
 $conn->set_charset("utf8");
 if ($conn->connect_error) {
  die("Connection failed: " . $conn->connect_error);
- } /*<form action="hugo functions.php" method="post">
+ } 
+ echo'
+ <form action="hugo functions.php" method="post">
  <input type="text" name="förnamn">
  <input type="text" name="efternamn">
  <input type="submit" value="läggtill" name="submit">
- </form>*/
- echo'
+ </form>
  <form action="hugo functions.php" method="post">
  <input type="text" name="periodnamn">
  <input type="date" name="startdatum">
@@ -41,18 +42,18 @@ return "har lagts till";
      
  }
  function periodgeneration($conn,$startdatum,$slutdatum){
-    /*$sql="INSERT INTO period(namn) VALUES('$periodNamn','$startdatum','$slutdatum')";
+    /*$sql="INSERT INTO period(namn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
      $conn->query($sql);*/
      $t=strtotime($startdatum);
      $g=strtotime($slutdatum);
      $pp=ceil(($g-$t)/60/60/24);
-     $b;
+     $j=0;
      for ($i=0; $i < $pp; $i++) { 
          $b=strtotime($i);
           date($startdatum,$b);
-          $b++;
+          $j++;
      }
-     return $b;
+     
      /*$sql="INSERT INTO perioddag(dagID,periodID) SELECT dag.dagID,period.periodID FROM dag, period WHERE dag.datum>=period.startdatum AND dag.datum<=period.slutdatum";
      $conn->query($sql);
      return"sos";*/
