@@ -55,6 +55,6 @@ echo "</table>";
 ?>
 <button type="submit" name="delete">Ta bort</button>
 </form>
-<a href="test.php">Gå tillbaka</a>
+<a href="foretag.php">Gå tillbaka</a>
 </body>
 </html>

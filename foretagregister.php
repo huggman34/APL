@@ -17,6 +17,6 @@
         echo "ERROR: Was not able to execute $sql. " . mysqli_error($conn);
     }
 ?>
-<br><a href="test.php" class="tillbaka2">Gå tillbaka</a>
+<br><a href="foretag.php" class="tillbaka2">Gå tillbaka</a>
 </body>
 </html>
