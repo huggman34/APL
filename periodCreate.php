@@ -6,14 +6,14 @@ $username=$_SESSION['username'];
 
  echo'
 
- <form action="functin.php" method="post">
+ <form action="periodCreate.php" method="post">
  <input type="text" name="periodnamn">
  <input type="date" name="startdatum">
  <input type="date" name="slutdatum">
  <input type="submit" value="submit" name="submin">
  </form>';
 //select form som används för att välja period
-    echo'<form action="functin.php" method="post">
+    echo'<form action="periodCreate.php" method="post">
     <select name="period">';
     $sql="SELECT * FROM period";
             $resultt = $conn->query($sql);
@@ -35,14 +35,14 @@ $username=$_SESSION['username'];
      periodgeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
  }
   
- }
+ 
  // skapar perioder och dagar baserar deras periodens start och slutdatum och skapar period dagar så länge dem är inom  
  function periodgeneration($conn,$periodNamn,$startdatum,$slutdatum){
      $sql="INSERT INTO period(namn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
      $conn->query($sql);
 
      $start=strtotime($startdatum);
-     $slut=strtotime("+1 day",$slutdatum);
+     $slut=strtotime($slutdatum);
      $dagar=ceil(($slut-$start)/60/60/24);
      
      for ($i=0; $i < $dagar; $i++) { 
