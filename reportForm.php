@@ -40,7 +40,7 @@
 </head>
 <body>
 <br></br>
-    <form action="narvaroReport.php" method="POST">
+    <form action="narvaro/narvaroReport.php" method="POST">
         <select name="elev">
             <?php
                 if(!empty($data)) {
