@@ -14,7 +14,7 @@
 
     if ($stmt->execute()) {
         echo "Närvaro har lagts till";
-        header('Location:reportForm.php');
+        header('Location:narvaroReportForm.php');
     } else {
         echo "Något gick fel";
     }
