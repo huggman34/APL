@@ -28,13 +28,13 @@
 </div>
 </div>
 <?php
-    include('connection.php');
+    include_once 'connection.php';
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>dagID</th><th>Datum</th><th>Ta bort dag</th></tr>";
+    echo "<tr><th>dagID</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort dag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
@@ -44,7 +44,11 @@
         echo $row['datum'];
         echo "</td><td>";
         ?>
-        <a href="perioddagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
+        <a href="dagredigering.php">Uppdatera</a>
+        <?php
+        echo "</td><td>";
+        ?>
+        <a href="dagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
@@ -56,7 +60,7 @@ $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>periodID</th><th>Period</th><th>Ta bort period</th></tr>";
+    echo "<tr><th>periodID</th><th>Period</th><th>Uppdatera information</th><th>Ta bort period</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
@@ -66,7 +70,11 @@ $sqlget = "SELECT * FROM period";
         echo $row['namn'];
         echo "</td><td>";
         ?>
-        <a href="perioddagdelete.php?id=<?php echo $row['periodID'];?>">Delete</a>
+        <a href="periodredigering.php">Uppdatera</a>
+        <?php
+        echo "</td><td>";
+        ?>
+        <a href="perioddelete.php?id=<?php echo $row['periodID'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
