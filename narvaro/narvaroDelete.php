@@ -1,6 +1,6 @@
 <?php
     require_once 'reportForm.php';
-    include 'connection.php';
+    include '../connection.php';
 
     $id = $_GET['id'];
     $sql = "DELETE FROM narvaro WHERE narvaroID = '$id'";
