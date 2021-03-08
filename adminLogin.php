@@ -15,8 +15,6 @@
 
     $_SESSION["username"] = $username;
     header('Location: hugo functions.php');
-    //echo "<p>inloggad som: $username</p>";
-
   } else {
       header("location: form.php");
   }
