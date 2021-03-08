@@ -5,11 +5,7 @@ $username=$_SESSION['username'];
 
 
  echo'
- <form action="functin" method="post">
- <input type="text" name="förnamn">
- <input type="text" name="efternamn">
- <input type="submit" value="läggtill" name="submit">
- </form>
+
  <form action="functin.php" method="post">
  <input type="text" name="periodnamn">
  <input type="date" name="startdatum">
@@ -38,14 +34,7 @@ $username=$_SESSION['username'];
  if (isset($_POST['submin'])) {
      periodgeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
  }
-//lägger till en elev i databasen
- function elevRegistreing($conn,$fornamn,$efternamn){
-     
-$sql="INSERT INTO elev(fornamn,efternamn) VALUES('$fornamn','$efternamn')";  
-
-$conn->query($sql);
-return "har lagts till";
-     
+  
  }
  // skapar perioder och dagar baserar deras periodens start och slutdatum och skapar period dagar så länge dem är inom  
  function periodgeneration($conn,$periodNamn,$startdatum,$slutdatum){
