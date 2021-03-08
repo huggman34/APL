@@ -15,7 +15,6 @@
 
     $_SESSION["username"] = $username;
     header('Location: reportForm.php');
-    //echo "<p>inloggad som: $username</p>";
 
   } else {
       header("location: form.php");
