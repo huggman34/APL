@@ -1,5 +1,5 @@
 <?php 
-    include_once '../connection.php';
+    include_once "../connection.php";
 
     $result = $_POST['elev'];
 
@@ -19,7 +19,7 @@
 
         if ($stmt->execute()) {
             echo "Närvaro har lagts till";
-            header('Location:../reportForm.php');
+            header('Location:reportForm.php');
         } else {
             echo "Något gick fel";
         }

@@ -1,5 +1,5 @@
 <?php
-    include "connection.php";
+    include "../connection.php";
     session_start();
 
     $username = $_SESSION["username"];
@@ -40,7 +40,7 @@
 </head>
 <body>
 <br></br>
-    <form action="narvaro/narvaroReport.php" method="POST">
+    <form action="narvaroReport.php" method="POST">
         <select name="elev">
             <?php
                 if(!empty($data)) {
