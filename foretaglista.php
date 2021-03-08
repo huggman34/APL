@@ -18,7 +18,7 @@
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th><th>Uppdatera information</th></tr>";
+    echo "<tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th><th>Uppdatera information</th><th>Ta bort företag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
@@ -32,29 +32,16 @@
         ?>
         <a href="foretagredigering.php">Uppdatera</a>
         <?php
+         echo "</td><td>";
+         ?>
+         <a href="foretagdelete.php?id=<?php echo $row['foretagsID'];?>">Delete</a>
+         <?php
         echo "</td></tr>";
 
     }
 
 echo "</table>";
 ?>
-<?php
-        $sqlget = "SELECT * FROM foretag";
-        $sqldata = mysqli_query($conn, $sqlget) or die("error");
-
-        echo '<form action="foretagdelete.php" method="post">';
-        echo '<label for="namn">Välj företag:</label>';
-        echo '<select id="foretagsID" name="foretagsID">';
-        while($row = mysqli_fetch_array($sqldata)){
- 
-        echo '<option value="' . $row["foretagsID"] . '" >'. $row["namn"] .'</option>';
-        
-        }
-        echo '</select>';
-        
-?>
-<button type="submit" name="delete">Ta bort</button>
-</form>
 <a href="foretag.php">Gå tillbaka</a>
 </body>
 </html>

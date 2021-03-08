@@ -9,7 +9,10 @@
 </head>
 <body>
 <?php
+
+    session_start();
     include_once 'connection.php';
+
 
     $sqlget = "SELECT * FROM elev";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -36,7 +39,6 @@
     }
 
 echo "</table>";
-
 ?>
 <a href="elev.php">Gå tillbaka</a>
 </body>
