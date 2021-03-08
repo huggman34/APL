@@ -1,7 +1,6 @@
 <html>
 <body>
 <?php
-    session_start();
     require_once 'foretaglista.php';
     include_once 'connection.php';
 
