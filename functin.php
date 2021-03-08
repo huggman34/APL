@@ -76,9 +76,11 @@ return "har lagts till";
      $sql="INSERT INTO perioddag(dagID,periodID) SELECT dag.dagID,period.periodID FROM dag, period WHERE period.namn='$periodNamn' AND dag.datum>=period.startdatum AND dag.datum<=period.slutdatum";
      $conn->query($sql);
     
-     
-     
+
  }
+ function deletePeriod($conn){
+    $sql = "DELETE FROM  WHERE dagID = '$id'";
+}
  if(isset($_POST['taredapå'])){
      $periodNamn=$_POST['period'];
     $sql = "SELECT narvaro.narvaro, dag.datum, elev.fornamn, period.namn, foretag.namn FROM narvaro
