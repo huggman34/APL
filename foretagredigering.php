@@ -15,7 +15,7 @@
    $sql = "SELECT * FROM foretag";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="edit.php" method="post">';
+   echo '<form action="editforetag.php" method="post">';
    echo '<label for="namn">Välj företag:</label>';
    echo '<select id="foretagsID" name="foretagsID">';
    while($rev = mysqli_fetch_array($result)){
