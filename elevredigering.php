@@ -25,7 +25,7 @@
    echo '</select>';
 ?>
    <input type="text" name="fornamn" value="<?php echo $fornamn; ?>"placeholder="Ändra förnamn">
-   <input type="password" name="efternamn" value="<?php echo $efternamn; ?>" placeholder="Ändra efternamn">
+   <input type="text" name="efternamn" value="<?php echo $efternamn; ?>" placeholder="Ändra efternamn">
    <button type="submit" name="save">Uppdatera</button>
 </form>
 </body>
