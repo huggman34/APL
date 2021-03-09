@@ -10,6 +10,7 @@
 </head>
 <body>
 <?php
+    session_start();
     include_once 'connection.php';
 
     $sqlget = "SELECT * FROM period";
@@ -41,8 +42,7 @@
 echo "</table>";
 ?>
 <?php
-    session_start();
-
+    
     $periodNamn = $_SESSION['id'];
 
     $startdatum = '';
