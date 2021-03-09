@@ -11,7 +11,7 @@
 <?php
 
     session_start();
-    include_once 'connection.php';
+    include_once '../connection.php';
 
 
     $sqlget = "SELECT * FROM elev";
@@ -28,7 +28,7 @@
         echo $row['efternamn'];
         echo "</td><td>";
         ?>
-        <a href="elevredigering.php">Uppdatera</a>
+        <a href="elevRedigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
