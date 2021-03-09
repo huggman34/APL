@@ -10,7 +10,8 @@
 <body>
 <?php
 /**
- * Denna fil är den primära filen för output i form av databas tabeller.
+ * Denna fil är den primära filen för output i form av tabeller.
+ * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
  * 
  */
     session_start();
