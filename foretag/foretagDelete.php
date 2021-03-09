@@ -1,5 +1,5 @@
 <?php
-    require_once '../foretaglista.php';
+    require_once 'foretaglista.php';
     include_once '../connection.php';
 
 
