@@ -1,5 +1,5 @@
 <?php
-    require_once '../elevlista.php';
+    require_once 'elevlista.php';
     include_once '../connection.php';
 
 
