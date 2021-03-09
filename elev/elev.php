@@ -8,6 +8,10 @@
 </head>
 <body>
 <?php
+/**
+ * Denna filen är ett formulär som skickar datan till 'elevRegister.php'
+ * Den används för att kunna sätta in elever i databasen. 
+ */
 session_start();
 
     include_once '../connection.php';
@@ -39,6 +43,6 @@ session_start();
 </div>
 </div>
 </form>
-<a class="link3" href="../perioddaglista.php">Se registrerade elever</a>
+<a class="link3" href="../perioddag/perioddaglista.php">Se registrerade elever</a>
 </body>
 </html>

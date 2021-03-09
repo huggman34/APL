@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Denna filen används för att kunna uppdatera elevens info i databasen.
+ * Den tar elevID och uppdaterar den existerande info som tillhör den elevID  med det som matas in.
+ */
     session_start();
     include_once '../connection.php';
 
