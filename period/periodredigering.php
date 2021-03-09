@@ -11,7 +11,7 @@
 <body>
 <?php
     session_start();
-    include_once 'connection.php';
+    include_once '../connection.php';
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
