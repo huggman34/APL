@@ -1,29 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    
-    <?php 
+<?php 
 
-        session_start();
-        require_once 'connection.php';
+    session_start();
+    include_once 'connection.php';
 
-        $periodID = $_POST['periodID'];
-        $namn = '';
+    $periodNamn = $_POST['periodNamn'];
+    $startdatum = '';
+    $slutdatum = '';
 
-        if(isset($_POST['periodID'])){
-            $periodID = $_POST['periodID'];
-            $namn = $_POST['namn'];
+    if(isset($_POST['periodNamn'])){
+        $periodNamn = $_POST['periodNamn'];
+        $startdatum = $_POST['startdatum'];
+        $slutdatum = $_POST['slutdatum'];
 
 
-            $sql = "UPDATE period SET namn='$namn' WHERE periodID=$periodID";
-            mysqli_query($conn, $sql);
+        $sql = "UPDATE period SET startdatum='$startdatum', slutdatum='$slutdatum' WHERE periodNamn=$periodNamn";
+        mysqli_query($conn, $sql);
             
-        }
-        header('location: perioddaglista.php');
-    ?>
-</body>
-</html>
+    }
+    header('location: perioddaglista.php');
+?>

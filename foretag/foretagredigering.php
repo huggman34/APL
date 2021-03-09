@@ -1,8 +1,8 @@
 <html>
 <body>
 <?php
-    require_once 'foretaglista.php';
-    include_once 'connection.php';
+    require_once '../foretaglista.php';
+    include_once '../connection.php';
 
 
     $foretagsID = $_SESSION['id'];
