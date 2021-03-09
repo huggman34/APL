@@ -1,6 +1,11 @@
 <html>
 <body>
 <?php
+/**
+* I denna fil kan man redigera namnet på elever.
+* Den skriver även ut elev tabellen igen för att lättare kunna se vad det är som redigeras.
+*/
+  
     require_once 'elevlista.php';
     include_once '../connection.php';
 

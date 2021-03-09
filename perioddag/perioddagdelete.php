@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Denna fil tar emot det perioddagID som man skickar med ifrån 'perioodaglista.php' och tar bort tillhörande ID ifrån tabellen.
+ */
     require_once 'perioddaglista.php';
     include_once '../connection.php';
 

@@ -21,9 +21,9 @@
     session_start();
 
     $_SESSION["username"] = $username;
-    header('Location: narvaro/reportForm.php');
+    header('Location: ../narvaro/reportForm.php');
 
   } else {
-      header("location: form.php");
+      header("location: ../narvaro/reportform.php");
   }
 ?>

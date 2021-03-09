@@ -1,27 +1,26 @@
 <?php
 /** 
-I den här filen lägger man till perioder tilsammans med dagar och period dagar. 
+ *  beskrivning 
+I den här filen lägger man till perioder tilsammans med dagar och period dagar.
+Man kan också välja bort dem dagar som man inte ska ha med i en period som låv dagar och annat. 
 
 Todo
 prepared statements på sql statements 
 */
 
-include_once "connection.php";
+include_once "::7connection.php";
 session_start();
 //$username=$_SESSION['username'];
 
 
  echo'
-
  <form action="periodCreate.php" method="post">
  <input type="text" name="periodnamn" requierd>
  <input type="date" name="startdatum">
  <input type="date" name="slutdatum">
  <input type="submit" value="submit" name="submin">
  </form>';
-//select form som används för att välja period
 
-   
  if (isset($_POST['submin'])) {
     if ($_POST['submin']=="ta bort dagar") {
         $periodD=$_POST['periodDag'];
@@ -33,7 +32,7 @@ session_start();
     }else{
         periodgeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
     }
-    if (issset($_POST['periodnamn'])) {
+    if (isset($_POST['periodnamn'])) {
         $periodNamn=$_POST['periodnamn'];
     }
    
@@ -70,10 +69,10 @@ session_start();
  
  /* beskrivning: skapar perioder och dagar baserar deras periodens start och slutdatum och skapar period dagar så länge dem är inom  
     parametrar: $conn(SQL conection)
-                $periodNamn(Namet på en perioden man vill skapa)
-                $startdatum(Datumet då en period börjar)
-                $slutdatum(Datum då en period)
-    returns: inget just nu  
+                (String)$periodNamn(Namet på en perioden man vill skapa)
+                (date)$startdatum(Datumet då en period börjar)
+                (date)$slutdatum(Datum då en period)
+    returns: inget  
  */
  function periodgeneration($conn,$periodNamn,$startdatum,$slutdatum){
      $sql="INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";

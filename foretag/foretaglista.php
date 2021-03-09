@@ -9,7 +9,10 @@
 </head>
 <body>
 <?php
-
+/**
+ * här skrivs all data ut som finns i foretag tabbelen
+ * todo:
+ */
     session_start();
     include_once '../connection.php';
 

@@ -1,7 +1,12 @@
 <?php 
 
+/**
+ * Denna fil används för att redigera period tabellen. 
+ * Genom att skicka in periodnamnet kan man redigera startdatum och slutdatum för perioden.
+ */
+
     session_start();
-    include_once 'connection.php';
+    include_once '../connection.php';
 
     $periodNamn = $_POST['periodNamn'];
     $startdatum = '';
@@ -17,5 +22,5 @@
         mysqli_query($conn, $sql);
             
     }
-    header('location: perioddaglista.php');
+    header('location: ../perioddag/perioddaglista.php');
 ?>
