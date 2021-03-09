@@ -1,4 +1,5 @@
-<?php 
+<?php
+
     session_start();
     include_once '../connection.php';
 
@@ -11,8 +12,10 @@
         $fornamn = $_POST['fornamn'];
         $efternamn = $_POST['efternamn'];
 
+
         $sql = "UPDATE elev SET fornamn='$fornamn', efternamn='$efternamn' WHERE elevID=$elevID";
-        mysqli_query($conn, $sql);            
+        mysqli_query($conn, $sql);
+            
     }
-    header('location: elevlista.php');
+    header('location: ../perioddaglista.php');
 ?>

@@ -10,27 +10,30 @@
 </head>
 <body>
 <?php
+    session_start();
     include_once 'connection.php';
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>periodID</th><th>Period</th><th>Uppdatera information</th><th>Ta bort period</th></tr>";
+    echo "<tr><th>periodNamn</th><th>Startdatum</th><th>Slutdatum</th><th>Uppdatera information</th><th>Ta bort period</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
         echo "<tr><td>";
-        echo $row['periodID'];
+        echo $row['periodNamn'];
         echo "</td><td>";
-        echo $row['namn'];
+        echo $row['startdatum'];
+        echo "</td><td>";
+        echo $row['slutdatum'];
         echo "</td><td>";
         ?>
         <a href="periodredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
-        <a href="perioddelete.php?id=<?php echo $row['periodID'];?>">Delete</a>
+        <a href="perioddelete.php?id=<?php echo $row['periodNamn'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
@@ -39,26 +42,27 @@
 echo "</table>";
 ?>
 <?php
-    session_start();
+    
+    $periodNamn = $_SESSION['id'];
 
-    $periodID = $_SESSION['id'];
-
-    $namn = '';
+    $startdatum = '';
+    $slutdatum = '';
 
    $sql = "SELECT * FROM period";
    $result = mysqli_query($conn, $sql);
 
    echo '<form action="editperiod.php" method="post">';
-   echo '<label for="namn">Välj datum:</label>';
-   echo '<select id="periodID" name="periodID">';
+   echo '<label for="periodNamn">Välj period:</label>';
+   echo '<select id="periodNamn" name="periodNamn">';
    while($rev = mysqli_fetch_array($result)){
 
-   echo '<option value="' . $rev["periodID"] . '" >'. $rev["namn"] .'</option>';
+   echo '<option value="' . $rev["periodNamn"] . '" >'. $rev["periodNamn"] .'</option>';
    
    }
    echo '</select>';
 ?>
-   <input type="text" name="namn" value="<?php echo $namn; ?>"placeholder="Ändra period">
+   <input type="date" name="startdatum" value="<?php echo $startdatum; ?>"placeholder="Ändra startdatum">
+   <input type="date" name="slutdatum" value="<?php echo $slutdatum; ?>"placeholder="Ändra slutdatum">
    <button type="submit" name="save">Uppdatera</button>
 </form>
 </body>

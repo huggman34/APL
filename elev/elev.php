@@ -39,6 +39,6 @@ session_start();
 </div>
 </div>
 </form>
-<a class="link3" href="elevlista.php">Se registrerade elever</a>
+<a class="link3" href="../perioddaglista.php">Se registrerade elever</a>
 </body>
 </html>

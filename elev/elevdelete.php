@@ -8,7 +8,7 @@
 
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);
-        header('Location:elevlista.php');
+        header('Location:../perioddaglista.php');
         exit;
     } else{
         echo "Error deleting record";

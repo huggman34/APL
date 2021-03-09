@@ -53,6 +53,6 @@
         }
     }
 ?>
-<br><a href="elev.php" class="tillbaka2">Gå tillbaka</a>
+<br><a href="../elev.php" class="tillbaka2">Gå tillbaka</a>
 </body>
 </html>

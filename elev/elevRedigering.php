@@ -1,9 +1,8 @@
 <html>
 <body>
 <?php
-    session_start();
-    require_once 'elevlista.php';
-    include_once 'connection.php';
+    require_once '../elevlista.php';
+    include_once '../connection.php';
 
 
     $elevID = $_SESSION['id'];

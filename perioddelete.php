@@ -1,15 +1,11 @@
-<html>
-<body>
 <?php
     require_once 'perioddaglista.php';
+    include_once 'connection.php';
 
-    include('connection.php');
 
-?>
-<?php
     $id = $_GET['id'];
-    $sql = "DELETE FROM period WHERE periodID = '$id'";
-
+    $sql = "DELETE FROM period WHERE periodNamn = '$id'";
+    echo $sql;
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);
         header('Location:perioddaglista.php');
@@ -20,5 +16,3 @@
 
 
 ?>
-</body>
-</html>

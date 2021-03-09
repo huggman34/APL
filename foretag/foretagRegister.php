@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-    include('connection.php');
+    include_once '../connection.php';
 ?>
     Du har registerat företaget: <br>
     <?php echo $_POST["namn"]; ?><br>
