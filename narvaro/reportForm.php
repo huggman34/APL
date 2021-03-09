@@ -1,4 +1,11 @@
 <?php
+/**
+ * Denna filen tar emot username från 'foretagLogin.php' och gör det till en session.
+ * Sedan hämtar den alla elever som har praktik idag hos det företaget som är inloggat från databasen.
+ * Om det inte finns något att hämta så har inga elever praktik idag hos företaget som är inloggat.
+ * Om den finns elever som har praktik hos företaget idag, kan företaget lägga närvaro på eleverna.
+ * Denna filen visar all data som finns i narvaro tabellen.
+ */
     include "../connection.php";
     session_start();
 

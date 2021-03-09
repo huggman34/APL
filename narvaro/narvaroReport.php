@@ -1,4 +1,10 @@
-<?php 
+<?php
+/**
+ * Denna filen tar emot platsID, periodDagID och narvaro som skickas via 'reportForm.php'
+ * Den kollar om datan som skickas in redan existerar i Narvaro tabellen.
+ * Om datan inte redan finns i tabellen så lägger den in datan i tabellen.
+ * Om datan redan finns då skriver den ut 'Eleven har redan registrerats närvaro'
+ */
     include_once "../connection.php";
 
     $result = $_POST['elev'];
