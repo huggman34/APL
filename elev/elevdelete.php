@@ -1,4 +1,8 @@
 <?php
+/**
+ * Denna filen används för att kunna radera elever i databasen
+ * Den hämtar elevID sedan radera den eleven som är kopplad till den elevID
+ */
     require_once 'elevlista.php';
     include_once '../connection.php';
 
@@ -13,6 +17,4 @@
     } else{
         echo "Error deleting record";
     }
-function ($)
-
 ?>
