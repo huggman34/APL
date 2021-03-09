@@ -10,6 +10,11 @@
 <body>
 <?php
 
+/**
+ * Denna tabell ger en output på elevtabellen från databasen.
+ * Härifrån har man även möjligheten att redigera eller ta bort elever.
+ */
+
     session_start();
     include_once '../connection.php';
 
