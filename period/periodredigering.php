@@ -10,6 +10,12 @@
 </head>
 <body>
 <?php
+
+/**
+* I denna fil väljer man vilket startdatum och slut datum som period ska ha genom att välja namnet på perioden och sedan ändra datum.
+* Den skriver även ut period tabellen igen för att lättare kunna se vad det är som redigeras.
+*/
+
     session_start();
     include_once '../connection.php';
 

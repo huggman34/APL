@@ -11,8 +11,9 @@
 <?php
 /**
  * Denna fil är den primära filen för output i form av tabeller.
- * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
- * 
+ * Den innehåller även alla länkar för att uppdatera och ta bort data i varje tabell.
+ * Den outputar tabeller med länkar som tar en till delete eller update filer.
+ * När man klickar på antingen uppdatera eller delete kollar den igenom vilket ID det hör till och ändrar det sedan i den tabellen.
  */
     session_start();
     include_once '../connection.php';

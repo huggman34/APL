@@ -8,8 +8,13 @@
 </head>
 <body>
 <?php
-session_start();
 
+/**
+ * I denna fil kan man välja vilka dagar man vill lägga in i databasen för att sedan kunna lägga in dem i perioder.
+ * När man väljer en dag skickar den vidare till 'perioddagregister.php' där den sedan registrerar det i databasen.
+ */
+
+    session_start();
     include_once '../connection.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
