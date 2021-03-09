@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-    include_once 'connection.php';
+    include_once '../connection.php';
 ?>
     Du har registerat : <br>
     <?php echo $_POST["periodNamn"]; ?><br>

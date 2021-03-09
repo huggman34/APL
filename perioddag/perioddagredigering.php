@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-    include_once 'connection.php';
+    include_once '../connection.php';
 
     $sqlget = "SELECT * FROM perioddag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

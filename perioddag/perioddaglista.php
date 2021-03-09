@@ -15,7 +15,7 @@
  * 
  */
     session_start();
-    include_once 'connection.php';
+    include_once '../connection.php';
 ?>
 <div class="container2">
 <div class="wrapper">
@@ -52,11 +52,11 @@
         echo $row['efternamn'];
         echo "</td><td>";
         ?>
-        <a href="elev/elevredigering.php">Uppdatera</a>
+        <a href="../elev/elevredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
-        <a href="elev/elevdelete.php?id=<?php echo $row['elevID'];?>">Delete</a>
+        <a href="../elev/elevdelete.php?id=<?php echo $row['elevID'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
@@ -80,11 +80,11 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo $row['telefon'];
     echo "</td><td>";
     ?>
-    <a href="foretag/foretagredigering.php">Uppdatera</a>
+    <a href="../foretag/foretagredigering.php">Uppdatera</a>
     <?php
      echo "</td><td>";
      ?>
-     <a href="foretag/foretagdelete.php?id=<?php echo $row['foretagsID'];?>">Delete</a>
+     <a href="../foretag/foretagdelete.php?id=<?php echo $row['foretagsID'];?>">Delete</a>
      <?php
     echo "</td></tr>";
 
@@ -106,11 +106,11 @@ echo "</table>";
         echo $row['datum'];
         echo "</td><td>";
         ?>
-        <a href="dagredigering.php">Uppdatera</a>
+        <a href="../dagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
-        <a href="dagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
+        <a href="../dagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
@@ -134,11 +134,11 @@ echo "</table>";
         echo $row['slutdatum'];
         echo "</td><td>";
         ?>
-        <a href="periodredigering.php">Uppdatera</a>
+        <a href="../periodredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
-        <a href="perioddelete.php?id=<?php echo $row['periodNamn'];?>">Delete</a>
+        <a href="../perioddelete.php?id=<?php echo $row['periodNamn'];?>">Delete</a>
         <?php
         echo "</td></tr>";
 
