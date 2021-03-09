@@ -17,5 +17,5 @@
         mysqli_query($conn, $sql);
             
     }
-    header('location: ../perioddaglista.php');
+    header('location: ../perioddag/perioddaglista.php');
 ?>

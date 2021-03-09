@@ -8,7 +8,7 @@ Todo
 prepared statements på sql statements 
 */
 
-include_once "connection.php";
+include_once "::7connection.php";
 session_start();
 //$username=$_SESSION['username'];
 

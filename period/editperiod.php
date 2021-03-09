@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-    include_once 'connection.php';
+    include_once '../connection.php';
 
     $periodNamn = $_POST['periodNamn'];
     $startdatum = '';
@@ -17,5 +17,5 @@
         mysqli_query($conn, $sql);
             
     }
-    header('location: perioddaglista.php');
+    header('location: ../perioddag/perioddaglista.php');
 ?>
