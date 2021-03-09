@@ -10,9 +10,9 @@
     </style>
 </head>
 <body>
-    <form action="adminLogin.php" method="POST">
-        <input class="input-box" type="text" name="username" placeholder="Admin användarnamn"/>
-        <input class="input-box" type="password" name="password" placeholder="Admin lösenord"/>
+    <form action="foretagLogin.php" method="POST">
+        <input class="input-box" type="text" name="username" placeholder="Företag namn"/>
+        <input class="input-box" type="password" name="password" placeholder="Lösenord"/>
         <input class="submit" type="submit" name="submit" value="Logga in"/>
     </form>
 </body>
