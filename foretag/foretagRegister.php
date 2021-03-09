@@ -1,6 +1,9 @@
 <html>
 <body>
 <?php
+/**
+ * insertas ett nytt företag i foretag tabbelen
+ */
     include_once '../connection.php';
 ?>
     Du har registerat företaget: <br>

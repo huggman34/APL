@@ -1,4 +1,7 @@
 <?php
+/**
+ * deletar företag baserat på ID.
+ */
     require_once '../foretaglista.php';
     include_once '../connection.php';
 

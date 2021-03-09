@@ -7,7 +7,9 @@
 <body>
     
     <?php 
-
+    /**
+     * Den här filen refererars till om man vill uppdatera datan i foretag tabellen. 
+     */
         session_start();
         include_once '../connection.php';
 

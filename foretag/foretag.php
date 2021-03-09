@@ -9,7 +9,10 @@
 <body>
 <?php
 session_start();
-
+/**
+ * här skriver admin in värdena för att registrera ett nytt företag.
+ * 
+ */
     include_once '../connection.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida

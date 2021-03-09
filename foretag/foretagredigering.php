@@ -1,6 +1,9 @@
 <html>
 <body>
 <?php
+/**
+ * här bestämmer man viken företags data som ska uppdateras
+ */
     require_once 'foretaglista.php';
     include_once '../connection.php';
 
