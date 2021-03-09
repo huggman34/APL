@@ -1,4 +1,8 @@
 <?php
+/**
+ * Denna filen gör så att man har möjligheten till att radera rader i narvaro tabellen i databasen
+ * som man gör via tabellen som visas i 'reportForm.php'
+ */
     require_once 'reportForm.php';
     include '../connection.php';
 
