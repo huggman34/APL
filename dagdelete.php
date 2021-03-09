@@ -5,7 +5,6 @@
 
     $id = $_GET['id'];
     $sql = "DELETE FROM dag WHERE dagID = '$id'";
-    echo $sql;
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);
         header('Location:perioddaglista.php');

@@ -9,7 +9,7 @@
     <?php 
 
         session_start();
-        require_once 'connection.php';
+        include_once '../connection.php';
 
         $foretagsID = $_POST['foretagsID'];
         $namn = '';
@@ -29,7 +29,7 @@
             mysqli_query($conn, $sql);
             
         }
-        header('location: foretaglista.php');
+        header('location: ../perioddaglista.php');
     ?>
 </body>
 </html>

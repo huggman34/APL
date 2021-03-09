@@ -4,7 +4,7 @@
 
 
     $id = $_GET['id'];
-    $sql = "DELETE FROM period WHERE periodID = '$id'";
+    $sql = "DELETE FROM period WHERE periodNamn = '$id'";
     echo $sql;
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);

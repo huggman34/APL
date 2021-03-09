@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-    include_once 'connection.php';
+    include_once '../connection.php';
 ?>
     Du har registerat eleven: <br>
     <?php echo $_POST["fornamn"]; ?> <?php echo $_POST["efternamn"]; ?><br>
@@ -14,6 +14,6 @@
         echo "ERROR: Was not able to execute $sql. " . mysqli_error($conn);
     }
 ?>
-<br><a href="elev.php" class="tillbaka2">Gå tillbaka</a>
+<br><a href="../elev.php" class="tillbaka2">Gå tillbaka</a>
 </body>
 </html>
