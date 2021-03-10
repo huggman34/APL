@@ -17,7 +17,7 @@
 */
 
     include_once '../connection.php';
-    include '../UpdateFunctions'
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM perioddag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

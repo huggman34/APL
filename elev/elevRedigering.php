@@ -7,11 +7,11 @@
 */
   
     //require_once '../Lists.php';
-    include 'UpdateFunctions.php';
+    include '../UpdateFunctions.php';
     include_once '../connection.php';
 
 
-    $elevID = $_SESSION['id'];
+    //$elevID = $_SESSION['id'];
 
     $fornamn = '';
     $efternamn = '';
@@ -20,7 +20,7 @@
    $result = mysqli_query($conn, $sql);
 
    if (isset($_POST['save'])) {
-      updateElev($conn,$_POST['fornamn'],$_POST['efternamn'],$_POST['elevID'])
+      updateElev($conn,$_POST['fornamn'],$_POST['efternamn'],$_POST['elevID']);
    }
    echo '<form action="elevRedigering.php" method="post">';
    echo '<label for="fornamn">Välj elev:</label>';
