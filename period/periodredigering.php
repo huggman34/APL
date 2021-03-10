@@ -18,7 +18,7 @@
 
     session_start();
     include_once '../connection.php';
-    include 'UpdateFunctions.php'
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -56,7 +56,7 @@ echo "</table>";
     $slutdatum = '';
  
     if (isset($_POST['save'])) {
-        updatePeriod($conn,$_POST['startdatum'],$_POST['slutdatum'],$_POST['periodNamn'])
+        updatePeriod($conn,$_POST['startdatum'],$_POST['slutdatum'],$_POST['periodNamn']);
     }
    $sql = "SELECT * FROM period";
    $result = mysqli_query($conn, $sql);
