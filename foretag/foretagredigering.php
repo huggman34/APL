@@ -5,6 +5,8 @@
  * här bestämmer man viken företags data som ska uppdateras
  */
    
+
+ 
     include '../UpdateFunctions.php';
     include_once '../connection.php';
 
