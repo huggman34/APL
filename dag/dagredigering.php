@@ -10,7 +10,11 @@
 </head>
 <body>
 <?php
-    include_once 'connection.php';
+/**
+ * Denna filen gör så att vi kan uppdatera dagarna som finns i dag tabellen i databasen
+ * Den uppdatera dagen genom dagID som skickas in.
+ */
+    include_once '../connection.php';
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

@@ -1,5 +1,10 @@
 <?php 
 
+/**
+ * Denna fil används för att redigera period tabellen. 
+ * Genom att skicka in periodnamnet kan man redigera startdatum och slutdatum för perioden.
+ */
+
     session_start();
     include_once '../connection.php';
 

@@ -8,6 +8,10 @@
 </head>
 <body>
 <?php
+/**
+ * Denna filen är ett formulär som skickar datan till 'elevRegister.php'
+ * Den används för att kunna sätta in elever i databasen. 
+ */
 session_start();
 
     include_once '../connection.php';

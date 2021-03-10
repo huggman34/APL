@@ -10,6 +10,12 @@
 </head>
 <body>
 <?php
+
+/**
+* I denna fil väljer man vilken dag som tillhör vilken period genom att välja namnet på perioden och ID på dagen.
+* Den skriver även ut perioddag tabellen igen för att lättare kunna se vad det är som redigeras.
+*/
+
     include_once '../connection.php';
 
     $sqlget = "SELECT * FROM perioddag";
@@ -56,7 +62,7 @@ echo "</table>";
    echo '<select id="perioddagID" name="perioddagID">';
    while($rev = mysqli_fetch_array($result)){
 
-   echo '<option value="' . $rev["perioddagID"] . '" >'. $rev["periodNamn"] .'</option>';
+   echo '<option value="' . $rev["perioddagID"] . '" >'. $rev["perioddagID"] .'</option>';
    
    }
    echo '</select>';
