@@ -23,7 +23,7 @@
 
    echo '<form action="foretagredigering.php" method="post">';
    echo '<label for="namn">Välj företag:</label>';
-   echo '<select id="foretagID" name="foretagID">';
+   echo '<select id="foretagsID" name="foretagsID">';
    while($rev = mysqli_fetch_array($result)){
 
    echo '<option value="' . $rev["foretagID"] . '" >'. $rev["namn"] .'</option>';
@@ -39,7 +39,7 @@
 </form>
 <?php
 if (isset($_POST['save'])) {
-   updateForetag($conn,$_POST['namn'],$_POST['losenord'],$_POST['epost'],$_POST['telefon'],$_POST['foretagID']);
+   updateForetag($conn,$_POST['namn'],$_POST['losenord'],$_POST['epost'],$_POST['telefon'],$_POST['foretagsID']);
    
 }
 ?>
