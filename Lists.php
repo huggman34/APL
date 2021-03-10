@@ -13,9 +13,12 @@
  * Denna fil är den primära filen för output i form av tabeller.
  * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
  * 
+ * ToDo:
+ * lat lösning på rad 194.
  */
     session_start();
-    include_once '../connection.php';
+    include_once 'connection.php';
+    include_once 'DeletFunctions.php';
 ?>
 <div class="container2">
 <div class="wrapper">
@@ -51,13 +54,15 @@
         echo "</td><td>";
         echo $row['efternamn'];
         echo "</td><td>";
+        $elev=$row['elevID']
         ?>
-        <a href="../elev/elevredigering.php">Uppdatera</a>
+        <a href="elev/elevredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../elev/elevdelete.php?id=<?php echo $row['elevID'];?>">Delete</a>
-        <?php
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deletelev' value='Delet'>
+        <input type='hidden' name='deletE' value='$elev'>
+        </form>";
         echo "</td></tr>";
 
     }
@@ -79,13 +84,15 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     echo $row['telefon'];
     echo "</td><td>";
+    $foretag=$row['foretagsID'];
     ?>
-    <a href="../foretag/foretagredigering.php">Uppdatera</a>
+    <a href="foretag/foretagredigering.php">Uppdatera</a>
     <?php
      echo "</td><td>";
-     ?>
-     <a href="../foretag/foretagdelete.php?id=<?php echo $row['foretagsID'];?>">Delete</a>
-     <?php
+     echo"<form action='Lists.php' method='post'>
+     <input type='submit' name='deletforetag' value='Delet'>
+     <input type='hidden' name='deletF' value='$foretag'>
+     </form>";
     echo "</td></tr>";
 
 }
@@ -105,13 +112,17 @@ echo "</table>";
         echo "</td><td>";
         echo $row['datum'];
         echo "</td><td>";
+        $dag=$row['dagID'];
         ?>
-        <a href="../dagredigering.php">Uppdatera</a>
+        <a href="dagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../dagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
-        <?php
+
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deletdag' value='Delet'>
+        <input type='hidden' name='deletD' value='$dag'>
+        </form>";
+
         echo "</td></tr>";
 
     }
@@ -133,13 +144,17 @@ echo "</table>";
         echo "</td><td>";
         echo $row['slutdatum'];
         echo "</td><td>";
+        $period=$row['periodNamn'];
         ?>
-        <a href="../periodredigering.php">Uppdatera</a>
+        <a href="period/periodredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../perioddelete.php?id=<?php echo $row['periodNamn'];?>">Delete</a>
-        <?php
+        
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deletperiod' value='Delet'>
+        <input type='hidden' name='deletP' value='$period'>
+        </form>";
+        
         echo "</td></tr>";
 
     }
@@ -161,18 +176,36 @@ echo "</table>";
         echo "</td><td>";
         echo $row['dagID'];
         echo "</td><td>";
+        $perioddag=$row['perioddagID'];
         ?>
-        <a href="perioddagredigering.php">Uppdatera</a>
+        <a href="perioddag/perioddagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="perioddagdelete.php?id=<?php echo $row['perioddagID'];?>">Delete</a>
-        <?php
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deletperioddag' value='Delet'>
+        <input type='hidden' name='deletPd' value='$perioddag'>
+        </form>";
         echo "</td></tr>";
 
     }
 
 echo "</table>";
+
+if (isset($_POST['deletperiod'])) {
+    deletePeriod($conn,$_POST['deletP']);
+}
+if (isset($_POST['deletperioddag'])) {
+    deletePeriodDag($conn,$_POST['deletPd']);
+}
+if (isset($_POST['deletelev'])) {
+    deleteElev($conn,$_POST['deletE']);
+}
+if (isset($_POST['deletforetag'])) {
+    deleteForetag($conn,$_POST['deletF']);
+}
+if (isset($_POST['deletdag'])) {
+    deleteDag($conn,$_POST['deletD']);
+}
 ?>
 <a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
 </body>
