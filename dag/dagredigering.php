@@ -15,6 +15,7 @@
  * Den uppdatera dagen genom dagID som skickas in.
  */
     include_once '../connection.php';
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -45,14 +46,18 @@ echo "</table>";
 <?php
     session_start();
 
-    $dagID = $_SESSION['id'];
+    //$dagID = $_SESSION['id'];
 
     $datum = '';
 
+    if (isset($_POST['save'])) {
+        updateDag($conn,$_POST['datum'],$_POST['dagID']);
+        header("Location: ../Lists.php");
+    }
    $sql = "SELECT * FROM dag";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="editdag.php" method="post">';
+   echo '<form action="dagredigering.php" method="post">';
    echo '<label for="datum">Välj datum:</label>';
    echo '<select id="dagID" name="dagID">';
    while($rev = mysqli_fetch_array($result)){

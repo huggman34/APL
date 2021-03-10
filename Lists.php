@@ -11,17 +11,22 @@
 <?php
 /**
  * Denna fil är den primära filen för output i form av tabeller.
- * Den innehåller även alla länkar för att uppdatera och ta bort data i varje tabell.
- * Den outputar tabeller med länkar som tar en till delete eller update filer.
+ * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
  * När man klickar på antingen uppdatera eller delete kollar den igenom vilket ID det hör till och ändrar det sedan i den tabellen.
+ *
+ *  ToDo:
+ * lat lösning på rad 194.
+ * 
+ * 
  */
     session_start();
-    include_once '../connection.php';
+    include_once 'connection.php';
+    include_once 'DeleteFunctions.php';
 ?>
 <div class="container2">
 <div class="wrapper">
     <h2 class="rubrik2">Länka dagar till perioder</h2>
-    <form action="perioddagregister.php" method="post">
+    <form action="perioddag/perioddagregister.php" method="post">
     <div class="form-group3">
         <label>Välj period </label> 
         <input type="text" name ="periodNamn" class="form-control">
@@ -52,13 +57,15 @@
         echo "</td><td>";
         echo $row['efternamn'];
         echo "</td><td>";
+        $elev=$row['elevID']
         ?>
-        <a href="../elev/elevredigering.php">Uppdatera</a>
+        <a href="elev/elevredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../elev/elevdelete.php?id=<?php echo $row['elevID'];?>">Delete</a>
-        <?php
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deleteelev' value='Delete'>
+        <input type='hidden' name='deleteE' value='$elev'>
+        </form>";
         echo "</td></tr>";
 
     }
@@ -80,13 +87,15 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     echo $row['telefon'];
     echo "</td><td>";
+    $foretag=$row['foretagID'];
     ?>
-    <a href="../foretag/foretagredigering.php">Uppdatera</a>
+    <a href="foretag/foretagredigering.php">Uppdatera</a>
     <?php
      echo "</td><td>";
-     ?>
-     <a href="../foretag/foretagdelete.php?id=<?php echo $row['foretagsID'];?>">Delete</a>
-     <?php
+     echo"<form action='Lists.php' method='post'>
+     <input type='submit' name='deleteforetag' value='Delete'>
+     <input type='hidden' name='deleteF' value='$foretag'>
+     </form>";
     echo "</td></tr>";
 
 }
@@ -106,13 +115,17 @@ echo "</table>";
         echo "</td><td>";
         echo $row['datum'];
         echo "</td><td>";
+        $dag=$row['dagID'];
         ?>
-        <a href="../dagredigering.php">Uppdatera</a>
+        <a href="dag/dagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../dagdelete.php?id=<?php echo $row['dagID'];?>">Delete</a>
-        <?php
+
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deletedag' value='Delete'>
+        <input type='hidden' name='deleteD' value='$dag'>
+        </form>";
+
         echo "</td></tr>";
 
     }
@@ -134,13 +147,17 @@ echo "</table>";
         echo "</td><td>";
         echo $row['slutdatum'];
         echo "</td><td>";
+        $period=$row['periodNamn'];
         ?>
-        <a href="../periodredigering.php">Uppdatera</a>
+        <a href="period/periodredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="../perioddelete.php?id=<?php echo $row['periodNamn'];?>">Delete</a>
-        <?php
+        
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deleteperiod' value='Delete'>
+        <input type='hidden' name='deleteP' value='$period'>
+        </form>";
+        
         echo "</td></tr>";
 
     }
@@ -162,18 +179,71 @@ echo "</table>";
         echo "</td><td>";
         echo $row['dagID'];
         echo "</td><td>";
+        $perioddag=$row['perioddagID'];
         ?>
-        <a href="perioddagredigering.php">Uppdatera</a>
+        <a href="perioddag/perioddagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        ?>
-        <a href="perioddagdelete.php?id=<?php echo $row['perioddagID'];?>">Delete</a>
-        <?php
+        echo"<form action='Lists.php' method='post'>
+        <input type='submit' name='deleteperioddag' value='Delete'>
+        <input type='hidden' name='deletePd' value='$perioddag'>
+        </form>";
         echo "</td></tr>";
 
     }
 
 echo "</table>";
+
+$sqlget = "SELECT * FROM plats";
+$sqldata = mysqli_query($conn, $sqlget) or die("error");
+
+echo "<table>";
+echo "<tr><th>platsID</th><th>periodNamn</th><th>företagID</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+
+while($row = mysqli_fetch_assoc($sqldata)) {
+
+    echo "<tr><td>";
+    echo $row['platsID'];
+    echo "</td><td>";
+    echo $row['periodNamn'];
+    echo "</td><td>";
+    echo $row['foretagID'];
+    echo "</td><td>";
+    echo $row['elevID'];
+    echo "</td><td>";
+    $plats=$row['platsID'];
+    ?>
+    <a href="plats/platsredigering.php">Uppdatera</a>
+    <?php
+    echo "</td><td>";
+    echo"<form action='Lists.php' method='post'>
+    <input type='submit' name='deleteplats' value='Delete'>
+    <input type='hidden' name='deletePl' value='$plats'>
+    </form>";
+    echo "</td></tr>";
+
+}
+
+echo "</table>";
+
+if (isset($_POST['deleteperiod'])) {
+    deletePeriod($conn,$_POST['deleteP']);
+}
+if (isset($_POST['deleteperioddag'])) {
+    deletePeriodDag($conn,$_POST['deletePd']);
+}
+if (isset($_POST['deleteelev'])) {
+    deleteElev($conn,$_POST['deleteE']);
+}
+if (isset($_POST['deleteforetag'])) {
+    deleteForetag($conn,$_POST['deleteF']);
+}
+if (isset($_POST['deletedag'])) {
+    deleteDag($conn,$_POST['deleteD']);
+}
+if (isset($_POST['deleteplats'])) {
+    deletePlats($conn,$_POST['deletePl']);
+}
 ?>
 <a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
 </body>

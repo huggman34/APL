@@ -18,6 +18,7 @@
 
     session_start();
     include_once '../connection.php';
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -53,11 +54,15 @@ echo "</table>";
 
     $startdatum = '';
     $slutdatum = '';
-
+ 
+    if (isset($_POST['save'])) {
+        updatePeriod($conn,$_POST['startdatum'],$_POST['slutdatum'],$_POST['periodNamn'])
+        header("Location: ../Lists.php");
+    }
    $sql = "SELECT * FROM period";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="editperiod.php" method="post">';
+   echo '<form action="periodredigering.php" method="post">';
    echo '<label for="periodNamn">Välj period:</label>';
    echo '<select id="periodNamn" name="periodNamn">';
    while($rev = mysqli_fetch_array($result)){

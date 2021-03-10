@@ -17,6 +17,7 @@
 */
 
     include_once '../connection.php';
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM perioddag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -54,10 +55,15 @@ echo "</table>";
     $periodNamn = '';
     $dagID = '';
 
+    if (isset($_POST['save'])) {
+        //refererar till funktion
+        updatePeriodDag($conn,$_POST['periodNamn'],$_POST['dagID'],$_POST['perioddagID']);
+        header("Location: ../Lists.php");
+    }
    $sql = "SELECT * FROM perioddag";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="editperioddag.php" method="post">';
+   echo '<form action="perioddagredigering.php" method="post">';
    echo '<label for="periodNamn">Välj period:</label>';
    echo '<select id="perioddagID" name="perioddagID">';
    while($rev = mysqli_fetch_array($result)){
