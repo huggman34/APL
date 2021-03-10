@@ -22,5 +22,5 @@
         mysqli_query($conn, $sql);
             
     }
-    header('location: ../perioddag/perioddaglista.php');
+    header('location: ../Lists.php');
 ?>

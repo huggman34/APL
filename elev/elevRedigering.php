@@ -6,7 +6,7 @@
 * Den skriver även ut elev tabellen igen för att lättare kunna se vad det är som redigeras.
 */
   
-    require_once 'elevlista.php';
+    require_once '../Lists.php';
     include_once '../connection.php';
 
 
