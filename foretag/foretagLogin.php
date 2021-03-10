@@ -7,7 +7,7 @@
  * Men om det inte gör det så får du skriva om inloggnings uppgifter.
  */
   session_start();
-  include_once "connection.php";
+  include_once "../connection.php";
 
   $username = $_POST["username"];
   $password = $_POST["password"];
