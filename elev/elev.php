@@ -15,6 +15,7 @@
 session_start();
 
     include_once '../connection.php';
+    include_once '../registerFunctions.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
     //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");
@@ -26,7 +27,7 @@ session_start();
 <div class="container">
 <div class="wrapper">
     <h2 class="rubrik">Registrera en elev</h2>
-    <form action="elevregister.php" method="post">
+    <form action="elev.php" method="post">
     <div class="form-group">
         <label>Förnamn</label> 
         <input type="text" name ="fornamn" class="form-control">
@@ -38,11 +39,16 @@ session_start();
         <span class="help-block"></span>
     </div>
     <div class="form-group2">
-        <input type= "submit" class="btn" value="Skicka">
+        <input type= "submit" name="submit" class="btn" value="Skicka">
     </div>
 </div>
 </div>
 </form>
+<?php
+    if(isset($_POST['submit'])) {
+        registerElev($conn, $_POST['fornamn'], $_POST['efternamn']);
+    }
+?>
 <a class="link3" href="../perioddag/perioddaglista.php">Se registrerade elever</a>
 </body>
 </html>

@@ -11,7 +11,7 @@
     include_once '../connection.php';
 
 
-    //$foretagsID = $_SESSION['id'];
+    //$foretagID = $_SESSION['id'];
 
     $namn = '';
     $losenord = '';
@@ -23,7 +23,7 @@
 
    echo '<form action="foretagredigering.php" method="post">';
    echo '<label for="namn">Välj företag:</label>';
-   echo '<select id="foretagsID" name="foretagsID">';
+   echo '<select id="foretagID" name="foretagID">';
    while($rev = mysqli_fetch_array($result)){
 
    echo '<option value="' . $rev["foretagID"] . '" >'. $rev["namn"] .'</option>';

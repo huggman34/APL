@@ -14,6 +14,7 @@ session_start();
  * 
  */
     include_once '../connection.php';
+    include_once '../registerFunctions.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
     //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");
@@ -25,7 +26,7 @@ session_start();
 <div class="container">
 <div class="wrapper">
     <h2 class="rubrik">Registrera ett företag</h2>
-    <form action="foretagregister.php" method="post">
+    <form action="foretag.php" method="post">
     <div class="form-group">
         <label>Namn på företaget</label> 
         <input type="text" name ="namn" class="form-control">
@@ -47,11 +48,16 @@ session_start();
         <span class="help-block"></span>
     </div>
     <div class="form-group2">
-        <input type= "submit" class="btn" value="Skicka">
+        <input type= "submit" name="submit" class="btn" value="Skicka">
     </div>
 </div>
 </div>
 </form>
+<?php 
+    if(isset($_POST['submit'])) {
+        registerForetag($conn, $_POST['namn'], $_POST['losenord'], $_POST['epost'], $_POST['telefon']);
+    }
+?>
 <a class="link" href="foretaglista.php">Se registrerade företag</a>
 </body>
 </html>

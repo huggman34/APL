@@ -18,7 +18,7 @@
 
     session_start();
     include_once '../connection.php';
-    include 'UpdateFunctions.php'
+    include '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

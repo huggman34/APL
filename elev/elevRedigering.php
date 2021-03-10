@@ -7,11 +7,11 @@
 */
   
     //require_once '../Lists.php';
-    include 'UpdateFunctions.php';
+    include '../UpdateFunctions.php';
     include_once '../connection.php';
 
 
-    $elevID = $_SESSION['id'];
+    //$elevID = $_SESSION['id'];
 
     $fornamn = '';
     $efternamn = '';

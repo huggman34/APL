@@ -21,12 +21,12 @@
  */
     session_start();
     include_once 'connection.php';
-    include_once 'DeletFunctions.php';
+    include_once 'DeleteFunctions.php';
 ?>
 <div class="container2">
 <div class="wrapper">
     <h2 class="rubrik2">Länka dagar till perioder</h2>
-    <form action="perioddagregister.php" method="post">
+    <form action="perioddag/perioddagregister.php" method="post">
     <div class="form-group3">
         <label>Välj period </label> 
         <input type="text" name ="periodNamn" class="form-control">
@@ -87,7 +87,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     echo $row['telefon'];
     echo "</td><td>";
-    $foretag=$row['foretagsID'];
+    $foretag=$row['foretagID'];
     ?>
     <a href="foretag/foretagredigering.php">Uppdatera</a>
     <?php
@@ -194,6 +194,38 @@ echo "</table>";
 
 echo "</table>";
 
+$sqlget = "SELECT * FROM plats";
+$sqldata = mysqli_query($conn, $sqlget) or die("error");
+
+echo "<table>";
+echo "<tr><th>platsID</th><th>periodNamn</th><th>företagID</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+
+while($row = mysqli_fetch_assoc($sqldata)) {
+
+    echo "<tr><td>";
+    echo $row['platsID'];
+    echo "</td><td>";
+    echo $row['periodNamn'];
+    echo "</td><td>";
+    echo $row['foretagID'];
+    echo "</td><td>";
+    echo $row['elevID'];
+    echo "</td><td>";
+    $plats=$row['platsID'];
+    ?>
+    <a href="plats/platsredigering.php">Uppdatera</a>
+    <?php
+    echo "</td><td>";
+    echo"<form action='Lists.php' method='post'>
+    <input type='submit' name='deleteplats' value='Delete'>
+    <input type='hidden' name='deletePl' value='$plats'>
+    </form>";
+    echo "</td></tr>";
+
+}
+
+echo "</table>";
+
 if (isset($_POST['deleteperiod'])) {
     deletePeriod($conn,$_POST['deleteP']);
 }
@@ -208,6 +240,9 @@ if (isset($_POST['deleteforetag'])) {
 }
 if (isset($_POST['deletedag'])) {
     deleteDag($conn,$_POST['deleteD']);
+}
+if (isset($_POST['deleteplats'])) {
+    deletePlats($conn,$_POST['deletePl']);
 }
 ?>
 <a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
