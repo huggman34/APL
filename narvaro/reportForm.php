@@ -7,17 +7,19 @@
  * Denna filen visar all data som finns i narvaro tabellen.
  */
     include "../connection.php";
+    include_once '../registerFunctions.php';
+    
     session_start();
 
     $username = $_SESSION["username"];
     echo "logged in as $username <br></br>";
 
-    $sql = "SELECT fornamn, efternamn, period.namn, periodDagID, platsID
+    $sql = "SELECT elev.elevID, period.periodNamn, periodDagID, platsID
     FROM plats
-    INNER JOIN elev ON elev.elevID = plats.platsID
-    INNER JOIN foretag ON foretag.foretagsID = plats.foretagsID
-    INNER JOIN period ON period.periodID = plats.periodID
-    INNER JOIN perioddag ON perioddag.periodID = plats.periodID
+    INNER JOIN elev ON elev.elevID = plats.elevID
+    INNER JOIN foretag ON foretag.foretagsID = plats.foretagID
+    INNER JOIN period ON period.periodNamn = plats.periodNamn
+    INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
     INNER JOIN dag ON dag.dagID = perioddag.dagID
     WHERE foretag.namn = ? AND dag.datum = CURRENT_DATE";
 
@@ -47,13 +49,13 @@
 </head>
 <body>
 <br></br>
-    <form action="narvaroReport.php" method="POST">
+    <form action="reportForm.php" method="POST">
         <select name="elev">
             <?php
                 if(!empty($data)) {
                     echo "<option disabled selected>".'-- Välj Elev --'."</option>";
                     foreach($data as $row) {
-                            echo "<option value='" .$row['platsID'] .'|'. $row['periodDagID'].  "'> ".$row['fornamn']." ".$row['efternamn']." </option>";
+                            echo "<option value='" .$row['platsID'] .'|'. $row['periodDagID'].  "'> ".$row['elevID']." </option>";
                     }
                 } else {
                     echo "<option disabled selected> Inga elever har praktik idag </option>";
@@ -67,6 +69,11 @@
         </select>
         <input class="submit" type="submit" name="submit" value="Insert"/>
     </form>
+    <?php
+        if(isset($_POST['submit'])) {
+            registerNarvaro($conn, $_POST['elev'], $_POST['narvaro']);
+        }
+    ?>
 
     <?php
 
@@ -83,7 +90,7 @@
         echo "</td><td>";
         echo $row['platsID'];
         echo "</td><td>";
-        echo $row['periodDagID'];
+        echo $row['perioddagID'];
         echo "</td><td>";
         echo $row['narvaro'];
         echo "</td><td>";
