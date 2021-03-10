@@ -17,7 +17,7 @@
     $sql = "SELECT elev.elevID, period.periodNamn, periodDagID, platsID
     FROM plats
     INNER JOIN elev ON elev.elevID = plats.elevID
-    INNER JOIN foretag ON foretag.foretagsID = plats.foretagID
+    INNER JOIN foretag ON foretag.foretagID = plats.foretagID
     INNER JOIN period ON period.periodNamn = plats.periodNamn
     INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
     INNER JOIN dag ON dag.dagID = perioddag.dagID

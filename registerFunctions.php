@@ -109,6 +109,29 @@
        
         $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$periodNamn' AND dag.datum>=period.startdatum AND dag.datum<=period.slutdatum";
         $conn->query($sql);
-   
+    }
+
+    function registerPlats($conn, $elevID, $periodNamn, $foretagID) {
+
+        $dupeCheck = "SELECT * FROM plats WHERE elevID = ?";
+    
+        $stmt = $conn->prepare($dupeCheck);
+        $stmt->bind_param("s", $elevID);
+        $stmt->execute();
+        $stmt->store_result();
+        $result = $stmt->num_rows;
+
+        if($result == 0) {
+            $stmt = $conn->prepare("INSERT INTO plats (periodNamn, foretagID, elevID) VALUES (?, ?, ?)");
+            $stmt->bind_param("sis", $periodNamn, $foretagID, $elevID);
+
+            if ($stmt->execute()) {
+                echo "Plats har lagts till";
+            } else {
+                echo "Något gick fel";
+            }
+        } else {
+            echo "Eleven har redan en plats";
+        }
     }
 ?>
