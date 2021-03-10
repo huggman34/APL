@@ -6,7 +6,7 @@
     
 
 function deleteForetag($conn,$id){
-    $sql = "DELETE FROM foretag WHERE foretagsID = '$id'";
+    $sql = "DELETE FROM foretag WHERE foretagID = '$id'";
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);
     } else{
@@ -53,6 +53,15 @@ function deleteDag($conn,$id){
 }
 function deletePeriodDag($conn,$id){
     $sql = "DELETE FROM perioddag WHERE perioddagID = '$id'";
+    if (mysqli_query($conn, $sql)){
+        mysqli_close($conn);
+        
+    } else{
+        echo "Error deleting record";
+    }
+}
+function deletePlats($conn,$id){
+    $sql = "DELETE FROM plats WHERE platsID = '$id'";
     if (mysqli_query($conn, $sql)){
         mysqli_close($conn);
         

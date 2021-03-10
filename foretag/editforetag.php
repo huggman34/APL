@@ -13,21 +13,21 @@
         session_start();
         include_once '../connection.php';
 
-        $foretagsID = $_POST['foretagsID'];
+        $foretagID = $_POST['foretagID'];
         $namn = '';
         $losenord = '';
         $epost = '';
         $telefon = '';
 
-        if(isset($_POST['foretagsID'])){
-            $foretagsID = $_POST['foretagsID'];
+        if(isset($_POST['foretagID'])){
+            $foretagID = $_POST['foretagID'];
             $namn = $_POST['namn'];
             $losenord = $_POST['losenord'];
             $epost = $_POST['epost'];
             $telefon = $_POST['telefon'];
 
 
-            $sql = "UPDATE foretag SET namn='$namn', losenord='$losenord', epost='$epost', telefon='$telefon' WHERE foretagsID=$foretagsID";
+            $sql = "UPDATE foretag SET namn='$namn', losenord='$losenord', epost='$epost', telefon='$telefon' WHERE foretagID=$foretagID";
             mysqli_query($conn, $sql);
             
         }
