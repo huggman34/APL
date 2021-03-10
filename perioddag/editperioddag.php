@@ -28,7 +28,7 @@
         mysqli_query($conn, $sql);
             
     }
-    header('location: perioddaglista.php');
+    header('location: ../Lists.php');
 ?>
 </body>
 </html>

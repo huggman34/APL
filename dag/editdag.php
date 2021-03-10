@@ -14,7 +14,7 @@
      */
 
         session_start();
-        require_once 'connection.php';
+        require_once '../connection.php';
 
         $dagID = $_POST['dagID'];
         $datum = '';
@@ -28,7 +28,7 @@
             mysqli_query($conn, $sql);
             
         }
-        header('location: perioddaglista.php');
+        header('location: ../Lists.php');
     ?>
 </body>
 </html>

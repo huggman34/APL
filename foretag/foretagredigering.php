@@ -4,7 +4,7 @@
 /**
  * här bestämmer man viken företags data som ska uppdateras
  */
-    require_once 'foretaglista.php';
+    require_once 'Lists.php';
     include_once '../connection.php';
 
 

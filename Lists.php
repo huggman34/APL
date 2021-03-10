@@ -17,6 +17,7 @@
  *  ToDo:
  * lat lösning på rad 194.
  * 
+ * 
  */
     session_start();
     include_once 'connection.php';
@@ -62,8 +63,8 @@
         <?php
         echo "</td><td>";
         echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deletelev' value='Delet'>
-        <input type='hidden' name='deletE' value='$elev'>
+        <input type='submit' name='deleteelev' value='Delete'>
+        <input type='hidden' name='deleteE' value='$elev'>
         </form>";
         echo "</td></tr>";
 
@@ -92,8 +93,8 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     <?php
      echo "</td><td>";
      echo"<form action='Lists.php' method='post'>
-     <input type='submit' name='deletforetag' value='Delet'>
-     <input type='hidden' name='deletF' value='$foretag'>
+     <input type='submit' name='deleteforetag' value='Delete'>
+     <input type='hidden' name='deleteF' value='$foretag'>
      </form>";
     echo "</td></tr>";
 
@@ -116,13 +117,13 @@ echo "</table>";
         echo "</td><td>";
         $dag=$row['dagID'];
         ?>
-        <a href="dagredigering.php">Uppdatera</a>
+        <a href="dag/dagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
 
         echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deletdag' value='Delet'>
-        <input type='hidden' name='deletD' value='$dag'>
+        <input type='submit' name='deletedag' value='Delete'>
+        <input type='hidden' name='deleteD' value='$dag'>
         </form>";
 
         echo "</td></tr>";
@@ -153,8 +154,8 @@ echo "</table>";
         echo "</td><td>";
         
         echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deletperiod' value='Delet'>
-        <input type='hidden' name='deletP' value='$period'>
+        <input type='submit' name='deleteperiod' value='Delete'>
+        <input type='hidden' name='deleteP' value='$period'>
         </form>";
         
         echo "</td></tr>";
@@ -184,8 +185,8 @@ echo "</table>";
         <?php
         echo "</td><td>";
         echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deletperioddag' value='Delet'>
-        <input type='hidden' name='deletPd' value='$perioddag'>
+        <input type='submit' name='deleteperioddag' value='Delete'>
+        <input type='hidden' name='deletePd' value='$perioddag'>
         </form>";
         echo "</td></tr>";
 
@@ -193,20 +194,20 @@ echo "</table>";
 
 echo "</table>";
 
-if (isset($_POST['deletperiod'])) {
-    deletePeriod($conn,$_POST['deletP']);
+if (isset($_POST['deleteperiod'])) {
+    deletePeriod($conn,$_POST['deleteP']);
 }
-if (isset($_POST['deletperioddag'])) {
-    deletePeriodDag($conn,$_POST['deletPd']);
+if (isset($_POST['deleteperioddag'])) {
+    deletePeriodDag($conn,$_POST['deletePd']);
 }
-if (isset($_POST['deletelev'])) {
-    deleteElev($conn,$_POST['deletE']);
+if (isset($_POST['deleteelev'])) {
+    deleteElev($conn,$_POST['deleteE']);
 }
-if (isset($_POST['deletforetag'])) {
-    deleteForetag($conn,$_POST['deletF']);
+if (isset($_POST['deleteforetag'])) {
+    deleteForetag($conn,$_POST['deleteF']);
 }
-if (isset($_POST['deletdag'])) {
-    deleteDag($conn,$_POST['deletD']);
+if (isset($_POST['deletedag'])) {
+    deleteDag($conn,$_POST['deleteD']);
 }
 ?>
 <a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
