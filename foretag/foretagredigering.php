@@ -40,7 +40,7 @@
 <?php
 if (isset($_POST['save'])) {
    updateForetag($conn,$_POST['namn'],$_POST['losenord'],$_POST['epost'],$_POST['telefon'],$_POST['foretagsID']);
-   
+   header("Location: ../Lists.php");
 }
 ?>
 </body>
