@@ -1,6 +1,8 @@
 <?php
 /**
- * I denna fil finns alla registrerings funktioner för att registrera företag, elev och narvaro.
+ * I denna fil finns alla registrerings funktioner för att registrera företag, elev, narvaro, plats
+ * samt period generation som skapar period, dagarna som är mellan periodens start och slutdatum.
+ * Den kopplar även dagarna med perioden i perioddags tabellen.
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
     function registerForetag($conn, $foretagNamn, $losenord, $epost, $telefon) {
