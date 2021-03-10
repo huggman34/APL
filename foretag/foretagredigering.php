@@ -1,15 +1,17 @@
-
 <html>
 <body>
 <?php
 /**
  * här bestämmer man viken företags data som ska uppdateras
  */
-    require_once '../Lists.php';
+   
+
+
+    include '../UpdateFunctions.php';
     include_once '../connection.php';
 
 
-    $foretagID = $_SESSION['id'];
+    //$foretagsID = $_SESSION['id'];
 
     $namn = '';
     $losenord = '';
@@ -19,9 +21,9 @@
    $sql = "SELECT * FROM foretag";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="editforetag.php" method="post">';
+   echo '<form action="foretagredigering.php" method="post">';
    echo '<label for="namn">Välj företag:</label>';
-   echo '<select id="foretagID" name="foretagID">';
+   echo '<select id="foretagsID" name="foretagsID">';
    while($rev = mysqli_fetch_array($result)){
 
    echo '<option value="' . $rev["foretagID"] . '" >'. $rev["namn"] .'</option>';
@@ -35,5 +37,11 @@
    <input type="text" name="telefon" value="<?php echo $telefon; ?>"placeholder="Skriv nytt telefonnummer">
    <button type="submit" name="save">Uppdatera</button>
 </form>
+<?php
+if (isset($_POST['save'])) {
+   updateForetag($conn,$_POST['namn'],$_POST['losenord'],$_POST['epost'],$_POST['telefon'],$_POST['foretagsID']);
+   
+}
+?>
 </body>
 </html>
