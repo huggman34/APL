@@ -11,10 +11,16 @@
 <?php
 /**
  * Denna fil är den primära filen för output i form av tabeller.
+<<<<<<< HEAD:Lists.php
  * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
  * 
  * ToDo:
  * lat lösning på rad 194.
+=======
+ * Den innehåller även alla länkar för att uppdatera och ta bort data i varje tabell.
+ * Den outputar tabeller med länkar som tar en till delete eller update filer.
+ * När man klickar på antingen uppdatera eller delete kollar den igenom vilket ID det hör till och ändrar det sedan i den tabellen.
+>>>>>>> fab22b469e48cfe00ff03dbe9852b42bebf33bd5:perioddag/perioddaglista.php
  */
     session_start();
     include_once 'connection.php';
