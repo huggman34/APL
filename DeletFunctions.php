@@ -23,7 +23,7 @@ function deleteNarvaro($conn,$id){
         echo "Error deleting record";
     }
 }
-//fungerar inte då period
+//fungerar inte
 function deletePeriod($conn,$id){
     $sql = "DELETE FROM period WHERE periodNamn = '$id'";
     if (mysqli_query($conn, $sql)){
