@@ -18,7 +18,7 @@
  */
     session_start();
     include_once 'connection.php';
-    include_once 'DeletFunctions.php';
+    include_once 'DeleteFunctions.php';
 ?>
 <div class="container2">
 <div class="wrapper">
