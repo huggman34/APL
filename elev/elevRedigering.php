@@ -6,7 +6,8 @@
 * Den skriver även ut elev tabellen igen för att lättare kunna se vad det är som redigeras.
 */
   
-    require_once '../Lists.php';
+    //require_once '../Lists.php';
+    include 'UpdateFunctions.php';
     include_once '../connection.php';
 
 
@@ -18,7 +19,10 @@
    $sql = "SELECT * FROM elev";
    $result = mysqli_query($conn, $sql);
 
-   echo '<form action="editelev.php" method="post">';
+   if (isset($_POST['save'])) {
+      updateElev($conn,$_POST['fornamn'],$_POST['efternamn'],$_POST['elevID'])
+   }
+   echo '<form action="elevRedigering.php" method="post">';
    echo '<label for="fornamn">Välj elev:</label>';
    echo '<select id="elevID" name="elevID">';
    while($rev = mysqli_fetch_array($result)){

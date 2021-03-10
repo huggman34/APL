@@ -12,9 +12,12 @@
 /**
  * Denna fil är den primära filen för output i form av tabeller.
  * Den innehåller även länkar för att uppdatera och ta bort data i varje tabell.
- * 
- * ToDo:
+ * När man klickar på antingen uppdatera eller delete kollar den igenom vilket ID det hör till och ändrar det sedan i den tabellen.
+ *
+ *  ToDo:
  * lat lösning på rad 194.
+ * 
+ * 
  */
     session_start();
     include_once 'connection.php';
