@@ -56,7 +56,9 @@ echo "</table>";
     $dagID = '';
 
     if (isset($_POST['save'])) {
+        //refererar till funktion
         updatePeriodDag($conn,$_POST['periodNamn'],$_POST['dagID'],$_POST['perioddagID']);
+        header("Location: ../Lists.php");
     }
    $sql = "SELECT * FROM perioddag";
    $result = mysqli_query($conn, $sql);

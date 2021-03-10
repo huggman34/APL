@@ -52,6 +52,7 @@ echo "</table>";
 
     if (isset($_POST['save'])) {
         updateDag($conn,$_POST['datum'],$_POST['dagID']);
+        header("Location: ../Lists.php");
     }
    $sql = "SELECT * FROM dag";
    $result = mysqli_query($conn, $sql);
