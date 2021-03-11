@@ -23,11 +23,13 @@ function deleteNarvaro($conn,$id){
         echo "Error deleting record";
     }
 }
-//fungerar inte
+/* beskrivning: raderar perioder och perioddagar där periodNamn är $id
+                 
+*/
 function deletePeriod($conn,$id){
-    $sql = "DELETE FROM period WHERE periodNamn = '$id'";
+    $sql = "DELETE period,perioddag FROM period INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn WHERE period.periodnamn='$id'";
     if (mysqli_query($conn, $sql)){
-        mysqli_close($conn);
+        
         
     } else{
         echo "Error deleting record";
@@ -36,16 +38,16 @@ function deletePeriod($conn,$id){
 function deleteElev($conn,$id){
     $sql = "DELETE FROM elev WHERE elevID = '$id'";
     if (mysqli_query($conn, $sql)){
-        mysqli_close($conn);
-        
+       
     } else{
         echo "Error deleting record";
     }
 }
+
 function deleteDag($conn,$id){
     $sql = "DELETE FROM dag WHERE dagID = '$id'";
     if (mysqli_query($conn, $sql)){
-        mysqli_close($conn);
+        
     
     } else{
         echo "Error deleting record";
@@ -54,7 +56,7 @@ function deleteDag($conn,$id){
 function deletePeriodDag($conn,$id){
     $sql = "DELETE FROM perioddag WHERE perioddagID = '$id'";
     if (mysqli_query($conn, $sql)){
-        mysqli_close($conn);
+       
         
     } else{
         echo "Error deleting record";
