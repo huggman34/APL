@@ -17,7 +17,7 @@ session_start();
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
     echo "Logged in as " . $username . "<br></br>";
-
+  
     echo'
     <form action="periodCreate.php" method="post">
     <input type="text" name="periodnamn" placeholder="namn" requierd>
