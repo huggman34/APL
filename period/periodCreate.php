@@ -18,9 +18,9 @@ session_start();
 
  echo'
  <form action="periodCreate.php" method="post">
- <input type="text" name="periodnamn" placeholder="namn" requierd>
- <input type="date" name="startdatum" requierd>
- <input type="date" name="slutdatum" requierd>
+ <input type="text" name="periodnamn" placeholder="namn" required>
+ <input type="date" name="startdatum" required>
+ <input type="date" name="slutdatum" required>
  <input type="submit" value="submit" name="submin">
  </form>';
  if (isset($_POST['periodnamn'])) {
