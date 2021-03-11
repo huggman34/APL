@@ -42,6 +42,7 @@
     </div>
 </div>
 </div>
+</form>
 <?php
 
     $sqlget = "SELECT * FROM elev";
