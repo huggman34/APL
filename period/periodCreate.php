@@ -18,9 +18,9 @@ session_start();
 
  echo'
  <form action="periodCreate.php" method="post">
- <input type="text" name="periodnamn" requierd>
- <input type="date" name="startdatum">
- <input type="date" name="slutdatum">
+ <input type="text" name="periodnamn" placeholder="namn" requierd>
+ <input type="date" name="startdatum" requierd>
+ <input type="date" name="slutdatum" requierd>
  <input type="submit" value="submit" name="submin">
  </form>';
  if (isset($_POST['periodnamn'])) {
@@ -49,14 +49,17 @@ session_start();
     
     
         echo "<table>";
-        echo "<tr><th>Dag</th><th>Period</th></tr>
+        echo "<tr><th>Dag</th><th>Datum</th><th>Period</th></tr>
         <form action='periodCreate.php' method='post'>";
 
         while($row = mysqli_fetch_assoc($sqldata)) {
 
+            $date=strtotime($row['datum']);
             $dag=$row['perioddagID'];
             echo "<tr>";
             echo "<td>";
+            echo date('l',$date);
+            echo "</td><td>";
             echo $row['datum'];
             echo "</td><td>";
             echo $row['periodNamn'];
