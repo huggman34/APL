@@ -29,10 +29,14 @@ session_start();
  if (isset($_POST['submin'])) {
     
     if ($_POST['submin']=="ta bort dagar") {
-        $periodD=$_POST['periodDag'];
+        if (isset($_POST['periodDag'])) {
+            $periodD=$_POST['periodDag'];
+        
+        
 
         foreach($periodD as $perioddag){
         deletePeriodDag($conn,$perioddag);
+        }
     }
     }else{
         periodGeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
@@ -69,13 +73,13 @@ session_start();
         }
         
         echo"<input type='hidden' name='periodnamn' value='$periodNamn'>
-        <input type='submit' name='submin' value='ta bort dagar'>
+        <input type='submit' name='submin' onclick=\"return confirm('Du är på väg att ta bort dem markerade datumen, är du säker?');\" value='ta bort dagar'>
         </form>";
         echo "</table>
         
         <form action='periodCreate.php' method='post'>
         <input type='hidden' name='periodnamn' value='$periodNamn'>
-        <input type='submit' name='submit' value='börja om'>
+        <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
         </form>";
 
         
