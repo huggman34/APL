@@ -62,9 +62,11 @@
         <a href="elev/elevredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deleteelev' value='Delete'>
-        <input type='hidden' name='deleteE' value='$elev'>
+        ?>
+        <form action='Lists.php' method='post'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort en elev från databasen, är du säker?')"name='deleteelev' value='Delete'>
+        <?php
+        echo "<input type='hidden' name='deleteE' value='$elev'>
         </form>";
         echo "</td></tr>";
 
@@ -92,9 +94,11 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     <a href="foretag/foretagredigering.php">Uppdatera</a>
     <?php
      echo "</td><td>";
-     echo"<form action='Lists.php' method='post'>
-     <input type='submit' name='deleteforetag' value='Delete'>
-     <input type='hidden' name='deleteF' value='$foretag'>
+     ?>
+     <form action='Lists.php' method='post'>
+     <input type="submit" onclick="return confirm('Du är på väg att ta bort ett företag från databasen, är du säker?')" name="deleteforetag" value="Delete">
+     <?php
+     echo "<input type='hidden' name='deleteF' value='$foretag'>
      </form>";
     echo "</td></tr>";
 
@@ -120,10 +124,11 @@ echo "</table>";
         <a href="dag/dagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-
-        echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deletedag' value='Delete'>
-        <input type='hidden' name='deleteD' value='$dag'>
+        ?>
+        <form action='Lists.php' method='post'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort en dag från databasen, är du säker?')" name='deletedag' value='Delete'>
+        <?php
+        echo "<input type='hidden' name='deleteD' value='$dag'>
         </form>";
 
         echo "</td></tr>";
@@ -152,10 +157,11 @@ echo "</table>";
         <a href="period/periodredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        
-        echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deleteperiod' value='Delete'>
-        <input type='hidden' name='deleteP' value='$period'>
+        ?>
+        <form action='Lists.php' method='post'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort en period från databasen, är du säker?')" name='deleteperiod' value='Delete'>
+        <?php
+        echo "<input type='hidden' name='deleteP' value='$period'>
         </form>";
         
         echo "</td></tr>";
@@ -184,9 +190,11 @@ echo "</table>";
         <a href="perioddag/perioddagredigering.php">Uppdatera</a>
         <?php
         echo "</td><td>";
-        echo"<form action='Lists.php' method='post'>
-        <input type='submit' name='deleteperioddag' value='Delete'>
-        <input type='hidden' name='deletePd' value='$perioddag'>
+        ?>
+        <form action='Lists.php' method='post'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort en perioddag från databasen, är du säker?')" name='deleteperioddag' value='Delete'>
+        <?php
+        echo "<input type='hidden' name='deletePd' value='$perioddag'>
         </form>";
         echo "</td></tr>";
 
@@ -216,9 +224,11 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     <a href="plats/platsredigering.php">Uppdatera</a>
     <?php
     echo "</td><td>";
-    echo"<form action='Lists.php' method='post'>
-    <input type='submit' name='deleteplats' value='Delete'>
-    <input type='hidden' name='deletePl' value='$plats'>
+    ?>
+    <form action='Lists.php' method='post'>
+    <input type='submit' onclick="return confirm('Du är på väg att ta bort en plats från databasen, är du säker?')" name='deleteplats' value='Delete'>
+    <?php
+    echo "<input type='hidden' name='deletePl' value='$plats'>
     </form>";
     echo "</td></tr>";
 

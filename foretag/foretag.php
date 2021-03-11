@@ -58,6 +58,6 @@ session_start();
         registerForetag($conn, $_POST['namn'], $_POST['losenord'], $_POST['epost'], $_POST['telefon']);
     }
 ?>
-<a class="link" href="foretaglista.php">Se registrerade företag</a>
+<a class="link" href="../Lists.php">Se registrerade företag</a>
 </body>
 </html>
