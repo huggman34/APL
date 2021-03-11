@@ -1,14 +1,22 @@
 <?php
+    include_once "loginFunctions.php";
     include "connection.php";
     include_once 'registerFunctions.php';
 
-    $elever = mysqli_query($conn, "SELECT elevID FROM elev");
-    $foretag = mysqli_query($conn, "SELECT namn, foretagID FROM foretag");
-    $perioder = mysqli_query($conn, "SELECT periodNamn FROM period");
+    session_start();
+    //session_destroy();
+
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
+
+        $elever = mysqli_query($conn, "SELECT elevID FROM elev");
+        $foretag = mysqli_query($conn, "SELECT namn, foretagID FROM foretag");
+        $perioder = mysqli_query($conn, "SELECT periodNamn FROM period");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
@@ -16,8 +24,8 @@
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
     </style>
-</head>
-<body>
+    </head>
+    <body>
     <form action="plats.php" method="POST">
         <select name="elevID">
             <?php
@@ -49,6 +57,11 @@
         if(isset($_POST['submit'])) {
             registerPlats($conn, $_POST['elevID'], $_POST['periodNamn'], $_POST['foretagID']);
         }
+    ?>
+    <?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
     ?>
 </body>
 </html>
