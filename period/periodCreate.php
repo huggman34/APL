@@ -1,55 +1,55 @@
 <?php
 /** 
- *  beskrivning 
-I den här filen lägger man till perioder tilsammans med dagar och period dagar.
-Man kan också välja bort dem dagar som man inte ska ha med i en period som låv dagar och annat. 
-
-Todo:
-prepared statements på sql statements 
+ * Beskrivning: 
+ * I den här filen lägger man till perioder tilsammans med dagar och period dagar.
+ * Man kan också välja bort dem dagar som man inte ska ha med i en period som låv dagar och annat. 
+ * TODO:
+ * prepared statements på sql statements 
 */
 
+include_once "../loginFunctions.php";
 include_once "../connection.php";
 include_once "../DeleteFunctions.php";
 include_once "../registerFunctions.php";
 session_start();
 //$username=$_SESSION['username'];
 
-
-
- echo'
- <form action="periodCreate.php" method="post">
- <input type="text" name="periodnamn" placeholder="namn" required>
- <input type="date" name="startdatum" required>
- <input type="date" name="slutdatum" required>
- <input type="submit" value="submit" name="submin">
- </form>';
- if (isset($_POST['periodnamn'])) {
-        $periodNamn=$_POST['periodnamn'];
-    }
- if (isset($_POST['submin'])) {
-    
-    if ($_POST['submin']=="ta bort dagar") {
-        if (isset($_POST['periodDag'])) {
-            $periodD=$_POST['periodDag'];
-        
-        
-
-        foreach($periodD as $perioddag){
-        deletePeriodDag($conn,$perioddag);
+if(checkAdminLogin()) {
+    $username = $_SESSION['username'];
+    echo "Logged in as " . $username . "<br></br>";
+  
+    echo'
+    <form action="periodCreate.php" method="post">
+    <input type="text" name="periodnamn" placeholder="namn" requierd>
+    <input type="date" name="startdatum" requierd>
+    <input type="date" name="slutdatum" requierd>
+    <input type="submit" value="submit" name="submin">
+    </form>';
+    if (isset($_POST['periodnamn'])) {
+            $periodNamn=$_POST['periodnamn'];
         }
-    }
-    }else{
-        periodGeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
-    }
+    if (isset($_POST['submin'])) {
+        
+        if ($_POST['submin']=="ta bort dagar") {
+            if (isset($_POST['periodDag'])) {
+                $periodD=$_POST['periodDag'];
+            
+            
+
+            foreach($periodD as $perioddag){
+            deletePeriodDag($conn,$perioddag);
+            }
+        }
+        }else{
+            periodGeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
+        }
     
-    
-   
-     $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
-    INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
-    INNER JOIN dag ON perioddag.dagID = dag.dagID
-    WHERE period.periodNamn = '$periodNamn'
-    ORDER BY dag.datum";
-    $sqldata = mysqli_query($conn, $sql) or die("error");
+        $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
+        INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
+        INNER JOIN dag ON perioddag.dagID = dag.dagID
+        WHERE period.periodNamn = '$periodNamn'
+        ORDER BY dag.datum";
+        $sqldata = mysqli_query($conn, $sql) or die("error");
     
     
         echo "<table>";
@@ -81,16 +81,15 @@ session_start();
         <input type='hidden' name='periodnamn' value='$periodNamn'>
         <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
         </form>";
+    }
+        if (isset($_POST['submit'])) {
+            deletePeriod($conn,$periodNamn);
+        }
 
-        
- }
- if (isset($_POST['submit'])) {
-     deletePeriod($conn,$periodNamn);
-
-     
- }
+} else {
+    echo "Please log in first to see this page <br></br>";
+}
   
- 
  /* beskrivning: skapar perioder och dagar baserar deras periodens start och slutdatum och skapar period dagar så länge dem är inom  
     parametrar: $conn(SQL conection)
                 (String)$periodNamn(Namet på en perioden man vill skapa)
@@ -98,4 +97,4 @@ session_start();
                 (date)$slutdatum(Datum då en period slutar)
     returns: inget  
  */
- ?>
+?>
