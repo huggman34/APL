@@ -6,35 +6,38 @@
  * Om den finns elever som har praktik hos företaget idag, kan företaget lägga närvaro på eleverna.
  * Denna filen visar all data som finns i narvaro tabellen.
  */
+    include_once "../loginFunctions.php";
     include "../connection.php";
     include_once '../registerFunctions.php';
     
     session_start();
+    //session_destroy();
 
-    $username = $_SESSION["username"];
-    echo "logged in as $username <br></br>";
+    if(checkForetagLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
-    $sql = "SELECT elev.elevID, period.periodNamn, periodDagID, platsID
-    FROM plats
-    INNER JOIN elev ON elev.elevID = plats.elevID
-    INNER JOIN foretag ON foretag.foretagID = plats.foretagID
-    INNER JOIN period ON period.periodNamn = plats.periodNamn
-    INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
-    INNER JOIN dag ON dag.dagID = perioddag.dagID
-    WHERE foretag.namn = ? AND dag.datum = CURRENT_DATE";
+        $sql = "SELECT elev.elevID, period.periodNamn, periodDagID, platsID
+        FROM plats
+        INNER JOIN elev ON elev.elevID = plats.elevID
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN period ON period.periodNamn = plats.periodNamn
+        INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
+        INNER JOIN dag ON dag.dagID = perioddag.dagID
+        WHERE foretag.namn = ? AND dag.datum = CURRENT_DATE";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
 
-    $stmt->close();
-    print_r($data);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+        $stmt->close();
+        print_r($data);
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <title>reportForm</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
@@ -46,9 +49,9 @@
          border: 1px solid black;
         }
     </style>
-</head>
-<body>
-<br></br>
+    </head>
+    <body>
+    <br></br>
     <form action="reportForm.php" method="POST">
         <select name="elev">
             <?php
@@ -74,33 +77,13 @@
             registerNarvaro($conn, $_POST['elev'], $_POST['narvaro']);
         }
     ?>
+    <?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    ?>
 
     <?php
-
-    $sqlget = "SELECT * FROM narvaro";
-    $sqldata = mysqli_query($conn, $sqlget) or die("error");
-
-    echo "<table style=3>";
-    echo "<tr><th>narvaroID</th><th>platsID</th><th>periodDagID</th><th>narvaro</th><th>Ta bort narvaro</th></tr>";
-
-    while($row = mysqli_fetch_assoc($sqldata)) {
-
-        echo "<tr><td>";
-        echo $row['narvaroID'];
-        echo "</td><td>";
-        echo $row['platsID'];
-        echo "</td><td>";
-        echo $row['perioddagID'];
-        echo "</td><td>";
-        echo $row['narvaro'];
-        echo "</td><td>";
-        ?>
-        <a href="narvaroDelete.php?id=<?php echo $row['narvaroID'];?>">Delete</a>
-        <?php
-        echo "</td></tr>";
     }
-
-    echo "</table>";
     
     $conn->close();
 ?>

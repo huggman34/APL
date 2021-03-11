@@ -15,7 +15,8 @@
       
         if($exist) {
           session_start();
-      
+
+          $_SESSION['loggedinAdmin'] = true;
           $_SESSION["username"] = $username;
           header('Location: adminMain.php');
         } else {
@@ -32,11 +33,28 @@
         if($exist) {
             session_start();
 
+            $_SESSION['loggedin'] = true;
             $_SESSION["username"] = $username;
             header('Location: ../narvaro/reportForm.php');
 
         } else {
             echo "Felaktig inloggningsuppgifter";
+        }
+    }
+
+    function checkForetagLogin() {
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+            return true;
+        } else {
+            false;
+        }
+    }
+
+    function checkAdminLogin() {
+        if (isset($_SESSION['loggedinAdmin']) && $_SESSION['loggedinAdmin'] == true) {
+            return true;
+        } else {
+            false;
         }
     }
 ?>
