@@ -15,6 +15,7 @@ session_start();
  */
     include_once '../connection.php';
     include_once '../registerFunctions.php';
+    include_once '../loginFunctions.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
     //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");
@@ -22,6 +23,9 @@ session_start();
 //} else {
 //header('Location: login.html');
 //}
+if(checkAdminLogin()) {
+    $username = $_SESSION['username'];
+    echo "Logged in as " . $username . "<br></br>";
 ?>
 <div class="container">
 <div class="wrapper">
@@ -61,3 +65,8 @@ session_start();
 <a class="link" href="../Lists.php">Se registrerade företag</a>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>
