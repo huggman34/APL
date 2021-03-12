@@ -20,9 +20,9 @@
  * 
  */
     session_start();
-    include_once 'connection.php';
-    include_once 'DeleteFunctions.php';
-    include_once 'loginFunctions.php';
+    require_once 'connection.php';
+    require_once 'DeleteFunctions.php';
+    require_once 'loginFunctions.php';
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";

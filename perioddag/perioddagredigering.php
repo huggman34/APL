@@ -16,8 +16,8 @@
 * Den skriver även ut perioddag tabellen igen för att lättare kunna se vad det är som redigeras.
 */
 
-    include_once '../connection.php';
-    include '../UpdateFunctions.php';
+    require_once '../connection.php';
+    require_once '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM perioddag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

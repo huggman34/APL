@@ -5,7 +5,7 @@
  * Denna filen används för att kunna sätta in dagar i dag tabellen i databasen
  * Du matar in vilket datum som ska sättas in från formuläret sedan så sätts dagen in.
  */
-    include_once '../connection.php';
+    require_once '../connection.php';
 ?>
     Du har registerat datumet: <br>
     <?php echo $_POST["datum"]; ?><br>

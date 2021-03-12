@@ -13,16 +13,10 @@ session_start();
  * här skriver admin in värdena för att registrera ett nytt företag.
  * 
  */
-    include_once '../connection.php';
-    include_once '../registerFunctions.php';
-    include_once '../loginFunctions.php';
+    require_once '../connection.php';
+    require_once '../registerFunctions.php';
+    require_once '../loginFunctions.php';
 
-//if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
-    //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");
-    //$_SESSION['password'];
-//} else {
-//header('Location: login.html');
-//}
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
     echo "Logged in as " . $username . "<br></br>";

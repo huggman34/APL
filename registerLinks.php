@@ -14,7 +14,7 @@
     <br>
     <a href="period/periodCreate.php">Perioder</a><br>
     <br>
-    <a href="plats.php">Plats</a><br>
+    <a href="plats/registerPlats.php">Plats</a><br>
     <br>
     <a href="narvaro/registerNarvaro.php">Närvaro</a><br>
     <br>
