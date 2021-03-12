@@ -9,8 +9,11 @@
 
     include '../UpdateFunctions.php';
     include_once '../connection.php';
+    include_once '../loginFunctions.php';
 
-
+    if(checkAdminLogin()) {
+      $username = $_SESSION['username'];
+      echo "Logged in as " . $username . "<br></br>";
     //$foretagID = $_SESSION['id'];
 
     $namn = '';
@@ -45,3 +48,8 @@ if (isset($_POST['save'])) {
 ?>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>

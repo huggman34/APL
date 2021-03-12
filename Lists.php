@@ -22,6 +22,10 @@
     session_start();
     include_once 'connection.php';
     include_once 'DeleteFunctions.php';
+    include_once 'loginFunctions.php';
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 ?>
 <div class="container2">
 <div class="wrapper">
@@ -257,3 +261,8 @@ if (isset($_POST['deleteplats'])) {
 <a href="index.php" class="tillbaka3">Gå tillbaka</a>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>

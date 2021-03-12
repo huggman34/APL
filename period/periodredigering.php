@@ -19,6 +19,10 @@
     session_start();
     include_once '../connection.php';
     include '../UpdateFunctions.php';
+    include_once 'loginFunction.php';
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     $sqlget = "SELECT * FROM period";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -78,3 +82,8 @@ echo "</table>";
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>
