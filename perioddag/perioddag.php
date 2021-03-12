@@ -16,6 +16,7 @@
 
     session_start();
     include_once '../connection.php';
+    include_once '../loginFunctions.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
     //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");
@@ -25,6 +26,9 @@
 //} else {
 //header('Location: login.html');
 //}
+if(checkAdminLogin()) {
+    $username = $_SESSION['username'];
+    echo "Logged in as " . $username . "<br></br>";
 ?>
 <div class="container">
 <div class="wrapper">
@@ -44,3 +48,8 @@
 <a class="link2" href="../Lists.php">Se inlagda dagar</a>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>
