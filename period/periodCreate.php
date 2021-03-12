@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
 <?php
 /** 
  * Beskrivning: 
@@ -11,30 +18,30 @@ include_once "../loginFunctions.php";
 include_once "../connection.php";
 include_once "../DeleteFunctions.php";
 include_once "../registerFunctions.php";
+include_once "../loginFunctions.php";
 session_start();
-//$username=$_SESSION['username'];
+
+
 
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
     echo "Logged in as " . $username . "<br></br>";
-  
-    echo'
-    <form action="periodCreate.php" method="post">
-    <input type="text" name="periodnamn" placeholder="namn" requierd>
-    <input type="date" name="startdatum" requierd>
-    <input type="date" name="slutdatum" requierd>
-    <input type="submit" value="submit" name="submin">
-    </form>';
-    if (isset($_POST['periodnamn'])) {
-            $periodNamn=$_POST['periodnamn'];
-        }
-    if (isset($_POST['submin'])) {
-        
-        if ($_POST['submin']=="ta bort dagar") {
-            if (isset($_POST['periodDag'])) {
-                $periodD=$_POST['periodDag'];
-            
-            
+ echo'
+ <form action="periodCreate.php" method="post">
+ <input type="text" name="periodnamn" placeholder="namn" requierd>
+ <input type="date" name="startdatum" requierd>
+ <input type="date" name="slutdatum" requierd>
+ <input type="submit" value="submit" name="submin">
+ </form>';
+ if (isset($_POST['periodnamn'])) {
+        $periodNamn=$_POST['periodnamn'];
+    }
+ if (isset($_POST['submin'])) {
+    
+    if ($_POST['submin']=="ta bort dagar") {
+        if (isset($_POST['periodDag'])) {
+            $periodD=$_POST['periodDag'];
+                    
 
             foreach($periodD as $perioddag){
             deletePeriodDag($conn,$perioddag);
@@ -44,19 +51,24 @@ if(checkAdminLogin()) {
             periodGeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
         }
     
-        $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
-        INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
-        INNER JOIN dag ON perioddag.dagID = dag.dagID
-        WHERE period.periodNamn = '$periodNamn'
-        ORDER BY dag.datum";
-        $sqldata = mysqli_query($conn, $sql) or die("error");
+   
+     $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
+    INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
+    INNER JOIN dag ON perioddag.dagID = dag.dagID
+    WHERE period.periodNamn = ?
+    ORDER BY dag.datum";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $periodNamn);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
+
     
         echo "<table>";
         echo "<tr><th>Dag</th><th>Datum</th><th>Period</th></tr>
         <form action='periodCreate.php' method='post'>";
 
-        while($row = mysqli_fetch_assoc($sqldata)) {
+        while($row = $result->fetch_assoc()) {
 
             $date=strtotime($row['datum']);
             $dag=$row['perioddagID'];
@@ -85,7 +97,7 @@ if(checkAdminLogin()) {
         if (isset($_POST['submit'])) {
             deletePeriod($conn,$periodNamn);
         }
-
+  
 } else {
     echo "Please log in first to see this page <br></br>";
 }
@@ -98,3 +110,6 @@ if(checkAdminLogin()) {
     returns: inget  
  */
 ?>
+<a class="link2" href="../Lists.php">Se inlagda perioder</a>
+</body>
+</html>

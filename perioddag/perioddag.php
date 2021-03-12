@@ -29,7 +29,7 @@
 <div class="container">
 <div class="wrapper">
     <h2 class="rubrik">Lägg till dagar i databasen</h2>
-    <form action="dagregister.php" method="post">
+    <form action="../dag/dagregister.php" method="post">
     <div class="form-group">
         <label>Välj dagar</label> 
         <input type="date" name ="datum" class="form-control">
@@ -41,6 +41,6 @@
 </div>
 </div>
 </form>
-<a class="link2" href="perioddaglista.php">Se inlagda dagar</a>
+<a class="link2" href="../Lists.php">Se inlagda dagar</a>
 </body>
 </html>

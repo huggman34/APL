@@ -67,5 +67,6 @@
         echo "Please log in first to see this page <br></br>";
     }
     ?>
+    <a class="link2" href="Lists.php">Se inlagda platser</a>
 </body>
 </html>

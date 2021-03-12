@@ -18,7 +18,7 @@
 
           $_SESSION['loggedinAdmin'] = true;
           $_SESSION["username"] = $username;
-          header('Location: adminMain.php');
+          header('Location: ../index.php');
         } else {
             echo "Felaktig inloggningsuppgifter";
         }

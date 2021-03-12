@@ -111,18 +111,16 @@ echo "</table>";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>dagID</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort dag</th></tr>";
+    echo "<tr><th>Datum</th><th>Uppdatera information</th><th>Ta bort dag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
         echo "<tr><td>";
-        echo $row['dagID'];
-        echo "</td><td>";
         echo $row['datum'];
         echo "</td><td>";
         $dag=$row['dagID'];
         ?>
-        <a href="dag/dagredigering.php">Uppdatera</a>
+        <a href="dag/dagredigering.php?id=<?php echo $row['dagID'];?>">Uppdatera</a>
         <?php
         echo "</td><td>";
         ?>
@@ -256,6 +254,6 @@ if (isset($_POST['deleteplats'])) {
     deletePlats($conn,$_POST['deletePl']);
 }
 ?>
-<a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
+<a href="index.php" class="tillbaka3">Gå tillbaka</a>
 </body>
 </html>

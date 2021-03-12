@@ -6,27 +6,67 @@
  */
 
 function updatePeriod($conn,$startdatum,$slutdatum,$periodnamn){
-        $sql = "UPDATE period SET startdatum='$startdatum', slutdatum='$slutdatum' WHERE periodNamn=$periodNamn";
-        mysqli_query($conn, $sql);
+        $sql = "UPDATE period SET startdatum=?, slutdatum=? WHERE periodNamn=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("dds",$startdatum,$slutdatum,$periodnamn);
+    
+            
+    if ($stmt->execute()){
+
+    }else{
+           return "Error"; 
+    }
 }
 function updateForetag($conn,$namn,$losenord,$epost,$telefon,$foretagsID){
-    $sql = "UPDATE foretag SET namn='$namn', losenord='$losenord', epost='$epost', telefon='$telefon' WHERE foretagID=$foretagsID";
-            mysqli_query($conn, $sql);
+    $sql = "UPDATE foretag SET namn=?, losenord=?, epost=?, telefon=? WHERE foretagID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssi",$namn,$losenord,$epost,$telefon,$foretagsID);
+
+        
+if ($stmt->execute()){
+
+}else{
+       return "Error"; 
+}
 }
 
 function updateDag($conn,$datum,$dagID){
-        $sql = "UPDATE dag SET datum='$datum' WHERE dagID=$dagID";
-        mysqli_query($conn, $sql);
+        $sql = "UPDATE dag SET datum=? WHERE dagID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("di",$datum,$dagID);
+    
+            
+    if ($stmt->execute()){
+
+    }else{
+           return "Error"; 
+    }
 }
 
 function updateElev($conn,$fornamn,$efternamn,$elevID){
-        $sql = "UPDATE elev SET fornamn='$fornamn', efternamn='$efternamn' WHERE elevID=$elevID";
-        mysqli_query($conn, $sql);
+        $sql = "UPDATE elev SET fornamn=?, efternamn=? WHERE elevID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss",$fornamn,$efternamn,$elevID);
+    
+            
+    if ($stmt->execute()){
+
+    }else{
+           return "Error"; 
+    }
 }
 
 function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
-        $sql = "UPDATE perioddag SET periodNamn='$periodNamn', dagID='$dagID' WHERE periodDagID=$perioddagID";
-        mysqli_query($conn, $sql);
+        $sql = "UPDATE perioddag SET periodNamn=?, dagID=? WHERE periodDagID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sii",$periodNamn,$dagID,$perioddagID);
+    
+            
+    if ($stmt->execute()){
+
+    }else{
+           return "Error"; 
+    }
 }
 
 ?>
