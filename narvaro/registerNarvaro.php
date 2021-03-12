@@ -6,9 +6,9 @@
  * Om den finns elever som har praktik hos företaget idag, kan företaget lägga närvaro på eleverna.
  * Denna filen visar all data som finns i narvaro tabellen.
  */
-    include_once "../loginFunctions.php";
-    include "../connection.php";
-    include_once '../registerFunctions.php';
+    require_once "../loginFunctions.php";
+    require_once "../connection.php";
+    require_once '../registerFunctions.php';
     
     session_start();
 
@@ -23,7 +23,7 @@
         INNER JOIN period ON period.periodNamn = plats.periodNamn
         INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE foretag.namn = ? AND dag.datum = CURRENT_DATE";
+        WHERE foretag.namn = ? AND dag.datum = '2021-03-10'";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $username);
@@ -51,7 +51,7 @@
     </head>
     <body>
     <br></br>
-    <form action="reportForm.php" method="POST">
+    <form action="registerNarvaro.php" method="POST">
         <select name="elev">
             <?php
                 if(!empty($data)) {

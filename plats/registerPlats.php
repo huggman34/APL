@@ -4,9 +4,9 @@
  * registerFunctions.php inkluderas för att få tillgång till registerPlats funktionen som skickar in data
  * som anges i formuläret.
  */
-    include_once "loginFunctions.php";
-    include "connection.php";
-    include_once 'registerFunctions.php';
+    require_once "../loginFunctions.php";
+    require_once "../connection.php";
+    require_once '../registerFunctions.php';
 
     session_start();
 
@@ -30,7 +30,7 @@
     </style>
     </head>
     <body>
-    <form action="plats.php" method="POST">
+    <form action="registerPlats.php" method="POST">
         <select name="elevID">
             <?php
                 echo "<option disabled selected>".'-- Välj Elev --'."</option>";

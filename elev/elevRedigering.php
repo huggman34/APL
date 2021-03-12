@@ -7,8 +7,8 @@
 */
   
     //require_once '../Lists.php';
-    include '../UpdateFunctions.php';
-    include_once '../connection.php';
+    require_once '../UpdateFunctions.php';
+    require_once '../connection.php';
 
 
     //$elevID = $_SESSION['id'];

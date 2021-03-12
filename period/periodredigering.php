@@ -17,9 +17,9 @@
 */
 
     session_start();
-    include_once '../connection.php';
-    include '../UpdateFunctions.php';
-    include_once 'loginFunction.php';
+    require_once '../connection.php';
+    require_once '../UpdateFunctions.php';
+    require_once 'loginFunction.php';
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";

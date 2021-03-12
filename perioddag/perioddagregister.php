@@ -6,7 +6,7 @@
      * Denna fil används för att registrera en dag till en period genom att koppla periodnamn och dagID och lägga in det i perioddag tabellen.
      */
 
-    include_once '../connection.php';
+    require_once '../connection.php';
 ?>
     Du har registerat : <br>
     <?php echo $_POST["periodNamn"]; ?><br>

@@ -14,8 +14,8 @@
  * Denna filen gör så att vi kan uppdatera dagarna som finns i dag tabellen i databasen
  * Den uppdatera dagen genom dagID som skickas in.
  */
-    include_once '../connection.php';
-    include '../UpdateFunctions.php';
+    require_once '../connection.php';
+    require_once '../UpdateFunctions.php';
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");

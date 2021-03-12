@@ -7,9 +7,9 @@
    
 
 
-    include '../UpdateFunctions.php';
-    include_once '../connection.php';
-    include_once '../loginFunctions.php';
+   require_once '../UpdateFunctions.php';
+   require_once '../connection.php';
+   require_once '../loginFunctions.php';
 
     if(checkAdminLogin()) {
       $username = $_SESSION['username'];
