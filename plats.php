@@ -1,10 +1,14 @@
 <?php
+/**
+ * Denna filen innehåller formuläret som man använder för att en elev en platshos ett företag under en period.
+ * registerFunctions.php inkluderas för att få tillgång till registerPlats funktionen som skickar in data
+ * som anges i formuläret.
+ */
     include_once "loginFunctions.php";
     include "connection.php";
     include_once 'registerFunctions.php';
 
     session_start();
-    //session_destroy();
 
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
