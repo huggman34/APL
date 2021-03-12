@@ -11,11 +11,14 @@ prepared statements på sql statements
 include_once "../connection.php";
 include_once "../DeleteFunctions.php";
 include_once "../registerFunctions.php";
+include_once "../loginFunctions.php";
 session_start();
-//$username=$_SESSION['username'];
 
 
 
+if(checkAdminLogin()) {
+    $username = $_SESSION['username'];
+    echo "Logged in as " . $username . "<br></br>";
  echo'
  <form action="periodCreate.php" method="post">
  <input type="text" name="periodnamn" placeholder="namn" requierd>
@@ -47,16 +50,22 @@ session_start();
      $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
     INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
     INNER JOIN dag ON perioddag.dagID = dag.dagID
-    WHERE period.periodNamn = '$periodNamn'
+    WHERE period.periodNamn = ?
     ORDER BY dag.datum";
-    $sqldata = mysqli_query($conn, $sql) or die("error");
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $periodNamn);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+
+   
     
     
         echo "<table>";
         echo "<tr><th>Dag</th><th>Datum</th><th>Period</th></tr>
         <form action='periodCreate.php' method='post'>";
 
-        while($row = mysqli_fetch_assoc($sqldata)) {
+        while($row = $result->fetch_assoc()) {
 
             $date=strtotime($row['datum']);
             $dag=$row['perioddagID'];
@@ -86,10 +95,11 @@ session_start();
  }
  if (isset($_POST['submit'])) {
      deletePeriod($conn,$periodNamn);
-
      
  }
-  
+} else {
+    echo "Please log in first to see this page <br></br>";
+}
  
  /* beskrivning: skapar perioder och dagar baserar deras periodens start och slutdatum och skapar period dagar så länge dem är inom  
     parametrar: $conn(SQL conection)
