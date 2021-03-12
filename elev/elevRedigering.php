@@ -9,7 +9,11 @@
     //require_once '../Lists.php';
     require_once '../UpdateFunctions.php';
     require_once '../connection.php';
+    require_once '../registerFunctions.php';
 
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     //$elevID = $_SESSION['id'];
 
@@ -39,3 +43,8 @@
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>

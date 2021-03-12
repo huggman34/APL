@@ -16,6 +16,11 @@
  */
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
+    require_once '../loginFunctions';
+
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -70,3 +75,8 @@ echo "</table>";
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>
