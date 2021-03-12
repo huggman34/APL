@@ -57,6 +57,7 @@
     }
 
     function registerNarvaro($conn, $elevID, $narvaro) {
+        /*
         $result = $elevID;
 
         $result_explode = explode('|', $result);
@@ -80,6 +81,23 @@
             }
         } else {
             echo "Eleven har redan registrerats närvaro";
+        }*/
+
+        $result = $elevID;
+
+        $result_explode = explode('|', $result);
+        
+        $platsID = $result_explode[0];
+        $periodDagID = $result_explode[1];
+        $narvaro = $_POST['narvaro'];
+
+        $stmt = $conn->prepare("UPDATE narvaro SET narvaro = ? WHERE platsID = ? AND periodDagID = ?");
+        $stmt->bind_param("iii", $narvaro, $platsID, $periodDagID);
+
+        if ($stmt->execute()) {
+            echo "Närvaro har lagts till";
+        } else {
+            echo "Något gick fel";
         }
     }
 
@@ -126,9 +144,35 @@
         if($result == 0) {
             $stmt = $conn->prepare("INSERT INTO plats (periodNamn, foretagID, elevID) VALUES (?, ?, ?)");
             $stmt->bind_param("sis", $periodNamn, $foretagID, $elevID);
-
+            
             if ($stmt->execute()) {
                 echo "Plats har lagts till";
+
+                $sql = "SELECT platsID, periodNamn FROM plats WHERE periodNamn IS NOT NULL ORDER BY platsID DESC LIMIT 1";
+                $result = $conn->query($sql) or die($conn->error);
+                $row = $result->fetch_assoc();
+
+                $lastPlatsID = $row['platsID'];
+
+                $sql2 = "SELECT perioddag.perioddagID FROM perioddag
+                WHERE perioddag.periodNamn = ?
+                ORDER BY perioddag.perioddagID ASC";
+
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->bind_param("s", $periodNamn);
+                $stmt2->execute();
+                $result = $stmt2->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+
+                $periodDag = array_column($data, 'perioddagID');
+
+                
+                //Sätter in perioddagar i närvaro tabellen
+                foreach ($periodDag as $pDag) {
+                    mysqli_query($conn, "INSERT INTO narvaro (platsID, perioddagID)
+                    VALUES ('$lastPlatsID', '$pDag')");
+                }
+
             } else {
                 echo "Något gick fel";
             }

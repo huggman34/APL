@@ -1,7 +1,8 @@
 <?php
 /**
- * Denna filen är ett formulär som skickar datan till 'elevRegister.php'
- * Den används för att kunna sätta in elever i databasen. 
+ * Denna filen innehåller formuläret som man använder för att registrera en elev.
+ * registerFunctions.php inkluderas för att få tillgång till registerElev funktionen som skickar in data
+ * som anges i formuläret.
  */
     session_start();
 

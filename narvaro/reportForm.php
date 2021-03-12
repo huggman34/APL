@@ -11,7 +11,6 @@
     include_once '../registerFunctions.php';
     
     session_start();
-    //session_destroy();
 
     if(checkForetagLogin()) {
         $username = $_SESSION['username'];
