@@ -20,7 +20,7 @@
    $result = mysqli_query($conn, $sql);
 
    if (isset($_POST['save'])) {
-      updateElev($conn,$_POST['fornamn'],$_POST['efternamn'],$_POST['elevID'])
+      updateElev($conn,$_POST['fornamn'],$_POST['efternamn'],$_POST['elevID']);
       header("Location: ../Lists.php");
    }
    echo '<form action="elevRedigering.php" method="post">';
