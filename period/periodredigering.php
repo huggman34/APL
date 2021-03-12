@@ -56,7 +56,7 @@ echo "</table>";
     $slutdatum = '';
  
     if (isset($_POST['save'])) {
-        updatePeriod($conn,$_POST['startdatum'],$_POST['slutdatum'],$_POST['periodNamn'])
+        updatePeriod($conn,$_POST['startdatum'],$_POST['slutdatum'],$_POST['periodNamn']);
         header("Location: ../Lists.php");
     }
    $sql = "SELECT * FROM period";

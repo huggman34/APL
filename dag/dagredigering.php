@@ -21,13 +21,11 @@
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>dagID</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort dag</th></tr>";
+    echo "<tr><th>Datum</th><th>Uppdatera information</th><th>Ta bort dag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
         echo "<tr><td>";
-        echo $row['dagID'];
-        echo "</td><td>";
         echo $row['datum'];
         echo "</td><td>";
         ?>
