@@ -52,7 +52,7 @@
                     registerElev($conn, $_POST['fornamn'], $_POST['efternamn']);
                 }
             ?>
-            <a class="link3" href="../perioddag/perioddaglista.php">Se registrerade elever</a>
+            <a class="link3" href="../Lists.php">Se registrerade elever</a>
         </body>
         </html>
     <?php
