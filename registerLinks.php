@@ -6,9 +6,9 @@
 </head>
 <body>
     <h2>Vad vill du registrera?</h2>
-    <a href="elev/elev.php">Elever</a><br>
+    <a href="elev/registerElev.php">Elever</a><br>
     <br>
-    <a href="foretag/foretag.php">Företag</a><br>
+    <a href="foretag/registerForetag.php">Företag</a><br>
     <br>
     <a href="perioddag/perioddag.php">Dagar</a><br>
     <br>
@@ -16,7 +16,7 @@
     <br>
     <a href="plats.php">Plats</a><br>
     <br>
-    <a href="narvaro/reportform.php">Närvaro</a><br>
+    <a href="narvaro/registerNarvaro.php">Närvaro</a><br>
     <br>
     <a href="index.php">Tillbaka</a>
 </body>

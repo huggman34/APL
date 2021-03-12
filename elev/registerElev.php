@@ -31,7 +31,7 @@
             <div class="container">
             <div class="wrapper">
             <h2 class="rubrik">Registrera en elev</h2>
-            <form action="elev.php" method="post">
+            <form action="registerElev.php" method="post">
             <div class="form-group">
                 <label>Förnamn</label> 
                 <input type="text" name ="fornamn" class="form-control">
