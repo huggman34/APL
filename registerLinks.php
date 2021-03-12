@@ -17,5 +17,7 @@
     <a href="plats.php">Plats</a><br>
     <br>
     <a href="narvaro/reportform.php">Närvaro</a><br>
+    <br>
+    <a href="index.php">Tillbaka</a>
 </body>
 </html>
