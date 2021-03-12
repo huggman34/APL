@@ -254,6 +254,6 @@ if (isset($_POST['deleteplats'])) {
     deletePlats($conn,$_POST['deletePl']);
 }
 ?>
-<a href="perioddag.php" class="tillbaka3">Gå tillbaka</a>
+<a href="index.php" class="tillbaka3">Gå tillbaka</a>
 </body>
 </html>
