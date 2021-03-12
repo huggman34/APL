@@ -41,6 +41,6 @@
 </div>
 </div>
 </form>
-<a class="link2" href="Lists.php">Se inlagda dagar</a>
+<a class="link2" href="../Lists.php">Se inlagda dagar</a>
 </body>
 </html>
