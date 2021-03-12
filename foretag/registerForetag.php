@@ -30,7 +30,7 @@ if(checkAdminLogin()) {
 <div class="container">
 <div class="wrapper">
     <h2 class="rubrik">Registrera ett företag</h2>
-    <form action="foretag.php" method="post">
+    <form action="registerForetag.php" method="post">
     <div class="form-group">
         <label>Namn på företaget</label> 
         <input type="text" name ="namn" class="form-control">
