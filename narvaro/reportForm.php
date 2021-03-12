@@ -87,5 +87,6 @@
     
     $conn->close();
 ?>
+<a class="link2" href="../Lists.php">Se inlagd närvaro</a>
 </body>
 </html>

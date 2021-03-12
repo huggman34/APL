@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
 <?php
 /** 
  * Beskrivning: 
@@ -98,3 +105,6 @@ if(checkAdminLogin()) {
     returns: inget  
  */
 ?>
+<a class="link2" href="../Lists.php">Se inlagda perioder</a>
+</body>
+</html>
