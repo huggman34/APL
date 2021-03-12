@@ -27,7 +27,7 @@
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";
 ?>
-<div class="container2">
+<!--<div class="container2">
 <div class="wrapper">
     <h2 class="rubrik2">Länka dagar till perioder</h2>
     <form action="perioddag/perioddagregister.php" method="post">
@@ -46,7 +46,7 @@
     </div>
 </div>
 </div>
-</form>
+</form>-->
 <?php
 
     $sqlget = "SELECT * FROM elev";
