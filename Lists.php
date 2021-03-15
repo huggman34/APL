@@ -177,13 +177,11 @@ echo "</table>";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>perioddagID</th><th>periodNamn</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+    echo "<tr><th>periodNamn</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
         echo "<tr><td>";
-        echo $row['perioddagID'];
-        echo "</td><td>";
         echo $row['periodNamn'];
         echo "</td><td>";
         echo $row['datum'];
@@ -209,13 +207,11 @@ $sqlget = "SELECT * FROM plats, foretag where plats.foretagID = foretag.foretagI
 $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
 echo "<table>";
-echo "<tr><th>platsID</th><th>periodNamn</th><th>Företag</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+echo "<tr><th>periodNamn</th><th>Företag</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
 while($row = mysqli_fetch_assoc($sqldata)) {
 
     echo "<tr><td>";
-    echo $row['platsID'];
-    echo "</td><td>";
     echo $row['periodNamn'];
     echo "</td><td>";
     echo $row['namn'];

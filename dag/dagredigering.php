@@ -48,7 +48,6 @@ session_start();
 echo "</table>";
 ?>
 <?php
-    session_start();
 
     //$dagID = $_SESSION['id'];
 
