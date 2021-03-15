@@ -173,11 +173,11 @@ echo "</table>";
 
 echo "</table>";
 
-    $sqlget = "SELECT * FROM perioddag";
+    $sqlget = "SELECT * FROM perioddag,dag where perioddag.dagID = dag.dagID";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>perioddagID</th><th>periodNamn</th><th>dagID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+    echo "<tr><th>perioddagID</th><th>periodNamn</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
@@ -186,7 +186,7 @@ echo "</table>";
         echo "</td><td>";
         echo $row['periodNamn'];
         echo "</td><td>";
-        echo $row['dagID'];
+        echo $row['datum'];
         echo "</td><td>";
         $perioddag=$row['perioddagID'];
         ?>
@@ -195,7 +195,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['periodNamn'];?> <?php echo $row['dagID'];?> från databasen, är du säker?')" name='deleteperioddag' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['datum'];?> från <?php echo $row['periodNamn'];?>, är du säker?')" name='deleteperioddag' value='Delete'>
         <?php
         echo "<input type='hidden' name='deletePd' value='$perioddag'>
         </form>";
@@ -205,11 +205,11 @@ echo "</table>";
 
 echo "</table>";
 
-$sqlget = "SELECT * FROM plats";
+$sqlget = "SELECT * FROM plats, foretag where plats.foretagID = foretag.foretagID";
 $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
 echo "<table>";
-echo "<tr><th>platsID</th><th>periodNamn</th><th>företagID</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+echo "<tr><th>platsID</th><th>periodNamn</th><th>Företag</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
 while($row = mysqli_fetch_assoc($sqldata)) {
 
@@ -218,7 +218,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     echo $row['periodNamn'];
     echo "</td><td>";
-    echo $row['foretagID'];
+    echo $row['namn'];
     echo "</td><td>";
     echo $row['elevID'];
     echo "</td><td>";
@@ -229,7 +229,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     ?>
     <form action='Lists.php' method='post'>
-    <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['elevID'];?> från <?php echo $row['platsID'];?> från databasen, är du säker?')" name='deleteplats' value='Delete'>
+    <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['elevID'];?> från <?php echo $row['namn'];?>, är du säker?')" name='deleteplats' value='Delete'>
     <?php
     echo "<input type='hidden' name='deletePl' value='$plats'>
     </form>";
