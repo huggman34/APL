@@ -69,7 +69,7 @@
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en elev från databasen, är du säker?')"name='deleteelev' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['fornamn'], $row['efternamn'];?> från databasen, är du säker?')" name='deleteelev' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteE' value='$elev'>
         </form>";
@@ -101,7 +101,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
      echo "</td><td>";
      ?>
      <form action='Lists.php' method='post'>
-     <input type="submit" onclick="return confirm('Du är på väg att ta bort ett företag från databasen, är du säker?')" name="deleteforetag" value="Delete">
+     <input type="submit" onclick="return confirm('Du är på väg att ta bort <?php echo $row['namn'];?> från databasen, är du säker?')" name="deleteforetag" value="Delete">
      <?php
      echo "<input type='hidden' name='deleteF' value='$foretag'>
      </form>";
@@ -129,7 +129,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en dag från databasen, är du säker?')" name='deletedag' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['datum'];?> från databasen, är du säker?')" name='deletedag' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteD' value='$dag'>
         </form>";
@@ -162,7 +162,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en period från databasen, är du säker?')" name='deleteperiod' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['periodNamn'];?> från databasen, är du säker?')" name='deleteperiod' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteP' value='$period'>
         </form>";
@@ -195,7 +195,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en perioddag från databasen, är du säker?')" name='deleteperioddag' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['periodNamn'];?> <?php echo $row['dagID'];?> från databasen, är du säker?')" name='deleteperioddag' value='Delete'>
         <?php
         echo "<input type='hidden' name='deletePd' value='$perioddag'>
         </form>";
@@ -229,7 +229,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo "</td><td>";
     ?>
     <form action='Lists.php' method='post'>
-    <input type='submit' onclick="return confirm('Du är på väg att ta bort en plats från databasen, är du säker?')" name='deleteplats' value='Delete'>
+    <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['elevID'];?> från <?php echo $row['platsID'];?> från databasen, är du säker?')" name='deleteplats' value='Delete'>
     <?php
     echo "<input type='hidden' name='deletePl' value='$plats'>
     </form>";
