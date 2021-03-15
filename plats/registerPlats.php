@@ -55,7 +55,7 @@
                 }
             ?>
         </select>
-        <input class="submit" type="submit" name="submit" value="Logga in"/>
+        <input class="submit" type="submit" name="submit" value="Skicka"/>
     </form>
     <?php
         if(isset($_POST['submit'])) {
@@ -67,6 +67,6 @@
         echo "Please log in first to see this page <br></br>";
     }
     ?>
-    <a class="link2" href="Lists.php">Se inlagda platser</a>
+    <a class="link2" href="../Lists.php">Se inlagda platser</a>
 </body>
 </html>

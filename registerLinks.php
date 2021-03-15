@@ -18,6 +18,6 @@
     <br>
     <a href="narvaro/registerNarvaro.php">Närvaro</a><br>
     <br>
-    <a href="index.php">Tillbaka</a>
+    <a href="index.php">Gå Tillbaka</a>
 </body>
 </html>
