@@ -6,6 +6,7 @@
  */
    
 
+session_start();
 
    require_once '../UpdateFunctions.php';
    require_once '../connection.php';

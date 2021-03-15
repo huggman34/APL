@@ -14,9 +14,10 @@
  * Denna filen gör så att vi kan uppdatera dagarna som finns i dag tabellen i databasen
  * Den uppdatera dagen genom dagID som skickas in.
  */
+session_start();
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
-    require_once '../loginFunctions';
+    require_once '../loginFunctions.php';
 
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
