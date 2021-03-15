@@ -5,12 +5,13 @@
 * I denna fil kan man redigera namnet på elever.
 * Den skriver även ut elev tabellen igen för att lättare kunna se vad det är som redigeras.
 */
-  
+  session_start();
     //require_once '../Lists.php';
     session_start();
     require_once '../UpdateFunctions.php';
     require_once '../connection.php';
     require_once '../registerFunctions.php';
+    require_once '../loginFunctions.php';
 
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];

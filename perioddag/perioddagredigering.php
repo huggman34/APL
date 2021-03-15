@@ -15,7 +15,7 @@
 * I denna fil väljer man vilken dag som tillhör vilken period genom att välja namnet på perioden och ID på dagen.
 * Den skriver även ut perioddag tabellen igen för att lättare kunna se vad det är som redigeras.
 */
-
+session_start();
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
     require_once '../loginFunctions.php';
