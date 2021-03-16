@@ -18,7 +18,7 @@
         }
     }
 
-    function registerElev($conn, $fornamn, $efternamn) {
+    function registerElev($conn, $fornamn, $efternamn, $klass) {
         $fornamn = ucfirst($fornamn);
         $efternamn = ucfirst($efternamn);
         $elevID = ucwords("$fornamn.$efternamn", ".");
@@ -32,8 +32,8 @@
         $result = $stmt->num_rows;
     
         if($result == 0) {
-            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $elevID, $fornamn, $efternamn);
+            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $elevID, $fornamn, $efternamn, $klass);
     
             if ($stmt->execute()){
                 echo "Records added successfully.";
@@ -45,8 +45,8 @@
             $count = $result+1;
             $dupeElevID = $elevID.$count;
     
-            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $dupeElevID, $fornamn, $efternamn);
+            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sss", $dupeElevID, $fornamn, $efternamn, $klass);
     
             if ($stmt->execute()){
                 echo "Records added successfully.";
@@ -178,6 +178,27 @@
             }
         } else {
             echo "Eleven har redan en plats";
+        }
+    }
+
+    function registerKlass($conn, $klass) {
+        $dupeCheck = "SELECT * FROM klass WHERE klass = ?";
+    
+        $stmt = $conn->prepare($dupeCheck);
+        $stmt->bind_param("s", $klass);
+        $stmt->execute();
+        $stmt->store_result();
+        $result = $stmt->num_rows;
+
+        if($result == 0) {
+            $stmt = $conn->prepare("INSERT INTO klass (klass) VALUES (?)");
+            $stmt->bind_param("s", $klass);
+
+            if($stmt->execute()) {
+                echo "Klassen har lagts till";
+            }
+        } else {
+            echo "Klassen är redan registrerad";
         }
     }
 ?>
