@@ -298,6 +298,129 @@ if(isset($_POST['submit'])) {
         echo "</table>";
     }
 }
+$sql2 = "SELECT periodNamn FROM period";
+$result = mysqli_query($conn, $sql2);
+$data2 = $result->fetch_all(MYSQLI_ASSOC);
+
+echo "<form action='Lists.php' method='POST'>";
+echo "<select name='Pnarvaro'>";
+    foreach ($data2 as $row) {
+        echo "<option value='".$row['periodNamn']."'> ".$row['periodNamn']." </option>";
+    }
+echo "</select>";
+echo "<input type='submit' name='submt'/>";
+echo "</form>";
+
+
+if(isset($_POST['submt'])) {
+    $periodNamn = $_POST['Pnarvaro'];
+
+    $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+    INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+    INNER JOIN plats ON plats.platsID=narvaro.platsID
+    INNER JOIN foretag ON foretag.foretagID=plats.foretagID
+    INNER JOIN elev ON elev.elevID=plats.elevID
+    INNER JOIN dag ON perioddag.dagID=dag.dagID
+    INNER JOIN period ON plats.periodNamn=period.periodNamn 
+    WHERE period.periodNamn=? ORDER BY dag.datum";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $periodNamn);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    //print_r($data);
+
+    if (empty($data)) {
+        echo "Ingen har praktiserat hos $periodNamn";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Företag</th><th>Elev</th><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
+    
+        foreach ($data as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['icke anmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+            
+            echo "<tr><td>";
+            echo $column['namn'];
+            echo "</td><td>";
+            echo $column['elevID'];
+            echo "</td><td>";
+            echo $column['datum'];
+            echo "</td><td>";
+            echo $column2['narvaro'];
+        }
+        echo "</table>";
+    }
+}
+
+$sql2 = "SELECT elevID FROM elev";
+$result = mysqli_query($conn, $sql2);
+$data2 = $result->fetch_all(MYSQLI_ASSOC);
+
+echo "<form action='Lists.php' method='POST'>";
+echo "<select name='Enarvaro'>";
+    foreach ($data2 as $row) {
+        echo "<option value='".$row['elevID']."'> ".$row['elevID']." </option>";
+    }
+echo "</select>";
+echo "<input type='submit' name='sub'/>";
+echo "</form>";
+
+
+if(isset($_POST['sub'])) {
+    $elevID = $_POST['Enarvaro'];
+
+    $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+    INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+    INNER JOIN plats ON plats.platsID=narvaro.platsID
+    INNER JOIN foretag ON foretag.foretagID=plats.foretagID
+    INNER JOIN elev ON elev.elevID=plats.elevID
+    INNER JOIN dag ON perioddag.dagID=dag.dagID 
+    WHERE elev.elevID=? ORDER BY dag.datum";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $elevID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    //print_r($data);
+
+    if (empty($data)) {
+        echo "Ingen har praktiserat hos $periodNamn";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
+    
+        foreach ($data as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['icke anmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+            
+            echo "<tr><td>";
+            echo $column['datum'];
+            echo "</td><td>";
+            echo $column2['narvaro'];
+        }
+        echo "</table>";
+    }
+} 
+
 
 
 if (isset($_POST['deleteperiod'])) {
