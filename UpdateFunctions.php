@@ -63,7 +63,20 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     
             
     if ($stmt->execute()){
+            return "";
+    }else{
+           return "Error"; 
+    }
+}
 
+function updatePlats($conn,$platsID,$periodNamn,$elevID,$foretagID){
+        $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=? WHERE platsID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssii",$periodNamn,$elevID,$foretagID,$platsID);
+    
+            
+    if ($stmt->execute()){
+return "ech";
     }else{
            return "Error"; 
     }
