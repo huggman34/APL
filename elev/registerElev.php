@@ -13,6 +13,8 @@
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";
+
+        $klass = mysqli_query($conn, "SELECT klass FROM klass");
     ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -42,6 +44,19 @@
                 <input type="text" name ="efternamn" class="form-control">
                 <span class="help-block"></span>
             </div>
+            <div class="form-group">
+                <label>Klass</label> 
+                
+                <select name="klass" class="form-control">
+                    <?php
+                        echo "<option disabled selected>".'Välj Klass'."</option>";
+                        foreach($klass as $k) {
+                            echo "<option value='".$k['klass']."'>".$k['klass']."</option>";
+                        }
+                    ?>
+                </select>
+                <span class="help-block"></span>
+            </div>
             <div class="form-group2">
                 <input type= "submit" name="submit" class="btn" value="Skicka">
             </div>
@@ -50,7 +65,7 @@
             </form>
             <?php
                 if(isset($_POST['submit'])) {
-                    registerElev($conn, $_POST['fornamn'], $_POST['efternamn']);
+                    registerElev($conn, $_POST['fornamn'], $_POST['efternamn'], $_POST['klass']);
                 }
             ?>
             <a class="link3" href="../Lists.php">Se registrerade elever</a>
