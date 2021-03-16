@@ -219,9 +219,9 @@ while($row = mysqli_fetch_assoc($sqldata)) {
     echo $row['elevID'];
     echo "</td><td>";
     $plats=$row['platsID'];
-    ?>
-    <a href="plats/platsredigering.php">Uppdatera</a>
-    <?php
+    
+   echo" <a href='plats/platsRedigering.php?id=$plats'>Uppdatera</a>";
+    
     echo "</td><td>";
     ?>
     <form action='Lists.php' method='post'>
