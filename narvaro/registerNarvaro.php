@@ -23,7 +23,7 @@
         INNER JOIN period ON period.periodNamn = plats.periodNamn
         INNER JOIN perioddag ON perioddag.periodNamn = plats.periodNamn
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE foretag.namn = ? AND dag.datum = '2021-03-10'";
+        WHERE foretag.namn = ? AND dag.datum = CURRENT_DATE";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $username);
@@ -32,7 +32,25 @@
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
         $stmt->close();
-        print_r($data);
+        //print_r($data);
+
+
+        $sql2 = "SELECT plats.elevID, foretag.namn, plats.periodNamn, dag.datum, narvaro.narvaro
+        FROM narvaro
+        INNER JOIN plats ON plats.platsID = narvaro.platsID
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
+        INNER JOIN dag ON dag.dagID = perioddag.dagID
+        WHERE foretag.namn = ? AND dag.datum = 'CURRENT_DATE' AND narvaro IS NOT NULL";
+
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bind_param("s", $username);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+        $data2 = $result2->fetch_all(MYSQLI_ASSOC);
+
+        //print_r($data2);
+
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -87,5 +105,21 @@
     $conn->close();
 ?>
 <a class="link2" href="../Lists.php">Se inlagd närvaro</a>
+
+<?php
+    echo "<table>";
+    echo "<tr><th>Elev</th><th>Period</th><th>Datum</th><th>Narvaro</th></tr>";
+
+    foreach ($data2 as $row) {
+        echo "<tr><td>";
+        echo $row['elevID'];
+        echo "</td><td>";
+        echo $row['periodNamn'];
+        echo "</td><td>";
+        echo $row['datum'];
+        echo "</td><td>";
+        echo $row['narvaro'];
+    }
+?>
 </body>
 </html>
