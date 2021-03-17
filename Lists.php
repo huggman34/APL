@@ -27,7 +27,7 @@
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";
 ?>
-<div class="container2">
+<!--<div class="container2">
 <div class="wrapper">
     <h2 class="rubrik2">Länka dagar till perioder</h2>
     <form action="perioddag/perioddagregister.php" method="post">
@@ -46,7 +46,7 @@
     </div>
 </div>
 </div>
-</form>
+</form>-->
 <?php
 
     $sqlget = "SELECT * FROM elev";
@@ -69,7 +69,7 @@
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en elev från databasen, är du säker?')"name='deleteelev' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['fornamn'], $row['efternamn'];?> från databasen, är du säker?')" name='deleteelev' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteE' value='$elev'>
         </form>";
@@ -101,7 +101,7 @@ while($row = mysqli_fetch_assoc($sqldata)) {
      echo "</td><td>";
      ?>
      <form action='Lists.php' method='post'>
-     <input type="submit" onclick="return confirm('Du är på väg att ta bort ett företag från databasen, är du säker?')" name="deleteforetag" value="Delete">
+     <input type="submit" onclick="return confirm('Du är på väg att ta bort <?php echo $row['namn'];?> från databasen, är du säker?')" name="deleteforetag" value="Delete">
      <?php
      echo "<input type='hidden' name='deleteF' value='$foretag'>
      </form>";
@@ -129,7 +129,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en dag från databasen, är du säker?')" name='deletedag' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['datum'];?> från databasen, är du säker?')" name='deletedag' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteD' value='$dag'>
         </form>";
@@ -162,7 +162,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en period från databasen, är du säker?')" name='deleteperiod' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['periodNamn'];?> från databasen, är du säker?')" name='deleteperiod' value='Delete'>
         <?php
         echo "<input type='hidden' name='deleteP' value='$period'>
         </form>";
@@ -173,20 +173,18 @@ echo "</table>";
 
 echo "</table>";
 
-    $sqlget = "SELECT * FROM perioddag";
+    $sqlget = "SELECT * FROM perioddag,dag where perioddag.dagID = dag.dagID";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
     echo "<table>";
-    echo "<tr><th>perioddagID</th><th>periodNamn</th><th>dagID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+    echo "<tr><th>periodNamn</th><th>Datum</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
     while($row = mysqli_fetch_assoc($sqldata)) {
 
         echo "<tr><td>";
-        echo $row['perioddagID'];
-        echo "</td><td>";
         echo $row['periodNamn'];
         echo "</td><td>";
-        echo $row['dagID'];
+        echo $row['datum'];
         echo "</td><td>";
         $perioddag=$row['perioddagID'];
         ?>
@@ -195,7 +193,7 @@ echo "</table>";
         echo "</td><td>";
         ?>
         <form action='Lists.php' method='post'>
-        <input type='submit' onclick="return confirm('Du är på väg att ta bort en perioddag från databasen, är du säker?')" name='deleteperioddag' value='Delete'>
+        <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['datum'];?> från <?php echo $row['periodNamn'];?>, är du säker?')" name='deleteperioddag' value='Delete'>
         <?php
         echo "<input type='hidden' name='deletePd' value='$perioddag'>
         </form>";
@@ -205,31 +203,29 @@ echo "</table>";
 
 echo "</table>";
 
-$sqlget = "SELECT * FROM plats";
+$sqlget = "SELECT * FROM plats, foretag where plats.foretagID = foretag.foretagID";
 $sqldata = mysqli_query($conn, $sqlget) or die("error");
 
 echo "<table>";
-echo "<tr><th>platsID</th><th>periodNamn</th><th>företagID</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
+echo "<tr><th>periodNamn</th><th>Företag</th><th>ElevID</th><th>Uppdatera information</th><th>Ta bort perioddag</th></tr>";
 
 while($row = mysqli_fetch_assoc($sqldata)) {
 
     echo "<tr><td>";
-    echo $row['platsID'];
-    echo "</td><td>";
     echo $row['periodNamn'];
     echo "</td><td>";
-    echo $row['foretagID'];
+    echo $row['namn'];
     echo "</td><td>";
     echo $row['elevID'];
     echo "</td><td>";
     $plats=$row['platsID'];
-    ?>
-    <a href="plats/platsredigering.php">Uppdatera</a>
-    <?php
+    
+   echo" <a href='plats/platsRedigering.php?id=$plats'>Uppdatera</a>";
+    
     echo "</td><td>";
     ?>
     <form action='Lists.php' method='post'>
-    <input type='submit' onclick="return confirm('Du är på väg att ta bort en plats från databasen, är du säker?')" name='deleteplats' value='Delete'>
+    <input type='submit' onclick="return confirm('Du är på väg att ta bort <?php echo $row['elevID'];?> från <?php echo $row['namn'];?>, är du säker?')" name='deleteplats' value='Delete'>
     <?php
     echo "<input type='hidden' name='deletePl' value='$plats'>
     </form>";
@@ -302,6 +298,129 @@ if(isset($_POST['submit'])) {
         echo "</table>";
     }
 }
+$sql2 = "SELECT periodNamn FROM period";
+$result = mysqli_query($conn, $sql2);
+$data2 = $result->fetch_all(MYSQLI_ASSOC);
+
+echo "<form action='Lists.php' method='POST'>";
+echo "<select name='Pnarvaro'>";
+    foreach ($data2 as $row) {
+        echo "<option value='".$row['periodNamn']."'> ".$row['periodNamn']." </option>";
+    }
+echo "</select>";
+echo "<input type='submit' name='submt'/>";
+echo "</form>";
+
+
+if(isset($_POST['submt'])) {
+    $periodNamn = $_POST['Pnarvaro'];
+
+    $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+    INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+    INNER JOIN plats ON plats.platsID=narvaro.platsID
+    INNER JOIN foretag ON foretag.foretagID=plats.foretagID
+    INNER JOIN elev ON elev.elevID=plats.elevID
+    INNER JOIN dag ON perioddag.dagID=dag.dagID
+    INNER JOIN period ON plats.periodNamn=period.periodNamn 
+    WHERE period.periodNamn=? ORDER BY dag.datum";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $periodNamn);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    //print_r($data);
+
+    if (empty($data)) {
+        echo "Ingen har praktiserat hos $periodNamn";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Företag</th><th>Elev</th><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
+    
+        foreach ($data as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['icke anmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+            
+            echo "<tr><td>";
+            echo $column['namn'];
+            echo "</td><td>";
+            echo $column['elevID'];
+            echo "</td><td>";
+            echo $column['datum'];
+            echo "</td><td>";
+            echo $column2['narvaro'];
+        }
+        echo "</table>";
+    }
+}
+
+$sql2 = "SELECT elevID FROM elev";
+$result = mysqli_query($conn, $sql2);
+$data2 = $result->fetch_all(MYSQLI_ASSOC);
+
+echo "<form action='Lists.php' method='POST'>";
+echo "<select name='Enarvaro'>";
+    foreach ($data2 as $row) {
+        echo "<option value='".$row['elevID']."'> ".$row['elevID']." </option>";
+    }
+echo "</select>";
+echo "<input type='submit' name='sub'/>";
+echo "</form>";
+
+
+if(isset($_POST['sub'])) {
+    $elevID = $_POST['Enarvaro'];
+
+    $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+    INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+    INNER JOIN plats ON plats.platsID=narvaro.platsID
+    INNER JOIN foretag ON foretag.foretagID=plats.foretagID
+    INNER JOIN elev ON elev.elevID=plats.elevID
+    INNER JOIN dag ON perioddag.dagID=dag.dagID 
+    WHERE elev.elevID=? ORDER BY dag.datum";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $elevID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    //print_r($data);
+
+    if (empty($data)) {
+        echo "Ingen har praktiserat hos $periodNamn";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
+    
+        foreach ($data as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['icke anmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+            
+            echo "<tr><td>";
+            echo $column['datum'];
+            echo "</td><td>";
+            echo $column2['narvaro'];
+        }
+        echo "</table>";
+    }
+} 
+
 
 $sql3 = "SELECT klass FROM klass";
 $result3 = mysqli_query($conn, $sql3);

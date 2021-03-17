@@ -28,9 +28,9 @@ if(checkAdminLogin()) {
     echo "Logged in as " . $username . "<br></br>";
  echo'
  <form action="periodCreate.php" method="post">
- <input type="text" name="periodnamn" placeholder="namn" requierd>
- <input type="date" name="startdatum" requierd>
- <input type="date" name="slutdatum" requierd>
+ <input type="text" name="periodnamn" placeholder="namn" required>
+ <input type="date" name="startdatum" required>
+ <input type="date" name="slutdatum" required>
  <input type="submit" value="submit" name="submin">
  </form>';
  if (isset($_POST['periodnamn'])) {
@@ -65,15 +65,18 @@ if(checkAdminLogin()) {
 
     
         echo "<table>";
-        echo "<tr><th>Dag</th><th>Datum</th><th>Period</th></tr>
+        echo "<tr><th>Vecka</th><th>Dag</th><th>Datum</th><th>Period</th></tr>
         <form action='periodCreate.php' method='post'>";
 
         while($row = $result->fetch_assoc()) {
 
             $date=strtotime($row['datum']);
             $dag=$row['perioddagID'];
+            $week=strtotime($row['datum']);
             echo "<tr>";
             echo "<td>";
+            echo date('W',$week);
+            echo "</td><td>";
             echo date('l',$date);
             echo "</td><td>";
             echo $row['datum'];

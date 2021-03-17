@@ -5,11 +5,16 @@
 * I denna fil kan man redigera namnet på elever.
 * Den skriver även ut elev tabellen igen för att lättare kunna se vad det är som redigeras.
 */
-  
     //require_once '../Lists.php';
+    session_start();
     require_once '../UpdateFunctions.php';
     require_once '../connection.php';
+    require_once '../registerFunctions.php';
+    require_once '../loginFunctions.php';
 
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     //$elevID = $_SESSION['id'];
 
@@ -39,3 +44,8 @@
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>

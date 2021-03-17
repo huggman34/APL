@@ -15,9 +15,14 @@
 * I denna fil väljer man vilken dag som tillhör vilken period genom att välja namnet på perioden och ID på dagen.
 * Den skriver även ut perioddag tabellen igen för att lättare kunna se vad det är som redigeras.
 */
-
+session_start();
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
+    require_once '../loginFunctions.php';
+
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     $sqlget = "SELECT * FROM perioddag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -48,7 +53,6 @@
 echo "</table>";
 ?>
 <?php
-    session_start();
 
     $perioddagID = $_SESSION['id'];
 
@@ -79,3 +83,8 @@ echo "</table>";
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>

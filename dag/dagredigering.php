@@ -14,8 +14,14 @@
  * Denna filen gör så att vi kan uppdatera dagarna som finns i dag tabellen i databasen
  * Den uppdatera dagen genom dagID som skickas in.
  */
+session_start();
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
+    require_once '../loginFunctions.php';
+
+    if(checkAdminLogin()) {
+        $username = $_SESSION['username'];
+        echo "Logged in as " . $username . "<br></br>";
 
     $sqlget = "SELECT * FROM dag";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
@@ -42,7 +48,6 @@
 echo "</table>";
 ?>
 <?php
-    session_start();
 
     //$dagID = $_SESSION['id'];
 
@@ -70,3 +75,8 @@ echo "</table>";
 </form>
 </body>
 </html>
+<?php
+    } else {
+        echo "Please log in first to see this page <br></br>";
+    }
+?>
