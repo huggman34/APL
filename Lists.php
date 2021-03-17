@@ -273,7 +273,7 @@ if(isset($_POST['submit'])) {
         echo "Ingen har praktiserat hos $foretagNamn";
     } else {
         echo "<table>";
-        echo "<tr><th>Företag</th><th>Elev</th><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
+        echo "<tr><th>Företag</th><th>Elev</th><th>Dag</th><th>Narvaro</th></tr>";
     
         foreach ($data as $row => $column) {
 
@@ -421,6 +421,53 @@ if(isset($_POST['sub'])) {
     }
 } 
 
+
+$sql3 = "SELECT klass FROM klass";
+$result3 = mysqli_query($conn, $sql3);
+$data3 = $result3->fetch_all(MYSQLI_ASSOC);
+
+echo "<form action='Lists.php' method='POST'>";
+echo "<select name='klass'>";
+    foreach ($data3 as $row) {
+        echo "<option value='".$row['klass']."'> ".$row['klass']." </option>";
+    }
+echo "</select>";
+echo "<input type='submit' name='submitKlass'/>";
+echo "</form>";
+
+if(isset($_POST['submitKlass'])) {
+    $klass = $_POST['klass'];
+
+    $sql = "SELECT elev.elevID, plats.periodNamn, foretag.namn
+    FROM elev
+    LEFT JOIN plats ON plats.elevID = elev.elevID
+    LEFT JOIN foretag ON plats.foretagID = foretag.foretagID
+    WHERE elev.klass = ?
+    ORDER BY elevID ASC";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $klass);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    if(empty($data)) {
+        echo "Ingen elev i $klass har fått en plats";
+    } else {
+        echo "<table>";
+        echo "<tr><th>Elev</th><th>Period</th><th>Företag</th></tr>";
+
+        foreach ($data as $row) {
+            echo "<tr><td>";
+            echo $row['elevID'];
+            echo "</td><td>";
+            echo $row['periodNamn'];
+            echo "</td><td>";
+            echo $row['namn'];
+        }
+        echo "</table>";
+    }
+}
 
 
 if (isset($_POST['deleteperiod'])) {

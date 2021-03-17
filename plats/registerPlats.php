@@ -14,7 +14,7 @@
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";
 
-        $elever = mysqli_query($conn, "SELECT elevID FROM elev");
+        $elever = mysqli_query($conn, "SELECT elevID, klass FROM elev");
         $foretag = mysqli_query($conn, "SELECT namn, foretagID FROM foretag");
         $perioder = mysqli_query($conn, "SELECT periodNamn FROM period");
 ?>
@@ -35,7 +35,7 @@
             <?php
                 echo "<option disabled selected>".'-- Välj Elev --'."</option>";
                 foreach($elever as $e) {
-                    echo "<option value='".$e['elevID']."'>".$e['elevID']."</option>";
+                    echo "<option value='".$e['elevID']."'>".$e['elevID'].' '.$e['klass']."</option>";
                 }
             ?>
         </select>
