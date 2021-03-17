@@ -101,21 +101,12 @@
         }
     }
 
-    function periodGeneration($conn,$periodNamn,$startdatum,$slutdatum) {
+    function periodGeneration($conn,$periodNamn,$startdatum,$slutdatum,$dag) {
         $sql="INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
         $conn->query($sql);
-   
-        $start=strtotime($startdatum);
-        $slut=strtotime($slutdatum);
-        $dagar=ceil(($slut-$start)/60/60/24);
-        
-        for ($i=0; $i < $dagar; $i++) { 
+       
+        foreach ($dag as $datum) { 
            
-           $gto=strtotime("+$i days",$start);
-           $datum=date('Y-m-d',$gto);
-           if (("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))) {
-               
-           }else {
                 $sql="SELECT * FROM dag WHERE datum='$datum'";
                 $query = $conn->query($sql);
                 $resultat = $query->fetch_assoc();
@@ -124,11 +115,12 @@
                 $sql = "INSERT INTO dag(datum) VALUES('$datum')";
                 $conn->query($sql);
                 }
+                $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$periodNamn' AND dag.datum='$datum'";
+                $conn->query($sql);
             }
-        }
+        
        
-        $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$periodNamn' AND dag.datum>=period.startdatum AND dag.datum<=period.slutdatum";
-        $conn->query($sql);
+        
     }
 
     function registerPlats($conn, $elevID, $periodNamn, $foretagID) {

@@ -35,71 +35,61 @@ if(checkAdminLogin()) {
  </form>';
  if (isset($_POST['periodnamn'])) {
         $periodNamn=$_POST['periodnamn'];
+        $startdatum=$_POST['startdatum'];
+        $slutdatum=$_POST['slutdatum'];
     }
  if (isset($_POST['submin'])) {
     
-    if ($_POST['submin']=="ta bort dagar") {
+    if ($_POST['submin']=="klar") {
         if (isset($_POST['periodDag'])) {
-            $periodD=$_POST['periodDag'];
-                    
-
-            foreach($periodD as $perioddag){
-            deletePeriodDag($conn,$perioddag);
-            }
+            periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
+            header("Location: ../Lists.php");
         }
-        }else{
-            periodGeneration($conn,$_POST['periodnamn'],$_POST['startdatum'],$_POST['slutdatum']);
         }
-    
-   
-     $sql = "SELECT dag.datum, period.periodNamn, perioddag.perioddagID FROM period
-    INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn
-    INNER JOIN dag ON perioddag.dagID = dag.dagID
-    WHERE period.periodNamn = ?
-    ORDER BY dag.datum";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $periodNamn);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-
-    
+        echo $periodNamn;
         echo "<table>";
         echo "<tr><th>Vecka</th><th>Dag</th><th>Datum</th><th>Period</th></tr>
         <form action='periodCreate.php' method='post'>";
+        $start=strtotime($startdatum);
+        $slut=strtotime($slutdatum);
+        $dagar=ceil(($slut-$start)/60/60/24);
+        
+        for ($i=0; $i < $dagar+1; $i++) { 
+           
+           $gto=strtotime("+$i days",$start);
+           $datum=date('Y-m-d',$gto);
 
-        while($row = $result->fetch_assoc()) {
-
-            $date=strtotime($row['datum']);
-            $dag=$row['perioddagID'];
-            $week=strtotime($row['datum']);
-            echo "<tr>";
-            echo "<td>";
-            echo date('W',$week);
-            echo "</td><td>";
-            echo date('l',$date);
-            echo "</td><td>";
-            echo $row['datum'];
-            echo "</td><td>";
-            echo $row['periodNamn'];
-            echo "</td><td>
-            <input type='checkbox' name='periodDag[]' value='$dag'>
-            </td></tr>";
+           
+           echo "<tr>";
+           echo "<td>";
+           echo date('W',$gto);
+           echo "</td><td>";
+           echo date('l',$gto);
+           echo "</td><td>";
+           echo $datum;
+           echo "</td><td>";
+           echo $periodNamn;
+           echo "</td><td>";
+           if (("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))) {
+            echo"<input type='checkbox' name='periodDag[]' value='$datum'>";
+        }else {
+            echo"<input type='checkbox' name='periodDag[]' value='$datum' checked>";
         }
-        
-        echo"<input type='hidden' name='periodnamn' value='$periodNamn'>
-        <input type='submit' name='submin' onclick=\"return confirm('Du är på väg att ta bort dem markerade datumen, är du säker?');\" value='ta bort dagar'>
-        </form>";
-        echo "</table>
-        
-        <form action='periodCreate.php' method='post'>
-        <input type='hidden' name='periodnamn' value='$periodNamn'>
-        <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
-        </form>";
+           
+           echo"</td></tr>";
+       }
+       
+       echo"<input type='hidden' name='periodnamn' value='$periodNamn'>
+       <input type='hidden' name='startdatum' value='$startdatum'>
+       <input type='hidden' name='slutdatum' value='$slutdatum'>
+       <input type='submit' name='submin' onclick=\"return confirm('Är du säker?');\" value='klar'>
+       </form>";
+       echo "</table>";
+     
+    echo"<form action='periodCreate.php' method='post'>
+    <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
+    </form>";
     }
-        if (isset($_POST['submit'])) {
-            deletePeriod($conn,$periodNamn);
-        }
   
 } else {
     echo "Please log in first to see this page <br></br>";
