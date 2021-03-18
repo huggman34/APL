@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="apl.css?version=1">
+    <link rel="stylesheet" type="text/css" href="apl.css?version=2">
 </head>
 <body>
 <?php
@@ -25,8 +25,16 @@ if(checkAdminLogin()) {
             <div class="background"></div>
         
     <?php
-    
+    $sqlget = "SELECT * FROM foretag";
+    $sqldata = mysqli_query($conn, $sqlget) or die("error");
+    echo'<form action="Index.php" method="post">';
+    while($row = mysqli_fetch_assoc($sqldata)) {
+        $namn=$row['namn'];
+        echo"<input type='submit' name='foretag' value='$namn'>";
+    }
+    echo'</form>';
      if (isset($_POST['elev'])) {
+        
         $eleID = $_POST['elev'];
 
         $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
@@ -63,12 +71,13 @@ if(checkAdminLogin()) {
                 
                 echo "<tr><td>";
                 echo $column['datum'];
-                echo "</td><td>";
-                echo $column2['narvaro'];
+                echo narvaroColor($column['narvaro']);               
             }
             echo "</table>";
         }
-    }else{
+    }elseif (isset($_POST['foretag'])) {
+        
+    } else{
         $sql3 = "SELECT klass FROM klass";
     $result3 = mysqli_query($conn, $sql3);
     $data3 = $result3->fetch_all(MYSQLI_ASSOC);
@@ -141,7 +150,7 @@ if(checkAdminLogin()) {
         INNER JOIN elev ON elev.elevID=plats.elevID
         INNER JOIN dag ON perioddag.dagID=dag.dagID
         INNER JOIN period ON plats.periodNamn=period.periodNamn 
-        WHERE period.periodNamn=? AND dag.datum='2021-03-01' ORDER BY dag.datum";
+        WHERE period.periodNamn=? AND dag.datum='2021-03-01' ORDER BY elev.klass";
     
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $periodNamn);
@@ -155,6 +164,7 @@ if(checkAdminLogin()) {
             echo "Ingen har praktiserat hos $periodNamn";
         } else {
             echo "<table>";
+            echo date("Y M d");
             echo "<tr><th>Företag</th><th>Klass</th><th>Elev</th><th>Dag</th><th>Narvaro</th><th>Ta bort narvaro</th></tr>";
             echo'<form action="Index.php" method="post">';
             foreach ($data as $row => $column) {
@@ -175,10 +185,7 @@ if(checkAdminLogin()) {
                 echo "</td><td>";
                 $elevID=$column['elevID'];
                 echo "<input type='submit' name='elev' value='$elevID'>";
-                echo "</td><td>";
-                echo $column['datum'];
-                echo "</td><td>";
-                echo $column2['narvaro'];
+                echo narvaroColor($column['narvaro']);
             }
             echo "</table>";
         }
@@ -189,6 +196,22 @@ if(checkAdminLogin()) {
 } else {
     echo "Please log in first to see this page <br></br>";
 
+}
+function narvaroColor($column){
+    switch ($column) {
+        case '1':
+            return "</td><td class='narvaro1'>Närvarande</td>";
+            break;
+        case '3':
+            return"</td><td class='narvaro2'>Frånvarande</td>";
+            break;
+        case '2':
+            return "</td><td class='narvaro3'>Giltigt frånvarande</td>";
+            break;
+        case 'null':
+            return "</td><td>Icke anmäld</td>";
+            break; 
+    }
 }
     ?>
     </div>
