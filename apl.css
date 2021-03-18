@@ -28,7 +28,7 @@ body{
     height:100vh;
     width:100vw;
     position:relative;
-    background: rgb(2,0,36);
+    background: gainsboro;
 }
 .namn{
     color:white;
@@ -78,7 +78,7 @@ body{
     top:1vh;
 }
 .form-group2{
-    color:black;
+    color:white;
     position: relative;
     left:3vw;
 }
@@ -112,4 +112,13 @@ body{
 .tillbaka3{
     position: relative;
     top:3vh;
+}
+.narvaro3{
+    background-color: yellow;
+}
+.narvaro1{
+    background-color: yellowgreen;
+}
+.narvaro2{
+    background-color: red;
 }
