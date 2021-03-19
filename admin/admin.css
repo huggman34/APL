@@ -32,10 +32,12 @@ body{
 }
 
 .views {
-    float: right;
+    box-sizing: border-box;
+    float: left;
     height: 100%;
     width: 95%;
-    background-color: #D1D1D1;
+    background-color: #E8E8E8;
+    padding: 7% 2% 0% 2%;
 }
 
 .logo {
@@ -48,13 +50,14 @@ body{
 .home {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: turquoise;*/
-    margin-bottom: 15%; 
+    margin-bottom: 15%;
 }
 
-.home img {
+.home svg {
     transform: scale(0.35);
     margin-left: auto;
     margin-right: auto;
@@ -83,35 +86,37 @@ body{
 .registerForetag {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: cornflowerblue;*/
     margin-bottom: 15%;
 }
 
-.registerForetag img {
-    transform: scale(0.35);
+.registerForetag svg {
+    transform: scale(0.65);
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
 }
 
 .registerPeriod {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: red;*/
     margin-bottom: 15%;
 }
 
-.registerPeriod img {
-    transform: scale(0.35);
+.registerPeriod svg {
+    transform: scale(1.2);
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
+    fill: white;
+    transition: 0.2s;
 }
 
 .registerKlass {
@@ -161,26 +166,54 @@ body{
     transform: scale(0.45);
 }
 
-.home img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+.home svg:hover {
+    fill: #EC6FE4 !important;
 }
 
 .registerElev img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
 }
 
-.registerForetag img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+.registerForetag svg:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
 }
 
-.registerPeriod img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+.registerPeriod svg:hover {
+    fill: #EC6FE4;
 }
 
 .registerKlass img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
 }
 
 .registerPlats img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+}
+
+.narvaro {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+}
+
+.narvaroTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.styled- th,
+.narvaroTable td {
+    padding: 12px 15px;
 }

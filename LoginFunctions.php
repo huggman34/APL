@@ -8,12 +8,13 @@
  * Om de inte är korrekta så skriver den ut att 'Felaktig inloggningsuppgifter'.
  */
     function adminLogin($conn, $username, $password) {
-        $stmt = $conn->prepare('SELECT * FROM admin WHERE anvnamn = ? AND losenord = ?');
-        $stmt->bind_param("ss", $username, $password);
+        $stmt = $conn->prepare('SELECT * FROM admin WHERE anvnamn = ?');
+        $stmt->bind_param("s", $username);
         $stmt->execute();
-        $exist = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
       
-        if($exist) {
+        if(!empty($row['anvnamn']) && password_verify($password, $row['losenord'])) {
           session_start();
 
           $_SESSION['loggedinAdmin'] = true;
@@ -25,12 +26,14 @@
     }
 
     function foretagLogin($conn, $username, $password) {
-        $stmt = $conn->prepare('SELECT * FROM foretag WHERE namn = ? AND losenord = ?');
-        $stmt->bind_param("ss", $username, $password);
-        $stmt->execute();
-        $exist = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        if($exist) {
+        $stmt = $conn->prepare('SELECT * FROM foretag WHERE namn = ?');
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if(!empty($row['namn']) && password_verify($password, $row['losenord'])) {
             session_start();
 
             $_SESSION['loggedin'] = true;

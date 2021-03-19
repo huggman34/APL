@@ -7,14 +7,29 @@
  */
     function registerForetag($conn, $foretagNamn, $losenord, $epost, $telefon) {
 
-        $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, epost, telefon)
-        VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $foretagNamn, $losenord, $epost, $telefon);
+        $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
+        $stmt = $conn->prepare($dupeCheck);
+        $stmt->bind_param("s", $foretagNamn);
+        $stmt->execute();
+        $stmt->store_result();
+        $result = $stmt->num_rows;
 
-        if ($stmt->execute()){
-            echo "Records added successfully.";
-        } else{
-            echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
+        if($result == 0) {
+            $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, epost, telefon)
+            VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $foretagNamn, $hashed_losenord, $epost, $telefon);
+
+            if ($stmt->execute()){
+                echo "Records added successfully.";
+            } else{
+                echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
+            }
+        } else {
+            $foretagNamnError = "Företaget är redan registrerad";
+
+            echo $foretagNamnError;
         }
     }
 
