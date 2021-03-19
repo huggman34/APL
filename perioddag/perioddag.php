@@ -16,7 +16,7 @@
 
     session_start();
     require_once '../connection.php';
-    require_once '../loginFunctions.php';
+    require_once '../LoginFunctions.php';
 
 //if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {  //global username och API, skicka med username till varje sida
     //echo "<p class='user'>" . strtoupper($_SESSION['username'] . "</p>");

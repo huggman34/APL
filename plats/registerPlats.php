@@ -1,12 +1,12 @@
 <?php
 /**
  * Denna filen innehåller formuläret som man använder för att en elev en platshos ett företag under en period.
- * registerFunctions.php inkluderas för att få tillgång till registerPlats funktionen som skickar in data
+ * RegisterFunctions.php inkluderas för att få tillgång till registerPlats funktionen som skickar in data
  * som anges i formuläret.
  */
-    require_once "../loginFunctions.php";
+    require_once "../LoginFunctions.php";
     require_once "../connection.php";
-    require_once '../registerFunctions.php';
+    require_once '../RegisterFunctions.php';
 
     session_start();
 

@@ -1,8 +1,9 @@
 body{
-    height:100vh;
-    width:100vw;
-    margin:0;
-    padding:0;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 ::-webkit-scrollbar {
     width: 0px;
@@ -69,7 +70,6 @@ body{
     outline-style:solid;
     outline-width:4px;
     outline-color:white;
-    top:1vh;
 }
 .form-group{
     width:25vw;

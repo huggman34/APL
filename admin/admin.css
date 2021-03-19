@@ -1,0 +1,186 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-x: hidden;
+}
+
+#wrapper {
+    height: 100vh;
+    width: 100vw;
+    float: right;
+    background-color: white;
+}
+
+.navbar {
+    float: left;
+    height: 100%;
+    width: 5%;
+    background-color: #4C4C4C;
+}
+
+.menu {
+    float: left;
+    right: 0;
+    top: 0;
+    height: 10%;
+    width: 95%;
+    background-color: white;
+    position: fixed;
+}
+
+.views {
+    float: right;
+    height: 100%;
+    width: 95%;
+    background-color: #D1D1D1;
+}
+
+.logo {
+    height: 10%;
+    width: 100%;
+    background-color: tomato;
+    margin-bottom: 65%;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: turquoise;*/
+    margin-bottom: 15%; 
+}
+
+.home img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+
+.registerElev {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: wheat;*/
+    margin-bottom: 15%;
+}
+
+.registerElev img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerForetag {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: cornflowerblue;*/
+    margin-bottom: 15%;
+}
+
+.registerForetag img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerPeriod {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: red;*/
+    margin-bottom: 15%;
+}
+
+.registerPeriod img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerKlass {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: blue;*/
+    margin-bottom: 15%;
+}
+
+.registerKlass img {
+    transform: scale(0.4);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerPlats {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: rosybrown;*/
+    margin-bottom: 15%;
+}
+
+.registerPlats img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.admin {
+    display: flex;
+    justify-content: center;
+    float: right;
+    width: 5%;
+    height: 100%;
+    margin-right: 5%;
+}
+
+.admin img {
+    transform: scale(0.45);
+}
+
+.home img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}
+
+.registerElev img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}
+
+.registerForetag img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}
+
+.registerPeriod img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}
+
+.registerKlass img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}
+
+.registerPlats img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);   
+}

@@ -14,11 +14,10 @@
  * prepared statements på sql statements 
 */
 
-require_once "../loginFunctions.php";
 require_once "../connection.php";
 require_once "../DeleteFunctions.php";
-require_once "../registerFunctions.php";
-require_once "../loginFunctions.php";
+require_once "../RegisterFunctions.php";
+require_once "../LoginFunctions.php";
 session_start();
 
 
