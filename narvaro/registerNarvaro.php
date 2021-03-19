@@ -6,9 +6,9 @@
  * Om den finns elever som har praktik hos företaget idag, kan företaget lägga närvaro på eleverna.
  * Denna filen visar all data som finns i narvaro tabellen.
  */
-    require_once "../loginFunctions.php";
+    require_once "../LoginFunctions.php";
     require_once "../connection.php";
-    require_once '../registerFunctions.php';
+    require_once '../RegisterFunctions.php';
     
     session_start();
 

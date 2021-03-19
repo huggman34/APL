@@ -10,7 +10,7 @@
 session_start();
    require_once '../UpdateFunctions.php';
    require_once '../connection.php';
-   require_once '../loginFunctions.php';
+   require_once '../LoginFunctions.php';
 
     if(checkAdminLogin()) {
       $username = $_SESSION['username'];

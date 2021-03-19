@@ -1,14 +1,14 @@
 <?php
 /**
  * Denna filen innehåller formuläret som man använder för att registrera en elev.
- * registerFunctions.php inkluderas för att få tillgång till registerElev funktionen som skickar in data
+ * RegisterFunctions.php inkluderas för att få tillgång till registerElev funktionen som skickar in data
  * som anges i formuläret.
  */
     session_start();
 
-    require_once '../loginFunctions.php';
+    require_once '../LoginFunctions.php';
     require_once '../connection.php';
-    require_once '../registerFunctions.php';
+    require_once '../RegisterFunctions.php';
 
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];

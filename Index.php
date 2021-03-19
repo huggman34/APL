@@ -7,22 +7,21 @@
 </head>
 <body>
 <?php
-require_once "loginFunctions.php";
+require_once "LoginFunctions.php";
 require_once "connection.php";
-require_once 'registerFunctions.php';
+require_once 'RegisterFunctions.php';
 
 session_start();
 
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
-        echo "Logged in as " . $username . "<br></br>";
+        //echo "Logged in as " . $username . "<br></br>";
 ?>
     <div class="container3">
         <div class="menu">
-            <div class="namn">Adminsida</div>
             <a class="tabell" href="Lists.php">Se tabeller</a>
-            <a class="registrera" href="registerlinks.php">Registration</a>
-            <div class="background"></div>
+            <a class="registrera" href="RegisterLinks.php">Registration</a>
+            <div class="background"></div><br></br>
         
     <?php
     $sqlget = "SELECT * FROM foretag";
