@@ -1,0 +1,219 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-x: hidden;
+}
+
+#wrapper {
+    height: 100vh;
+    width: 100vw;
+    float: right;
+    background-color: white;
+}
+
+.navbar {
+    float: left;
+    height: 100%;
+    width: 5%;
+    background-color: #4C4C4C;
+}
+
+.menu {
+    float: left;
+    right: 0;
+    top: 0;
+    height: 10%;
+    width: 95%;
+    background-color: white;
+    position: fixed;
+}
+
+.views {
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    width: 95%;
+    background-color: #E8E8E8;
+    padding: 7% 2% 0% 2%;
+}
+
+.logo {
+    height: 10%;
+    width: 100%;
+    background-color: tomato;
+    margin-bottom: 65%;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: turquoise;*/
+    margin-bottom: 15%;
+}
+
+.home svg {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+
+.registerElev {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: wheat;*/
+    margin-bottom: 15%;
+}
+
+.registerElev img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerForetag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: cornflowerblue;*/
+    margin-bottom: 15%;
+}
+
+.registerForetag svg {
+    transform: scale(0.65);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.registerPeriod {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: red;*/
+    margin-bottom: 15%;
+}
+
+.registerPeriod svg {
+    transform: scale(1.2);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    fill: white;
+    transition: 0.2s;
+}
+
+.registerKlass {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: blue;*/
+    margin-bottom: 15%;
+}
+
+.registerKlass img {
+    transform: scale(0.4);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.registerPlats {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    /*background-color: rosybrown;*/
+    margin-bottom: 15%;
+}
+
+.registerPlats img {
+    transform: scale(0.35);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    filter: invert(1);
+}
+
+.admin {
+    display: flex;
+    justify-content: center;
+    float: right;
+    width: 5%;
+    height: 100%;
+    margin-right: 5%;
+}
+
+.admin img {
+    transform: scale(0.45);
+}
+
+.home svg:hover {
+    fill: #EC6FE4 !important;
+}
+
+.registerElev img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+}
+
+.registerForetag svg:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+}
+
+.registerPeriod svg:hover {
+    fill: #EC6FE4;
+}
+
+.registerKlass img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+}
+
+.registerPlats img:hover {
+    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+}
+
+.narvaro {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+}
+
+.narvaroTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.styled- th,
+.narvaroTable td {
+    padding: 12px 15px;
+}

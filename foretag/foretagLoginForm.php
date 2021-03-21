@@ -1,10 +1,10 @@
 <?php
 /**
  * Detta är en inloggnings formulär för att logga in som företag, datan skickas
- * till 'loginFunctions.php' där den granskas för att se om inloggnings uppgifter är korrekt eller ej
+ * till 'LoginFunctions.php' där den granskas för att se om inloggnings uppgifter är korrekt eller ej
  */
     require_once "../connection.php";
-    require_once "../loginFunctions.php";
+    require_once "../LoginFunctions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,7 +1,7 @@
 <?php
-    require_once "../loginFunctions.php";
+    require_once "../LoginFunctions.php";
     require_once "../connection.php";
-    require_once '../registerFunctions.php';
+    require_once '../RegisterFunctions.php';
 
     session_start();
 
