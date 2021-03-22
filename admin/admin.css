@@ -58,29 +58,30 @@ body{
 }
 
 .home svg {
-    transform: scale(0.35);
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 
 .registerElev {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: wheat;*/
     margin-bottom: 15%;
 }
 
-.registerElev img {
-    transform: scale(0.35);
+.registerElev svg {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .registerForetag {
@@ -94,10 +95,11 @@ body{
 }
 
 .registerForetag svg {
-    transform: scale(0.65);
     margin-left: auto;
     margin-right: auto;
     display: block;
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .registerPeriod {
@@ -111,46 +113,51 @@ body{
 }
 
 .registerPeriod svg {
-    transform: scale(1.2);
     margin-left: auto;
     margin-right: auto;
     display: block;
-    fill: white;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 .registerKlass {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: blue;*/
     margin-bottom: 15%;
 }
 
-.registerKlass img {
-    transform: scale(0.4);
+.registerKlass svg {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
+    transform: translate(0.25 0.25);
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    stroke-width: 0.5px;
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .registerPlats {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 10%;
     width: 100%;
     /*background-color: rosybrown;*/
     margin-bottom: 15%;
 }
 
-.registerPlats img {
-    transform: scale(0.35);
+.registerPlats svg {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    filter: invert(1);
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .admin {
@@ -167,27 +174,28 @@ body{
 }
 
 .home svg:hover {
-    fill: #EC6FE4 !important;
+    fill: #EC6FE4;
 }
 
-.registerElev img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+.registerElev svg:hover {
+    fill: #EC6FE4;
 }
 
 .registerForetag svg:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+    fill: #EC6FE4;
 }
 
 .registerPeriod svg:hover {
     fill: #EC6FE4;
 }
 
-.registerKlass img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+.registerKlass svg:hover {
+    fill: #EC6FE4;
+    stroke: #EC6FE4;
 }
 
-.registerPlats img:hover {
-    filter: invert(64%) sepia(90%) saturate(1579%) hue-rotate(273deg) brightness(97%) contrast(90%);
+.registerPlats svg:hover {
+    fill: #EC6FE4;
 }
 
 .narvaro {
