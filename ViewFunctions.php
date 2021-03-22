@@ -43,4 +43,14 @@ function elevNarvaro($conn,$elevID){
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
 } 
+function foretag($conn,$foretagID){
+    $sql= "SELECT * FROM foretag";
+
+    $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $foretagID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
+}
 ?>
