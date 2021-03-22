@@ -74,7 +74,7 @@ if(checkAdminLogin()) {
                             $data = $result->fetch_all(MYSQLI_ASSOC);
 
                             echo "<table class='narvaroTable'>";
-                            echo "<tr><th>Elev</th><th>Period</th><th>Företag</th><th>Narvaro</th></tr>";
+                            echo "<tr><th>Elev</th><th>Period</th><th>Företag</th><th>Närvaro</th></tr>";
 
                             foreach ($data as $row) {
                                 echo "<tr><td>";
