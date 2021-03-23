@@ -104,6 +104,22 @@ if(checkAdminLogin()) {
                 <div class="views" id="content6" style='display:none'>
                     <!-- PLATS CONTENT HÄR -->
                     <h1>Plats content här</h1>
+
+                            echo "<table class='narvaroTable'>";
+                            echo "<tr><th>Elev</th><th>Period</th><th>Företag</th><th>Närvaro</th></tr>";
+
+                            foreach ($data as $row) {
+                                echo "<tr><td>";
+                                echo $row['elevID'];
+                                echo "</td><td>";
+                                echo $row['periodNamn'];
+                                echo "</td><td>";
+                                echo $row['namn'];
+                                echo "</td><td>";
+                                echo $row['narvaro'];
+                            }
+                            echo "</table>";
+                        ?>
                 </div>
             </div>
         </div>

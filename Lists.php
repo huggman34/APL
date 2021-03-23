@@ -26,28 +26,6 @@
     if(checkAdminLogin()) {
         $username = $_SESSION['username'];
         echo "Logged in as " . $username . "<br></br>";
-?>
-<!--<div class="container2">
-<div class="wrapper">
-    <h2 class="rubrik2">Länka dagar till perioder</h2>
-    <form action="perioddag/perioddagregister.php" method="post">
-    <div class="form-group3">
-        <label>Välj period </label> 
-        <input type="text" name ="periodNamn" class="form-control">
-        <span class="help-block"></span>
-    </div>
-    <div class="form-group3">
-        <label>Välj dag genom ID</label>
-        <input type="text" name ="dagID" class="form-control">
-        <span class="help-block"></span>
-    </div>
-    <div class="form-group4">
-        <input type= "submit" class="btn" value="Skicka">
-    </div>
-</div>
-</div>
-</form>-->
-<?php
 
     $sqlget = "SELECT * FROM elev";
     $sqldata = mysqli_query($conn, $sqlget) or die("error");
