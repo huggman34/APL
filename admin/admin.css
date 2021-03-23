@@ -207,6 +207,15 @@ body{
     box-sizing: border-box;
 }
 
+.foretag {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
 h1 {
     font-size: 1.5em;
     padding: 0;
@@ -214,6 +223,14 @@ h1 {
 }
 
 .narvaroTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.foretagtable {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
