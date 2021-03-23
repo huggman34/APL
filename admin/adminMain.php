@@ -117,6 +117,7 @@ if(checkAdminLogin()) {
                                 echo $row['namn'];
                                 echo "</td><td>";
                                 echo $row['narvaro'];
+                                echo "</td></tr>";                                                       
                             }
                             echo "</table>";
                         ?>
