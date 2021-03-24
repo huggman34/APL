@@ -14,10 +14,19 @@
     }
 
     function elevKlass($conn) {
-        $sql = "SELECT plats.elevID, plats.periodNamn, foretag.namn
+        $sql = "SELECT plats.elevID, plats.periodNamn
+        FROM plats
+        ORDER BY periodNamn,elevID ASC";
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
+    function elevPlats($conn) {
+        $sql = "SELECT plats.elevID, foretag.namn
         FROM plats
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
-        WHERE plats.periodNamn = '?'
         ORDER BY elevID ASC";
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);

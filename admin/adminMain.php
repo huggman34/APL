@@ -126,15 +126,13 @@ if(checkAdminLogin()) {
                         $data = elevKlass($conn);
 
                         echo "<table class='elevklassTable'>";
-                        echo "<thead><tr><th>ElevID</th><th>Period</th><th>Företag</th></tr></thead>";
+                        echo "<thead><tr><th>ElevID</th><th>Period</th></tr></thead>";
 
                         foreach($data as $row){
                             echo "<tbody><tr><td>";
                             echo $row['elevID'];
                             echo "</td><td>";
                             echo $row ['periodNamn'];
-                            echo "</td><td>";
-                            echo $row ['namn'];
                             echo "</td></tr></tbody>";
                         }
                         echo "</table>";
@@ -142,25 +140,26 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>
+                    <div class="plats">
                     <!-- PLATS CONTENT HÄR -->
-                    <h1>Plats content här</h1>
+                    <h1>Plats</h1>
+                        <?php
 
-                            echo "<table class='narvaroTable'>";
-                            echo "<tr><th>Elev</th><th>Period</th><th>Företag</th><th>Närvaro</th></tr>";
+                            $data = elevPlats($conn);
+
+                            echo "<table class='platsTable'>";
+                            echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";
 
                             foreach ($data as $row) {
-                                echo "<tr><td>";
+                                echo "<tbody><tr><td>";
                                 echo $row['elevID'];
                                 echo "</td><td>";
-                                echo $row['periodNamn'];
-                                echo "</td><td>";
                                 echo $row['namn'];
-                                echo "</td><td>";
-                                echo $row['narvaro'];
-                                echo "</td></tr>";                                                       
+                                echo "</td></tr></tbody>";                                                       
                             }
                             echo "</table>";
                         ?>
+                    </div>
                 </div>
             </div>
         </div>
