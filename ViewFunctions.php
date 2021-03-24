@@ -25,34 +25,26 @@
         return $data;
     }
 
-    function periodNarvaro($conn, $period) {
+    function periodNarvaro($conn) {
         $sql = "SELECT narvaro.narvaro FROM narvaro 
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN period ON period.periodNamn = perioddag.periodNamn
-        WHERE period.periodNamn = ?";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $period);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        WHERE period.periodNamn = '?'";
+        $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
         return $data;
     }
 
-function foretagElever($conn,$foretagNamn){
+function foretagElever($conn){
     $sql = "SELECT foretag.namn, plats.elevID, dag.datum, narvaro.narvaro
     FROM narvaro
     INNER JOIN plats ON plats.platsID = narvaro.platsID
     INNER JOIN foretag ON foretag.foretagID = plats.foretagID
     INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
     INNER JOIN dag ON dag.dagID = perioddag.dagID
-    WHERE foretag.namn = ? ORDER BY dag.datum ASC";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $foretagNamn);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    WHERE foretag.namn = '?' ORDER BY dag.datum ASC";
+   $result = mysqli_query($conn, $sql);
     $data = $result->fetch_all(MYSQLI_ASSOC);
     
     return $data;
@@ -68,20 +60,17 @@ function selectTabel($conn,$tabel){
     return $rund;
     
 }
-function elevNarvaro($conn,$elevID){
+function elevNarvaro($conn){
         $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
         INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
         INNER JOIN plats ON plats.platsID=narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID=plats.foretagID
         INNER JOIN elev ON elev.elevID=plats.elevID
         INNER JOIN dag ON perioddag.dagID=dag.dagID 
-        WHERE elev.elevID=? ORDER BY dag.datum";
-    
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $elevID);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        WHERE elev.elevID='?' ORDER BY dag.datum";
+        $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
+        
         return $data;
 } 
 function foretag($conn){
