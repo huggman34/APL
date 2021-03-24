@@ -224,6 +224,15 @@ body{
     box-sizing: border-box;
 }
 
+.elevklass {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
 h1 {
     font-size: 1.5em;
     padding: 0;
@@ -241,13 +250,6 @@ h1 {
 }
 
 .narvaroTable th,
-.foretagtable {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 100%;
-}
 
 .styled- th,
 .narvaroTable td {
@@ -269,6 +271,80 @@ h1 {
 }
 
 .narvaroTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+}
+
+.foretagtable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.foretagTable th,
+
+.styled- th,
+.foretagTable td {
+    padding: 12px 15px;
+}
+
+.foretagTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.foretagTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.foretagTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.foretagTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+}
+
+.elevklasstable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.elevklassTable th,
+
+.styled- th,
+.elevklassTable td {
+    padding: 12px 15px;
+}
+
+.elevklassTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.elevklassTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.elevklassTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.elevklassTable tbody tr:last-of-type {
     border-bottom: 2px solid #4C4C4C;
 }
 

@@ -13,16 +13,13 @@
         return $data;
     }
 
-    function elevKlass($conn, $klass) {
-        $sql = "SELECT elev.elevID
-        FROM elev
-        WHERE elev.klass = ?
+    function elevKlass($conn) {
+        $sql = "SELECT plats.elevID, plats.periodNamn, foretag.namn
+        FROM plats
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        WHERE plats.periodNamn = '?'
         ORDER BY elevID ASC";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $klass);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
         return $data;
@@ -87,14 +84,12 @@ function elevNarvaro($conn,$elevID){
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
 } 
-function foretag($conn,$foretagID){
+function foretag($conn){
     $sql= "SELECT * FROM foretag";
 
-    $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $foretagID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
+    $result = mysqli_query($conn, $sql);
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $data;
 }
 ?>
