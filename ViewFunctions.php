@@ -7,7 +7,7 @@
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
         WHERE dag.datum = CURRENT_DATE
-        ORDER BY plats.elevID ASC";
+        ORDER BY periodNamn,elevID ASC";
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
