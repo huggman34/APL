@@ -19,7 +19,7 @@
 
           $_SESSION['loggedinAdmin'] = true;
           $_SESSION["username"] = $username;
-          header('Location: ../index.php');
+          header('Location: ../admin/adminMain.php');
         } else {
             echo "Felaktig inloggningsuppgifter";
         }
@@ -38,8 +38,8 @@
 
             $_SESSION['loggedin'] = true;
             $_SESSION["username"] = $username;
-            header('Location: ../narvaro/registerNarvaro.php');
-
+            //header('Location: ../narvaro/registerNarvaro.php');
+            return "välkommen $username";
         } else {
             echo "Felaktig inloggningsuppgifter";
         }
