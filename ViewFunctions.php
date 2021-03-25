@@ -12,7 +12,22 @@
 
         return $data;
     }
+    function narvaroIdagForetag($conn,$foretag) {
+        $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro
+        FROM narvaro
+        INNER JOIN plats ON plats.platsID = narvaro.platsID
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
+        INNER JOIN dag ON dag.dagID = perioddag.dagID
+        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
 
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $foretag);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
+    }
     function elevKlass($conn, $klass) {
         $sql = "SELECT elev.elevID
         FROM elev
