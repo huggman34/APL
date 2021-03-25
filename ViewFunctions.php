@@ -6,7 +6,8 @@
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE dag.datum = CURRENT_DATE";
+        WHERE dag.datum = CURRENT_DATE
+        ORDER BY plats.elevID ASC";
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -43,6 +44,37 @@
         return $data;
     }
 
+    function period($conn) {
+        $sql = "SELECT DISTINCT perioddag.periodNamn
+        FROM narvaro
+        INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID";
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
+    function klass($conn) {
+        $sql = "SELECT DISTINCT elev.klass
+        FROM elev";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
+    function elev($conn, $klass) {
+        $sql = "SELECT elevID, klass FROM elev
+        WHERE klass = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $klass);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 function foretagElever($conn,$foretagNamn){
     $sql = "SELECT foretag.namn, plats.elevID, dag.datum, narvaro.narvaro
     FROM narvaro
@@ -71,30 +103,32 @@ function selectTabel($conn,$tabel){
     return $rund;
     
 }
-function elevNarvaro($conn,$elevID){
-        $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
-        INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
-        INNER JOIN plats ON plats.platsID=narvaro.platsID
-        INNER JOIN foretag ON foretag.foretagID=plats.foretagID
-        INNER JOIN elev ON elev.elevID=plats.elevID
-        INNER JOIN dag ON perioddag.dagID=dag.dagID 
-        WHERE elev.elevID=? ORDER BY dag.datum";
-    
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $elevID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
-} 
-function foretag($conn,$foretagID){
-    $sql= "SELECT * FROM foretag";
+    function elevNarvaro($conn, $elevID){
 
-    $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $foretagID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
-}
+            $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+            INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+            INNER JOIN plats ON plats.platsID=narvaro.platsID
+            INNER JOIN foretag ON foretag.foretagID=plats.foretagID
+            INNER JOIN elev ON elev.elevID=plats.elevID
+            INNER JOIN dag ON perioddag.dagID=dag.dagID 
+            WHERE elev.elevID=? ORDER BY dag.datum";
+        
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $elevID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            return $data;
+    }
+
+    function foretag($conn,$foretagID){
+        $sql= "SELECT * FROM foretag";
+
+        $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $foretagID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            return $data;
+    }
 ?>
