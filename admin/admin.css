@@ -33,11 +33,10 @@ body{
 
 .views {
     box-sizing: border-box;
-    float: left;
     height: 100%;
     width: 100%;
     background-color: #E8E8E8;
-    padding: 7% 2% 0% 2%;
+    padding: 7% 2% 2% 2%;
 }
 
 .content-container {
@@ -207,6 +206,80 @@ body{
 }
 
 .narvaro {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    padding: 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.narvaroTable {
+    border-collapse: collapse;
+    margin: 3% 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+
+}
+
+.narvaroTable tbody {
+    display: block;
+    height: 25vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.narvaroTable th,
+.narvaroTable td {
+    padding: 12px 15px;
+}
+
+.narvaroTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.narvaroTable thead, .narvaroTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.narvaroTable tbody tr {
+    border-bottom: 2px solid #4C4C4C;
+}
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+::-webkit-scrollbar-track {
+    background: #D3D3D3;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4C4C4C;
+}
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+}
+
+.narvaro div{
+    width: 100%;
+    float: left;
+    margin-bottom: 1%;
+}
+
+.narvaro h1 {
+    display: inline;
+  
+.foretag {
     width: 50%;
     height: 50%;
     background-color: white;
@@ -215,7 +288,16 @@ body{
     box-sizing: border-box;
 }
 
-.foretag {
+.elevklass {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+.plats {
     width: 50%;
     height: 50%;
     background-color: white;
@@ -232,16 +314,159 @@ h1 {
     font-weight: normal;
 }
 
-.narvaroTable {
+
+.narvaro h3 {
+    display: inline;
+    margin-left: 69.3%;
+    font-size: 1em;
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+.periodNarvaro {
+    position: relative;
+    width: 47.5%;
+    height: 80%;
+    background-color: white;
+    padding: 1%;
+    margin-left: 2%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.periodNarvaro form {
+    position: absolute;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.elevList {
+    width: 48.75%;
+    height: 100%;
+    background-color: white;
+    padding: 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.elevList div {
+    width: 100%;
+    height: 94%;
+    margin-top: 5%;
+}
+
+.elevTable {
     border-collapse: collapse;
     margin: 3% 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
+
 }
 
+.elevTable tbody {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.elevTable th,
+.elevTable td {
+  
 .narvaroTable th,
-.foretagtable {
+
+.styled- th,
+.narvaroTable td {
+    padding: 12px 15px;
+}
+
+.elevTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.elevTable thead, .elevTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.elevTable tbody tr {
+    border-bottom: 2px solid #4C4C4C;
+    cursor: pointer;
+}
+
+.elevList select {
+    float: right;
+    margin-bottom: 2%;
+}
+
+.narvaroView {
+    width: 48.75%;
+    height: 50%;
+    background-color: #e8e8e8;
+    padding: 0%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    vertical-align: top;
+    margin-left: 2%;
+}
+
+.elevNarvaro {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+    background-color: white;
+}
+
+.elevNarvaro tbody {
+    display: block;
+    height: 34vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.elevNarvaro th,
+.elevNarvaro td {
+    padding: 12px 15px;
+}
+
+.elevNarvaro thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.elevNarvaro thead, .elevNarvaro tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.elevNarvaro tbody tr {
+    border-bottom: 2px solid #4C4C4C;
+    cursor: pointer;
+}
+
+.narvaroView h1 {
+    text-align: center;
+    margin-top: 18%;
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+}
+
+.foretagTable {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -249,29 +474,106 @@ h1 {
     min-width: 100%;
 }
 
+.foretagTable th,
+
 .styled- th,
-.narvaroTable td {
+.foretagTable td {
     padding: 12px 15px;
 }
 
-.narvaroTable thead {
+.foretagTable thead {
     background-color: #4C4C4C;
     color: white;
     text-align: left;
 }
 
-.narvaroTable tbody tr {
+.foretagTable tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.narvaroTable tbody tr:nth-of-type(even) {
+.foretagTable tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-.narvaroTable tbody tr:last-of-type {
+.foretagTable tbody tr:last-of-type {
     border-bottom: 2px solid #4C4C4C;
 }
 
 .navbar svg.toggle-state {
     fill: #EC6FE4;
+}
+
+.elevklassTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.elevklassTable th,
+
+.styled- th,
+.elevklassTable td {
+    padding: 12px 15px;
+}
+
+.elevklassTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.elevklassTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.elevklassTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.elevklassTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+}
+
+.platsTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+}
+
+.platsTable th,
+
+.styled- th,
+.platsTable td {
+    padding: 12px 15px;
+}
+
+.platsTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.platsTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.platsTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.platsTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.navbar svg.toggle-state {
+    fill: #EC6FE4;
+
 }

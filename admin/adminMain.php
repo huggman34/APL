@@ -3,6 +3,7 @@
     require_once "../connection.php";
     require_once '../RegisterFunctions.php';
     require_once "../ViewFunctions.php";
+    //require_once "periodNarvaro.php";
 
     session_start();
 
@@ -18,8 +19,9 @@ if(checkAdminLogin()) {
         <link rel="stylesheet" type="text/css" href="admin.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Admin</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
-    <body>
+    <body onload="donutChart(); elever();">
         <div id="wrapper">
             <div class="navbar">
                 <div class="logo"></div>
@@ -63,71 +65,235 @@ if(checkAdminLogin()) {
                 <div class="views" id="content1">
                     <!-- STARTSIDA CONTENT HÄR -->
                     <div class="narvaro">
-                        <h1>Närvaro</h1>
+                        <div>
+                            <h1>Närvaro</h1>
+                            <h3><?php echo date("Y-m-d") ?></h3>
+                        </div>
                             <?php
                                 $data = narvaroIdag($conn);
 
                                 echo "<table class='narvaroTable'>";
-                                echo "<thead><tr><th>Elev</th><th>Period</th><th>Företag</th><th>Narvaro</th></tr></thead>";
+                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Narvaro</th></tr></thead><tbody>";
 
-                                foreach ($data as $row) {
-                                    echo "<tbody><tr><td>";
-                                    echo $row['elevID'];
+                                foreach ($data as $row => $column) {
+
+                                    if (is_null($column['narvaro'])) {
+                                        $column['narvaro'] = "null";
+                                    }
+                                    
+                                    $str = ['null', '1', '2', '3'];
+                                    $rplc = ['', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+                        
+                                    $column2 = str_replace($str, $rplc, $column);
+                                    
+                                    echo "<tr><td>";
+                                    echo $column['elevID'];
                                     echo "</td><td>";
-                                    echo $row['periodNamn'];
+                                    echo $column['namn'];
                                     echo "</td><td>";
-                                    echo $row['namn'];
+                                    echo $column['periodNamn'];
                                     echo "</td><td>";
-                                    echo $row['narvaro'];
-                                    echo "</tr></tbody>";
+                                    echo $column2['narvaro'];
+                                    echo "</td></tr>";
                                 }
-                                echo "</table>";
+                                echo "</tbody></table>";
                             ?>
+                    </div>
+                    <div class="periodNarvaro">
+                        <?php 
+                            $perioder = period($conn);
+                        ?>
+
+                        <form method="POST">
+                            <select id="sel" name="period" onchange="donutChart();">
+                                <!--<option selected="true" disabled="diabled" >Välj Period</option>-->
+                                <?php
+                                    foreach ($perioder as $p) {
+                                        echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                    }
+                                ?>
+                            </select>
+                        </form>
+                        <div id="donutchart" style="width: 100%; height: 100%"></div>
+                        <script type="text/javascript">
+                            var narvaroCount =0;
+                            var franvaroCount =0;
+                            var ogiltigFranvaroCount =0;
+                            var nullCount=0;
+                            google.charts.load("current", {packages:["corechart"]});
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                    ['Task', 'Hours per Day'],
+                                    ['Närvaro', narvaroCount],
+                                    ['Frånvaro', franvaroCount],
+                                    ['Ogiltig frånvaro', ogiltigFranvaroCount],
+                                    ['Oänmäld', nullCount]
+                                ]);
+                                    var options = {
+                                    pieHole: 0.4,
+                                    colors: ['#77dd77','#ff6961','#FEFE95','#D3D3D3'],
+                                    chartArea:{
+                                        left:70,
+                                        width: '75%',
+                                        height: '75%'
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    },
+                                    pieSliceTextStyle: {color: '#4C4C4C'},
+                                    pieSliceBorderColor: {color: '#4C4C4C'},
+                                    title:'Period Närvaro',
+                                    titleTextStyle: {fontSize: 15, bold: false, fontName: 'sans-serif'},
+                                };
+
+                                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                                chart.draw(data, options);
+                            }
+
+                            function donutChart() {
+                                var dataval;
+                                    dataval=$("#sel").val();
+                                $.ajax({
+                                    url: 'periodNarvaro.php',
+                                    type: 'POST',
+                                    data: {
+                                        period: dataval
+                                    },
+
+                                    success: function(data) {
+                                        res = data.split(';');
+                                        narvaroCount = parseInt(res[0]);
+                                        franvaroCount = parseInt(res[1]);
+                                        ogiltigFranvaroCount = parseInt(res[2]);
+                                        nullCount = parseInt(res[3]);
+
+                                        drawChart();
+                                    }
+                                });
+                            };
+
+                        </script>
+                        
                     </div>
                 </div>
                 <div class="views" id="content2" style='display:none'>
                     <!-- ELEV CONTENT HÄR -->
-                    <h1>Elev content här</h1>
+                    <div class="elevList">
+                        <?php
+                            $klasser = klass($conn);
+                        ?>
+                        <form method="POST">
+                            <select id="klass" name="klass" onchange="elever();">
+                                <?php
+                                    foreach ($klasser as $k) {
+                                        echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
+                                    }
+                                ?>
+                            </select>
+                        </form>
+                        <script>
+                            function elever() {
+                                var klassSel = $('#klass').val();
+                                $.ajax({
+                                    url: 'elever.php',
+                                    type: 'POST',
+                                    data: {
+                                        klass: klassSel
+                                    },
+
+                                    success: function(data) {
+                                        $('#elevList').html(data);
+                                    }
+                                });
+                            };
+                        </script>
+                        <div id="elevList"></div>
+                    </div>
+
+                    <div class="narvaroView">
+                        <h1>Klicka på en elev</h1>
+                    </div>
                 </div>
                 <div class="views" id="content3" style='display:none'>
                     <!-- FÖRETAG CONTENT HÄR -->
-                    <h1>företag content här</h1>
+                    <div class="foretag">
+                    <h1>Företag</h1>
+                    <?php
+
+                        $data = foretag($conn);
+
+                        echo "<table class='foretagTable'>";
+                        echo "<thead><tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th></tr></thead>";
+
+                        foreach($data as $row){
+                            echo "<tbody><tr><td>";
+                            echo $row['namn'];
+                            echo "</td><td>";
+                            echo $row['epost'];
+                            echo "</td><td>";
+                            echo $row['telefon'];
+                            echo "</td></tr></tbody>";
+                        }
+                        echo "</table>";
+                    ?>
+                    </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>
                 </div>
                 <div class="views" id="content5" style='display:none'>
-                    <!-- KLASS CONTENT HÄR -->
-                    <h1>Klass content här</h1>
+                    <div class="elevklass">
+                    <!-- KLASS CONTENT HÄR-->
+                    <h1>Klass</h1>
+                    <?php
+
+                        $data = elevKlass($conn);
+
+                        echo "<table class='elevklassTable'>";
+                        echo "<thead><tr><th>ElevID</th><th>Period</th></tr></thead>";
+
+                        foreach($data as $row){
+                            echo "<tbody><tr><td>";
+                            echo $row['elevID'];
+                            echo "</td><td>";
+                            echo $row ['periodNamn'];
+                            echo "</td></tr></tbody>";
+                        }
+                        echo "</table>";
+                    ?>
+                    </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>
+                    <div class="plats">
                     <!-- PLATS CONTENT HÄR -->
-                    <h1>Plats content här</h1>
+                    <h1>Plats</h1>
+                        <?php
 
-                            echo "<table class='narvaroTable'>";
-                            echo "<tr><th>Elev</th><th>Period</th><th>Företag</th><th>Närvaro</th></tr>";
+                            $data = elevPlats($conn);
+
+                        <?php
+
+                            echo "<table class='platsTable'>";
+                            echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";
 
                             foreach ($data as $row) {
-                                echo "<tr><td>";
+                                echo "<tbody><tr><td>";
                                 echo $row['elevID'];
                                 echo "</td><td>";
-                                echo $row['periodNamn'];
-                                echo "</td><td>";
                                 echo $row['namn'];
-                                echo "</td><td>";
-                                echo $row['narvaro'];
-                                echo "</td></tr>";                                                       
+                                echo "</td></tr></tbody>";                                                       
                             }
                             echo "</table>";
                         ?>
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="admin.js"></script>
     </body>
+        <script src="admin.js"></script>
     </html>
-
     <?php   
 } else {
     echo "Please log in first to see this page <br></br>";
