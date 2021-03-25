@@ -278,7 +278,7 @@ body{
 
 .narvaro h1 {
     display: inline;
-  
+}
 .foretag {
     width: 50%;
     height: 50%;
@@ -377,9 +377,10 @@ h1 {
     overflow-x: hidden;
 }
 
-.elevTable th,
-.elevTable td {
-  
+.elevTable th, 
+
+.elevTable td, 
+
 .narvaroTable th,
 
 .styled- th,
@@ -461,7 +462,7 @@ h1 {
 .narvaroView h1 {
     text-align: center;
     margin-top: 18%;
-
+}
 .navbar svg.toggle-state {
     fill: #EC6FE4;
 }

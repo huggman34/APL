@@ -273,7 +273,6 @@ if(checkAdminLogin()) {
 
                             $data = elevPlats($conn);
 
-                        <?php
 
                             echo "<table class='platsTable'>";
                             echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";
