@@ -217,23 +217,77 @@ if(checkAdminLogin()) {
                 </div>
                 <div class="views" id="content3" style='display:none'>
                     <!-- FÖRETAG CONTENT HÄR -->
-                    <h1>företag content här</h1>
+                    <div class="foretag">
+                    <h1>Företag</h1>
+                    <?php
+
+                        $data = foretag($conn);
+
+                        echo "<table class='foretagTable'>";
+                        echo "<thead><tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th></tr></thead>";
+
+                        foreach($data as $row){
+                            echo "<tbody><tr><td>";
+                            echo $row['namn'];
+                            echo "</td><td>";
+                            echo $row['epost'];
+                            echo "</td><td>";
+                            echo $row['telefon'];
+                            echo "</td></tr></tbody>";
+                        }
+                        echo "</table>";
+                    ?>
+                    </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>
                 </div>
                 <div class="views" id="content5" style='display:none'>
-                    <!-- KLASS CONTENT HÄR -->
-                    <h1>Klass content här</h1>
+                    <div class="elevklass">
+                    <!-- KLASS CONTENT HÄR-->
+                    <h1>Klass</h1>
+                    <?php
+
+                        $data = elevKlass($conn);
+
+                        echo "<table class='elevklassTable'>";
+                        echo "<thead><tr><th>ElevID</th><th>Period</th></tr></thead>";
+
+                        foreach($data as $row){
+                            echo "<tbody><tr><td>";
+                            echo $row['elevID'];
+                            echo "</td><td>";
+                            echo $row ['periodNamn'];
+                            echo "</td></tr></tbody>";
+                        }
+                        echo "</table>";
+                    ?>
+                    </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>
+                    <div class="plats">
                     <!-- PLATS CONTENT HÄR -->
-                    <h1>Plats content här</h1>
+                    <h1>Plats</h1>
+                        <?php
+
+                            $data = elevPlats($conn);
 
                         <?php
 
+                            echo "<table class='platsTable'>";
+                            echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";
+
+                            foreach ($data as $row) {
+                                echo "<tbody><tr><td>";
+                                echo $row['elevID'];
+                                echo "</td><td>";
+                                echo $row['namn'];
+                                echo "</td></tr></tbody>";                                                       
+                            }
+                            echo "</table>";
                         ?>
+                    </div>
                 </div>
             </div>
         </div>

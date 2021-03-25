@@ -55,6 +55,7 @@ if(checkAdminLogin()) {
     if(isset($_POST['submit'])) {
         registerForetag($conn, $_POST['namn'], $_POST['losenord'], $_POST['epost'], $_POST['telefon']);
         //registerAdmin($conn, $_POST['namn'], $_POST['losenord']);
+
     }
 ?>
 <a class="link" href="../Lists.php">Se registrerade företag</a>
