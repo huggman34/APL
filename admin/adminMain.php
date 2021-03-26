@@ -237,31 +237,27 @@ if(checkAdminLogin()) {
                     <div class="foretagList">
                         <h1>Företag</h1>
                         <?php
-                            $foretags = foretags($conn);
-                        ?>
-                        <script>
-                        function foretag(){
-                            var foretagSel = $('#foretag').val();
-                            $.ajax({
-                                url: 'foretag.php',
-                                type: 'POST',
-                                data:{
-                                    foretag: foretagSel
-                                },
-
-                                success: function(data){
-                                    $('#foretagList').html(data);
-                                }
-                            });
-                        };
-                        </script>¨
-                        <div id="foretagList"></div>
+                            $data = foretag($conn);
+                        
+                            echo "<table class='foretagTable'>";
+                            echo "<thead><tr><th>Företag</th><th>Epost</th><th>Telefonnummer</th></tr></thead><tbody>";
+                        
+                            foreach ($data as $row) {
+                                echo "<tr><td>";
+                                echo $row['namn'];
+                                echo "</td><td>";
+                                echo $row['epost'];
+                                echo "</td><td>";
+                                echo $row['telefon'];
+                                echo "</td></tr>";
+                            }
+                            echo "</tbody></table>";
+                            ?>
                     </div>
-
                     <div class="foretagView">
-                        <h1>Klicka på ett företag<h1>
+                        <h1>Klicka på ett företag</h1>
+                    </div>
                 </div>
-                
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>

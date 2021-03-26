@@ -451,7 +451,7 @@ h1 {
     text-align: left;
 }
 
-.foretagTable thead, .elevTable tbody tr {
+.foretagTable thead, .foretagTable tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
@@ -469,6 +469,43 @@ h1 {
 .foretagList select {
     float: right;
     margin-bottom: 2%;
+}
+
+.foretagInfo {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+    background-color: white;
+}
+
+.foretagInfo tbody {
+    display: block;
+    height: 34vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.foretagInfo th,
+.foretagInfo td {
+    padding: 12px 15px;
+}
+
+.foretagInfo thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.foretagInfo thead, .foretagInfo tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.foretagInfo tbody tr {
+    border-bottom: 2px solid #4C4C4C;
+    cursor: pointer;
 }
 
 .foretagView {
