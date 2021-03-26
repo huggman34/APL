@@ -25,20 +25,29 @@
 
     if(!empty($elevNarvaro)){
         echo "<table class='elevNarvaro'>";
-        echo "<thead><tr><th>Elev</th><th>Företag</th><th>Datum</th><th>Närvaro</th></tr></thead><tbody>";
+        echo "<thead><tr><th>Företag</th><th>Datum</th><th>Närvaro</th></tr></thead><tbody>";
 
-        foreach ($elevNarvaro as $row) {
+        foreach ($elevNarvaro as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+            
             echo "<tr><td>";
-            echo $row['elevID'];
+            echo $column['namn'];
             echo "</td><td>";
-            echo $row['namn'];
+            echo $column['datum'];
             echo "</td><td>";
-            echo $row['datum'];
-            echo "</td><td>";
-            echo $row['narvaro'];
+            echo $column2['narvaro'];
             echo "</td></tr>";
         }
         echo "</tbody></table>";
+
     } else {
         echo "Ingen data är tillgänglig";
     }

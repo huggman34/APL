@@ -79,6 +79,24 @@ $(document).on('click','.elevTable tbody tr',function(){
         success: function(data) {
             //alert(data);
             $('.narvaroView').html(data);
+            $(".elevNarvaro td").each( function() {
+                var thisCell = $(this);
+                var cellValue = thisCell.text();
+            
+                if (cellValue == 'Närvarande') {
+                    thisCell.css("background-color","#77dd77");
+                }
+                if (cellValue == 'Giltig frånvaro') {
+                    thisCell.css("background-color","#FEFE95");
+                }
+                if (cellValue == 'Ogiltig frånvaro') {
+                    thisCell.css("background-color","#ff6961");
+                }
+                if (cellValue == 'Oanmäld') {
+                    thisCell.css("background-color","gainsboro");
+                }
+             }
+            )
         }
     })
 });
@@ -99,7 +117,6 @@ $(document).on('click','.elevTable tbody tr',function(){
         }
     });
 })*/
-
 
 /*$(document).ready(function(e) {
     $("[name='period']").on('change', function() {
