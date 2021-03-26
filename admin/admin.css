@@ -475,7 +475,7 @@ h1 {
     margin-bottom: 2%;
 }
 
-.elevNarvaro {
+.foretagInfo {
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -483,31 +483,31 @@ h1 {
     background-color: white;
 }
 
-.elevNarvaro tbody {
+.foretagInfo tbody {
     display: block;
     height: 34vh;
     overflow: auto;
     overflow-x: hidden;
 }
 
-.elevNarvaro th,
-.elevNarvaro td {
+.foretagInfo th,
+.foretagInfo td {
     padding: 12px 15px;
 }
 
-.elevNarvaro thead {
+.foretagInfo thead {
     background-color: #4C4C4C;
     color: white;
     text-align: left;
 }
 
-.elevNarvaro thead, .elevNarvaro tbody tr {
+.foretagInfo thead, .foretagInfo tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.elevNarvaro tbody tr {
+.foretagInfo tbody tr {
     border-bottom: 2px solid #4C4C4C;
     cursor: pointer;
 }
