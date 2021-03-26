@@ -222,18 +222,4 @@
             echo "Klassen är redan registrerad";
         }
     }
-
-    function registerAdmin($conn, $foretagNamn, $losenord) {
-        $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
-
-        $stmt = $conn->prepare("INSERT INTO admin (anvnamn, losenord)
-        VALUES (?, ?)");
-        $stmt->bind_param("ss", $foretagNamn, $hashed_losenord);
-
-        if ($stmt->execute()){
-            echo "Records added successfully.";
-        } else{
-            echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
-        }
-    }
 ?>
