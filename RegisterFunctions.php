@@ -222,5 +222,4 @@
             echo "Klassen är redan registrerad";
         }
     }
-
 ?>

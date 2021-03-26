@@ -82,7 +82,7 @@ if(checkAdminLogin()) {
                                     }
                                     
                                     $str = ['null', '1', '2', '3'];
-                                    $rplc = ['', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+                                    $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
                         
                                     $column2 = str_replace($str, $rplc, $column);
                                     
@@ -106,7 +106,6 @@ if(checkAdminLogin()) {
 
                         <form method="POST">
                             <select id="sel" name="period" onchange="donutChart();">
-                                <!--<option selected="true" disabled="diabled" >Välj Period</option>-->
                                 <?php
                                     foreach ($perioder as $p) {
                                         echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
@@ -116,10 +115,10 @@ if(checkAdminLogin()) {
                         </form>
                         <div id="donutchart" style="width: 100%; height: 100%"></div>
                         <script type="text/javascript">
-                            var narvaroCount =0;
-                            var franvaroCount =0;
-                            var ogiltigFranvaroCount =0;
-                            var nullCount=0;
+                            var narvaroCount = 0;
+                            var franvaroCount = 0;
+                            var ogiltigFranvaroCount = 0;
+                            var nullCount = 0;
                             google.charts.load("current", {packages:["corechart"]});
                             google.charts.setOnLoadCallback(drawChart);
                             function drawChart() {
@@ -132,7 +131,7 @@ if(checkAdminLogin()) {
                                 ]);
                                     var options = {
                                     pieHole: 0.4,
-                                    colors: ['#77dd77','#ff6961','#FEFE95','#D3D3D3'],
+                                    colors: ['#77dd77','#ff6961','#FEFE95','gainsboro'],
                                     chartArea:{
                                         left:70,
                                         width: '75%',
@@ -218,35 +217,37 @@ if(checkAdminLogin()) {
                 <div class="views" id="content3" style='display:none'>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretag">
-                    <h1>Företag</h1>
-                    <?php
+                        <h1>Företag</h1>
+                        <?php
 
-                        $data = foretag($conn);
+                            $data = foretag($conn);
 
-                        echo "<table class='foretagTable'>";
-                        echo "<thead><tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th></tr></thead>";
+                            echo "<table class='foretagTable'>";
+                            echo "<thead><tr><th>Företagsnamn</th><th>Epost</th><th>Telefonnummer</th></tr></thead>";
 
-                        foreach($data as $row){
-                            echo "<tbody><tr><td>";
-                            echo $row['namn'];
-                            echo "</td><td>";
-                            echo $row['epost'];
-                            echo "</td><td>";
-                            echo $row['telefon'];
-                            echo "</td></tr></tbody>";
-                        }
-                        echo "</table>";
-                    ?>
+                            foreach($data as $row){
+                                echo "<tbody><tr><td>";
+                                echo $row['namn'];
+                                echo "</td><td>";
+                                echo $row['epost'];
+                                echo "</td><td>";
+                                echo $row['telefon'];
+                                echo "</td></tr></tbody>";
+                            }
+                            echo "</table>";
+                        ?>
                     </div>
                 </div>
+                
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>
                 </div>
+
                 <div class="views" id="content5" style='display:none'>
                     <div class="elevklass">
-                    <!-- KLASS CONTENT HÄR-->
-                    <h1>Klass</h1>
+                        <!-- KLASS CONTENT HÄR-->
+                        <h1>Klass</h1>
                     <?php
 
                         $data = elevKlass($conn);
@@ -267,12 +268,11 @@ if(checkAdminLogin()) {
                 </div>
                 <div class="views" id="content6" style='display:none'>
                     <div class="plats">
-                    <!-- PLATS CONTENT HÄR -->
-                    <h1>Plats</h1>
+                        <!-- PLATS CONTENT HÄR -->
+                        <h1>Plats</h1>
                         <?php
 
                             $data = elevPlats($conn);
-
 
                             echo "<table class='platsTable'>";
                             echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";

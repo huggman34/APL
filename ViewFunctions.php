@@ -51,12 +51,17 @@
         return $data;
     }
 
-    function periodNarvaro($conn) {
+    function periodNarvaro($conn, $period) {
         $sql = "SELECT narvaro.narvaro FROM narvaro 
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN period ON period.periodNamn = perioddag.periodNamn
-        WHERE period.periodNamn = '?'";
-        $result = mysqli_query($conn, $sql);
+        WHERE period.periodNamn = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $period);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
         return $data;
@@ -135,14 +140,12 @@ function selectTabel($conn,$tabel){
             return $data;
     }
 
-    function foretag($conn,$foretagID){
+    function foretag($conn){
         $sql= "SELECT * FROM foretag";
 
-        $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $foretagID);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = $result->fetch_all(MYSQLI_ASSOC);
-            return $data;
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
     }
 ?>

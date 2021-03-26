@@ -57,15 +57,15 @@ $(".narvaroTable td").each( function() {
     if (cellValue == 'Ogiltig frånvaro') {
         thisCell.css("background-color","#ff6961");
     }
-    if (cellValue == '') {
-        thisCell.css("background-color","#cfcfc4");
+    if (cellValue == 'Oanmäld') {
+        thisCell.css("background-color","gainsboro");
     }
  }
 )
 
 $(document).on('click','.elevTable tbody tr',function(){
     var row = $(this);
-    row.css("background-color", "#d3d3d3");
+    row.css("background-color", "gainsboro");
     $(".elevTable tbody tr").not(this).css("background-color", "#ffffff")
     var elev = row.find("td:first-child").text();
 
