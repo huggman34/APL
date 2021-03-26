@@ -7,13 +7,29 @@
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
         WHERE dag.datum = CURRENT_DATE
-        ORDER BY plats.elevID ASC";
+        ORDER BY periodNamn,elevID ASC";
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
         return $data;
     }
-
+    function narvaroIdagForetag($conn,$foretag) {
+        $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro
+        FROM narvaro
+        INNER JOIN plats ON plats.platsID = narvaro.platsID
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
+        INNER JOIN dag ON dag.dagID = perioddag.dagID
+        WHERE dag.datum = CURRENT_DATE AND foretag.namn='?'";
+      
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $foretag);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
+    }
+   
     function elevKlass($conn) {
         $sql = "SELECT plats.elevID, plats.periodNamn
         FROM plats
@@ -73,7 +89,7 @@
 
     function elev($conn, $klass) {
         $sql = "SELECT elevID, klass FROM elev
-        WHERE klass = ?";
+        WHERE klass = '?'";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $klass);
@@ -114,7 +130,7 @@ function selectTabel($conn,$tabel){
             INNER JOIN foretag ON foretag.foretagID=plats.foretagID
             INNER JOIN elev ON elev.elevID=plats.elevID
             INNER JOIN dag ON perioddag.dagID=dag.dagID 
-            WHERE elev.elevID=? ORDER BY dag.datum";
+            WHERE elev.elevID='?' ORDER BY dag.datum";
         
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $elevID);
