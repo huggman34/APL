@@ -20,7 +20,7 @@
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE dag.datum = CURRENT_DATE AND foretag.namn='?'";
+        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
       
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $foretag);
