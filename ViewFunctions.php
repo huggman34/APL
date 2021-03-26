@@ -87,9 +87,8 @@
         return $data;
     }
 
-    function foretags($conn){
-        $sql= "SELECT DISTINCT foretag.namn 
-        FROM foretag";
+    function foretag($conn){
+        $sql= "SELECT * FROM foretag";
 
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);

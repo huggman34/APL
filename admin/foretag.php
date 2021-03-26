@@ -1,14 +1,14 @@
 <?php
     require_once '../connection.php';
 
-    $foretag = $_POST['foretag'];
+    $namn = $_POST['namn'];
 
-    function foretags($conn, $foretag) {
+    function foretag($conn, $namn) {
         $sql = "SELECT namn, epost, telefon FROM foretag
         WHERE namn = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $foretag);
+        $stmt->bind_param("s", $namn);
         $stmt->execute();
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -16,18 +16,13 @@
         return $data;
     }
 
-    $foretags = foretags($conn, $foretag);
+    $foretag = foretag($conn, $namn);
 
-    /*foreach ($elever as $e) {
-        echo $e['elevID'];
-        echo ';';
-    }*/
-    //print_r($elever);
 
     echo "<table class='foretagTable'>";
     echo "<thead><tr><th>Företag</th><th>Epost</th><th>Telefonnummer</th></tr></thead><tbody>";
 
-    foreach ($foretags as $row) {
+    foreach ($foretag as $row) {
         echo "<tr><td>";
         echo $row['namn'];
         echo "</td><td>";
