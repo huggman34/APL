@@ -20,7 +20,7 @@
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
+        WHERE dag.datum = CURRENT_DATE AND foretag.namn='?'";
       
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $foretag);
@@ -84,7 +84,7 @@
 
     function elev($conn, $klass) {
         $sql = "SELECT elevID, klass FROM elev
-        WHERE klass = ?";
+        WHERE klass = '?'";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $klass);
@@ -125,7 +125,7 @@ function selectTabel($conn,$tabel){
             INNER JOIN foretag ON foretag.foretagID=plats.foretagID
             INNER JOIN elev ON elev.elevID=plats.elevID
             INNER JOIN dag ON perioddag.dagID=dag.dagID 
-            WHERE elev.elevID=? ORDER BY dag.datum";
+            WHERE elev.elevID='?' ORDER BY dag.datum";
         
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $elevID);
