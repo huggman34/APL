@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <form action="adminLoginForm.php" method="POST">
+    <form action="Index.php" method="POST">
         <input class="input-box" type="text" name="username" placeholder="Admin användarnamn"/>
         <input class="input-box" type="password" name="password" placeholder="Admin lösenord"/>
         <input class="submit" type="submit" name="submit" value="Logga in"/>
