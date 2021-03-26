@@ -87,6 +87,16 @@
         return $data;
     }
 
+    function foretags($conn){
+        $sql= "SELECT DISTINCT foretag.namn 
+        FROM foretag";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
     function elev($conn, $klass) {
         $sql = "SELECT elevID, klass FROM elev
         WHERE klass = '?'";
@@ -140,12 +150,4 @@ function selectTabel($conn,$tabel){
             return $data;
     }
 
-    function foretag($conn){
-        $sql= "SELECT * FROM foretag";
-
-        $result = mysqli_query($conn, $sql);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-
-        return $data;
-    }
 ?>

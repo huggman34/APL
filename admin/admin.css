@@ -280,15 +280,6 @@ body{
     display: inline;
 }
 
-.foretag {
-    width: 50%;
-    height: 50%;
-    background-color: white;
-    border-radius: 15px;
-    padding: 1%;
-    box-sizing: border-box;
-}
-
 .elevklass {
     width: 50%;
     height: 50%;
@@ -421,6 +412,81 @@ h1 {
     margin-left: 2%;
 }
 
+.foretagList {
+    width: 48.75%;
+    height: 100%;
+    background-color: white;
+    padding: 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.foretagList div {
+    width: 100%;
+    height: 94%;
+    margin-top: 5%;
+}
+
+.foretagTable {
+    border-collapse: collapse;
+    margin: 3% 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+
+}
+
+.foretagTable tbody {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.foretagTable th,
+.foretagTable td {
+    padding: 12px 15px;
+}
+
+.foretagTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.foretagTable thead, .elevTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.foretagTable tbody tr {
+    cursor: pointer;
+    border-bottom: 2px solid gainsboro;
+}
+
+.foretagTable tr:last-child{
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.foretagList select {
+    float: right;
+    margin-bottom: 2%;
+}
+
+.foretagView {
+    width: 48.75%;
+    height: 50%;
+    background-color: #e8e8e8;
+    padding: 0%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    vertical-align: top;
+    margin-left: 2%;
+}
+
 .elevNarvaro {
     border-collapse: collapse;
     font-size: 0.9em;
@@ -465,39 +531,6 @@ h1 {
 
 .navbar svg.toggle-state {
     fill: #EC6FE4;
-}
-
-.foretagTable {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 100%;
-}
-
-.foretagTable th,
-
-.styled- th,
-.foretagTable td {
-    padding: 12px 15px;
-}
-
-.foretagTable thead {
-    background-color: #4C4C4C;
-    color: white;
-    text-align: left;
-}
-
-.foretagTable tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.foretagTable tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.foretagTable tbody tr:last-of-type {
-    border-bottom: 2px solid #4C4C4C;
 }
 
 .navbar svg.toggle-state {
