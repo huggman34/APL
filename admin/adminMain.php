@@ -210,8 +210,26 @@ if(checkAdminLogin()) {
                         <div id="elevList"></div>
                     </div>
 
-                    <div class="narvaroView">
-                        <h1>Klicka på en elev</h1>
+                    <div class="elevHolder">
+                        <div class="narvaroView">
+                            <h1>Klicka på en elev</h1>
+                        </div>
+                        <div class="formHolder">
+                            <div class="formSelect">
+                                <button class="button">Registrera Elev</button>
+                                <button class="button2">Registrera Klass</button>
+                            </div>
+                            <div class="formArea">
+                                <form>
+                                    <input type="text" name="fornamn" placeholder="Förnamn">
+                                    <input type="text" name="efternamn" placeholder="Efternamn">
+                                    <select namn="klass">
+                                        <option disabled selected>Klass<option>
+                                    </select>
+                                    <input type="submit" namn="sub" value="Spara">
+                                </form>
+                            <div>
+                        </div>
                     </div>
                 </div>
                 <div class="views" id="content3" style='display:none'>
