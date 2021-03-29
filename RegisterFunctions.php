@@ -85,7 +85,7 @@
         }
     }
 
-    function registerNarvaro($conn, $elevID, $narvaro) {
+    function registerNarvaro($conn, $periodDagID,$platsID, $narvaro) {
         /*
         $result = $elevID;
 
@@ -110,15 +110,15 @@
             }
         } else {
             echo "Eleven har redan registrerats närvaro";
-        }*/
+        }
 
         $result = $elevID;
 
         $result_explode = explode('|', $result);
         
         $platsID = $result_explode[0];
-        $periodDagID = $result_explode[1];
-        $narvaro = $_POST['narvaro'];
+        $periodDagID = $result_explode[1];*/
+        //$narvaro = $_GET['narvaro'];
 
         $stmt = $conn->prepare("UPDATE narvaro SET narvaro = ? WHERE platsID = ? AND periodDagID = ?");
         $stmt->bind_param("iii", $narvaro, $platsID, $periodDagID);
