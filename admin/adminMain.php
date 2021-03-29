@@ -224,11 +224,11 @@ if(checkAdminLogin()) {
                                     <input type="text" name="fornamn" placeholder="Förnamn">
                                     <input type="text" name="efternamn" placeholder="Efternamn">
                                     <select namn="klass">
-                                        <option disabled selected>Klass<option>
+                                        <option disabled selected>Klass</option>
                                     </select>
                                     <input type="submit" namn="sub" value="Spara">
                                 </form>
-                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>
