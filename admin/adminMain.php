@@ -235,7 +235,6 @@ if(checkAdminLogin()) {
                 <div class="views" id="content3" style='display:none'>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
-                        <h1>Företag</h1>
                         <?php
                             $data = foretag($conn);
                         
