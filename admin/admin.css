@@ -50,7 +50,7 @@ body{
 .logo {
     height: 10%;
     width: 100%;
-    background-color: tomato;
+    background-color: #EC6FE4;
     margin-bottom: 65%;
 }
 
@@ -71,7 +71,6 @@ body{
     transition: 0.2s;
     cursor: pointer;
 }
-
 
 .registerElev {
     display: flex;
@@ -345,6 +344,7 @@ h1 {
     box-sizing: border-box;
     display: inline-block;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
 }
 
 .elevList div {
@@ -388,7 +388,11 @@ h1 {
 
 .elevTable tbody tr {
     cursor: pointer;
-    border-bottom: 2px solid gainsboro;
+    /*border-bottom: 2px solid gainsboro;*/
+}
+
+.elevTable tr:nth-child(even) {
+    background-color: #EBEBEB;
 }
 
 .elevTable tr:last-child{
@@ -546,6 +550,10 @@ h1 {
     outline: none;
     padding: 0;
     border-right: 0.25vw solid white;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .button2 {
@@ -553,12 +561,15 @@ h1 {
     height: 100%;
     margin: 0;
     float: left;
-    background-color: white;
     border: none;
     outline: none;
     padding: 0;
     background-color: #4c4c4c;
     color: white;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .formArea {
@@ -599,8 +610,8 @@ h1 {
     box-sizing: border-box;
 }
 
-.button:hover, .button2:hover {
-    background-color: aqua;
+.hover {
+    background-color: darkgray;
 }
 
 .elevNarvaro tbody {
@@ -737,4 +748,13 @@ h1 {
 .navbar svg.toggle-state {
     fill: #EC6FE4;
 
+}
+
+#regKlass {
+    display: none;
+}
+
+#elevSearch {
+    position: relative;
+    float: left;
 }

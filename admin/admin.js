@@ -65,8 +65,8 @@ $(".narvaroTable td").each( function() {
 
 $(document).on('click','.elevTable tbody tr',function(){
     var row = $(this);
-    row.css("background-color", "gainsboro");
-    $(".elevTable tbody tr").not(this).css("background-color", "#ffffff")
+    row.css("color", "#EC6FE4");
+    $(".elevTable tbody tr").not(this).css("color", "black")
     var elev = row.find("td:first-child").text();
 
     $.ajax({
@@ -100,6 +100,105 @@ $(document).on('click','.elevTable tbody tr',function(){
         }
     })
 });
+
+/*$("#subElev").click(function(e){
+    e.preventDefault();
+    $.ajax({
+        url: 'regElev.php',
+        type: 'POST',
+        data: {
+            fornamn: 'fornamn',
+            efternamn: 'efternamn',
+            elevKlass: 'elevKlass'
+        },
+
+        success: function(data) {
+            alert(data);
+        }
+    });
+});*/
+
+$(document).ready(function(){
+    $("#elevSearch").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".elevTable tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
+$("#regElev").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+    var namn = $("#namn").val();
+    var efternamn = $("#efternamn").val();
+    var elevKlass = $("#elevKlass").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            fornamn: namn,
+            efternamn: efternamn,
+            elevKlass: elevKlass
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regElev")[0].reset();
+        }
+    });
+});
+
+$("#regKlass").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+
+    var klass = $("#klassNamn").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            klassNamn: klass
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regKlass")[0].reset();
+        }
+    });
+});
+
+$(".button2").on('click', function() {
+    $("#regElev").css("display", "none");
+    $("#regKlass").css("display", "block");
+    $(".button2").css("background-color", "darkgray");
+    $(".button").css("background-color", "#4C4C4C");
+});
+
+$(".button").on('click', function() {
+    $("#regKlass").css("display", "none");
+    $("#regElev").css("display", "block");
+    $(".button").css("background-color", "darkgray");
+    $(".button2").css("background-color", "#4C4C4C");
+});
+
+if($("#regElev").css("display") == "block") {
+    $(".button").css("background-color", "darkgray");
+}
+
+/*$(".button").hover(function() {
+    $(this).addClass("hover"); 
+}, function() {
+    $(this).removeClass("hover");
+});*/
 
 /*$('#sel').on('change', function() {
     var value = $(this).val();
