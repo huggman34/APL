@@ -1,7 +1,7 @@
 <?php
 /**
- * Detta är en inloggnings formulär för att logga in som företag, datan skickas
- * till 'LoginFunctions.php' där den granskas för att se om inloggnings uppgifter är korrekt eller ej
+ * Det här filen inneholler alla app reqests.
+ *
  */
     require_once "../connection.php";
     require_once "../LoginFunctions.php";
@@ -26,6 +26,6 @@
             echo json_encode($login);
         }
         if(isset($_GET['sub'])){
-            registerNarvaro($conn,$_GET['elevID'],$_GET['narvaro']);
+            registerNarvaro($conn,$_GET['perioddag'],$_GET['elevID'],$_GET['narvaro']);
         }
     ?>
