@@ -372,25 +372,60 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>
+                <div class="platsList">
+                        <div>
+                            <?php
+                                $platser = elevPlats($conn);
+
+                                echo "<table class='platsTable'>";
+                                echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead><tbody>";
+                            
+                                foreach ($platser as $row) {
+                                    echo "<tr><td>";
+                                    echo $row['elevID'];
+                                    echo "</td><td>";
+                                    echo $row['namn'];
+                                    echo "</td></tr>";
+                                }
+                                echo "</tbody></table>";
+                            ?>
+                        </div>
+                    </div>
+                        
                     <div class="plats">
                         <!-- PLATS CONTENT HÄR -->
-                        <h1>Plats</h1>
-                        <?php
+                        <h1>Registrera Plats</h1>
+                        <form id="regPlats" action="regPlats.php" method="POST">
+                            <select id="platsElev">
+                            <?php
+                                $allElev = allElev($conn);
 
-                            $data = elevPlats($conn);
-
-                            echo "<table class='platsTable'>";
-                            echo "<thead><tr><th>Elev</th><th>Företag</th></tr></thead>";
-
-                            foreach ($data as $row) {
-                                echo "<tbody><tr><td>";
-                                echo $row['elevID'];
-                                echo "</td><td>";
-                                echo $row['namn'];
-                                echo "</td></tr></tbody>";                                                       
-                            }
-                            echo "</table>";
-                        ?>
+                                echo "<option disabled selected> Välj Elev </option>";
+                                foreach ($allElev as $e) {
+                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsForetag">
+                            <?php
+                                $foretag = foretag($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($foretag as $f) {
+                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsPeriod">
+                            <?php
+                                $allPeriod = allPeriod($conn);
+                                echo "<option disabled selected> Välj Period </option>";
+                                foreach ($allPeriod as $p) {
+                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <input id="subPlats" type="submit" value="Spara">
+                        </form>
                     </div>
                 </div>
             </div>
