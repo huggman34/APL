@@ -192,8 +192,7 @@ if(checkAdminLogin()) {
     if ($_POST['submin']=="klar") {
         if (isset($_POST['periodDag'])) {
             periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
-            //header("Location: adminMain.php");
-        }}
+        }}else{
         echo $periodNamn;
         echo "<table>";
         echo "<tr><th>Vecka</th><th>Dag</th><th>Datum</th><th>Period</th></tr>
@@ -223,7 +222,6 @@ if(checkAdminLogin()) {
         }else {
             echo"<input type='checkbox' name='periodDag[]' value='$datum' checked>";
         }
-           
            echo"</td></tr>";
        }
        
@@ -237,7 +235,7 @@ if(checkAdminLogin()) {
     echo"<form action='adminMain.php' method='post'>
     <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
     </form>";
-    }?>
+    }}?>
                 </div>
                 <div class="views" id="content2" style='display:none'>
                     <!-- ELEV CONTENT HÄR -->
