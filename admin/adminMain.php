@@ -127,7 +127,7 @@ if(checkAdminLogin()) {
                                     ['Närvaro', narvaroCount],
                                     ['Frånvaro', franvaroCount],
                                     ['Ogiltig frånvaro', ogiltigFranvaroCount],
-                                    ['Oänmäld', nullCount]
+                                    ['Oanmäld', nullCount]
                                 ]);
                                     var options = {
                                     pieHole: 0.4,
@@ -242,6 +242,7 @@ if(checkAdminLogin()) {
                 <div class="views" id="content2" style='display:none'>
                     <!-- ELEV CONTENT HÄR -->
                     <div class="elevList">
+                        <input id="elevSearch" type="text" placeholder="Sök efter elever...">
                         <?php
                             $klasser = klass($conn);
                         ?>
@@ -283,13 +284,22 @@ if(checkAdminLogin()) {
                                 <button class="button2">Registrera Klass</button>
                             </div>
                             <div class="formArea">
-                                <form>
-                                    <input type="text" name="fornamn" placeholder="Förnamn">
-                                    <input type="text" name="efternamn" placeholder="Efternamn">
-                                    <select namn="klass">
+                                <form id="regElev" action="regElev.php" method="POST">
+                                    <input id="namn" type="text" placeholder="Förnamn">
+                                    <input id="efternamn" type="text" placeholder="Efternamn">
+                                    <select id="elevKlass">
                                         <option disabled selected>Klass</option>
+                                        <?php
+                                            foreach ($klasser as $k) {
+                                                echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
+                                            }
+                                        ?>
                                     </select>
-                                    <input type="submit" namn="sub" value="Spara">
+                                    <input id="subElev" type="submit" namn="sub" value="Spara">
+                                </form>
+                                <form id="regKlass" action="regKlass.php" method="POST">
+                                    <input id="klassNamn" type="text" placeholder="Klass">
+                                    <input id="subKlass" type="submit" value="Spara">
                                 </form>
                             </div>
                         </div>
