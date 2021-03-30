@@ -14,7 +14,7 @@
         return $data;
     }
     function narvaroIdagForetag($conn,$foretag) {
-        $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro
+        $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
         FROM narvaro
         INNER JOIN plats ON plats.platsID = narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID

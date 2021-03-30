@@ -5,11 +5,11 @@
  * Den kopplar även dagarna med perioden i perioddags tabellen.
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
-    function registerForetag($conn, $foretagNamn, $losenord, $epost, $telefon) {
+    function registerForetag($conn, $namn, $losenord, $epost, $telefon) {
 
         $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
         $stmt = $conn->prepare($dupeCheck);
-        $stmt->bind_param("s", $foretagNamn);
+        $stmt->bind_param("s", $namn);
         $stmt->execute();
         $stmt->store_result();
         $result = $stmt->num_rows;
@@ -19,7 +19,7 @@
 
             $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, epost, telefon)
             VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $foretagNamn, $hashed_losenord, $epost, $telefon);
+            $stmt->bind_param("ssss", $namn, $hashed_losenord, $epost, $telefon);
 
             if ($stmt->execute()){
                 echo "Records added successfully.";
@@ -27,9 +27,9 @@
                 echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
             }
         } else {
-            $foretagNamnError = "Företaget är redan registrerad";
+            $namnError = "Företaget är redan registrerad";
 
-            echo $foretagNamnError;
+            echo $namnError;
         }
     }
 
@@ -71,12 +71,12 @@
         }
     }
 
-    function registerAdmin($conn, $foretagNamn, $losenord) {
+    function registerAdmin($conn, $namn, $losenord) {
         $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO admin (anvnamn, losenord)
         VALUES (?, ?)");
-        $stmt->bind_param("ss", $foretagNamn, $hashed_losenord);
+        $stmt->bind_param("ss", $namn, $hashed_losenord);
 
         if ($stmt->execute()){
             echo "Records added successfully.";
@@ -85,7 +85,7 @@
         }
     }
 
-    function registerNarvaro($conn, $elevID, $narvaro) {
+    function registerNarvaro($conn, $periodDagID,$platsID, $narvaro) {
         /*
         $result = $elevID;
 
@@ -110,15 +110,15 @@
             }
         } else {
             echo "Eleven har redan registrerats närvaro";
-        }*/
+        }
 
         $result = $elevID;
 
         $result_explode = explode('|', $result);
         
         $platsID = $result_explode[0];
-        $periodDagID = $result_explode[1];
-        $narvaro = $_POST['narvaro'];
+        $periodDagID = $result_explode[1];*/
+        //$narvaro = $_GET['narvaro'];
 
         $stmt = $conn->prepare("UPDATE narvaro SET narvaro = ? WHERE platsID = ? AND periodDagID = ?");
         $stmt->bind_param("iii", $narvaro, $platsID, $periodDagID);
@@ -131,8 +131,9 @@
     }
 
     function periodGeneration($conn,$periodNamn,$startdatum,$slutdatum,$dag) {
-        $sql="INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
-        $conn->query($sql);
+        $stmt = $conn->prepare("INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES(?,?,?)");
+        $stmt->bind_param("sss", $periodNamn, $startdatum, $slutdatum);
+        $stmt->execute();
        
         foreach ($dag as $datum) { 
            

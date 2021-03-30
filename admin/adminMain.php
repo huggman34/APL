@@ -175,6 +175,67 @@ if(checkAdminLogin()) {
                         </script>
                         
                     </div>
+                    <?php echo'
+ <form action="adminMain.php" method="post">
+ <input type="text" name="periodnamn" placeholder="namn" required>
+ <input type="date" name="startdatum" required>
+ <input type="date" name="slutdatum" required>
+ <input type="submit" value="submit" name="submin">
+ </form>';
+ if (isset($_POST['periodnamn'])) {
+        $periodNamn=$_POST['periodnamn'];
+        $startdatum=$_POST['startdatum'];
+        $slutdatum=$_POST['slutdatum'];
+    }
+ if (isset($_POST['submin'])) {
+    
+    if ($_POST['submin']=="klar") {
+        if (isset($_POST['periodDag'])) {
+            periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
+        }}else{
+        echo $periodNamn;
+        echo "<table>";
+        echo "<tr><th>Vecka</th><th>Dag</th><th>Datum</th><th>Period</th></tr>
+        <form action='adminMain.php' method='post'>";
+        $start=strtotime($startdatum);
+        $slut=strtotime($slutdatum);
+        $dagar=ceil(($slut-$start)/60/60/24);
+        
+        for ($i=0; $i < $dagar+1; $i++) { 
+           
+           $gto=strtotime("+$i days",$start);
+           $datum=date('Y-m-d',$gto);
+
+           
+           echo "<tr>";
+           echo "<td>";
+           echo date('W',$gto);
+           echo "</td><td>";
+           echo date('l',$gto);
+           echo "</td><td>";
+           echo $datum;
+           echo "</td><td>";
+           echo $periodNamn;
+           echo "</td><td>";
+           if (("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))) {
+            echo"<input type='checkbox' name='periodDag[]' value='$datum'>";
+        }else {
+            echo"<input type='checkbox' name='periodDag[]' value='$datum' checked>";
+        }
+           echo"</td></tr>";
+       }
+       
+       echo"<input type='hidden' name='periodnamn' value='$periodNamn'>
+       <input type='hidden' name='startdatum' value='$startdatum'>
+       <input type='hidden' name='slutdatum' value='$slutdatum'>
+       <input type='submit' name='submin' onclick=\"return confirm('Är du säker?');\" value='klar'>
+       </form>";
+       echo "</table>";
+     
+    echo"<form action='adminMain.php' method='post'>
+    <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
+    </form>";
+    }}?>
                 </div>
                 <div class="views" id="content2" style='display:none'>
                     <!-- ELEV CONTENT HÄR -->
@@ -263,8 +324,24 @@ if(checkAdminLogin()) {
                             echo "</tbody></table>";
                             ?>
                     </div>
+                    <div class="foretagsholder">
                     <div class="foretagView">
-                        <h1>Klicka på ett företag</h1>
+                        <!--<h1>Klicka på ett företag</h1>-->
+                    </div>
+                        <div class="formHolder">
+                            <div class="formSelect">
+                                <button class="button3">Registrera Företag</button>
+                            </div>
+                            <div class="formArea2">
+                                <form id="regForetag" action="regForetag.php" method="post">
+                                    <input type="text" name="namn" placeholder="Företagsnamn">
+                                    <input type="password" name="losenord" placeholder="Lösenord">
+                                    <input type="text" name="epost" placeholder="Epost">
+                                    <input type="text" name="telefon" placeholder="Telefonnummer">
+                                    <input type="submit" name="subForetag" value="Spara">
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
