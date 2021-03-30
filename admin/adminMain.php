@@ -263,9 +263,30 @@ if(checkAdminLogin()) {
                             echo "</tbody></table>";
                             ?>
                     </div>
+                    <div class="foretagsholder">
                     <div class="foretagView">
-                        <h1>Klicka på ett företag</h1>
+                        <!--<h1>Klicka på ett företag</h1>-->
                     </div>
+                        <div class="formHolder">
+                            <div class="formSelect">
+                                <button class="button3">Registrera Företag</button>
+                            </div>
+                            <div class="formArea2">
+                                <form action="adminMain.php" method="post">
+                                    <input type="text" name="namn" placeholder="Företagsnamn">
+                                    <input type="password" name="losenord" placeholder="Lösenord">
+                                    <input type="text" name="epost" placeholder="Epost">
+                                    <input type="text" name="telefon" placeholder="Telefonnummer">
+                                    <input type="submit" namn="submit" value="Spara">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    if(isset($_POST['submit'])){
+                        registerForetag($conn, $_POST['namn'], $_POST['epost'], $_POST['telefon']);
+                    }
+                    ?>
                 </div>
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
