@@ -335,21 +335,16 @@ if(checkAdminLogin()) {
                                 <button class="button3">Registrera Företag</button>
                             </div>
                             <div class="formArea2">
-                                <form action="adminMain.php" method="post">
+                                <form id="regForetag" action="regForetag.php" method="post">
                                     <input type="text" name="namn" placeholder="Företagsnamn">
                                     <input type="password" name="losenord" placeholder="Lösenord">
                                     <input type="text" name="epost" placeholder="Epost">
                                     <input type="text" name="telefon" placeholder="Telefonnummer">
-                                    <input type="submit" namn="submit" value="Spara">
+                                    <input type="submit" name="subForetag" value="Spara">
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if(isset($_POST['submit'])){
-                        registerForetag($conn, $_POST['namn'], $_POST['epost'], $_POST['telefon']);
-                    }
-                    ?>
                 </div>
                 <div class="views" id="content4" style='display:none'>
                     <!-- PERIOD CONTENT HÄR -->
