@@ -643,6 +643,18 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    height:4.5vh;
+}
+
+.formArea2 input[type=password] {
+    width: 100%;
+    padding: 2% 2%;
+    margin: 1% 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height:4.5vh;
 }
 
 .formArea2 input[type=submit] {
@@ -654,8 +666,8 @@ h1 {
     box-sizing: border-box;
     float: right;
     position: absolute;
-    top:27vh;
-    left:35vw;
+    top:26.5vh;
+    left:34.7vw;
 }
 
 .formArea2 select {
