@@ -131,8 +131,9 @@
     }
 
     function periodGeneration($conn,$periodNamn,$startdatum,$slutdatum,$dag) {
-        $sql="INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES('$periodNamn','$startdatum','$slutdatum')";
-        $conn->query($sql);
+        $stmt = $conn->prepare("INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES(?,?,?)");
+        $stmt->bind_param("sss", $periodNamn, $startdatum, $slutdatum);
+        $stmt->execute();
        
         foreach ($dag as $datum) { 
            
