@@ -77,6 +77,15 @@
         return $data;
     }
 
+    function allPeriod($conn) {
+        $sql = "SELECT * FROM period";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
     function klass($conn) {
         $sql = "SELECT DISTINCT elev.klass
         FROM elev";
@@ -95,6 +104,16 @@
 
         return $data;
     }
+
+    function allElev($conn){
+        $sql= "SELECT * FROM elev";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
 
     function elev($conn, $klass) {
         $sql = "SELECT elevID, klass FROM elev

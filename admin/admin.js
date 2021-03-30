@@ -176,22 +176,48 @@ $("#regKlass").submit(function(e) {
     });
 });
 
+$("#regPlats").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+    var elev = $("#platsElev").val();
+    var foretag = $("#platsForetag").val();
+    var period = $("#platsPeriod").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            elev: elev,
+            foretag: foretag,
+            period: period
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regPlats")[0].reset();
+        }
+    });
+});
+
 $(".button2").on('click', function() {
     $("#regElev").css("display", "none");
     $("#regKlass").css("display", "block");
-    $(".button2").css("background-color", "darkgray");
-    $(".button").css("background-color", "#4C4C4C");
+    $(".button2").css("background-color", "#4C4C4C");
+    $(".button").css("background-color", "darkgray");
 });
 
 $(".button").on('click', function() {
     $("#regKlass").css("display", "none");
     $("#regElev").css("display", "block");
-    $(".button").css("background-color", "darkgray");
-    $(".button2").css("background-color", "#4C4C4C");
+    $(".button").css("background-color", "#4C4C4C");
+    $(".button2").css("background-color", "darkgray");
 });
 
 if($("#regElev").css("display") == "block") {
-    $(".button").css("background-color", "darkgray");
+    $(".button").css("background-color", "#4C4C4C");
 }
 
 /*$(".button").hover(function() {
