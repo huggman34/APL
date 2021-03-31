@@ -324,9 +324,9 @@ if(checkAdminLogin()) {
                             echo "</tbody></table>";
                             ?>
                     </div>
-                    <div class="foretagsholder">
+                    <div class="foretagholder">
                     <div class="foretagView">
-                        <!--<h1>Klicka på ett företag</h1>-->
+                        <h1>Klicka på ett företag</h1>
                     </div>
                         <div class="formHolder">
                             <div class="formSelect">

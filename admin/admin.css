@@ -746,7 +746,7 @@ h1 {
     margin-left: 2%;
 }
 
-.foretagsholder{
+.foretagholder{
     position: relative;
     width: 48.75%;
     height: 100%;
@@ -788,6 +788,10 @@ h1 {
 }
 
 .narvaroView h1 {
+    text-align: center;
+}
+
+.foretagView h1 {
     text-align: center;
 }
 
