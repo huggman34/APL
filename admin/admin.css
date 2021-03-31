@@ -310,7 +310,6 @@ body{
     box-sizing: border-box;
     display: inline-block;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    text-align:center;
     vertical-align: top;
 }
 
@@ -318,6 +317,16 @@ body{
     width: 100%;
     height: 94%;
     margin-top: 5%;
+}
+
+.registerPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    background-color: yellow;
+    margin-bottom: 15%;
 }
 
 #regPlats select{
@@ -387,7 +396,6 @@ h1 {
     box-sizing: border-box;
     display: inline-block;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    text-align: center;
 }
 
 .elevList div {
@@ -892,4 +900,27 @@ h1 {
 #elevSearch {
     position: relative;
     float: left;
+}
+
+.row1 {
+    width: 100%;
+    height: 47.5%;
+    margin-bottom: 2%;
+    display: flex;
+}
+
+.row2 {
+    width: 100%;
+    height: 47.5%;
+    background-color: turquoise;
+}
+
+.registerBox {
+    width: 33%;
+    height: 100%;
+    background-color: white;
+}
+
+.registerBox:nth-child(2), .registerBox:nth-child(3) {
+    margin-left: 1%;
 }
