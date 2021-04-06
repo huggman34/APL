@@ -16,6 +16,15 @@ if(checkAdminLogin()) {
     if (isset($_POST['deletforetag'])) {
         deleteForetag($conn,$_POST['ID']);
     }
+    if (isset($_POST['deletplats'])) {
+        deletePlats($conn,$_POST['ID']);
+    }
+    if (isset($_POST['deletperiod'])) {
+        deletePeriod($conn,$_POST['ID']);
+    }
+    if (isset($_POST['deletklass'])) {
+        deleteKlass($conn,$_POST['ID']);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -185,72 +194,14 @@ if(checkAdminLogin()) {
                         </script>
                         
                     </div>
-                    <?php echo'
- <form action="adminMain.php" method="post">
- <input type="text" name="periodnamn" placeholder="namn" required>
- <input type="date" name="startdatum" required>
- <input type="date" name="slutdatum" required>
- <input type="submit" value="submit" name="submin">
- </form>';
- if (isset($_POST['periodnamn'])) {
-        $periodNamn=$_POST['periodnamn'];
-        $startdatum=$_POST['startdatum'];
-        $slutdatum=$_POST['slutdatum'];
-    }
- if (isset($_POST['submin'])) {
-    
-    if ($_POST['submin']=="klar") {
-        if (isset($_POST['periodDag'])) {
-            periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
-        }}else{
-        echo $periodNamn;
-        echo "<table>";
-        echo "<tr><th>Vecka</th><th>Dag</th><th>Datum</th><th>Period</th></tr>
-        <form action='adminMain.php' method='post'>";
-        $start=strtotime($startdatum);
-        $slut=strtotime($slutdatum);
-        $dagar=ceil(($slut-$start)/60/60/24);
-        
-        for ($i=0; $i < $dagar+1; $i++) { 
-           
-           $gto=strtotime("+$i days",$start);
-           $datum=date('Y-m-d',$gto);
-
-           
-           echo "<tr>";
-           echo "<td>";
-           echo date('W',$gto);
-           echo "</td><td>";
-           echo date('l',$gto);
-           echo "</td><td>";
-           echo $datum;
-           echo "</td><td>";
-           echo $periodNamn;
-           echo "</td><td>";
-           if (("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))) {
-            echo"<input type='checkbox' name='periodDag[]' value='$datum'>";
-        }else {
-            echo"<input type='checkbox' name='periodDag[]' value='$datum' checked>";
-        }
-           echo"</td></tr>";
-       }
-       
-       echo"<input type='hidden' name='periodnamn' value='$periodNamn'>
-       <input type='hidden' name='startdatum' value='$startdatum'>
-       <input type='hidden' name='slutdatum' value='$slutdatum'>
-       <input type='submit' name='submin' onclick=\"return confirm('Är du säker?');\" value='klar'>
-       </form>";
-       echo "</table>";
-     
-    echo"<form action='adminMain.php' method='post'>
-    <input type='submit' name='submit' onclick=\"return confirm('Är du säker?');\" value='börja om'>
-    </form>";
-    }}?>
                 </div>
                 <div class="views" id="content2" style='display:none'>
                 <form action="adminMain.php" method="post">
                 <div id="delet" class="deletbox">
                 <input type="submit" name="deletelev" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                <div id="delet5" class="deletbox">
+                <input type="submit" name="deletklass" onclick="return confirm('Är du säker?');" value="submit">
                 </div>
                 </form>
                     <!-- ELEV CONTENT HÄR -->
@@ -340,8 +291,34 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
+                <form action="adminMain.php" method="post">
+                <div id="delet4" class="deletbox">
+                <input type="submit" name="deletperiod" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                </form>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>
+                    <?php
+                    $period="period";
+                        $data = selectTabel($conn,$period);
+
+                        echo "<table class='elevklassTable'>";
+                        echo "<thead><tr><th>Period</th><th>Startdatum</th><th>Slutdatum</th></tr></thead>";
+
+                        foreach($data as $row){
+                            echo "<tbody><tr><td>";
+                            echo $row['periodNamn'];
+                            echo "</td><td>";
+                            echo $row['startdatum'];
+                            echo "</td><td>";
+                            echo $row['slutdatum'];
+                            echo "</td><td>";
+                            $periodID=$row['periodNamn'];
+                            echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >...</button>";
+                            echo "</td></tr></tbody>";
+                        }
+                        echo "</table>";
+                    ?>
                 </div>
 
                 <div class="views" id="content5" style='display:none'>
@@ -367,6 +344,11 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>
+                <form action="adminMain.php" method="post">
+                    <div id="delet3" class="deletbox">
+                    <input type="submit" name="deletplats" onclick="return confirm('Är du säker?');" value="submit">
+                    </div>
+                </form>
                 <div class="platsList">
                         <div>
                             <?php
@@ -380,6 +362,9 @@ if(checkAdminLogin()) {
                                     echo $row['elevID'];
                                     echo "</td><td>";
                                     echo $row['namn'];
+                                    echo "</td><td>";
+                                    $platsID=$row['platsID'];
+                                    echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >...</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";

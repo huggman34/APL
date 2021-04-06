@@ -23,6 +23,8 @@
         echo ';';
     }*/
     //print_r($elever);
+    echo "<button type='button' onclick=\"deletBoxK('$klass');\" >...</button>";
+
 
     echo "<table class='elevTable'>";
     echo "<thead><tr><th>Elev</th><th>Förnamn</th><th>Efternamn</th></tr></thead><tbody>";
