@@ -141,6 +141,8 @@ $("#regElev").submit(function(e) {
     var namn = $("#namn").val();
     var efternamn = $("#efternamn").val();
     var elevKlass = $("#elevKlass").val();
+    var epost = $("#epost").val();
+    var nummer = $("#nummer").val();
     
     $.ajax({
         type: "POST",
@@ -148,7 +150,9 @@ $("#regElev").submit(function(e) {
         data: {
             fornamn: namn,
             efternamn: efternamn,
-            elevKlass: elevKlass
+            elevKlass: elevKlass,
+            epost: epost,
+            nummer: nummer
         }, // serializes the form's elements.
 
         success: function(data)

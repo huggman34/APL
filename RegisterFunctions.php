@@ -33,7 +33,7 @@
         }
     }
 
-    function registerElev($conn, $fornamn, $efternamn, $klass) {
+    function registerElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon) {
         $fornamn = ucfirst($fornamn);
         $efternamn = ucfirst($efternamn);
         $elevID = ucwords("$fornamn.$efternamn", ".");
@@ -47,8 +47,8 @@
         $result = $stmt->num_rows;
     
         if($result == 0) {
-            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $elevID, $fornamn, $efternamn, $klass);
+            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass, epost, telefon) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $elevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
             if ($stmt->execute()){
                 echo "Records added successfully.";
@@ -60,8 +60,8 @@
             $count = $result+1;
             $dupeElevID = $elevID.$count;
     
-            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sss", $dupeElevID, $fornamn, $efternamn, $klass);
+            $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass, epost, telefon) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $dupeElevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
             if ($stmt->execute()){
                 echo "Records added successfully.";

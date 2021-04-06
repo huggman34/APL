@@ -412,16 +412,8 @@ if(checkAdminLogin()) {
                                 <form id="regElev" action="regElev.php" method="POST">
                                     <input id="namn" type="text" placeholder="Förnamn">
                                     <input id="efternamn" type="text" placeholder="Efternamn">
-                                    <input id="E-post" type="text" placeholder="E-post">
+                                    <input id="epost" type="text" placeholder="E-post">
                                     <input id="nummer" type="tel" placeholder="Nummer">
-                                    <!--<select id="elevKlass2">
-                                        <option disabled selected>Klass</option>
-                                        <?php
-                                            /*foreach ($klasser as $k) {
-                                                echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
-                                            }*/
-                                        ?>
-                                    </select>-->
                                     <input id="elevKlass" type="text" placeholder="Klass">
                                     <input id="subElev" type="submit" namn="sub" value="Spara">
                                 </form>
