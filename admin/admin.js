@@ -163,6 +163,42 @@ $("#regElev").submit(function(e) {
     });
 });
 
+$("#regForetag").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+
+    var fornamn = $("#Hfornamn").val();
+    var efternamn = $("#Hefternamn").val();
+    var epost = $("#Hepost").val();
+    var telefon = $("#Htelefon").val();
+
+    var namn = $("#Fnamn").val();
+    var losenord = $("#losenord").val();
+    var adress = $("#adress").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            fornamn: fornamn,
+            efternamn: efternamn,
+            epost: epost,
+            telefon: telefon,
+            namn: namn,
+            losenord: losenord,
+            adress: adress
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regForetag")[0].reset();
+        }
+    });
+});
+
 $("#regKlass").submit(function(e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.s

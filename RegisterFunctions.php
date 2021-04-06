@@ -5,7 +5,7 @@
  * Den kopplar även dagarna med perioden i perioddags tabellen.
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
-    function registerForetag($conn, $namn, $losenord, $epost, $telefon) {
+    function registerForetag($conn, $namn, $losenord, $adress) {
 
         $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
         $stmt = $conn->prepare($dupeCheck);
@@ -17,9 +17,9 @@
         if($result == 0) {
             $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, epost, telefon)
-            VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $namn, $hashed_losenord, $epost, $telefon);
+            $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, adress)
+            VALUES (?, ?, ?)");
+            $stmt->bind_param("sssss", $namn, $hashed_losenord, $adress);
 
             if ($stmt->execute()){
                 echo "Records added successfully.";
@@ -28,6 +28,33 @@
             }
         } else {
             $namnError = "Företaget är redan registrerad";
+
+            echo $namnError;
+        }
+    }
+
+    function registerHandledare($conn, $fornamn, $efternamn, $epost, $telefon) {
+
+        $dupeCheck = "SELECT * FROM handledare WHERE fornamn = ? AND efternamn = ?";
+        $stmt = $conn->prepare($dupeCheck);
+        $stmt->bind_param("ss", $fornamn, $efternamn);
+        $stmt->execute();
+        $stmt->store_result();
+        $result = $stmt->num_rows;
+
+        if($result == 0) {
+
+            $stmt = $conn->prepare("INSERT INTO handledare (fornamn, efternamn, foretagID, epost, telefon) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $fornamn, $efternamn, $foretagID, $epost, $telefon);
+    
+            if ($stmt->execute()){
+                echo "Records added successfully.";
+            } else{
+                echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
+            }
+            
+        } else {
+            $namnError = "Handledare är redan registrerad";
 
             echo $namnError;
         }
