@@ -412,16 +412,8 @@ if(checkAdminLogin()) {
                                 <form id="regElev" action="regElev.php" method="POST">
                                     <input id="namn" type="text" placeholder="Förnamn">
                                     <input id="efternamn" type="text" placeholder="Efternamn">
-                                    <input id="E-post" type="text" placeholder="E-post">
+                                    <input id="epost" type="text" placeholder="E-post">
                                     <input id="nummer" type="tel" placeholder="Nummer">
-                                    <!--<select id="elevKlass2">
-                                        <option disabled selected>Klass</option>
-                                        <?php
-                                            /*foreach ($klasser as $k) {
-                                                echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
-                                            }*/
-                                        ?>
-                                    </select>-->
                                     <input id="elevKlass" type="text" placeholder="Klass">
                                     <input id="subElev" type="submit" namn="sub" value="Spara">
                                 </form>
@@ -432,14 +424,18 @@ if(checkAdminLogin()) {
                             </div>
                         </div>
                         <div id="foretagReg" class="registerBox">
-                            <h1>Register Företag</h1>
+                            <h1>Register Handledare</h1>
                             <div class="formArea2" style="display: none">
                                 <form id="regForetag" action="regForetag.php" method="post">
-                                    <input type="text" name="namn" placeholder="Företagsnamn">
-                                    <input type="password" name="losenord" placeholder="Lösenord">
-                                    <input type="text" name="epost" placeholder="Epost">
-                                    <input type="text" name="telefon" placeholder="Telefonnummer">
-                                    <input type="submit" name="subForetag" value="Spara">
+                                    <input id="Hfornamn" type="text" placeholder="Förnamn">
+                                    <input id="Hefternamn" type="text" placeholder="Efternamn">
+                                    <input id="Hepost" type="text" placeholder="E-post">
+                                    <input id="Htelefon" type="tel" placeholder="Telefon">
+
+                                    <input id="Fnamn" type="text" placeholder="Företagsnamn">
+                                    <input id="losenord" type="password" placeholder="Lösenord">
+                                    <input id="adress" type="text" placeholder="Adress">
+                                    <input id="subForetag" type="submit" value="Spara">
                                 </form>
                             </div>
                         </div>

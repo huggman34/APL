@@ -141,6 +141,8 @@ $("#regElev").submit(function(e) {
     var namn = $("#namn").val();
     var efternamn = $("#efternamn").val();
     var elevKlass = $("#elevKlass").val();
+    var epost = $("#epost").val();
+    var nummer = $("#nummer").val();
     
     $.ajax({
         type: "POST",
@@ -148,13 +150,51 @@ $("#regElev").submit(function(e) {
         data: {
             fornamn: namn,
             efternamn: efternamn,
-            elevKlass: elevKlass
+            elevKlass: elevKlass,
+            epost: epost,
+            nummer: nummer
         }, // serializes the form's elements.
 
         success: function(data)
         {
             alert(data); // show response from the php script.
             $("#regElev")[0].reset();
+        }
+    });
+});
+
+$("#regForetag").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+
+    var fornamn = $("#Hfornamn").val();
+    var efternamn = $("#Hefternamn").val();
+    var epost = $("#Hepost").val();
+    var telefon = $("#Htelefon").val();
+
+    var namn = $("#Fnamn").val();
+    var losenord = $("#losenord").val();
+    var adress = $("#adress").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            fornamn: fornamn,
+            efternamn: efternamn,
+            epost: epost,
+            telefon: telefon,
+            namn: namn,
+            losenord: losenord,
+            adress: adress
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regForetag")[0].reset();
         }
     });
 });

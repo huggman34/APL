@@ -685,9 +685,10 @@ h1 {
     background-color: white;
     padding: 2%;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
-.formArea2 input[type=text] {
+.formArea2 input[type=text], .formArea2 input[type=tel] {
     width: 100%;
     padding: 2% 2%;
     margin: 1% 0;
@@ -712,14 +713,11 @@ h1 {
 .formArea2 input[type=submit] {
     width: 20%;
     padding: 1% 1%;
-    margin: 7% 0;
+    margin: 5% 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     float: right;
-    position: absolute;
-    top:26.5vh;
-    left:34.7vw;
 }
 
 .formArea2 select {
