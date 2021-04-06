@@ -447,6 +447,13 @@ if(checkAdminLogin()) {
                     <div class="row2">
                         <div class="registerBox">
                             <h1>Register Period</h1>
+                            <form id="regPeriod" method="post">
+                                <input type="text" id="periodnamn" placeholder="namn" required>
+                                <input type="date" id="startdatum" required>
+                                <input type="date" id="slutdatum" required>
+                                <input type="submit" value="submit" id="submin">
+                            </form>
+                        <div id="dagList"></div>
                         </div>
                         <div class="registerBox">
                             <h1>Register Plats</h1>
