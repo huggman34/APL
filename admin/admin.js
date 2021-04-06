@@ -45,6 +45,25 @@ $(".registerPage").on('click', function() {
     //$("#homeIcon").css("fill", "white");
 });
 
+function deletBoxE(ID) {
+    document.getElementById("delet").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet").appendChild(nys);
+}
+function deletBoxF(ID) {
+    document.getElementById("delet2").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet2").appendChild(nys);
+}
+function deletBoxP(ID) {
+    document.getElementById("delet3").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet3").appendChild(nys);
+}
+
 $('.navbar svg').click(function() {
     $(this).toggleClass('toggle-state');
     $('.navbar svg').not(this).removeClass('toggle-state');

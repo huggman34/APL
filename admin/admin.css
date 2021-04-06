@@ -935,6 +935,14 @@ h1 {
     z-index: 1;
     transition: 0.2s;
 }
+.deletbox{
+    width: 20%;
+    height: 20%;
+    z-index: 4;
+    position: absolute;
+    background-color: lawngreen;
+    visibility: hidden;
+}
 
 .exit {
     position: absolute;

@@ -3,12 +3,19 @@
     require_once "../connection.php";
     require_once '../RegisterFunctions.php';
     require_once "../ViewFunctions.php";
+    require_once "../DeleteFunctions.php";
     //require_once "periodNarvaro.php";
 
     session_start();
 
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
+    if (isset($_POST['deletelev'])) {
+        deleteElev($conn,$_POST['ID']);
+    }
+    if (isset($_POST['deletforetag'])) {
+        deleteForetag($conn,$_POST['ID']);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -241,6 +248,11 @@ if(checkAdminLogin()) {
     }}?>
                 </div>
                 <div class="views" id="content2" style='display:none'>
+                <form action="adminMain.php" method="post">
+                <div id="delet" class="deletbox">
+                <input type="submit" name="deletelev" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                </form>
                     <!-- ELEV CONTENT HÄR -->
                     <div class="elevList">
                         <input id="elevSearch" type="text" placeholder="Sök efter elever...">
@@ -288,6 +300,11 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content3" style='display:none'>
+                <form action="adminMain.php" method="post">
+                <div id="delet2" class="deletbox">
+                <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                </form>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
                         <?php
@@ -303,6 +320,9 @@ if(checkAdminLogin()) {
                                 echo $row['epost'];
                                 echo "</td><td>";
                                 echo $row['telefon'];
+                                echo "</td><td>";
+                                $foretagID=$row['foretagID'];
+                                echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >...</button>";
                                 echo "</td></tr>";
                             }
                             echo "</tbody></table>";
