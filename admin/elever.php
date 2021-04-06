@@ -30,10 +30,13 @@
     foreach ($elever as $row) {
         echo "<tr><td>";
         echo $row['elevID'];
+        $elevID= $row['elevID'];
         echo "</td><td>";
         echo $row['fornamn'];
         echo "</td><td>";
         echo $row['efternamn'];
+        echo "</td><td>";
+        echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >...</button>";
         echo "</td></tr>";
     }
     echo "</tbody></table>";
