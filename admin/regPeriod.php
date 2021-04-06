@@ -23,7 +23,7 @@
         $slut=strtotime($slutdatum);
         $dagar=ceil(($slut-$start)/60/60/24);
         
-        for ($i=0; $i < $dagar; $i++) { 
+        for ($i=0; $i < $dagar+1; $i++) { 
            
            $gto=strtotime("+$i days",$start);
            $datum=date('Y-m-d',$gto);

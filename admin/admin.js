@@ -63,6 +63,18 @@ function deletBoxP(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet3").appendChild(nys);
 }
+function deletBoxPr(ID) {
+    document.getElementById("delet4").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet4").appendChild(nys);
+}
+function deletBoxK(ID) {
+    document.getElementById("delet5").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet5").appendChild(nys);
+}
 
 $('.navbar svg').click(function() {
     $(this).toggleClass('toggle-state');
