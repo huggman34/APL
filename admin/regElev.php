@@ -6,6 +6,8 @@
         $fornamn = $_POST['fornamn'];
         $efternamn = $_POST['efternamn'];
         $klass = $_POST['elevKlass'];
+
+        //registerKlass($conn, $klass);
      
         registerElev($conn, $fornamn, $efternamn, $klass);
     }

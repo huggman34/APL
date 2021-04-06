@@ -284,25 +284,6 @@ if(checkAdminLogin()) {
                                 <button class="button">Registrera Elev</button>
                                 <button class="button2">Registrera Klass</button>
                             </div>
-                            <div class="formArea">
-                                <form id="regElev" action="regElev.php" method="POST">
-                                    <input id="namn" type="text" placeholder="Förnamn">
-                                    <input id="efternamn" type="text" placeholder="Efternamn">
-                                    <select id="elevKlass">
-                                        <option disabled selected>Klass</option>
-                                        <?php
-                                            foreach ($klasser as $k) {
-                                                echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
-                                            }
-                                        ?>
-                                    </select>
-                                    <input id="subElev" type="submit" namn="sub" value="Spara">
-                                </form>
-                                <form id="regKlass" action="regKlass.php" method="POST">
-                                    <input id="klassNamn" type="text" placeholder="Klass">
-                                    <input id="subKlass" type="submit" value="Spara">
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -334,15 +315,6 @@ if(checkAdminLogin()) {
                         <div class="formHolder">
                             <div class="formSelect">
                                 <button class="button3">Registrera Företag</button>
-                            </div>
-                            <div class="formArea2">
-                                <form id="regForetag" action="regForetag.php" method="post">
-                                    <input type="text" name="namn" placeholder="Företagsnamn">
-                                    <input type="password" name="losenord" placeholder="Lösenord">
-                                    <input type="text" name="epost" placeholder="Epost">
-                                    <input type="text" name="telefon" placeholder="Telefonnummer">
-                                    <input type="submit" name="subForetag" value="Spara">
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -434,13 +406,51 @@ if(checkAdminLogin()) {
                 <div class="views" id="content7" style='display:none'>
                     <div class="row1">
                         <!--Row Holder-->
-                        <div class="registerBox"></div>
-                        <div class="registerBox"></div>
-                        <div class="registerBox"></div>
-
+                        <div id="elevReg" class="registerBox">
+                            <h1>Register Elev</h1>
+                            <div class="formArea" style="display: none">
+                                <form id="regElev" action="regElev.php" method="POST">
+                                    <input id="namn" type="text" placeholder="Förnamn">
+                                    <input id="efternamn" type="text" placeholder="Efternamn">
+                                    <input id="E-post" type="text" placeholder="E-post">
+                                    <input id="nummer" type="tel" placeholder="Nummer">
+                                    <!--<select id="elevKlass2">
+                                        <option disabled selected>Klass</option>
+                                        <?php
+                                            /*foreach ($klasser as $k) {
+                                                echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
+                                            }*/
+                                        ?>
+                                    </select>-->
+                                    <input id="elevKlass" type="text" placeholder="Klass">
+                                    <input id="subElev" type="submit" namn="sub" value="Spara">
+                                </form>
+                                <!--<form id="regKlass" action="regKlass.php" method="POST">
+                                    <input id="klassNamn" type="text" placeholder="Klass">
+                                    <input id="subKlass" type="submit" value="Spara">
+                                </form>-->
+                            </div>
+                        </div>
+                        <div id="foretagReg" class="registerBox">
+                            <h1>Register Företag</h1>
+                            <div class="formArea2" style="display: none">
+                                <form id="regForetag" action="regForetag.php" method="post">
+                                    <input type="text" name="namn" placeholder="Företagsnamn">
+                                    <input type="password" name="losenord" placeholder="Lösenord">
+                                    <input type="text" name="epost" placeholder="Epost">
+                                    <input type="text" name="telefon" placeholder="Telefonnummer">
+                                    <input type="submit" name="subForetag" value="Spara">
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="row2">
-
+                        <div class="registerBox">
+                            <h1>Register Period</h1>
+                        </div>
+                        <div class="registerBox">
+                            <h1>Register Plats</h1>
+                        </div>
                     </div>
                 </div>
             </div>

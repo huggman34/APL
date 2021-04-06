@@ -644,7 +644,7 @@ h1 {
     box-sizing: border-box;
 }
 
-.formArea input[type=text] {
+.formArea input[type=text], .formArea input[type=tel] {
     width: 100%;
     padding: 2% 2%;
     margin: 1% 0;
@@ -657,14 +657,14 @@ h1 {
 .formArea input[type=submit] {
     width: 20%;
     padding: 1% 1%;
-    margin: 7% 0;
+    margin: 5% 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     float: right;
 }
 
-.formArea select {
+.formArea #elevKlass {
     width: 20%;
     padding: 1% 1%;
     margin: 1% 0%;
@@ -906,20 +906,36 @@ h1 {
     height: 47.5%;
     margin-bottom: 2%;
     display: flex;
+    gap: 2%;
 }
 
 .row2 {
     width: 100%;
     height: 47.5%;
-    background-color: turquoise;
+    display: flex;
+    gap: 2%;
 }
 
 .registerBox {
-    width: 33%;
+    width: 50%;
     height: 100%;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.registerBox:nth-child(2), .registerBox:nth-child(3) {
-    margin-left: 1%;
+.expand {
+    position: absolute;
+    width: 91.5%;
+    height: 83%;
+    z-index: 1;
+    transition: 0.2s;
+}
+
+.exit {
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    right: 0;
+    top: 0;
+    padding: 1% 1%;
 }
