@@ -294,15 +294,13 @@ if(checkAdminLogin()) {
                             $data = foretag($conn);
                         
                             echo "<table class='foretagTable'>";
-                            echo "<thead><tr><th>Företag</th><th>Epost</th><th>Telefonnummer</th></tr></thead><tbody>";
+                            echo "<thead><tr><th>Företag</th><th>Adress</th></tr></thead><tbody>";
                         
                             foreach ($data as $row) {
                                 echo "<tr><td>";
                                 echo $row['namn'];
                                 echo "</td><td>";
-                                echo $row['epost'];
-                                echo "</td><td>";
-                                echo $row['telefon'];
+                                echo $row['adress'];
                                 echo "</td></tr>";
                             }
                             echo "</tbody></table>";
