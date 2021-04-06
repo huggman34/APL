@@ -19,10 +19,12 @@
 
             $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, adress)
             VALUES (?, ?, ?)");
-            $stmt->bind_param("sssss", $namn, $hashed_losenord, $adress);
+            $stmt->bind_param("sss", $namn, $hashed_losenord, $adress);
 
             if ($stmt->execute()){
                 echo "Records added successfully.";
+                $lastID = $conn->insert_id;
+                return $lastID;
             } else{
                 echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
             }
@@ -33,7 +35,7 @@
         }
     }
 
-    function registerHandledare($conn, $fornamn, $efternamn, $epost, $telefon) {
+    function registerHandledare($conn, $fornamn, $efternamn, $foretagID, $epost, $telefon) {
 
         $dupeCheck = "SELECT * FROM handledare WHERE fornamn = ? AND efternamn = ?";
         $stmt = $conn->prepare($dupeCheck);
