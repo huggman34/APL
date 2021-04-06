@@ -107,44 +107,6 @@ $(document).on('click','.elevTable tbody tr',function(){
     })
 });
 
-$(document).on('click','.foretagTable tbody tr',function(){
-    var row = $(this);
-    row.css("color", "#EC6FE4");
-    $(".foretagTable tbody tr").not(this).css("color", "black")
-    var foretag = row.find("td:first-child").text();
-
-    $.ajax({
-        url: 'foretagInfo.php',
-        type: 'POST',
-        data: {
-            foretagID: foretag
-        },
-
-        success: function(data) {
-            //alert(data);
-            $('.foretagView').html(data);
-            $(".foretagInfo td").each( function() {
-                var thisCell = $(this);
-                var cellValue = thisCell.text();
-            
-                if (cellValue == 'Närvarande') {
-                    thisCell.css("background-color","#77dd77");
-                }
-                if (cellValue == 'Giltig frånvaro') {
-                    thisCell.css("background-color","#FEFE95");
-                }
-                if (cellValue == 'Ogiltig frånvaro') {
-                    thisCell.css("background-color","#ff6961");
-                }
-                if (cellValue == 'Oanmäld') {
-                    thisCell.css("background-color","gainsboro");
-                }
-             }
-            )
-        }
-    })
-});
-
 /*$("#subElev").click(function(e){
     e.preventDefault();
     $.ajax({
@@ -218,6 +180,63 @@ $("#regKlass").submit(function(e) {
             $("#regKlass")[0].reset();
         }
     });
+});
+$("#regPeriod").submit(function(e) {
+
+    e.preventDefault();
+    
+   var perio = $('#periodnamn').val();
+   var start = $('#startdatum').val();
+   var slut = $('#slutdatum').val();
+   var subin = $('#submin').val();
+   var dag = [];
+   $("input[name='periodDag']:checked").each(function(){
+    dag.push(this.value);
+});
+    
+         $.ajax({
+            url: 'regPeriod.php',
+            type: 'POST',
+            data: {
+            periodnamn: perio,    
+            startdatum: start,
+            slutdatum: slut,
+            submin: subin,
+            periodDag: dag
+        },
+    
+      success: function(data) {
+      $('#dagList').html(data);
+      alert(data);
+         }
+  });
+});
+$("#genPeriod").submit(function(e) {
+
+    e.preventDefault();
+    
+   var perio = $('#periodnamn').val();
+   var start = $('#startdatum').val();
+   var slut = $('#slutdatum').val();
+   var subin = $('#submin').val();
+   
+    
+         $.ajax({
+            url: 'regPeriod.php',
+            type: 'POST',
+            data: {
+            periodnamn: perio,    
+            startdatum: start,
+            slutdatum: slut,
+            submin: subin,
+            
+        },
+    
+      success: function(data) {
+     
+      alert(data);
+         }
+  });
 });
 
 $("#regPlats").submit(function(e) {
