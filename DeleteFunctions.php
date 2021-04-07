@@ -70,6 +70,18 @@ function deleteDag($conn,$id){
         return "Error deleting record";
     }
 }
+function deleteKlass($conn,$id){
+    $sql = "DELETE FROM klass WHERE klass = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s",$id);
+    
+            
+    if ($stmt->execute()){
+        
+    } else{
+        return "Error deleting record";
+    }
+}
 function deletePeriodDag($conn,$id){
     $sql = "DELETE FROM perioddag WHERE perioddagID = ?";
     $stmt = $conn->prepare($sql);

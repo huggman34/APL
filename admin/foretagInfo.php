@@ -4,10 +4,13 @@
     $foretagID = $_POST['foretagID'];
     function foretagInfo($conn, $foretagID){
 
-        $sql = "SELECT foretag.namn,elev.elevID,plats.periodNamn FROM foretag 
-        INNER JOIN plats ON plats.foretagID=foretag.foretagID
+        $sql = "SELECT foretag.namn,elev.elevID,plats.periodNamn,narvaro.narvaro,dag.datum FROM narvaro 
+        INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
+        INNER JOIN plats ON plats.platsID=narvaro.platsID
+        INNER JOIN foretag ON foretag.foretagID=plats.foretagID
         INNER JOIN elev ON elev.elevID=plats.elevID
-        WHERE foretag.foretagID=?";
+        INNER JOIN dag ON perioddag.dagID=dag.dagID
+        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
     
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $foretagID);
@@ -21,15 +24,25 @@
 
     if(!empty($foretagInfo)){
         echo "<table class='foretagInfo'>";
-        echo "<thead><tr><th>Företag</th><th>Elev</th><th>Period</th></tr></thead><tbody>";
+        echo "<thead><tr><th>Elev</th><th>Period</th><th>Närvaro idag</th></tr></thead><tbody>";
 
-        foreach ($foretagInfo as $row) {
+        foreach ($foretagInfo as $row => $column) {
+
+            if (is_null($column['narvaro'])) {
+                $column['narvaro'] = "null";
+            }
+            
+            $str = ['null', '1', '2', '3'];
+            $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
+
+            $column2 = str_replace($str, $rplc, $column);
+
             echo "<tr><td>";
-            echo $row['foretagID'];
+            echo $column['elevID'];
             echo "</td><td>";
-            echo $row['elevID'];
+            echo $column['periodNamn'];
             echo "</td><td>";
-            echo $row['periodNamn'];
+            echo $column2['narvaro'];
             echo "</td></tr>";
         }
         echo "</tbody></table>";

@@ -45,6 +45,37 @@ $(".registerPage").on('click', function() {
     //$("#homeIcon").css("fill", "white");
 });
 
+function deletBoxE(ID) {
+    document.getElementById("delet").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet").appendChild(nys);
+}
+function deletBoxF(ID) {
+    document.getElementById("delet2").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet2").appendChild(nys);
+}
+function deletBoxP(ID) {
+    document.getElementById("delet3").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet3").appendChild(nys);
+}
+function deletBoxPr(ID) {
+    document.getElementById("delet4").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet4").appendChild(nys);
+}
+function deletBoxK(ID) {
+    document.getElementById("delet5").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet5").appendChild(nys);
+}
+
 $('.navbar svg').click(function() {
     $(this).toggleClass('toggle-state');
     $('.navbar svg').not(this).removeClass('toggle-state');
@@ -220,6 +251,63 @@ $("#regKlass").submit(function(e) {
             $("#regKlass")[0].reset();
         }
     });
+});
+$("#regPeriod").submit(function(e) {
+
+    e.preventDefault();
+    
+   var perio = $('#periodnamn').val();
+   var start = $('#startdatum').val();
+   var slut = $('#slutdatum').val();
+   var subin = $('#submin').val();
+   var dag = [];
+   $("input[name='periodDag']:checked").each(function(){
+    dag.push(this.value);
+});
+    
+         $.ajax({
+            url: 'regPeriod.php',
+            type: 'POST',
+            data: {
+            periodnamn: perio,    
+            startdatum: start,
+            slutdatum: slut,
+            submin: subin,
+            periodDag: dag
+        },
+    
+      success: function(data) {
+      $('#dagList').html(data);
+      alert(data);
+         }
+  });
+});
+$("#genPeriod").submit(function(e) {
+
+    e.preventDefault();
+    
+   var perio = $('#periodnamn').val();
+   var start = $('#startdatum').val();
+   var slut = $('#slutdatum').val();
+   var subin = $('#submin').val();
+   
+    
+         $.ajax({
+            url: 'regPeriod.php',
+            type: 'POST',
+            data: {
+            periodnamn: perio,    
+            startdatum: start,
+            slutdatum: slut,
+            submin: subin,
+            
+        },
+    
+      success: function(data) {
+     
+      alert(data);
+         }
+  });
 });
 
 $("#regPlats").submit(function(e) {

@@ -23,6 +23,8 @@
         echo ';';
     }*/
     //print_r($elever);
+    echo "<button type='button' onclick=\"deletBoxK('$klass');\" >...</button>";
+
 
     echo "<table class='elevTable'>";
     echo "<thead><tr><th>Elev</th><th>Förnamn</th><th>Efternamn</th></tr></thead><tbody>";
@@ -30,10 +32,13 @@
     foreach ($elever as $row) {
         echo "<tr><td>";
         echo $row['elevID'];
+        $elevID= $row['elevID'];
         echo "</td><td>";
         echo $row['fornamn'];
         echo "</td><td>";
         echo $row['efternamn'];
+        echo "</td><td>";
+        echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >...</button>";
         echo "</td></tr>";
     }
     echo "</tbody></table>";
