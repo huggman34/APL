@@ -106,5 +106,17 @@ function deletePlats($conn,$id){
         return "Error deleting record";
     }
 }
+function deleteHandledare($conn,$id){
+    $sql = "DELETE FROM handledare WHERE handledarID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i",$id);
+    
+            
+    if ($stmt->execute()){
+        
+    } else{
+        return "Error deleting record";
+    }
+}
 
 ?>

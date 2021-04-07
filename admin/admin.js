@@ -75,6 +75,12 @@ function deletBoxK(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet5").appendChild(nys);
 }
+function deletBoxH(ID) {
+    document.getElementById("delet6").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet6").appendChild(nys);
+}
 function periodPlats(period) {
     let element = document.getElementById("platsPeriod");
     element.value = period;
