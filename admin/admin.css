@@ -949,3 +949,11 @@ h1 {
     top: 0;
     padding: 1% 1%;
 }
+.uppdatebox{
+    width: 20%;
+    height: 20%;
+    z-index: 4;
+    position: absolute;
+    background-color: lawngreen;
+    visibility: hidden;
+}

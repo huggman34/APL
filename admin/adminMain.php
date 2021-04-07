@@ -368,6 +368,38 @@ if(checkAdminLogin()) {
                     <input type="submit" name="deletplats" onclick="return confirm('Är du säker?');" value="submit">
                     </div>
                 </form>
+                <form class="uppdatebox" id="regPl" action="regPlats.php" method="POST">
+                            <select id="ep">
+                            <?php
+                                $allElev = allElev($conn);
+
+                                echo "<option disabled selected> Välj Elev </option>";
+                                foreach ($allElev as $e) {
+                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="fp">
+                            <?php
+                                $foretag = foretag($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($foretag as $f) {
+                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="pp">
+                            <?php
+                                $allPeriod = allPeriod($conn);
+                                echo "<option disabled selected> Välj Period </option>";
+                                foreach ($allPeriod as $p) {
+                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                }
+                            
+                            echo'</select>'
+                            ?>
+                            <input id="subPl" type="submit" value="Spara">
+                        </form>
                 <div class="platsList">
                         <div>
                             <?php
@@ -383,7 +415,12 @@ if(checkAdminLogin()) {
                                     echo $row['namn'];
                                     echo "</td><td>";
                                     $platsID=$row['platsID'];
+                                    $elevID=$row['elevID'];
+                                    $periodNamn=$row['periodNamn'];
+                                    $foretagID=$row['foretagID'];
                                     echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >...</button>";
+                                    //echo '<button type="button" onclick="updateBP('.$elevID.',\''.$periodNamn.','.$foretagID.'\');" >uppp</button>';
+                                    echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >uppp</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
