@@ -488,6 +488,10 @@ h1 {
 
 }
 
+.foretagTable tr:nth-child(even) {
+    background-color: #EBEBEB;
+}
+
 .foretagTable tbody {
     display: block;
     height: 100%;
@@ -514,7 +518,6 @@ h1 {
 
 .foretagTable tbody tr {
     cursor: pointer;
-    border-bottom: 2px solid gainsboro;
 }
 
 .foretagTable tr:last-child{
