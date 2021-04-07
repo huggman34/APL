@@ -78,7 +78,7 @@
             $stmt->bind_param("ssssss", $elevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
             if ($stmt->execute()){
-                echo "Records added successfully.";
+                return $elevID;
             } else{
                 echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
             }
