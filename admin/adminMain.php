@@ -25,6 +25,9 @@ if(checkAdminLogin()) {
     if (isset($_POST['deletklass'])) {
         deleteKlass($conn,$_POST['ID']);
     }
+    if (isset($_POST['delethandledare'])) {
+        deleteHandledare($conn,$_POST['ID']);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -269,6 +272,9 @@ if(checkAdminLogin()) {
                 <form action="adminMain.php" method="post">
                 <div id="delet2" class="deletbox">
                 <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                <div id="delet6" class="deletbox">
+                <input type="submit" name="delethandledare" onclick="return confirm('Är du säker?');" value="submit">
                 </div>
                 </form>
                     <!-- FÖRETAG CONTENT HÄR -->
