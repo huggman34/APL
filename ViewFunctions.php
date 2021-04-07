@@ -41,7 +41,7 @@
     }
 
     function elevPlats($conn) {
-        $sql = "SELECT plats.elevID, foretag.namn
+        $sql = "SELECT plats.platsID, plats.elevID, foretag.namn
         FROM plats
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
         ORDER BY elevID ASC";
