@@ -75,6 +75,10 @@ function deletBoxK(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet5").appendChild(nys);
 }
+function periodPlats(period) {
+    let element = document.getElementById("platsPeriod");
+    element.value = period;
+}
 
 $('.navbar svg').click(function() {
     $(this).toggleClass('toggle-state');
@@ -174,6 +178,7 @@ $("#regElev").submit(function(e) {
     var elevKlass = $("#elevKlass").val();
     var epost = $("#epost").val();
     var nummer = $("#nummer").val();
+    var periodn = $("#periodN").val();
     
     $.ajax({
         type: "POST",
@@ -183,7 +188,8 @@ $("#regElev").submit(function(e) {
             efternamn: efternamn,
             elevKlass: elevKlass,
             epost: epost,
-            nummer: nummer
+            nummer: nummer,
+            periodN: periodn
         }, // serializes the form's elements.
 
         success: function(data)
