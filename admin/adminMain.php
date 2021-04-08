@@ -448,9 +448,9 @@ if(checkAdminLogin()) {
                                     <input id="elevKlass" type="text" placeholder="Klass">
                                     <input id="subElev" type="submit" namn="sub" value="Spara">
                                     <select id="periodN" name="periodN">
+                                    <option value="ingen">du kan ge en elev en period senare om du vill</option>
                                 <?php
-                                $pt="period";
-                                $peri = selectTabel($conn,$pt);
+                                $peri = selectTabel($conn,"period");
                                     foreach ($peri as $p) {
                                         echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
                                     }
