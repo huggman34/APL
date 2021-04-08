@@ -320,7 +320,7 @@ body{
     display: inline;
 }
 
-.elevklass {
+.elevKlass {
     width: 48.75%;
     height: 100%;
     background-color: white;
@@ -561,6 +561,10 @@ h1 {
 .foretagTable tbody tr {
     cursor: pointer;
     /*border-bottom: 2px solid gainsboro;*/
+}
+
+.foretagTable tr:nth-child(even) {
+    background-color: #EBEBEB;
 }
 
 .foretagTable tr:last-child{
@@ -852,10 +856,18 @@ h1 {
 
 .elevklassTable {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 3% 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
+
+}
+
+.elevklassTable tbody {
+    display: block;
+    height: 10vh;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .elevklassTable th,
@@ -867,6 +879,17 @@ h1 {
     background-color: #4C4C4C;
     color: white;
     text-align: left;
+}
+
+.elevklassTable thead, .elevklassTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.elevklassTable tbody tr {
+    cursor: pointer;
+    /*border-bottom: 2px solid gainsboro;*/
 }
 
 .elevklassTable tr:nth-child(even) {
@@ -984,4 +1007,12 @@ h1 {
     right: 0;
     top: 0;
     padding: 1% 1%;
+}
+.uppdatebox{
+    width: 20%;
+    height: 20%;
+    z-index: 4;
+    position: absolute;
+    background-color: lawngreen;
+    visibility: hidden;
 }

@@ -1,5 +1,6 @@
 <?php
     require_once '../connection.php';
+    require_once '../ViewFunctions.php';
 
     $foretagID = $_POST['foretagID'];
     function foretagInfo($conn, $foretagID){
@@ -49,4 +50,22 @@
     } else {
         echo "Ingen data är tillgänglig";
     }
+
+    $handledare = selectTabel($conn,"handledare");
+    echo "<table class='foretagInfo'>";
+    echo "<thead><tr><th>Namn</th><th>Epost</th><th>Telefon</th></tr></thead><tbody>";
+
+    /*foreach ($handledare as $row => $column) {
+    echo "<tr><td>";
+            echo $column['fornamn'],$column['efternamn'];
+            echo "</td><td>";
+            echo $column['epost'];
+            echo "</td><td>";
+            echo $column['telefon'];
+            echo "</td><td>";
+            $handledarID=$row['handledarID'];
+            echo "<button type='button' onclick=\"deletBoxPr('$handledarID');\" >...</button>";
+            echo "</td></tr>";
+        }
+        echo "</tbody></table>";*/
 ?>

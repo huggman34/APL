@@ -25,6 +25,9 @@ if(checkAdminLogin()) {
     if (isset($_POST['deletklass'])) {
         deleteKlass($conn,$_POST['ID']);
     }
+    if (isset($_POST['delethandledare'])) {
+        deleteHandledare($conn,$_POST['ID']);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -235,6 +238,21 @@ if(checkAdminLogin()) {
                                     }
                                 });
                             };
+
+                            function elevPlatsPeriod() {
+                                var pls = $('#platsElev').val();
+                                $.ajax({
+                                    url: 'periodSelect.php',
+                                    type: 'POST',
+                                    data: {
+                                        platsElev: pls
+                                    },
+
+                                    success: function(data) {
+                                        periodPlats(data);
+                                    }
+                                });
+                            };
                         </script>
                         <div id="elevList"></div>
                     </div>
@@ -255,6 +273,9 @@ if(checkAdminLogin()) {
                 <form action="adminMain.php" method="post">
                 <div id="delet2" class="deletbox">
                 <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?');" value="submit">
+                </div>
+                <div id="delet6" class="deletbox">
+                <input type="submit" name="delethandledare" onclick="return confirm('Är du säker?');" value="submit">
                 </div>
                 </form>
                     <!-- FÖRETAG CONTENT HÄR -->
@@ -354,6 +375,38 @@ if(checkAdminLogin()) {
                     <input type="submit" name="deletplats" onclick="return confirm('Är du säker?');" value="submit">
                     </div>
                 </form>
+                <form class="uppdatebox" id="regPl" action="regPlats.php" method="POST">
+                            <select id="ep">
+                            <?php
+                                $allElev = allElev($conn);
+
+                                echo "<option disabled selected> Välj Elev </option>";
+                                foreach ($allElev as $e) {
+                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="fp">
+                            <?php
+                                $foretag = foretag($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($foretag as $f) {
+                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="pp">
+                            <?php
+                                $allPeriod = allPeriod($conn);
+                                echo "<option disabled selected> Välj Period </option>";
+                                foreach ($allPeriod as $p) {
+                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                }
+                            
+                            echo'</select>'
+                            ?>
+                            <input id="subPl" type="submit" value="Spara">
+                        </form>
                 <div class="platsList">
                         <div>
                             <?php
@@ -369,7 +422,12 @@ if(checkAdminLogin()) {
                                     echo $row['namn'];
                                     echo "</td><td>";
                                     $platsID=$row['platsID'];
+                                    $elevID=$row['elevID'];
+                                    $periodNamn=$row['periodNamn'];
+                                    $foretagID=$row['foretagID'];
                                     echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >...</button>";
+                                    //echo '<button type="button" onclick="updateBP('.$elevID.',\''.$periodNamn.','.$foretagID.'\');" >uppp</button>';
+                                    echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >uppp</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
@@ -380,37 +438,7 @@ if(checkAdminLogin()) {
                     <div class="plats">
                         <!-- PLATS CONTENT HÄR -->
                         <h1>Registrera Plats</h1>
-                        <form id="regPlats" action="regPlats.php" method="POST">
-                            <select id="platsElev">
-                            <?php
-                                $allElev = allElev($conn);
-
-                                echo "<option disabled selected> Välj Elev </option>";
-                                foreach ($allElev as $e) {
-                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <select id="platsForetag">
-                            <?php
-                                $foretag = foretag($conn);
-                                echo "<option disabled selected> Välj Företag </option>";
-                                foreach ($foretag as $f) {
-                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <select id="platsPeriod">
-                            <?php
-                                $allPeriod = allPeriod($conn);
-                                echo "<option disabled selected> Välj Period </option>";
-                                foreach ($allPeriod as $p) {
-                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <input id="subPlats" type="submit" value="Spara">
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="views" id="content7" style='display:none'>
@@ -426,6 +454,15 @@ if(checkAdminLogin()) {
                                     <input id="nummer" type="tel" placeholder="Nummer">
                                     <input id="elevKlass" type="text" placeholder="Klass">
                                     <input id="subElev" type="submit" namn="sub" value="Spara">
+                                    <select id="periodN" name="periodN">
+                                    <option value="ingen">du kan ge en elev en period senare om du vill</option>
+                                <?php
+                                $peri = selectTabel($conn,"period");
+                                    foreach ($peri as $p) {
+                                        echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                    }
+                                ?>
+                            </select>
                                 </form>
                                 <!--<form id="regKlass" action="regKlass.php" method="POST">
                                     <input id="klassNamn" type="text" placeholder="Klass">
@@ -463,6 +500,38 @@ if(checkAdminLogin()) {
                         </div>
                         <div class="registerBox">
                             <h1>Register Plats</h1>
+                            <form id="regPlats" action="regPlats.php" method="POST">
+                            <select id="platsElev" onchange="elevPlatsPeriod();">
+                            <?php
+                                $allElev = allElev($conn);
+
+                                echo "<option disabled selected> Välj Elev </option>";
+                                foreach ($allElev as $e) {
+                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsForetag">
+                            <?php
+                                $foretag = foretag($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($foretag as $f) {
+                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsPeriod">
+                            <?php
+                                $allPeriod = allPeriod($conn);
+                                echo "<option disabled selected> Välj Period </option>";
+                                foreach ($allPeriod as $p) {
+                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                }
+                            
+                            echo'</select>'
+                            ?>
+                            <input id="subPlats" type="submit" value="Spara">
+                        </form>
                         </div>
                     </div>
                 </div>

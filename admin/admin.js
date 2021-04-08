@@ -96,6 +96,26 @@ function deletBoxK(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet5").appendChild(nys);
 }
+function deletBoxH(ID) {
+    document.getElementById("delet6").style.visibility="visible";
+    var nys = document.createElement('div');
+    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
+    document.getElementById("delet6").appendChild(nys);
+}
+function updateBP(elevID,foretagID,periodNamn) {
+    document.getElementById("regPl").style.visibility="visible";
+    let pp = document.getElementById("pp");
+    pp.value = periodNamn;
+    let fp = document.getElementById("fp");
+    fp.value = foretagID;
+    let ep = document.getElementById("ep");
+    ep.value = elevID;
+}
+
+function periodPlats(period) {
+    let element = document.getElementById("platsPeriod");
+    element.value = period;
+}
 
 $('.navbar svg').click(function() {
     $(this).toggleClass('toggle-state');
@@ -168,6 +188,45 @@ $(document).on('click','.elevTable tbody tr',function(){
     })
 });
 
+$(document).on('click','.foretagTable tbody tr',function(){
+    var row = $(this);
+    row.css("color", "#EC6FE4");
+    $(".foretagTable tbody tr").not(this).css("color", "black")
+    var foretag = row.find("td:first-child").text();
+
+    $.ajax({
+        url: 'foretagInfo.php',
+        type: 'POST',
+        data: {
+            foretagID: foretag
+        },
+
+        success: function(data) {
+            //alert(data);
+            $('.foretagView').html(data);
+            $(".foretagInfo td").each( function() {
+                var thisCell = $(this);
+                var cellValue = thisCell.text();
+
+                if (cellValue == 'Närvarande') {
+                    thisCell.css("background-color","#77dd77");
+                }
+                if (cellValue == 'Giltig frånvaro') {
+                    thisCell.css("background-color","#FEFE95");
+                }
+                if (cellValue == 'Ogiltig frånvaro') {
+                    thisCell.css("background-color","#ff6961");
+                }
+                if (cellValue == 'Oanmäld') {
+                    thisCell.css("background-color","gainsboro");
+                }
+             }
+            )
+        }
+    })
+});
+
+
 /*$("#subElev").click(function(e){
     e.preventDefault();
     $.ajax({
@@ -204,6 +263,7 @@ $("#regElev").submit(function(e) {
     var elevKlass = $("#elevKlass").val();
     var epost = $("#epost").val();
     var nummer = $("#nummer").val();
+    var periodn = $("#periodN").val();
     
     $.ajax({
         type: "POST",
@@ -213,7 +273,8 @@ $("#regElev").submit(function(e) {
             efternamn: efternamn,
             elevKlass: elevKlass,
             epost: epost,
-            nummer: nummer
+            nummer: nummer,
+            periodN: periodn
         }, // serializes the form's elements.
 
         success: function(data)
@@ -362,6 +423,32 @@ $("#regPlats").submit(function(e) {
         {
             alert(data); // show response from the php script.
             $("#regPlats")[0].reset();
+        }
+    });
+});
+
+$("#regPl").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+    var elev = $("#ep").val();
+    var foretag = $("#fp").val();
+    var period = $("#pp").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            elev: elev,
+            foretag: foretag,
+            period: period
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regPl")[0].reset();
         }
     });
 });

@@ -83,17 +83,29 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     }
 }
 
-function updatePlats($conn,$platsID,$periodNamn,$elevID,$foretagID){
+function updatePlats($conn,$periodNamn,$elevID,$foretagID){
+
+    $sql = "SELECT platsID FROM plats
+    WHERE elevID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $elevID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    if(empty($row)){
+        return "tom";
+    }else{
+        
         $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=? WHERE platsID=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssii",$periodNamn,$elevID,$foretagID,$platsID);
+        $stmt->bind_param("ssii",$periodNamn,$elevID,$foretagID,$row['platsID']);
     
             
     if ($stmt->execute()){
 return "ech";
     }else{
            return "Error"; 
-    }
+    }}
 }
 
 ?>
