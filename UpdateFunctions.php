@@ -78,7 +78,10 @@ function updatePlats($conn,$periodNamn,$elevID,$foretagID){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-
+    if(empty($row)){
+        return "tom";
+    }else{
+        
         $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=? WHERE platsID=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssii",$periodNamn,$elevID,$foretagID,$row['platsID']);
@@ -88,7 +91,7 @@ function updatePlats($conn,$periodNamn,$elevID,$foretagID){
 return "ech";
     }else{
            return "Error"; 
-    }
+    }}
 }
 
 ?>

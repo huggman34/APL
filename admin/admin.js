@@ -81,6 +81,16 @@ function deletBoxH(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet6").appendChild(nys);
 }
+function updateBP(elevID,foretagID,periodNamn) {
+    document.getElementById("regPl").style.visibility="visible";
+    let pp = document.getElementById("pp");
+    pp.value = periodNamn;
+    let fp = document.getElementById("fp");
+    fp.value = foretagID;
+    let ep = document.getElementById("ep");
+    ep.value = elevID;
+}
+
 function periodPlats(period) {
     let element = document.getElementById("platsPeriod");
     element.value = period;
@@ -383,6 +393,32 @@ $("#regPlats").submit(function(e) {
         {
             alert(data); // show response from the php script.
             $("#regPlats")[0].reset();
+        }
+    });
+});
+
+$("#regPl").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+    var elev = $("#ep").val();
+    var foretag = $("#fp").val();
+    var period = $("#pp").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            elev: elev,
+            foretag: foretag,
+            period: period
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regPl")[0].reset();
         }
     });
 });
