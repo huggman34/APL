@@ -123,6 +123,15 @@
         return $data;
     }
 
+    function allHandledare($conn){
+        $sql = "SELECT fornamn, efternamn, epost, telefon, namn FROM handledare
+        INNER JOIN foretag ON foretag.foretagID = handledare.foretagID";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
 
     function elev($conn, $klass) {
         $sql = "SELECT elevID, klass FROM elev

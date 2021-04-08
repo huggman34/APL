@@ -465,6 +465,7 @@ h1 {
 .elevTable th,
 .elevTable td {
     padding: 12px 15px;
+    word-break: break-all;
 }
 
 .elevTable thead {
@@ -509,13 +510,26 @@ h1 {
     width: 48.75%;
     height: 100%;
     background-color: white;
-    padding: 1%;
+    padding: 0% 1% 1% 1%;
     box-sizing: border-box;
     display: inline-block;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.foretagList div {
+.foretagListOptions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 99.9%;
+    height: 8%;
+}
+
+.foretagListOptions button{
+    width: 5%;
+    height: 50%;
+}
+
+.foretagVy {
     width: 100%;
     height: 94%;
     margin-top: 5%;
@@ -523,7 +537,6 @@ h1 {
 
 .foretagTable {
     border-collapse: collapse;
-    margin: 3% 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
@@ -544,6 +557,7 @@ h1 {
 .foretagTable th,
 .foretagTable td {
     padding: 12px 15px;
+    word-break: break-all
 }
 
 .foretagTable thead {

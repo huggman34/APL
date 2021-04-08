@@ -203,7 +203,7 @@ $(document).on('click','.foretagTable tbody tr',function(){
 
         success: function(data) {
             //alert(data);
-            $('.foretagView').html(data);
+            //$('.foretagView').html(data);
             $(".foretagInfo td").each( function() {
                 var thisCell = $(this);
                 var cellValue = thisCell.text();
@@ -226,6 +226,15 @@ $(document).on('click','.foretagTable tbody tr',function(){
     })
 });
 
+$("#viewForetag").on('click', function(){
+    $("#handledarVy").css("display", "none");
+    $("#foretagVy").css("display", "block");
+});
+
+$("#viewHandledare").on('click', function(){
+    $("#foretagVy").css("display", "none");
+    $("#handledarVy").css("display", "block");
+});
 
 /*$("#subElev").click(function(e){
     e.preventDefault();
