@@ -202,6 +202,7 @@ if(checkAdminLogin()) {
                 <form action="adminMain.php" method="post">
                 <div id="delet" class="deletbox">
                 <input type="submit" name="deletelev" onclick="return confirm('Är du säker?');" value="submit">
+
                 </div>
                 <div id="delet5" class="deletbox">
                 <input type="submit" name="deletklass" onclick="return confirm('Är du säker?');" value="submit">
@@ -286,6 +287,10 @@ if(checkAdminLogin()) {
                             echo "<thead><tr><th>Företag</th><th>Adress</th></tr></thead><tbody>";
                         
                             foreach ($data as $row) {
+                                $foretagID = $row['foretagID'];
+                                $namn = $row['namn'];
+                                $adress = $row['adress'];
+
                                 echo "<tr><td>";
                                 echo $row['namn'];
                                 echo "</td><td>";
@@ -293,6 +298,7 @@ if(checkAdminLogin()) {
                                 echo "</td><td>";
                                 $foretagID=$row['foretagID'];
                                 echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >...</button>";
+                                echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
                                 echo "</td></tr>";
                             }
                             echo "</tbody></table>";
@@ -341,25 +347,26 @@ if(checkAdminLogin()) {
                 </div>
 
                 <div class="views" id="content5" style='display:none'>
-                <!-- KLASS CONTENT HÄR-->
-                    <div class="elevKlass">
-                        <h1>Klass</h1>
-                    <?php
+                    <div class="elevklass">
+                        <!-- KLASS CONTENT HÄR-->
+                        <?php
 
-                        $data = elevKlass($conn);
+                            $data = allKlass($conn);
 
-                        echo "<table class='elevklassTable'>";
-                        echo "<thead><tr><th>ElevID</th><th>Period</th></tr></thead>";
+                            echo "<table class='elevklassTable'>";
+                            echo "<thead><tr><th>Klass</th></tr></thead><tbody>";
 
-                        foreach($data as $row){
-                            echo "<tbody><tr><td>";
-                            echo $row['elevID'];
-                            echo "</td><td>";
-                            echo $row ['periodNamn'];
-                            echo "</td></tr></tbody>";
-                        }
-                        echo "</table>";
-                    ?>
+                            foreach($data as $row){
+                                $klass = $row['klass'];
+
+                                echo "<tr><td>";
+                                echo $row['klass'];
+                                echo "</td><td>";
+                                echo "<button type='button' onclick=\"updateKlass('$klass');\" >Update</button>";
+                                echo "</td></tr>";
+                            }
+                            echo "</tbody></table>";
+                        ?>
                     </div>
                 </div>
                 <div class="views" id="content6" style='display:none'>

@@ -4,7 +4,7 @@
  * Denna fil inneholler alla funktioner som används för att redigera tabeller. 
  * Genom att referera till funktionen kan man uppdatera värdena för en rad i tabbelen baserat på dess ID.
  */
-
+ 
 function updatePeriod($conn,$startdatum,$slutdatum,$periodnamn){
         $sql = "UPDATE period SET startdatum=?, slutdatum=? WHERE periodNamn=?";
         $stmt = $conn->prepare($sql);
@@ -17,17 +17,31 @@ function updatePeriod($conn,$startdatum,$slutdatum,$periodnamn){
            return "Error"; 
     }
 }
-function updateForetag($conn,$namn,$losenord,$epost,$telefon,$foretagsID){
-    $sql = "UPDATE foretag SET namn=?, losenord=?, epost=?, telefon=? WHERE foretagID=?";
+
+function updateForetag($conn, $namn, $adress, $foretagsID){
+    $sql = "UPDATE foretag SET namn=?, adress=? WHERE foretagID=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi",$namn,$losenord,$epost,$telefon,$foretagsID);
+    $stmt->bind_param("ssi", $namn, $adress, $foretagsID);
 
-        
-if ($stmt->execute()){
-
-}else{
+    if ($stmt->execute()){
+        echo "foretag updated";
+        header('Location: adminMain.php');
+    }else{
        return "Error"; 
+    }
 }
+
+function updateKlass($conn, $nyKlass, $klassID){
+    $sql = "UPDATE klass SET klass = ? WHERE klass = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $nyKlass, $klassID);
+
+    if ($stmt->execute()){
+        echo "klass updated";
+        header('Location: adminMain.php');
+    }else{
+       return "Error"; 
+    }
 }
 
 function updateDag($conn,$datum,$dagID){
@@ -43,16 +57,16 @@ function updateDag($conn,$datum,$dagID){
     }
 }
 
-function updateElev($conn,$fornamn,$efternamn,$elevID){
-        $sql = "UPDATE elev SET fornamn=?, efternamn=? WHERE elevID=?";
+function updateElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID){
+        $sql = "UPDATE elev SET fornamn = ?, efternamn = ?, klass = ?, epost = ?, telefon = ? WHERE elevID=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss",$fornamn,$efternamn,$elevID);
-    
-            
-    if ($stmt->execute()){
+        $stmt->bind_param("ssssss", $fornamn, $efternamn, $klass, $epost, $telefon, $elevID);
 
-    }else{
-           return "Error"; 
+    if ($stmt->execute()){
+        echo "elev updated";
+        header('Location: adminMain.php');
+    } else{
+        return "Error"; 
     }
 }
 

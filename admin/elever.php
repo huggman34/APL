@@ -4,7 +4,7 @@
     $klass = $_POST['klass'];
 
     function elev($conn, $klass) {
-        $sql = "SELECT elevID, fornamn, efternamn FROM elev
+        $sql = "SELECT * FROM elev
         WHERE klass = ?";
 
         $stmt = $conn->prepare($sql);
@@ -23,22 +23,30 @@
         echo ';';
     }*/
     //print_r($elever);
-    echo "<button type='button' onclick=\"deletBoxK('$klass');\" >...</button>";
+    //echo "<button type='button' onclick=\"deletBoxK('$klass');\" >...</button>";
 
 
     echo "<table class='elevTable'>";
-    echo "<thead><tr><th>Elev</th><th>Förnamn</th><th>Efternamn</th></tr></thead><tbody>";
+    echo "<thead><tr><th>Elev</th><th>Förnamn</th><th>Efternamn</th><th>Klass</th></tr></thead><tbody>";
 
     foreach ($elever as $row) {
+        $elevID = $row['elevID'];
+        $fornamn = $row['fornamn'];
+        $efternamn = $row['efternamn'];
+        $klass = $row['klass'];
+        $epost = $row['epost'];
+        $telefon = $row['telefon'];
+
         echo "<tr><td>";
         echo $row['elevID'];
-        $elevID= $row['elevID'];
         echo "</td><td>";
         echo $row['fornamn'];
         echo "</td><td>";
         echo $row['efternamn'];
         echo "</td><td>";
+        echo $row['klass'];
         echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >...</button>";
+        echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Update</button>";
         echo "</td></tr>";
     }
     echo "</tbody></table>";

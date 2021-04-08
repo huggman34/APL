@@ -225,6 +225,47 @@ body{
 
 }
 
+#update {
+    position: absolute;
+    width: 5%;
+    height: 3%;
+    margin-left: 21.9%;
+    margin-top: 0;
+    background-color: yellow;
+}
+
+.updateElev {
+    position: absolute;
+    top: 0;
+    margin-top: 7%;
+    width: 50%;
+    height: 40%;
+    display: block;
+    background-color: yellowgreen;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.updateForetag {
+    position: absolute;
+    top: 0;
+    margin-top: 7%;
+    width: 50%;
+    height: 40%;
+    display: block;
+    background-color: yellowgreen;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
 .narvaroTable tbody {
     display: block;
     height: 25vh;
@@ -287,7 +328,6 @@ body{
     box-sizing: border-box;
     display: inline-block;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    text-align: center;
 }
 
 .plats {
