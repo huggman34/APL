@@ -38,13 +38,17 @@
         $telefon = $row['telefon'];
 
         echo "<tr><td>";
-        echo $row['elevID'];
+        echo $elevID;
         echo "</td><td>";
-        echo $row['fornamn'];
+        echo $fornamn;
         echo "</td><td>";
-        echo $row['efternamn'];
+        echo $efternamn;
         echo "</td><td>";
-        echo $row['klass'];
+        echo $klass;
+        echo "</td><td>";
+        echo $epost;
+        echo "</td><td>";
+        echo $telefon;
         echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >...</button>";
         echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Update</button>";
         echo "</td></tr>";

@@ -280,38 +280,67 @@ if(checkAdminLogin()) {
                 </form>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
-                        <?php
-                            $data = foretag($conn);
-                        
-                            echo "<table class='foretagTable'>";
-                            echo "<thead><tr><th>Företag</th><th>Adress</th></tr></thead><tbody>";
-                        
-                            foreach ($data as $row) {
-                                $foretagID = $row['foretagID'];
-                                $namn = $row['namn'];
-                                $adress = $row['adress'];
+                        <div class="foretagListOptions">
+                            <button id="viewForetag">F</button>
+                            <button id="viewHandledare">H</button>
+                        </div>
+                        <div id="foretagVy">
+                            <?php
+                                $data = foretag($conn);
+                            
+                                echo "<table class='foretagTable'>";
+                                echo "<thead><tr><th>Företag</th><th>Adress</th></tr></thead><tbody>";
+                            
+                                foreach ($data as $row) {
+                                    $foretagID = $row['foretagID'];
+                                    $namn = $row['namn'];
+                                    $adress = $row['adress'];
 
-                                echo "<tr><td>";
-                                echo $row['namn'];
-                                echo "</td><td>";
-                                echo $row['adress'];
-                                echo "</td><td>";
-                                $foretagID=$row['foretagID'];
-                                echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >...</button>";
-                                echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
-                                echo "</td></tr>";
-                            }
-                            echo "</tbody></table>";
+                                    echo "<tr><td>";
+                                    echo $row['namn'];
+                                    echo "</td><td>";
+                                    echo $row['adress'];
+                                    echo "</td><td>";
+                                    echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >...</button>";
+                                    echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
+                                    echo "</td></tr>";
+                                }
+                                echo "</tbody></table>";
                             ?>
+                        </div>
+                        <div id="handledarVy" style="display:none">
+                            <?php
+                                $data = allHandledare($conn);
+                            
+                                echo "<table class='foretagTable'>";
+                                echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Företag</th><th>E-post</th><th>Telefon</th></tr></thead><tbody>";
+                            
+                                foreach ($data as $row) {
+                                    $fornamn = $row['fornamn'];
+                                    $efternamn = $row['efternamn'];
+                                    $epost = $row['epost'];
+                                    $foretag = $row['namn'];
+                                    $telefon = $row['telefon'];
+
+                                    echo "<tr><td>";
+                                    echo $fornamn;
+                                    echo "</td><td>";
+                                    echo $efternamn;
+                                    echo "</td><td>";
+                                    echo $foretag;
+                                    echo "</td><td>";
+                                    echo $epost;
+                                    echo "</td><td>";
+                                    echo $telefon;
+                                    echo "</td></tr>";
+                                }
+                                echo "</tbody></table>";
+                            ?>
+                        </div>
                     </div>
                     <div class="foretagholder">
-                    <div class="foretagView">
-                        <h1>Klicka på ett företag</h1>
-                    </div>
-                        <div class="formHolder">
-                            <div class="formSelect">
-                                <button class="button3">Registrera Företag</button>
-                            </div>
+                        <div class="foretagView">
+                            <h1>Klicka på ett företag</h1>
                         </div>
                     </div>
                 </div>
