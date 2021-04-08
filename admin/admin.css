@@ -279,13 +279,15 @@ body{
     display: inline;
 }
 
-.elevklass {
-    width: 50%;
-    height: 50%;
+.elevKlass {
+    width: 48.75%;
+    height: 100%;
     background-color: white;
-    border-radius: 15px;
     padding: 1%;
     box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
 }
 
 .plats {
@@ -518,7 +520,7 @@ h1 {
     /*border-bottom: 2px solid gainsboro;*/
 }
 
-.elevTable tr:nth-child(even) {
+.foretagTable tr:nth-child(even) {
     background-color: #EBEBEB;
 }
 
@@ -813,15 +815,21 @@ h1 {
 
 .elevklassTable {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 3% 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
+
+}
+
+.elevklassTable tbody {
+    display: block;
+    height: 10vh;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .elevklassTable th,
-
-.styled- th,
 .elevklassTable td {
     padding: 12px 15px;
 }
@@ -832,15 +840,22 @@ h1 {
     text-align: left;
 }
 
+.elevklassTable thead, .elevklassTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
 .elevklassTable tbody tr {
-    border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+    /*border-bottom: 2px solid gainsboro;*/
 }
 
-.elevklassTable tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+.elevklassTable tr:nth-child(even) {
+    background-color: #EBEBEB;
 }
 
-.elevklassTable tbody tr:last-of-type {
+.elevklassTable tr:last-child{
     border-bottom: 2px solid #4C4C4C;
 }
 
