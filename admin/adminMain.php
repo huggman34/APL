@@ -341,8 +341,8 @@ if(checkAdminLogin()) {
                 </div>
 
                 <div class="views" id="content5" style='display:none'>
-                    <div class="elevklass">
-                        <!-- KLASS CONTENT HÄR-->
+                <!-- KLASS CONTENT HÄR-->
+                    <div class="elevKlass">
                         <h1>Klass</h1>
                     <?php
 
