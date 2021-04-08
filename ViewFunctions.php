@@ -124,8 +124,9 @@
     }
 
     function allHandledare($conn){
-        $sql = "SELECT fornamn, efternamn, epost, telefon, namn FROM handledare
-        INNER JOIN foretag ON foretag.foretagID = handledare.foretagID";
+        $sql = "SELECT handledarID, fornamn, efternamn, epost, telefon, namn FROM handledare
+        INNER JOIN foretag ON foretag.foretagID = handledare.foretagID
+        ORDER BY fornamn ASC";
 
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);

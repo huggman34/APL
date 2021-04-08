@@ -316,6 +316,7 @@ if(checkAdminLogin()) {
                                 echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Företag</th><th>E-post</th><th>Telefon</th></tr></thead><tbody>";
                             
                                 foreach ($data as $row) {
+                                    $handledarID = $row['handledarID'];
                                     $fornamn = $row['fornamn'];
                                     $efternamn = $row['efternamn'];
                                     $epost = $row['epost'];
@@ -332,6 +333,7 @@ if(checkAdminLogin()) {
                                     echo $epost;
                                     echo "</td><td>";
                                     echo $telefon;
+                                    echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Update</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";

@@ -59,11 +59,18 @@ function updateForetag(foretagID, namn, adress) {
     document.getElementById("content3").appendChild(update);
 }
 
+function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telefon) {
+    var update = document.createElement('div');
+    update.className = "updateElev";
+    update.innerHTML = "<form action='updateHandledare.php' method='POST'><input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='foretag' value='"+foretag+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
+    document.getElementById("content3").appendChild(update);
+}
+
 function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='foretagID' type='hidden' name='klass' value='"+klass+"'><input id='' type='text' name='nyKlass'><input type='submit'></form>";
-    document.getElementById("content5").appendChild(update);
+    document.getElementById("content3").appendChild(update);
 }
 
 function deletBoxE(ID) {

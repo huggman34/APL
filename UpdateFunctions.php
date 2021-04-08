@@ -70,6 +70,19 @@ function updateElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elev
     }
 }
 
+function updateHandledare($conn, $fornamn, $efternamn, $foretagID, $epost, $telefon, $handledarID){
+    $sql = "UPDATE handledare SET fornamn = ?, efternamn = ?, foretagID = ?, epost = ?, telefon = ? WHERE handledarID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssissi", $fornamn, $efternamn, $foretagID, $epost, $telefon, $handledarID);
+
+    if ($stmt->execute()){
+        echo "Handledare updated";
+        header('Location: adminMain.php');
+    } else {
+        return "Error"; 
+    }
+}
+
 function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
         $sql = "UPDATE perioddag SET periodNamn=?, dagID=? WHERE periodDagID=?";
         $stmt = $conn->prepare($sql);
