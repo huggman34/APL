@@ -96,6 +96,15 @@
         return $data;
     }
 
+    function allKlass($conn) {
+        $sql = "SELECT * FROM klass";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
     function foretag($conn){
         $sql= "SELECT * FROM foretag";
 

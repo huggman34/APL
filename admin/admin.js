@@ -45,6 +45,27 @@ $(".registerPage").on('click', function() {
     //$("#homeIcon").css("fill", "white");
 });
 
+function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
+    var update = document.createElement('div');
+    update.className = "updateElev";
+    update.innerHTML = "<form action='updateElev.php' method='POST'><input id='elevID' type='hidden' name='elevID' value='"+elevID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='klass' value='"+klass+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
+    document.getElementById("content2").appendChild(update);
+}
+
+function updateForetag(foretagID, namn, adress) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.innerHTML = "<form action='updateForetag.php' method='POST'><input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'><input id='' type='text' name='namn' value='"+namn+"'><input id='' type='text' name='adress' value='"+adress+"'><input type='submit'></form>";
+    document.getElementById("content3").appendChild(update);
+}
+
+function updateKlass(klass) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='foretagID' type='hidden' name='klass' value='"+klass+"'><input id='' type='text' name='nyKlass'><input type='submit'></form>";
+    document.getElementById("content5").appendChild(update);
+}
+
 function deletBoxE(ID) {
     document.getElementById("delet").style.visibility="visible";
     var nys = document.createElement('div');
@@ -105,6 +126,15 @@ $(document).on('click','.elevTable tbody tr',function(){
     row.css("color", "#EC6FE4");
     $(".elevTable tbody tr").not(this).css("color", "black")
     var elev = row.find("td:first-child").text();
+    /*$("#update").append('<button id="updateElev" value="'+elev+'">Update</button>');
+
+        var updateView = document.createElement('div');
+        updateView.className = "updateview";
+
+        updateView.innerhtml = "<form><input id='elevID' type='hidden' name='elevID' value='"+elev+"'><input id='' type='text' name='fornamn'><input id='' type='text' name='efternamn'></form>";
+        document.getElementById("content2").appendChild(updateView);
+        */
+    
 
     $.ajax({
         url: 'elevNarvaro.php',

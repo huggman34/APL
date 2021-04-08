@@ -225,6 +225,47 @@ body{
 
 }
 
+#update {
+    position: absolute;
+    width: 5%;
+    height: 3%;
+    margin-left: 21.9%;
+    margin-top: 0;
+    background-color: yellow;
+}
+
+.updateElev {
+    position: absolute;
+    top: 0;
+    margin-top: 7%;
+    width: 50%;
+    height: 40%;
+    display: block;
+    background-color: yellowgreen;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.updateForetag {
+    position: absolute;
+    top: 0;
+    margin-top: 7%;
+    width: 50%;
+    height: 40%;
+    display: block;
+    background-color: yellowgreen;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
 .narvaroTable tbody {
     display: block;
     height: 25vh;
@@ -280,12 +321,13 @@ body{
 }
 
 .elevklass {
-    width: 50%;
-    height: 50%;
+    width: 48.75%;
+    height: 100%;
     background-color: white;
-    border-radius: 15px;
     padding: 1%;
     box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .plats {
@@ -817,8 +859,6 @@ h1 {
 }
 
 .elevklassTable th,
-
-.styled- th,
 .elevklassTable td {
     padding: 12px 15px;
 }
@@ -829,15 +869,11 @@ h1 {
     text-align: left;
 }
 
-.elevklassTable tbody tr {
-    border-bottom: 1px solid #dddddd;
+.elevklassTable tr:nth-child(even) {
+    background-color: #EBEBEB;
 }
 
-.elevklassTable tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.elevklassTable tbody tr:last-of-type {
+.elevklassTable tr:last-child{
     border-bottom: 2px solid #4C4C4C;
 }
 
