@@ -253,6 +253,44 @@ if(checkAdminLogin()) {
                                     }
                                 });
                             };
+                            function dagPeriod() {
+                                var pN = $('#periodnamn').val();
+                                var startD = $('#startdatum').val();
+                                var slutD = $('#slutdatum').val();
+                                $.ajax({
+                                    url: 'regPeriod.php',
+                                    type: 'POST',
+                                    data: {
+                                        periodnamn: pN,
+                                        startdatum: startD,
+                                        slutdatum: slutD
+                                    },
+
+                                    success: function(data) {
+                                        $('#dagList').html(data);
+                                    }
+                                });
+                            };
+                            function UdagPeriod() {
+                                var pN = $('#Uperiodnamn').val();
+                                var startD = $('#Ustartdatum').val();
+                                var slutD = $('#Uslutdatum').val();
+                                var pID = $('#periodID').val();
+                                $.ajax({
+                                    url: 'updatePeriod.php',
+                                    type: 'POST',
+                                    data: {
+                                        periodnamn: pN,
+                                        startdatum: startD,
+                                        slutdatum: slutD,
+                                        periodID: pID
+                                    },
+
+                                    success: function(data) {
+                                        $('#UdagList').html(data);
+                                    }
+                                });
+                            };
                         </script>
                         <div id="elevList"></div>
                     </div>
@@ -350,6 +388,10 @@ if(checkAdminLogin()) {
                 <input type="submit" name="deletperiod" onclick="return confirm('Är du säker?');" value="submit">
                 </div>
                 </form>
+                <!--Formen för updatering av period -->
+                <form id='updatePeriod' method='post'>
+                    <div id="uppDiv"></div>
+                        </form>
                     <!-- PERIOD CONTENT HÄR -->
                     <h1>Period content här</h1>
                     <?php
@@ -368,7 +410,10 @@ if(checkAdminLogin()) {
                             echo $row['slutdatum'];
                             echo "</td><td>";
                             $periodID=$row['periodNamn'];
+                            $slutdatum=$row['slutdatum'];
+                            $startdatum=$row['startdatum'];
                             echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >...</button>";
+                            echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Update</button>";
                             echo "</td></tr></tbody>";
                         }
                         echo "</table>";
@@ -455,7 +500,6 @@ if(checkAdminLogin()) {
                                     $periodNamn=$row['periodNamn'];
                                     $foretagID=$row['foretagID'];
                                     echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >...</button>";
-                                    //echo '<button type="button" onclick="updateBP('.$elevID.',\''.$periodNamn.','.$foretagID.'\');" >uppp</button>';
                                     echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >uppp</button>";
                                     echo "</td></tr>";
                                 }
@@ -520,12 +564,12 @@ if(checkAdminLogin()) {
                         <div class="registerBox">
                             <h1>Register Period</h1>
                             <form id="regPeriod" method="post">
-                                <input type="text" id="periodnamn" placeholder="namn" required>
-                                <input type="date" id="startdatum" required>
-                                <input type="date" id="slutdatum" required>
-                                <input type="submit" value="submit" id="submin">
+                                <input type="text" id="periodnamn" name="periodnamn" placeholder="namn" required>
+                                <input type="date" id="startdatum" name="startdatum" required>
+                                <input type="date" id="slutdatum" name="slutdatum" onchange="dagPeriod();" required>
+                               
+                                <div id="dagList"></div>
                             </form>
-                        <div id="dagList"></div>
                         </div>
                         <div class="registerBox">
                             <h1>Register Plats</h1>
