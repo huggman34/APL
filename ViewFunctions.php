@@ -1,6 +1,6 @@
 <?php
     function narvaroIdag($conn) {
-        $sql = "SELECT plats.elevID, foretag.namn, plats.periodNamn, dag.datum, narvaro.narvaro
+        $sql = "SELECT narvaroID, plats.elevID, foretag.namn, plats.periodNamn, dag.datum, narvaro.narvaro
         FROM narvaro
         INNER JOIN plats ON plats.platsID = narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
@@ -13,6 +13,7 @@
 
         return $data;
     }
+    
     function narvaroIdagForetag($conn,$foretag) {
         $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
         FROM narvaro
@@ -171,7 +172,7 @@ function selectTabel($conn,$tabel){
 }
     function elevNarvaro($conn, $elevID){
 
-            $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+            $sql = "SELECT foretag.namn, elev.elevID, narvaro.narvaro, dag.datum FROM narvaro 
             INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
             INNER JOIN plats ON plats.platsID=narvaro.platsID
             INNER JOIN foretag ON foretag.foretagID=plats.foretagID

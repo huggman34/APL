@@ -998,6 +998,13 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.registerBoxMini {
+    width: 24%;
+    height: 100%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .expand {
     position: absolute;
     width: 91.5%;
@@ -1005,6 +1012,16 @@ h1 {
     z-index: 1;
     transition: 0.2s;
 }
+
+.expand2 {
+    position: absolute;
+    width: 91.5%;
+    height: 83%;
+    z-index: 1;
+    transition: 0.2s;
+    top: 13%;
+}
+
 .deletbox{
     width: 20%;
     height: 20%;
