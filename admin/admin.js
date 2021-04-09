@@ -49,7 +49,88 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     var update = document.createElement('div');
     update.className = "updateElev";
     update.innerHTML = "<form action='updateElev.php' method='POST'><input id='elevID' type='hidden' name='elevID' value='"+elevID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='klass' value='"+klass+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
-    document.getElementById("content2").appendChild(update);
+
+    if($(".updateElev")[0]) {
+        $(".updateElev").remove();
+        document.getElementById("content2").appendChild(update);
+
+    } else {
+        document.getElementById("content2").appendChild(update);
+    }
+}
+
+function updateElevNarvaro(narvaroID, narvaro) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateElevNarvaro";
+    update.innerHTML = "<form action='updateElevNarvaro.php' method='POST'>\
+    <input id='narvaroID' type='hidden' name='narvaroID' value='"+narvaroID+"'>\
+    <select id='elevNarvaro' type='text' name='narvaro'>\
+    <option value=''>Oanmäld</option>\
+    <option value='1'>Närvarande</option>\
+    <option value='2'>Giltig frånvaro</option>\
+    <option value='3'>Ogiltig frånvaro</option>\
+    </select>\
+    <input type='submit'></form>";
+
+    $(document).ready(function(){
+        if(narvaro === 'Närvarande') {
+            $('#elevNarvaro option[value=1]').attr('selected','selected');
+        }
+    
+        if(narvaro === 'Giltig frånvaro') {
+            $('#elevNarvaro option[value=2]').attr('selected','selected');
+        }
+    
+        if(narvaro === 'Ogiltig frånvaro') {
+            $('#elevNarvaro option[value=3]').attr('selected','selected');
+        }
+    });
+
+    if($("#updateElevNarvaro")[0]) {
+        $("#updateElevNarvaro").remove();
+        document.getElementById("content2").appendChild(update);
+
+    } else {
+        document.getElementById("content2").appendChild(update);
+    }
+}
+
+function updateElevNarvaroIdag(narvaroID, narvaro) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateElevNarvaroIdag";
+    update.innerHTML = "<form action='updateElevNarvaro.php' method='POST'>\
+    <input type='hidden' name='narvaroID' value='"+narvaroID+"'>\
+    <select id='elevNarvaroIdag' type='text' name='narvaro'>\
+    <option value=''>Oanmäld</option>\
+    <option value='1'>Närvarande</option>\
+    <option value='2'>Giltig frånvaro</option>\
+    <option value='3'>Ogiltig frånvaro</option>\
+    </select>\
+    <input type='submit'></form>";
+
+    $(document).ready(function(){
+        if(narvaro === 'Närvarande') {
+            $('#elevNarvaroIdag option[value=1]').attr('selected','selected');
+        }
+    
+        if(narvaro === 'Giltig frånvaro') {
+            $('#elevNarvaroIdag option[value=2]').attr('selected','selected');
+        }
+    
+        if(narvaro === 'Ogiltig frånvaro') {
+            $('#elevNarvaroIdag option[value=3]').attr('selected','selected');
+        }
+    });
+
+    if($("#updateElevNarvaroIdag")[0]) {
+        $("#updateElevNarvaroIdag").remove();
+        document.getElementById("content1").appendChild(update);
+
+    } else {
+        document.getElementById("content1").appendChild(update);
+    }
 }
 
 function updatePeriod(periodID,slutdatum, startdatum) {
@@ -61,15 +142,46 @@ function updatePeriod(periodID,slutdatum, startdatum) {
 function updateForetag(foretagID, namn, adress) {
     var update = document.createElement('div');
     update.className = "updateForetag";
+    update.id = "updateForetag";
     update.innerHTML = "<form action='updateForetag.php' method='POST'><input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'><input id='' type='text' name='namn' value='"+namn+"'><input id='' type='text' name='adress' value='"+adress+"'><input type='submit'></form>";
-    document.getElementById("content3").appendChild(update);
+
+    if($("#updateForetag")[0]) {
+        $("#updateForetag").remove();
+        document.getElementById("content3").appendChild(update);
+
+    } else {
+        document.getElementById("content3").appendChild(update);
+    }
+}
+
+function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telefon) {
+    var update = document.createElement('div');
+    update.className = "updateElev";
+    update.id = "updateHandledare";
+    update.innerHTML = "<form action='updateHandledare.php' method='POST'><input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='foretag' value='"+foretag+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
+
+    if($("#updateHandledare")[0]) {
+        $("#updateHandledare").remove();
+        document.getElementById("content3").appendChild(update);
+
+    } else {
+        document.getElementById("content3").appendChild(update);
+    }
 }
 
 function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
+    update.id = "updateKlass";
     update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='foretagID' type='hidden' name='klass' value='"+klass+"'><input id='' type='text' name='nyKlass'><input type='submit'></form>";
-    document.getElementById("content5").appendChild(update);
+    
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content5").appendChild(update);
+
+    } else {
+        document.getElementById("content5").appendChild(update);
+    }
 }
 
 function deletBoxE(ID) {
@@ -306,14 +418,37 @@ $("#regForetag").submit(function(e) {
     var form = $(this);
     var url = form.attr('action');
 
-    var fornamn = $("#Hfornamn").val();
+    var namn = $("#Fnamn").val();
+    var adress = $("#adress").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            namn: namn,
+            adress: adress
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regForetag")[0].reset();
+        }
+    });
+});
+
+$("#regHandledare").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+
+    var fornamn = $("#Hnamn").val();
     var efternamn = $("#Hefternamn").val();
     var epost = $("#Hepost").val();
-    var telefon = $("#Htelefon").val();
-
-    var namn = $("#Fnamn").val();
+    var telefon = $("#telefon").val();
     var losenord = $("#losenord").val();
-    var adress = $("#adress").val();
+    var foretagID = $("#foretagID").val();
     
     $.ajax({
         type: "POST",
@@ -323,15 +458,14 @@ $("#regForetag").submit(function(e) {
             efternamn: efternamn,
             epost: epost,
             telefon: telefon,
-            namn: namn,
             losenord: losenord,
-            adress: adress
+            foretagID: foretagID
         }, // serializes the form's elements.
 
         success: function(data)
         {
             alert(data); // show response from the php script.
-            $("#regForetag")[0].reset();
+            $("#regHandledare")[0].reset();
         }
     });
 });
@@ -531,6 +665,54 @@ $(document).ready(function(){
         $('.exit').children().hide();
         $('#foretagReg').children('.formArea2').hide();
         $('#foretagReg').children('.exit').hide();
+    });
+});
+
+$(document).ready(function(){
+    var count = 0;
+    $('#handledarReg').on('click', function() {
+        count++;
+        if (count == 1) {
+            $('#handledarReg').addClass('expand');
+            //$('#foretagReg').append($('.formArea2'));
+            $(".formArea2").css("display", "block");
+            $('#handledarReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        } else {
+            $('#handledarReg').addClass('expand');
+            $('.exit').children().show();
+            $('#handledarReg').children('.formArea2').show();
+            $('#handledarReg').children('.exit').show();
+        }
+    });
+    $(document).on('click', '.exitSvg', function() {
+        $('#handledarReg').removeClass('expand');
+        $('.exit').children().hide();
+        $('#handledarReg').children('.formArea2').hide();
+        $('#handledarReg').children('.exit').hide();
+    });
+});
+
+$(document).ready(function(){
+    var count = 0;
+    $('#platsReg').on('click', function() {
+        count++;
+        if (count == 1) {
+            $('#platsReg').addClass('expand2');
+            //$('#foretagReg').append($('.formArea2'));
+            $(".formArea2").css("display", "block");
+            $('#platsReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        } else {
+            $('#platsReg').addClass('expand2');
+            $('.exit').children().show();
+            $('#platsReg').children('.formArea2').show();
+            $('#platsReg').children('.exit').show();
+        }
+    });
+    $(document).on('click', '.exitSvg', function() {
+        $('#platsReg').removeClass('expand2');
+        $('.exit').children().hide();
+        $('#platsReg').children('.formArea2').hide();
+        $('#platsReg').children('.exit').hide();
     });
 });
 

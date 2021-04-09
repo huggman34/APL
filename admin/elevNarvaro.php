@@ -4,7 +4,7 @@
     $elevID = $_POST['elevID'];
     function elevNarvaro($conn, $elevID){
 
-        $sql = "SELECT foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
+        $sql = "SELECT narvaroID, foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
         INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
         INNER JOIN plats ON plats.platsID=narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID=plats.foretagID
@@ -25,7 +25,7 @@
 
     if(!empty($elevNarvaro)){
         echo "<table class='elevNarvaro'>";
-        echo "<thead><tr><th>Företag</th><th>Datum</th><th>Närvaro</th></tr></thead><tbody>";
+        echo "<thead><tr><th>Företag</th><th>Datum</th><th>Närvaro</th><th></th></tr></thead><tbody>";
 
         foreach ($elevNarvaro as $row => $column) {
 
@@ -37,6 +37,9 @@
             $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
 
             $column2 = str_replace($str, $rplc, $column);
+
+            $narvaroID = $column['narvaroID'];
+            $narvaro = $column2['narvaro'];
             
             echo "<tr><td>";
             echo $column['namn'];
@@ -44,6 +47,8 @@
             echo $column['datum'];
             echo "</td><td>";
             echo $column2['narvaro'];
+            echo "</td><td>";
+            echo "<button type='button' onclick=\"updateElevNarvaro('$narvaroID', '$narvaro');\" >Update</button>";
             echo "</td></tr>";
         }
         echo "</tbody></table>";

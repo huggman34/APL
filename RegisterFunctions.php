@@ -5,7 +5,7 @@
  * Den kopplar även dagarna med perioden i perioddags tabellen.
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
-    function registerForetag($conn, $namn, $losenord, $adress) {
+    function registerForetag2($conn, $namn, $losenord, $adress) {
 
         $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
         $stmt = $conn->prepare($dupeCheck);
@@ -35,7 +35,30 @@
         }
     }
 
-    function registerHandledare($conn, $fornamn, $efternamn, $foretagID, $epost, $telefon) {
+    function registerForetag($conn, $namn, $adress) {
+
+        $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
+        $stmt = $conn->prepare($dupeCheck);
+        $stmt->bind_param("s", $namn);
+        $stmt->execute();
+        $stmt->store_result();
+        $result = $stmt->num_rows;
+
+        if($result == 0) {
+            $stmt = $conn->prepare("INSERT INTO foretag (namn, adress)
+            VALUES (?, ?)");
+            $stmt->bind_param("ss", $namn, $adress);
+            $stmt->execute();
+
+            echo "Records added successfully.";
+
+        } else {
+            $namnError = "Företaget är redan registrerad";
+            echo $namnError;
+        }
+    }
+
+    function registerHandledare($conn, $foretagID, $fornamn, $efternamn, $epost, $telefon, $losenord) {
 
         $dupeCheck = "SELECT * FROM handledare WHERE fornamn = ? AND efternamn = ?";
         $stmt = $conn->prepare($dupeCheck);
@@ -45,15 +68,14 @@
         $result = $stmt->num_rows;
 
         if($result == 0) {
+            
+            $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO handledare (fornamn, efternamn, foretagID, epost, telefon) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssss", $fornamn, $efternamn, $foretagID, $epost, $telefon);
-    
-            if ($stmt->execute()){
-                echo "Records added successfully.";
-            } else{
-                echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
-            }
+            $stmt = $conn->prepare("INSERT INTO handledare (foretagID, fornamn, efternamn, epost, telefon, losenord) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("isssss", $foretagID, $fornamn, $efternamn, $epost, $telefon, $hashed_losenord);
+            $stmt->execute();
+
+            echo "Records added successfully.";
             
         } else {
             $namnError = "Handledare är redan registrerad";
