@@ -148,6 +148,15 @@ function foretagElever($conn,$foretagNamn){
     
     return $data;
 }
+function periodDag($conn,$period,$dag){
+        $sql= "SELECT * FROM perioddag INNER JOIN dag ON dag.dagID=perioddag.dagID WHERE perioddag.periodNamn='$period' AND dag.datum='$dag'";
+
+        $result = mysqli_query($conn, $sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+
+}
 function selectTabel($conn,$tabel){
     $rund= array();
     $sql = "SELECT * FROM $tabel";
