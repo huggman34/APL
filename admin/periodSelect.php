@@ -47,7 +47,7 @@ return $data;
         echo "</td><td>";
         echo $e['klass'];
         echo "</td><td>";
-        echo"<input id='elevPlats' type='checkbox' name='elevPlats' value='$elevID'>";
+        echo"<input id='elevPeriod' type='checkbox' name='elevPeriod' value='$elevID'>";
         echo "</td></tr>";
         }
         

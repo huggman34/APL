@@ -125,7 +125,7 @@
     }
 
     function allHandledare($conn){
-        $sql = "SELECT handledarID, fornamn, efternamn, epost, telefon, namn FROM handledare
+        $sql = "SELECT handledarID, fornamn, efternamn, epost, telefon, namn, handledare.foretagID FROM handledare
         INNER JOIN foretag ON foretag.foretagID = handledare.foretagID
         ORDER BY fornamn ASC";
 
