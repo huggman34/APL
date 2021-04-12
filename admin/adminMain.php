@@ -221,6 +221,7 @@ if(checkAdminLogin()) {
                         ?>
                         <form method="POST">
                             <select id="klass" name="klass" onchange="elever();">
+                                <option>All</option>
                                 <?php
                                     foreach ($klasser as $k) {
                                         echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";

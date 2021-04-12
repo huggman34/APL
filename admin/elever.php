@@ -4,16 +4,29 @@
     $klass = $_POST['klass'];
 
     function elev($conn, $klass) {
-        $sql = "SELECT * FROM elev
-        WHERE klass = ?";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $klass);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
+        if($klass == "All") {
+            $sql = "SELECT * FROM elev";
 
-        return $data;
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $data;
+
+        } else {
+            $sql = "SELECT * FROM elev
+            WHERE klass = ?";
+    
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $klass);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+    
+            return $data;
+        }
     }
 
     $elever = elev($conn, $klass);
