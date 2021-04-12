@@ -245,16 +245,18 @@ if(checkAdminLogin()) {
                             };
 
                             function elevPlatsPeriod() {
-                                var pls = $('#platsElev').val();
+                                var pls = $('#platsPeriod').val();
+                                var plk = $('#platsKlass').val();
                                 $.ajax({
                                     url: 'periodSelect.php',
                                     type: 'POST',
                                     data: {
-                                        platsElev: pls
+                                        platsPeriod: pls,
+                                        platsKlass: plk 
                                     },
 
                                     success: function(data) {
-                                        periodPlats(data);
+                                        $('#restElever').html(data);
                                     }
                                 });
                             };
@@ -536,15 +538,6 @@ if(checkAdminLogin()) {
                                     <input id="nummer" type="tel" placeholder="Nummer">
                                     <input id="elevKlass" type="text" placeholder="Klass">
                                     <input id="subElev" type="submit" namn="sub" value="Spara">
-                                    <select id="periodN" name="periodN">
-                                    <option value="ingen">du kan ge en elev en period senare om du vill</option>
-                                <?php
-                                $peri = selectTabel($conn,"period");
-                                    foreach ($peri as $p) {
-                                        echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                    }
-                                ?>
-                            </select>
                                 </form>
                                 <!--<form id="regKlass" action="regKlass.php" method="POST">
                                     <input id="klassNamn" type="text" placeholder="Klass">
@@ -599,40 +592,40 @@ if(checkAdminLogin()) {
                         </div>
                         <div id="platsReg" class="registerBox">
                             <h1>Register Plats</h1>
-                            <div class="formArea2" style="display: none">
-                                <form id="regPlats" action="regPlats.php" method="POST">
-                                    <select id="platsElev" onchange="elevPlatsPeriod();">
-                                    <?php
-                                        $allElev = allElev($conn);
+                            <form id="regPlats" action="regPlats.php" method="POST">
+                            <select>
+                            <?php
+                                $allElev = allElev($conn);
 
-                                        echo "<option disabled selected> Välj Elev </option>";
-                                        foreach ($allElev as $e) {
-                                            echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
-                                        }
-                                    ?>
-                                    </select>
-                                    <select id="platsForetag">
-                                    <?php
-                                        $foretag = foretag($conn);
-                                        echo "<option disabled selected> Välj Företag </option>";
-                                        foreach ($foretag as $f) {
-                                            echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
-                                        }
-                                    ?>
-                                    </select>
-                                    <select id="platsPeriod">
-                                    <?php
-                                        $allPeriod = allPeriod($conn);
-                                        echo "<option disabled selected> Välj Period </option>";
-                                        foreach ($allPeriod as $p) {
-                                            echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                        }
-                                    
-                                    echo'</select>'
-                                    ?>
-                                    <input id="subPlats" type="submit" value="Spara">
-                                </form>
-                            </div>
+                                echo "<option disabled selected> Välj Elev </option>";
+                                foreach ($allElev as $e) {
+                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsForetag">
+                            <?php
+                                $foretag = foretag($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($foretag as $f) {
+                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <select id="platsPeriod" onchange="elevPlatsPeriod();">
+                            <?php
+                                $allPeriod = allPeriod($conn);
+                                echo "<option disabled selected> Välj Period </option>";
+                                foreach ($allPeriod as $p) {
+                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                }
+                            
+                            echo'</select>'
+                            ?>
+                            <div id="restElever"></div>
+                            <input id="subPlats" type="submit" value="Spara">
+                        </form>
+                           
                         </div>
                     </div>
                 </div>

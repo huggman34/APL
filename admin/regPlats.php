@@ -10,7 +10,10 @@
      
         $exist=updatePlats($conn, $periodNamn, $elevID, $foretagID);
         if ($exist=="tom") {
-            registerPlats($conn,$elevID,$periodNamn,$foretagID);
+
+            foreach ($elevID as $e ) {
+                registerPlats($conn,$e,$periodNamn,$foretagID);
+            }
         }
         
     }

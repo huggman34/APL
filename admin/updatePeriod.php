@@ -3,6 +3,7 @@
     require_once '../RegisterFunctions.php';
     require_once '../ViewFunctions.php';
     require_once '../UpdateFunctions.php';
+      
     if (isset($_POST['Uperiodnamn'])) {
         $periodNamn=$_POST['Uperiodnamn'];
         $startdatum=$_POST['Ustartdatum'];

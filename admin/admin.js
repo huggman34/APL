@@ -230,9 +230,9 @@ function updateBP(elevID,foretagID,periodNamn) {
     ep.value = elevID;
 }
 
-function periodPlats(period) {
-    let element = document.getElementById("platsPeriod");
-    element.value = period;
+function klassPlats() {
+    let element = document.getElementById("platsKlass");
+    element.value = document.getElementById("platsKlass").value;
 }
 
 $('.navbar svg').click(function() {
@@ -561,10 +561,12 @@ $("#regPlats").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.s
     var form = $(this);
     var url = form.attr('action');
-    var elev = $("#platsElev").val();
     var foretag = $("#platsForetag").val();
     var period = $("#platsPeriod").val();
-    
+    var elev = [];
+    $("input[name='elevPlats']:checked").each(function(){
+     elev.push(this.value);
+ });
     $.ajax({
         type: "POST",
         url: url,
