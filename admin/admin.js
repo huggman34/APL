@@ -376,7 +376,7 @@ $(document).on('click','.foretagTable tbody tr',function(){
 
         success: function(data) {
             //alert(data);
-            //$('.foretagView').html(data);
+            $('.foretagView').html(data);
             $(".foretagInfo td").each( function() {
                 var thisCell = $(this);
                 var cellValue = thisCell.text();
