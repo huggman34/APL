@@ -8,13 +8,11 @@
         $klass = $_POST['elevKlass'];
         $epost = $_POST['epost'];
         $telefon = $_POST['nummer'];
-        $periodNamn = $_POST['periodN'];
-        $foretag = 0;
 
         registerKlass($conn, $klass);
      
-        $elevID=registerElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon);        
-        registerPlats($conn,$elevID,$periodNamn,$foretag);
+        registerElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon);        
+        
 
     }
 ?>
