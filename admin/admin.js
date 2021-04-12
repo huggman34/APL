@@ -154,6 +154,12 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
     }
 }
 
+function updatePeriod(periodID,slutdatum, startdatum) {
+    var update = document.createElement('div');
+    update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'><input type='text' id='Uperiodnamn' name='Uperiodnamn' placeholder='namn' value='"+periodID+"' required><input type='date' id='Ustartdatum' name='Ustartdatum' value='"+startdatum+"' required><input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required><div id='UdagList'></div>";
+    document.getElementById("uppDiv").appendChild(update);
+}
+
 function updateForetag(foretagID, namn, adress) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -269,9 +275,9 @@ function updateBP(elevID,foretagID,periodNamn) {
     ep.value = elevID;
 }
 
-function periodPlats(period) {
-    let element = document.getElementById("platsPeriod");
-    element.value = period;
+function klassPlats() {
+    let element = document.getElementById("platsKlass");
+    element.value = document.getElementById("platsKlass").value;
 }
 
 $('.navbar svg').click(function() {
@@ -561,29 +567,35 @@ $("#regPeriod").submit(function(e) {
          }
   });
 });
-$("#genPeriod").submit(function(e) {
+
+$("#updatePeriod").submit(function(e) {
 
     e.preventDefault();
     
-   var perio = $('#periodnamn').val();
-   var start = $('#startdatum').val();
-   var slut = $('#slutdatum').val();
-   var subin = $('#submin').val();
-   
+   var perio = $('#Uperiodnamn').val();
+   var start = $('#Ustartdatum').val();
+   var slut = $('#Uslutdatum').val();
+   var subin = $('#Usubmin').val();
+   var perioID = $('#periodID').val();
+   var dag = [];
+   $("input[name='UperiodDag']:checked").each(function(){
+    dag.push(this.value);
+});
     
          $.ajax({
-            url: 'regPeriod.php',
+            url: 'updatePeriod.php',
             type: 'POST',
             data: {
             periodnamn: perio,    
             startdatum: start,
             slutdatum: slut,
             submin: subin,
-            
+            periodDag: dag,
+            periodID: perioID
         },
     
       success: function(data) {
-     
+      $('#UdagList').html(data);
       alert(data);
          }
   });
@@ -594,10 +606,12 @@ $("#regPlats").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.s
     var form = $(this);
     var url = form.attr('action');
-    var elev = $("#platsElev").val();
     var foretag = $("#platsForetag").val();
     var period = $("#platsPeriod").val();
-    
+    var elev = [];
+    $("input[name='elevPlats']:checked").each(function(){
+     elev.push(this.value);
+ });
     $.ajax({
         type: "POST",
         url: url,

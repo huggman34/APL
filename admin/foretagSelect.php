@@ -55,5 +55,3 @@ return $data;
 
     }
     echo "</tbody></table>";
-
-?>
