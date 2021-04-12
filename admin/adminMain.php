@@ -261,6 +261,22 @@ if(checkAdminLogin()) {
                                     }
                                 });
                             };
+                            function handledarPlats() {
+                                var pls = $('#platsHandledare').val();
+                                var plk = $('#handKlass').val();
+                                $.ajax({
+                                    url: 'foretagSelect.php',
+                                    type: 'POST',
+                                    data: {
+                                        platsHandledare: pls,
+                                        platsKlass: plk 
+                                    },
+
+                                    success: function(data) {
+                                        $('#platsElever').html(data);
+                                    }
+                                });
+                            };
                             function dagPeriod() {
                                 var pN = $('#periodnamn').val();
                                 var startD = $('#startdatum').val();
@@ -597,25 +613,7 @@ if(checkAdminLogin()) {
                         <div id="platsReg" class="registerBox">
                             <h1>Register Plats</h1>
                             <form id="regPlats" action="regPlats.php" method="POST">
-                            <select>
-                            <?php
-                                $allElev = allElev($conn);
-
-                                echo "<option disabled selected> Välj Elev </option>";
-                                foreach ($allElev as $e) {
-                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <select id="platsForetag">
-                            <?php
-                                $foretag = foretag($conn);
-                                echo "<option disabled selected> Välj Företag </option>";
-                                foreach ($foretag as $f) {
-                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
-                                }
-                            ?>
-                            </select>
+                            
                             <select id="platsPeriod" onchange="elevPlatsPeriod();">
                             <?php
                                 $allPeriod = allPeriod($conn);
@@ -629,7 +627,20 @@ if(checkAdminLogin()) {
                             <div id="restElever"></div>
                             <input id="subPlats" type="submit" value="Spara">
                         </form>
-                           
+                        <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
+                            <select id="platsHandledare" onchange="handledarPlats();">
+                            <?php
+                                $hanlnedare = allHandledare($conn);
+                                echo "<option disabled selected> Välj Företag </option>";
+                                foreach ($hanlnedare as $f) {
+                                    echo "<option value='".$f['handledarID']."'> ".$f['fornamn'],$f['efternamn'],$f['namn']." </option>";
+                                }
+                            ?>
+                            </select>
+                            <input type="hidden" name="platsForetag" id="platsForetag">
+                            <div id="platsElever"></div>
+                            <input id="subPlats" type="submit" value="Spara">
+                            </form>
                         </div>
                     </div>
                 </div>

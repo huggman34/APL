@@ -611,13 +611,14 @@ $("#updatePeriod").submit(function(e) {
   });
 });
 
-$("#regPlats").submit(function(e) {
+$("#regPlatsHand").submit(function(e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.s
     var form = $(this);
     var url = form.attr('action');
     var foretag = $("#platsForetag").val();
     var period = $("#platsPeriod").val();
+    var hand =$("#platsHandledare").val();
     var elev = [];
     $("input[name='elevPlats']:checked").each(function(){
      elev.push(this.value);
@@ -628,7 +629,38 @@ $("#regPlats").submit(function(e) {
         data: {
             elev: elev,
             foretag: foretag,
-            period: period
+            period: period,
+            handledare: hand
+        }, // serializes the form's elements.
+
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+            $("#regPlatsHand")[0].reset();
+        }
+    });
+});
+
+$("#regPlats").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    var form = $(this);
+    var url = form.attr('action');
+    var foretag = $("#platsForetag").val();
+    var period = $("#platsPeriod").val();
+    var hand =$("#platsHandledare").val();
+    var elev = [];
+    $("input[name='elevPeriod']:checked").each(function(){
+     elev.push(this.value);
+ });
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            elev: elev,
+            foretag: foretag,
+            period: period,
+            handledare: hand
         }, // serializes the form's elements.
 
         success: function(data)

@@ -151,7 +151,7 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     }
 }
 
-function updatePlats($conn,$periodNamn,$elevID,$foretagID){
+function updatePlats($conn,$periodNamn,$elevID,$foretagID,$handledarID){
 
     $sql = "SELECT platsID FROM plats
     WHERE elevID = ?";
@@ -164,9 +164,9 @@ function updatePlats($conn,$periodNamn,$elevID,$foretagID){
         return "tom";
     }else{
         
-        $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=? WHERE platsID=?";
+        $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=?, handledarID=? WHERE platsID=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssii",$periodNamn,$elevID,$foretagID,$row['platsID']);
+        $stmt->bind_param("ssiii",$periodNamn,$elevID,$foretagID,$handledarID,$row['platsID']);
     
             
     if ($stmt->execute()){
@@ -174,6 +174,18 @@ return "ech";
     }else{
            return "Error"; 
     }}
+}
+function updatePlatsHand($conn,$handledarID,$platsID){
+    
+    $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
+        $result = mysqli_query($conn, $sql);
+        $data =  $result->fetch_assoc();
+        $foretagID=$data['foretagID'];
+
+    $sql = "UPDATE plats SET foretagID=?, handledarID=? WHERE platsID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii",$foretagID,$handledarID,$platsID);
+        $stmt->execute();
 }
 
 ?>
