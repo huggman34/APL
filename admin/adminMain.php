@@ -95,7 +95,7 @@ if(checkAdminLogin()) {
                                 $data = narvaroIdag($conn);
 
                                 echo "<table class='narvaroTable'>";
-                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Narvaro</th></tr></thead><tbody>";
+                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Narvaro</th><th></th></tr></thead><tbody>";
 
                                 foreach ($data as $row => $column) {
 
@@ -107,6 +107,9 @@ if(checkAdminLogin()) {
                                     $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
                         
                                     $column2 = str_replace($str, $rplc, $column);
+
+                                    $narvaroID = $column['narvaroID'];
+                                    $narvaro = $column2['narvaro'];
                                     
                                     echo "<tr><td>";
                                     echo $column['elevID'];
@@ -116,6 +119,8 @@ if(checkAdminLogin()) {
                                     echo $column['periodNamn'];
                                     echo "</td><td>";
                                     echo $column2['narvaro'];
+                                    echo "</td><td>";
+                                    echo "<button type='button' onclick=\"updateElevNarvaroIdag('$narvaroID', '$narvaro');\" >Update</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
@@ -153,7 +158,7 @@ if(checkAdminLogin()) {
                                 ]);
                                     var options = {
                                     pieHole: 0.4,
-                                    colors: ['#77dd77','#ff6961','#FEFE95','gainsboro'],
+                                    colors: ['#77dd77','#FEFE95','#ff6961','gainsboro'],
                                     chartArea:{
                                         left:70,
                                         width: '75%',
@@ -309,14 +314,15 @@ if(checkAdminLogin()) {
                         </div>
                     </div>
                 </div>
+
                 <div class="views" id="content3" style='display:none'>
-                <form action="adminMain.php" method="post">
-                <div id="delet2" class="deletbox">
-                <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?');" value="submit">
-                </div>
-                <div id="delet6" class="deletbox">
-                <input type="submit" name="delethandledare" onclick="return confirm('Är du säker?');" value="submit">
-                </div>
+                    <form action="adminMain.php" method="post">
+                    <div id="delet2" class="deletbox">
+                    <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?');" value="submit">
+                    </div>
+                    <div id="delet6" class="deletbox">
+                    <input type="submit" name="delethandledare" onclick="return confirm('Är du säker?');" value="submit">
+                    </div>
                 </form>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
@@ -326,6 +332,7 @@ if(checkAdminLogin()) {
                         </div>
                         <div id="foretagVy">
                             <?php
+                            
                                 $data = foretag($conn);
                             
                                 echo "<table class='foretagTable'>";
@@ -356,6 +363,7 @@ if(checkAdminLogin()) {
                                 echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Företag</th><th>E-post</th><th>Telefon</th></tr></thead><tbody>";
                             
                                 foreach ($data as $row) {
+                                    $handledarID = $row['handledarID'];
                                     $fornamn = $row['fornamn'];
                                     $efternamn = $row['efternamn'];
                                     $epost = $row['epost'];
@@ -372,6 +380,7 @@ if(checkAdminLogin()) {
                                     echo $epost;
                                     echo "</td><td>";
                                     echo $telefon;
+                                    echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Update</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
@@ -536,19 +545,36 @@ if(checkAdminLogin()) {
                                 </form>-->
                             </div>
                         </div>
-                        <div id="foretagReg" class="registerBox">
-                            <h1>Register Handledare</h1>
+                        <div id="foretagReg" class="registerBoxMini">
+                            <h1>Register Företag</h1>
                             <div class="formArea2" style="display: none">
                                 <form id="regForetag" action="regForetag.php" method="post">
-                                    <input id="Hfornamn" type="text" placeholder="Förnamn">
-                                    <input id="Hefternamn" type="text" placeholder="Efternamn">
-                                    <input id="Hepost" type="text" placeholder="E-post">
-                                    <input id="Htelefon" type="tel" placeholder="Telefon">
-
                                     <input id="Fnamn" type="text" placeholder="Företagsnamn">
-                                    <input id="losenord" type="password" placeholder="Lösenord">
                                     <input id="adress" type="text" placeholder="Adress">
                                     <input id="subForetag" type="submit" value="Spara">
+                                </form>
+                            </div>
+                        </div>
+                        <div id="handledarReg" class="registerBoxMini">
+                            <h1>Register Handledare</h1>
+                            <div class="formArea2" style="display: none">
+                                <form id="regHandledare" action="regHandledare.php" method="post">
+                                    <input id="Hnamn" type="text" placeholder="Förnamn">
+                                    <input id="Hefternamn" type="text" placeholder="Efternamn">
+                                    <input id="Hepost" type="text" placeholder="E-post">
+                                    <input id="telefon" type="text" placeholder="Tel">
+                                    <input id="losenord" type="password" placeholder="Lösenord">
+                                    <select id="foretagID">
+                                        <?php
+                                            $allForetag = foretag($conn);
+
+                                            foreach ($allForetag as $f) {
+                                                echo "<option disabled selected>Välj företag</option>";
+                                                echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                            }
+                                        ?>
+                                    </select>
+                                    <input id="subHandledare" type="submit" value="Spara">
                                 </form>
                             </div>
                         </div>
@@ -564,7 +590,7 @@ if(checkAdminLogin()) {
                                 <div id="dagList"></div>
                             </form>
                         </div>
-                        <div class="registerBox">
+                        <div id="platsReg" class="registerBox">
                             <h1>Register Plats</h1>
                             <form id="regPlats" action="regPlats.php" method="POST">
                             <select>
@@ -599,6 +625,7 @@ if(checkAdminLogin()) {
                             <div id="restElever"></div>
                             <input id="subPlats" type="submit" value="Spara">
                         </form>
+                           
                         </div>
                     </div>
                 </div>
