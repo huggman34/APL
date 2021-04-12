@@ -266,6 +266,20 @@ body{
     text-align: center;
 }
 
+#elevMenu {
+    position: relative;
+    height: 5%;
+    width: 100%;
+    display: none;
+}
+
+#foretagMenu {
+    position: relative;
+    height: 5%;
+    width: 100%;
+    display: none;
+}
+
 #updateElevNarvaroIdag {
     position: absolute;
     top: 0;

@@ -45,6 +45,17 @@ $(".registerPage").on('click', function() {
     //$("#homeIcon").css("fill", "white");
 });
 
+function toggleMenu(event) {
+    var thisCell = event.parentElement;
+    var menu = thisCell.lastChild;
+
+    if (window.getComputedStyle(menu).display === "none") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+}
+
 function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     var update = document.createElement('div');
     update.className = "updateElev";
@@ -301,8 +312,7 @@ $(".narvaroTable td").each( function() {
     if (cellValue == 'Oanmäld') {
         thisCell.css("background-color","gainsboro");
     }
- }
-)
+})
 
 $(document).on('click','.elevTable tbody tr',function(){
     var row = $(this);

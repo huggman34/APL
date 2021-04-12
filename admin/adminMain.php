@@ -337,7 +337,7 @@ if(checkAdminLogin()) {
                                 $data = foretag($conn);
                             
                                 echo "<table class='foretagTable'>";
-                                echo "<thead><tr><th>Företag</th><th>Adress</th></tr></thead><tbody>";
+                                echo "<thead><tr><th>Företag</th><th>Adress</th><th></th></tr></thead><tbody>";
                             
                                 foreach ($data as $row) {
                                     $foretagID = $row['foretagID'];
@@ -349,8 +349,11 @@ if(checkAdminLogin()) {
                                     echo "</td><td>";
                                     echo $row['adress'];
                                     echo "</td><td>";
-                                    echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >...</button>";
-                                    echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
+                                    echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
+                                    echo "<div id='foretagMenu'>";
+                                        echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
+                                    echo "</div>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
