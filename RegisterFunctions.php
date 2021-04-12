@@ -204,7 +204,7 @@
         
     }
 
-    function registerPlats($conn, $elevID, $periodNamn, $foretagID) {
+    function registerPlats($conn, $elevID, $periodNamn) {
 
         $dupeCheck = "SELECT * FROM plats WHERE elevID = ?";
     
@@ -215,8 +215,8 @@
         $result = $stmt->num_rows;
 
         if($result == 0) {
-            $stmt = $conn->prepare("INSERT INTO plats (periodNamn, foretagID, elevID) VALUES (?, ?, ?)");
-            $stmt->bind_param("sis", $periodNamn, $foretagID, $elevID);
+            $stmt = $conn->prepare("INSERT INTO plats (periodNamn, elevID) VALUES (?, ?)");
+            $stmt->bind_param("ss", $periodNamn, $elevID);
             
             if ($stmt->execute()) {
                 echo "Plats har lagts till";
