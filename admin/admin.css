@@ -461,6 +461,27 @@ h1 {
     text-align: center;
 }
 
+.periodList {
+    width: 48.75%;
+    height: 100%;
+    background-color: white;
+    padding: 1% 1% 1% 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-right: 2%;
+}
+
+.klassList {
+    width: 48.75%;
+    height: 100%;
+    background-color: white;
+    padding: 1% 1% 1% 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .elevList {
     width: 48.75%;
     height: 100%;
@@ -901,7 +922,7 @@ h1 {
 
 .elevklassTable {
     border-collapse: collapse;
-    margin: 3% 0;
+    
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
@@ -910,7 +931,7 @@ h1 {
 
 .elevklassTable tbody {
     display: block;
-    height: 10vh;
+    height: 40vh;
     overflow: auto;
     overflow-x: hidden;
 }

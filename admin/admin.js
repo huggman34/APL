@@ -607,7 +607,7 @@ $("#updatePeriod").submit(function(e) {
       success: function(data) {
       $('#UdagList').html(data);
       alert(data);
-         }
+    }
   });
 });
 
