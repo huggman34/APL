@@ -6,12 +6,12 @@
 
 $platsPeriod=$_POST['platsPeriod'];
 
-function selectPeriod($conn,$platsPeriod,$elevID){
+function selectPeriod($conn,$elevID){
 $sql = "SELECT * FROM elev INNER JOIN plats ON elev.elevID=plats.elevID
-WHERE plats.periodNamn=? AND plats.elevID=?";
+WHERE plats.elevID=?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $platsPeriod,$elevID);
+$stmt->bind_param("s",$elevID);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -37,7 +37,7 @@ return $data;
                 $platsKlass=$_POST['platsKlass'];
                 $elevID=$e['elevID'];
 
-                $data=selectPeriod($conn,$platsPeriod,$elevID);
+                $data=selectPeriod($conn,$elevID);
 
         if (empty($data) && $platsKlass==$e['klass']) {
 

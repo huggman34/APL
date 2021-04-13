@@ -4,14 +4,14 @@
     require_once '../ViewFunctions.php';
     require_once '../UpdateFunctions.php';
 
-$platsHandledare=$_POST['platsHandledare'];
+$platsHandledare=$_POST['foretagPeriod'];
 
-function selectForetag($conn,$platsKlass){
+function selectForetag($conn,$period){
 $sql = "SELECT * FROM plats INNER JOIN elev ON elev.elevID=plats.elevID
-WHERE plats.handledarID IS NULL AND plats.foretagID IS NULL AND elev.klass=?";
+WHERE plats.handledarID IS NULL AND plats.foretagID IS NULL AND plats.periodNamn=?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $platsKlass);
+$stmt->bind_param("s", $period);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -19,19 +19,19 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 return $data;
 }
 
-    $klass=selectTabel($conn,"klass");
-    echo'<select id="handKlass" onchange="handledarPlats();">';
-    echo "<option disabled selected> Välj klas </option>";
-    foreach ($klass as $kls) {
-        $kl=$kls['klass'];
-        echo"<option value='$kl'>$kl</option>";
+    $period=allHandledare($conn);
+    echo'<select id="platsHandledare">';
+    echo "<option disabled selected> Välj handledare </option>";
+    foreach ($period as $kls) {
+    
+        echo"<option value='".$kls['handledarID']."'>".$kls['fornamn'],$kls['efternamn'],$kls['namn']."</option>";
     }
     echo"</select>";
     echo "<table>";
     echo "<thead><tr><th>Elev</th><th>Klass</th><th>Period</th></tr></thead><tbody>";
 
-if (isset($_POST['platsKlass'])) {
-   $data=selectForetag($conn,$_POST['platsKlass']);    
+
+   $data=selectForetag($conn,$platsHandledare);    
     foreach ($data as $e) {
         
         $elevID =$e['platsID'];
@@ -47,5 +47,5 @@ if (isset($_POST['platsKlass'])) {
         
         
     }
-}
+
     echo "</tbody></table>";
