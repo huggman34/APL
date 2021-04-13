@@ -221,7 +221,7 @@ function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updateKlass";
-    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='foretagID' type='hidden' name='klass' value='"+klass+"'><input id='' type='text' name='nyKlass'><input type='submit'></form>";
+    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='' type='hidden' name='klass' value='"+klass+"'><input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'><input type='submit'></form>";
     
     $(document).ready(function(){
         $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
@@ -233,10 +233,171 @@ function updateKlass(klass) {
 
     if($("#updateKlass")[0]) {
         $("#updateKlass").remove();
-        document.getElementById("content5").appendChild(update);
+        document.getElementById("content4").appendChild(update);
 
     } else {
-        document.getElementById("content5").appendChild(update);
+        document.getElementById("content4").appendChild(update);
+    }
+}
+
+function updatePlats(elevID, foretagID, periodNamn) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='' type='hidden' name='klass' value='"+klass+"'><input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content4").appendChild(update);
+
+    } else {
+        document.getElementById("content4").appendChild(update);
+    }
+}
+
+function deleteKlass(klass) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content4").appendChild(update);
+
+    } else {
+        document.getElementById("content4").appendChild(update);
+    }
+}
+
+function deleteHandledare(handledarID) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content3").appendChild(update);
+
+    } else {
+        document.getElementById("content3").appendChild(update);
+    }
+}
+
+function deleteElev(elevID) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content2").appendChild(update);
+
+    } else {
+        document.getElementById("content2").appendChild(update);
+    }
+}
+
+function deleteForetag(foretagID) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content3").appendChild(update);
+
+    } else {
+        document.getElementById("content3").appendChild(update);
+    }
+}
+
+function deletePeriod(periodID) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content4").appendChild(update);
+
+    } else {
+        document.getElementById("content4").appendChild(update);
+    }
+}
+
+function deletePlats(platsID) {
+    var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updateKlass";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><input type='submit'></form>";
+    
+    $(document).ready(function(){
+        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updateKlass').remove();
+        });
+    });
+
+    if($("#updateKlass")[0]) {
+        $("#updateKlass").remove();
+        document.getElementById("content6").appendChild(update);
+
+    } else {
+        document.getElementById("content6").appendChild(update);
     }
 }
 
@@ -805,6 +966,25 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function () {  
+    $.ajax({  
+        type: "GET",  
+        url: "getForetag.php",  
+        data: "{}",  
+        success: function (data) {
+            var s = '<option value="-1">Please Select a Department</option>';
+
+            var myJson = JSON.parse(data);
+
+            for (var i = 0; i < myJson.length; i++) {  
+                s += '<option value="' + myJson[0].foretagID + '">' + myJson[0].namn + '</option>';  
+            }
+            //$(".content1").html(data);
+
+            //alert(s);
+        }  
+    });
+});  
 
 
 
