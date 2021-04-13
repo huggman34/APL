@@ -261,14 +261,12 @@ if(checkAdminLogin()) {
                                 });
                             };
                             function handledarPlats() {
-                                var pls = $('#platsHandledare').val();
-                                var plk = $('#handKlass').val();
+                                var pls = $('#foretagPeriod').val();
                                 $.ajax({
                                     url: 'foretagSelect.php',
                                     type: 'POST',
                                     data: {
-                                        platsHandledare: pls,
-                                        platsKlass: plk 
+                                        foretagPeriod: pls, 
                                     },
 
                                     success: function(data) {
@@ -476,7 +474,7 @@ if(checkAdminLogin()) {
                     <input type="submit" name="deletplats" onclick="return confirm('Är du säker?');" value="submit">
                     </div>
                 </form>
-                <form class="uppdatebox" id="regPl" action="regPlats.php" method="POST">
+                <form class="uppdatebox" id="regPl" action="regPlatsHand.php" method="POST">
                             <select id="ep">
                             <?php
                                 $allElev = allElev($conn);
@@ -489,10 +487,10 @@ if(checkAdminLogin()) {
                             </select>
                             <select id="fp">
                             <?php
-                                $foretag = foretag($conn);
+                                $foretag = allHandledare($conn);
                                 echo "<option disabled selected> Välj Företag </option>";
                                 foreach ($foretag as $f) {
-                                    echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                    echo "<option value='".$f['handledarID']."'> ".$f['fornamn'],$f['efternamn'],$f['namn']." </option>";
                                 }
                             ?>
                             </select>
@@ -506,6 +504,7 @@ if(checkAdminLogin()) {
                             
                             echo'</select>'
                             ?>
+                            <input type="hidden" id="pl">
                             <input id="subPl" type="submit" value="Spara">
                         </form>
                 <div class="platsList">
@@ -525,9 +524,9 @@ if(checkAdminLogin()) {
                                     $platsID=$row['platsID'];
                                     $elevID=$row['elevID'];
                                     $periodNamn=$row['periodNamn'];
-                                    $foretagID=$row['foretagID'];
+                                    $foretagID=$row['handledarID'];
                                     echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >...</button>";
-                                    echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >uppp</button>";
+                                    echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn','$platsID');\" >uppp</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
@@ -624,16 +623,15 @@ if(checkAdminLogin()) {
                             <input id="subPlats" type="submit" value="Spara">
                         </form>
                         <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
-                            <select id="platsHandledare" onchange="handledarPlats();">
+                            <select id="foretagPeriod" onchange="handledarPlats();">
                             <?php
-                                $hanlnedare = allHandledare($conn);
+                                $hanlnedare = allPeriod($conn);
                                 echo "<option disabled selected> Välj Företag </option>";
                                 foreach ($hanlnedare as $f) {
-                                    echo "<option value='".$f['handledarID']."'> ".$f['fornamn'],$f['efternamn'],$f['namn']." </option>";
+                                    echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
                                 }
                             ?>
                             </select>
-                            <input type="hidden" name="platsForetag" id="platsForetag">
                             <div id="platsElever"></div>
                             <input id="subPlats" type="submit" value="Spara">
                             </form>

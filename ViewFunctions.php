@@ -42,9 +42,10 @@
     }
 
     function elevPlats($conn) {
-        $sql = "SELECT plats.foretagID,plats.periodNamn,plats.platsID, plats.elevID, foretag.namn
+        $sql = "SELECT plats.handledarID,plats.foretagID,plats.periodNamn,plats.platsID, plats.elevID, foretag.namn
         FROM plats
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN handledare ON handledare.handledarID=plats.handledarID
         ORDER BY elevID ASC";
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
