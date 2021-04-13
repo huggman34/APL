@@ -157,12 +157,15 @@ function updatePlats($conn,$periodNamn,$elevID,$handledarID,$platsID){
         $result = mysqli_query($conn, $sql);
         $data =  $result->fetch_assoc();
         $foretagID=$data['foretagID'];
-        echo $foretagID;
+        
 
-        $sqpl = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=?, handledarID=? WHERE platsID=?";
-        $stmt = $conn->prepare($sqpl);
+        $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=?, handledarID=? WHERE platsID=?";
+        $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssiii",$periodNamn,$elevID,$foretagID,$handledarID,$platsID);
+        echo $foretagID,$platsID,$handledarID,$elevID,$periodNamn;
         $stmt->execute();
+
+        //$sql="SELECT * FROM plats INNER JOIN period ON plats.periodNamn=period.periodNamn INNER JOIN perioddag ON perioddag.periodNamn=period.periodNamn WHERE period";
 
    
 }

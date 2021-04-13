@@ -9,8 +9,8 @@
         $handledare= $_POST['handledare'];
         $plats=$_POST['plats'];
         
-        $exist=updatePlats($conn,$elevID,$periodNamn,$handledare,$plats);
-        echo $plats,$elevID,$periodNamn,$handledare,$exist;
+        $exist=updatePlats($conn,$periodNamn,$elevID,$handledare,$plats);
+        echo $exist;
   
     }else{
         $elevID = $_POST['elev'];

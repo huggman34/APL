@@ -117,7 +117,7 @@
     }
 
     function allElev($conn){
-        $sql= "SELECT * FROM elev";
+        $sql= "SELECT * FROM elev ORDER BY klass";
 
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
