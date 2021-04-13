@@ -165,9 +165,27 @@ function updatePlats($conn,$periodNamn,$elevID,$handledarID,$platsID){
         echo $foretagID,$platsID,$handledarID,$elevID,$periodNamn;
         $stmt->execute();
 
-        //$sql="SELECT * FROM plats INNER JOIN period ON plats.periodNamn=period.periodNamn INNER JOIN perioddag ON perioddag.periodNamn=period.periodNamn WHERE period";
+        $sql="DELETE FROM narvaro WHERE platsID='$platsID'";
+        $conn->query($sql);
+        
+                $sql2 = "SELECT perioddag.perioddagID FROM perioddag
+                WHERE perioddag.periodNamn = ?
+                ORDER BY perioddag.perioddagID ASC";
 
-   
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->bind_param("s", $periodNamn);
+                $stmt2->execute();
+                $result = $stmt2->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+
+                $periodDag = array_column($data, 'perioddagID');
+
+                
+                //Sätter in perioddagar i närvaro tabellen
+                foreach ($periodDag as $pDag) {
+                    mysqli_query($conn, "INSERT INTO narvaro (platsID, perioddagID)
+                    VALUES ('$platsID', '$pDag')");
+                }
 }
 function updatePlatsHand($conn,$handledarID,$platsID){
     
