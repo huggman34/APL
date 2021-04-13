@@ -43,7 +43,7 @@ function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag){
            $platsID=$rw['platsID'];
 
            $sql="INSERT INTO narvaro(perioddagID,platsID) VALUES ('$periodDagID','$platsID')";
-           $query = $conn->query($sql);
+    $conn->query($sql);
         }else{
             $sql="SELECT perioddag.perioddagID,dag.datum FROM perioddag INNER JOIN dag ON perioddag.dagID=dag.dagID WHERE perioddag.periodNamn='$newperiod'";
             $query = $conn->query($sql);
@@ -151,29 +151,41 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     }
 }
 
-function updatePlats($conn,$periodNamn,$elevID,$foretagID,$handledarID){
-
-    $sql = "SELECT platsID FROM plats
-    WHERE elevID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $elevID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    if(empty($row)){
-        return "tom";
-    }else{
+function updatePlats($conn,$periodNamn,$elevID,$handledarID,$platsID){
         
+        $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
+        $result = mysqli_query($conn, $sql);
+        $data =  $result->fetch_assoc();
+        $foretagID=$data['foretagID'];
+        
+
         $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=?, handledarID=? WHERE platsID=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssiii",$periodNamn,$elevID,$foretagID,$handledarID,$row['platsID']);
-    
-            
-    if ($stmt->execute()){
-return "ech";
-    }else{
-           return "Error"; 
-    }}
+        $stmt->bind_param("ssiii",$periodNamn,$elevID,$foretagID,$handledarID,$platsID);
+        echo $foretagID,$platsID,$handledarID,$elevID,$periodNamn;
+        $stmt->execute();
+
+        $sql="DELETE FROM narvaro WHERE platsID='$platsID'";
+        $conn->query($sql);
+        
+                $sql2 = "SELECT perioddag.perioddagID FROM perioddag
+                WHERE perioddag.periodNamn = ?
+                ORDER BY perioddag.perioddagID ASC";
+
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->bind_param("s", $periodNamn);
+                $stmt2->execute();
+                $result = $stmt2->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+
+                $periodDag = array_column($data, 'perioddagID');
+
+                
+                //Sätter in perioddagar i närvaro tabellen
+                foreach ($periodDag as $pDag) {
+                    mysqli_query($conn, "INSERT INTO narvaro (platsID, perioddagID)
+                    VALUES ('$platsID', '$pDag')");
+                }
 }
 function updatePlatsHand($conn,$handledarID,$platsID){
     

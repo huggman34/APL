@@ -437,7 +437,7 @@ function deletBoxH(ID) {
     nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
     document.getElementById("delet6").appendChild(nys);
 }
-function updateBP(elevID,foretagID,periodNamn) {
+function updateBP(elevID,foretagID,periodNamn,plats) {
     document.getElementById("regPl").style.visibility="visible";
     let pp = document.getElementById("pp");
     pp.value = periodNamn;
@@ -445,6 +445,8 @@ function updateBP(elevID,foretagID,periodNamn) {
     fp.value = foretagID;
     let ep = document.getElementById("ep");
     ep.value = elevID;
+    let pl = document.getElementById("pl");
+    pl.value = plats;
 }
 
 function klassPlats() {
@@ -777,8 +779,6 @@ $("#regPlatsHand").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.s
     var form = $(this);
     var url = form.attr('action');
-    var foretag = $("#platsForetag").val();
-    var period = $("#platsPeriod").val();
     var hand =$("#platsHandledare").val();
     var elev = [];
     $("input[name='elevPlats']:checked").each(function(){
@@ -789,8 +789,6 @@ $("#regPlatsHand").submit(function(e) {
         url: url,
         data: {
             elev: elev,
-            foretag: foretag,
-            period: period,
             handledare: hand
         }, // serializes the form's elements.
 
@@ -840,14 +838,16 @@ $("#regPl").submit(function(e) {
     var elev = $("#ep").val();
     var foretag = $("#fp").val();
     var period = $("#pp").val();
+    var plats = $("#pl").val();
     
     $.ajax({
         type: "POST",
         url: url,
         data: {
             elev: elev,
-            foretag: foretag,
-            period: period
+            handledare: foretag,
+            period: period,
+            plats: plats
         }, // serializes the form's elements.
 
         success: function(data)
