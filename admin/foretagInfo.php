@@ -48,7 +48,7 @@
         }
         echo "</tbody></table>";
     } else {
-        echo "Ingen data är tillgänglig";
+        echo "Ingen elev arbetar på detta företag";
     }
 
     /*$handledare = selectTabel($conn,"handledare");
