@@ -343,8 +343,8 @@ if(checkAdminLogin()) {
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
                         <div class="foretagListOptions">
-                            <button id="viewForetag">F</button>
-                            <button id="viewHandledare">H</button>
+                            <button id="viewForetag">Företag</button>
+                            <button id="viewHandledare">Handledare</button>
                         </div>
                         <div id="foretagVy">
                             <?php
