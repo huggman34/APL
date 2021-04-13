@@ -51,7 +51,7 @@
         echo "Ingen data är tillgänglig";
     }
 
-    $handledare = selectTabel($conn,"handledare");
+    /*$handledare = selectTabel($conn,"handledare");
     echo "<table class='foretagInfo'>";
     echo "<thead><tr><th>Namn</th><th>Epost</th><th>Telefon</th></tr></thead><tbody>";
 
@@ -70,5 +70,5 @@
             echo "</td></tr>";
         }
         }
-        echo "</tbody></table>";
+        echo "</tbody></table>";*/
 ?>
