@@ -64,11 +64,6 @@ if(checkAdminLogin()) {
                         <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5a.5.5 0 0 1 1 0z"/>
                     </svg>
                 </div>
-                <div class="registerKlass">
-                    <svg id="classIcon" xmlns="http://www.w3.org/2000/svg" height="23" width="23" fill="white" viewBox="0 0 35.5 35.5">
-                        <path d="M3.65,21.88a.73.73,0,0,1-.73-.73V8A3.64,3.64,0,0,1,6.56,4.38H12.4a.73.73,0,1,1,0,1.45H6.56A2.19,2.19,0,0,0,4.38,8V21.15A.73.73,0,0,1,3.65,21.88ZM25.52,19A9.48,9.48,0,1,1,35,9.48,9.49,9.49,0,0,1,25.52,19Zm0-17.5a8,8,0,1,0,8,8A8,8,0,0,0,25.52,1.46Zm0,13.12a.73.73,0,0,1-.73-.73V5.1a.73.73,0,0,1,1.46,0v8.75A.73.73,0,0,1,25.52,14.58Zm4.38-4.37H21.15a.73.73,0,1,1,0-1.46H29.9a.73.73,0,1,1,0,1.46ZM8.75,35a.75.75,0,0,1-.29-.06.73.73,0,0,1-.38-1l4.37-10.2a.73.73,0,1,1,1.34.57L9.42,34.56A.73.73,0,0,1,8.75,35Zm16,0a.73.73,0,0,1-.67-.44L19.75,24.35a.73.73,0,1,1,1.34-.57L25.46,34a.73.73,0,0,1-.38,1A.72.72,0,0,1,24.79,35Zm-8-2.92a.73.73,0,0,1-.73-.73V24.06a.73.73,0,0,1,1.46,0v7.29A.73.73,0,0,1,16.77,32.08Zm16-7.29H.73A.73.73,0,0,1,0,24.06V21.15a.73.73,0,0,1,.73-.73h19a.73.73,0,0,1,0,1.46H1.46v1.45H32.08V21.15a.73.73,0,0,1,1.46,0v2.91A.73.73,0,0,1,32.81,24.79Z"/>
-                    </svg>
-                </div>
                 <div class="registerPlats">
                     <svg id="platsIcon" xmlns="http://www.w3.org/2000/svg" height="23" width="23" fill="white" viewBox="0 0 43.95 50">
                         <path d="M22.07,8.79a10.24,10.24,0,0,0-7.69,17A8.25,8.25,0,0,1,18,21.67a5.32,5.32,0,0,1-1.31-3.51,5.37,5.37,0,1,1,9.44,3.51,8.35,8.35,0,0,1,3.63,4.14,10.24,10.24,0,0,0-7.7-17Zm0,6.93a2.45,2.45,0,1,1-2.44,2.44A2.44,2.44,0,0,1,22.07,15.72Zm0,7.82a5.36,5.36,0,0,0-5.26,4.3,10.21,10.21,0,0,0,10.52,0A5.35,5.35,0,0,0,22.07,23.54Zm16.11,8.78A8.79,8.79,0,1,0,47,41.11,8.8,8.8,0,0,0,38.18,32.32Zm2.93,10.26H39.65V44a1.47,1.47,0,1,1-2.93,0V42.58H35.25a1.47,1.47,0,0,1,0-2.93h1.47V38.18a1.47,1.47,0,0,1,2.93,0v1.47h1.46a1.47,1.47,0,1,1,0,2.93ZM38,29.4a18.92,18.92,0,0,0,3.08-9.12A19.25,19.25,0,0,0,32.35,3,19.08,19.08,0,0,0,3.07,20.28a18.87,18.87,0,0,0,3.71,10l14.11,19.1a1.47,1.47,0,0,0,2.36,0l3.69-5a11.55,11.55,0,0,1-.48-3.3A11.73,11.73,0,0,1,38,29.4ZM22.07,32.23A13.19,13.19,0,1,1,35.26,19,13.2,13.2,0,0,1,22.07,32.23Z" transform="translate(-3.03 0)"/>
@@ -324,10 +319,6 @@ if(checkAdminLogin()) {
                             <h1>Klicka på en elev</h1>
                         </div>
                         <div class="formHolder">
-                            <div class="formSelect">
-                                <button class="button">Registrera Elev</button>
-                                <button class="button2">Registrera Klass</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -414,48 +405,48 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
-                <form action="adminMain.php" method="post">
-                <div id="delet4" class="deletbox">
-                <input type="submit" name="deletperiod" onclick="return confirm('Är du säker?');" value="submit">
-                </div>
-                </form>
-                <!--Formen för updatering av period -->
-                <form id='updatePeriod' method='post'>
-                    <div id="uppDiv"></div>
-                        </form>
+                    <form action="adminMain.php" method="post">
+                    <div id="delet4" class="deletbox">
+                    <input type="submit" name="deletperiod" onclick="return confirm('Är du säker?');" value="submit">
+                    </div>
+                    </form>
+                    <!--Formen för updatering av period -->
+                    <form id='updatePeriod' method='post'>
+                        <div id="uppDiv"></div>
+                    </form>
                     <!-- PERIOD CONTENT HÄR -->
-                    <h1>Period content här</h1>
-                    <?php
-                    $period="period";
-                        $data = selectTabel($conn,$period);
-
-                        echo "<table class='elevklassTable'>";
-                        echo "<thead><tr><th>Period</th><th>Startdatum</th><th>Slutdatum</th></tr></thead>";
-
-                        foreach($data as $row){
-                            echo "<tbody><tr><td>";
-                            echo $row['periodNamn'];
-                            echo "</td><td>";
-                            echo $row['startdatum'];
-                            echo "</td><td>";
-                            echo $row['slutdatum'];
-                            echo "</td><td>";
-                            $periodID=$row['periodNamn'];
-                            $slutdatum=$row['slutdatum'];
-                            $startdatum=$row['startdatum'];
-                            echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >...</button>";
-                            echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Update</button>";
-                            echo "</td></tr></tbody>";
-                        }
-                        echo "</table>";
-                    ?>
-                </div>
-
-                <div class="views" id="content5" style='display:none'>
-                    <div class="elevklass">
-                        <!-- KLASS CONTENT HÄR-->
+                    <div class="periodList">
                         <?php
+                            $period="period";
+                            $data = selectTabel($conn,$period);
 
+                            echo "<table class='elevklassTable'>";
+                            echo "<thead><tr><th>Period</th><th>Startdatum</th><th>Slutdatum</th><th></th></tr></thead><tbody>";
+
+                            foreach($data as $row){
+                                $periodID=$row['periodNamn'];
+                                $slutdatum=$row['slutdatum'];
+                                $startdatum=$row['startdatum'];
+
+                                echo "<tr><td>";
+                                echo $row['periodNamn'];
+                                echo "</td><td>";
+                                echo $row['startdatum'];
+                                echo "</td><td>";
+                                echo $row['slutdatum'];
+                                echo "</td><td>";
+                                echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
+                                echo "<div id='foretagMenu'>";
+                                    echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >Ta bort</button>";
+                                    echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Update</button>";
+                                echo "</div>";
+                                echo "</td></tr>";
+                            }
+                            echo "</tbody></table>";
+                        ?>
+                    </div>
+                    <div class="klassList">
+                        <?php
                             $data = allKlass($conn);
 
                             echo "<table class='elevklassTable'>";
@@ -474,6 +465,7 @@ if(checkAdminLogin()) {
                         ?>
                     </div>
                 </div>
+
                 <div class="views" id="content6" style='display:none'>
                 <form action="adminMain.php" method="post">
                     <div id="delet3" class="deletbox">
