@@ -42,7 +42,7 @@ if(checkAdminLogin()) {
     </head>
     <body onload="donutChart(); elever();">
         <div id="wrapper">
-            <div id="snackbar">Some text some message..</div>
+            <div id="snackbar"></div>
             <div class="navbar">
                 <div class="logo"></div>
                 <div class="home">
@@ -567,19 +567,19 @@ if(checkAdminLogin()) {
                                 <li><div id="elevReg">Elev registrering</div></li>
                                     <div id="elevForm" class="formArea" style="display: none">
                                         <form id="regElev" action="regElev.php" method="POST">
-                                            <input id="namn" type="text" placeholder="Förnamn">
-                                            <input id="efternamn" type="text" placeholder="Efternamn">
-                                            <input id="epost" type="email" placeholder="E-post">
-                                            <input id="nummer" type="tel" placeholder="Nummer">
-                                            <input id="elevKlass" type="text" placeholder="Klass">
+                                            <input id="namn" type="text" placeholder="Förnamn" required>
+                                            <input id="efternamn" type="text" placeholder="Efternamn" required>
+                                            <input id="epost" type="email" placeholder="E-post" required>
+                                            <input id="nummer" type="tel" placeholder="Nummer" required>
+                                            <input id="elevKlass" type="text" placeholder="Klass" required>
                                             <input id="subElev" type="submit" namn="sub" value="Spara">
                                         </form>
                                     </div>
                                 <li><div id="foretagReg">Företag registrering</div></li>
                                     <div id="foretagForm" class="formArea2" style="display: none">
                                         <form id="regForetag" action="regForetag.php" method="post">
-                                            <input id="Fnamn" type="text" placeholder="Företagsnamn">
-                                            <input id="adress" type="text" placeholder="Adress">
+                                            <input id="Fnamn" type="text" placeholder="Företagsnamn" required>
+                                            <input id="adress" type="text" placeholder="Adress" required>
                                             <input id="subForetag" type="submit" value="Spara">
                                         </form>
                                     </div>
@@ -587,17 +587,17 @@ if(checkAdminLogin()) {
 
                                     <div id="handledarForm" class="formArea2" style="display: none">
                                         <form id="regHandledare" action="regHandledare.php" method="post">
-                                            <input id="Hnamn" type="text" placeholder="Förnamn">
-                                            <input id="Hefternamn" type="text" placeholder="Efternamn">
-                                            <input id="Hepost" type="email" placeholder="E-post">
-                                            <input id="telefon" type="text" placeholder="Tel">
-                                            <input id="losenord" type="password" placeholder="Lösenord">
-                                            <select id="foretagID">
+                                            <input id="Hnamn" type="text" placeholder="Förnamn" required>
+                                            <input id="Hefternamn" type="text" placeholder="Efternamn" required>
+                                            <input id="Hepost" type="email" placeholder="E-post" required>
+                                            <input id="telefon" type="text" placeholder="Tel" required>
+                                            <input id="losenord" type="password" placeholder="Lösenord" required>
+                                            <select id="foretagID" required>
                                                 <?php
                                                     $allForetag = foretag($conn);
 
+                                                    echo "<option disabled selected value=''>Välj företag</option>";
                                                     foreach ($allForetag as $f) {
-                                                        echo "<option disabled selected>Välj företag</option>";
                                                         echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
                                                     }
                                                 ?>
@@ -620,15 +620,15 @@ if(checkAdminLogin()) {
                                         </form>
                                     </div>
 
-                                <li><div id="platsReg">Plats registrering</div></li>
+                                <li><div id="platsDel1">Koppla period</div></li>
 
-                                <div id="platsForm" class="formArea" style="display: none">
+                                <div id="platsDel1Form" class="formArea" style="display: none">
                                     <form id="regPlats" action="regPlats.php" method="POST">
                                 
-                                        <select id="platsPeriod" onchange="elevPlatsPeriod();">
+                                        <select id="platsPeriod" onchange="elevPlatsPeriod();" required>
                                             <?php
                                                 $allPeriod = allPeriod($conn);
-                                                echo "<option disabled selected> Välj Period </option>";
+                                                echo "<option disabled selected value=''> Välj Period </option>";
                                                 foreach ($allPeriod as $p) {
                                                     echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
                                                 }
@@ -637,6 +637,11 @@ if(checkAdminLogin()) {
                                         <div id="restElever"></div>
                                         <input id="subPlats" type="submit" value="Spara">
                                     </form>
+                                </div>
+
+                                <li><div id="platsDel2">Koppla handledare och företag</div></li>
+
+                                <div id="platsDel2Form" class="formArea" style="display: none">
                                     <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
                                         <select id="foretagPeriod" onchange="handledarPlats();">
                                         <?php
@@ -651,6 +656,7 @@ if(checkAdminLogin()) {
                                         <input id="subPlats2" type="submit" value="Spara">
                                     </form>
                                 </div>
+
                             </ul>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ return $data;
     $elev=selectTabel($conn,"elev");
     $klass=selectTabel($conn,"klass");
     echo'<select id="platsKlass" onchange="elevPlatsPeriod();">';
-    echo "<option disabled selected> Välj klas </option>";
+    echo "<option disabled selected> Välj klass </option>";
     foreach ($klass as $kls) {
         $kl=$kls['klass'];
         echo"<option value='$kl'>$kl</option>";
