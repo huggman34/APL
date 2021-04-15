@@ -39,9 +39,9 @@
             $_SESSION['loggedin'] = true;
             $_SESSION["username"] = $username;
             //header('Location: ../narvaro/registerNarvaro.php');
-            return "välkommen $username";
+            return "valkommen";
         } else {
-            echo "Felaktig inloggningsuppgifter";
+            return "Felaktiga inloggningsuppgifter";
         }
     }
 
