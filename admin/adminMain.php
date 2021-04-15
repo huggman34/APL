@@ -254,6 +254,7 @@ if(checkAdminLogin()) {
 
                                     success: function(data) {
                                         $('#restElever').html(data);
+                                        klassPlats(plk);
                                     }
                                 });
                             };

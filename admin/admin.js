@@ -505,9 +505,9 @@ function updateBP(elevID,foretagID,periodNamn,plats) {
     pl.value = plats;
 }
 
-function klassPlats() {
+function klassPlats(klass) {
     let element = document.getElementById("platsKlass");
-    element.value = document.getElementById("platsKlass").value;
+    element.value = klass;
 }
 
 $('.navbar svg').click(function() {
