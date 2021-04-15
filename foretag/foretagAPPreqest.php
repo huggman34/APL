@@ -7,6 +7,7 @@
     require_once "../LoginFunctions.php";
     require_once "../ViewFunctions.php";
     require_once "../RegisterFunctions.php";
+    require_once "../UpdateFunctions.php";
 
     
         if(isset($_GET['submit'])) {
@@ -23,9 +24,9 @@
         
         if(isset($_GET['subit'])) {
             $login=foretagLogin($conn, $_GET['username'], $_GET['password']);
-            echo json_encode($login);
+            echo $login;
         }
         if(isset($_GET['sub'])){
-            registerNarvaro($conn,$_GET['perioddag'],$_GET['elevID'],$_GET['narvaro']);
+            updateNarvaro($conn,$_GET['narvaroID'],$_GET['narvaro']);
         }
     ?>

@@ -15,13 +15,14 @@
     }
     
     function narvaroIdagForetag($conn,$foretag) {
-        $sql = "SELECT plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
+        $sql = "SELECT narvaro.narvaroID,plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
         FROM narvaro
         INNER JOIN plats ON plats.platsID = narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN handledare ON handledare.handledarID = plats.handledarID
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
+        WHERE dag.datum = CURRENT_DATE AND handledare.epost=?";
       
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $foretag);

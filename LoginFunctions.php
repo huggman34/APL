@@ -27,13 +27,13 @@
 
     function foretagLogin($conn, $username, $password) {
 
-        $stmt = $conn->prepare('SELECT * FROM foretag WHERE namn = ?');
+        $stmt = $conn->prepare('SELECT * FROM handledare WHERE epost = ?');
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
-        if(!empty($row['namn']) && password_verify($password, $row['losenord'])) {
+        if(!empty($row['epost']) && password_verify($password, $row['losenord'])) {
             session_start();
 
             $_SESSION['loggedin'] = true;
