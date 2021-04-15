@@ -151,7 +151,7 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     }
 }
 
-function updatePlats($conn,$periodNamn,$elevID,$handledarID,$platsID){
+function updatePlats($conn,$periodNamn,$handledarID,$platsID){
         
         $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
         $result = mysqli_query($conn, $sql);
@@ -159,10 +159,9 @@ function updatePlats($conn,$periodNamn,$elevID,$handledarID,$platsID){
         $foretagID=$data['foretagID'];
         
 
-        $sql = "UPDATE plats SET periodNamn=?, elevID=?, foretagID=?, handledarID=? WHERE platsID=?";
+        $sql = "UPDATE plats SET periodNamn=?, foretagID=?, handledarID=? WHERE platsID=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssiii",$periodNamn,$elevID,$foretagID,$handledarID,$platsID);
-        echo $foretagID,$platsID,$handledarID,$elevID,$periodNamn;
+        $stmt->bind_param("siii",$periodNamn,$foretagID,$handledarID,$platsID);
         $stmt->execute();
 
         $sql="DELETE FROM narvaro WHERE platsID='$platsID'";

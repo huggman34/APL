@@ -2,8 +2,8 @@
     require_once '../connection.php';
     require_once "../ViewFunctions.php";
 
-    $foretag = allHandledare($conn);
-    $data = json_encode($foretag);
+    $allPeriod = allPeriod($conn);
+    $data = json_encode($allPeriod);
 
     print_r($data);
 ?>
