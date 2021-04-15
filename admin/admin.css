@@ -921,7 +921,7 @@ h1 {
 
 .elevklassTable {
     border-collapse: collapse;
-    
+    height: 100%;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
@@ -930,7 +930,7 @@ h1 {
 
 .elevklassTable tbody {
     display: block;
-    height: 40vh;
+    height: 91%;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -1129,6 +1129,10 @@ h1 {
     padding: 1% 1% 1% 5%;
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .regMenu ul li div:hover{

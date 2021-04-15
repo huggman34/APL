@@ -50,10 +50,10 @@
             $stmt->bind_param("ss", $namn, $adress);
             $stmt->execute();
 
-            echo "Records added successfully.";
+            echo "$namn har registrerats.";
 
         } else {
-            $namnError = "Företaget är redan registrerad";
+            $namnError = "$namn är redan registrerad";
             echo $namnError;
         }
     }
@@ -75,11 +75,10 @@
             $stmt->bind_param("isssss", $foretagID, $fornamn, $efternamn, $epost, $telefon, $hashed_losenord);
             $stmt->execute();
 
-            echo "Records added successfully.";
+            echo "$fornamn $efternamn är nu registrerad.";
             
         } else {
-            $namnError = "Handledare är redan registrerad";
-
+            $namnError = "$fornamn $efternamn är redan registrerad";
             echo $namnError;
         }
     }
@@ -184,32 +183,35 @@
     function periodGeneration($conn,$periodNamn,$startdatum,$slutdatum,$dag) {
         $stmt = $conn->prepare("INSERT INTO period(periodNamn,startdatum,slutdatum) VALUES(?,?,?)");
         $stmt->bind_param("sss", $periodNamn, $startdatum, $slutdatum);
-        $stmt->execute();
+
+        if($stmt->execute()) {
+            echo "$periodNamn perioden har skapats";
+        } else {
+            echo "Något gick fel";
+        }
        
         foreach ($dag as $datum) { 
            
-                $sql="SELECT * FROM dag WHERE datum='$datum'";
-                $query = $conn->query($sql);
-                $resultat = $query->fetch_assoc();
+            $sql="SELECT * FROM dag WHERE datum='$datum'";
+            $query = $conn->query($sql);
+            $resultat = $query->fetch_assoc();
                     
-                if (empty($resultat)) {
+            if (empty($resultat)) {
                 $sql = "INSERT INTO dag(datum) VALUES('$datum')";
                 $conn->query($sql);
-                }
-                $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$periodNamn' AND dag.datum='$datum'";
-                $conn->query($sql);
             }
-        
-       
-        
+
+            $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$periodNamn' AND dag.datum='$datum'";
+            $conn->query($sql);
+        }
     }
 
     function registerPlats($conn, $elevID, $periodNamn) {
 
-        $dupeCheck = "SELECT * FROM plats WHERE elevID = ? AND periodnamn=?";
+        $dupeCheck = "SELECT * FROM plats WHERE elevID = ? AND periodNamn = ?";
     
         $stmt = $conn->prepare($dupeCheck);
-        $stmt->bind_param("s", $elevID,$periodNamn);
+        $stmt->bind_param("ss", $elevID, $periodNamn);
         $stmt->execute();
         $stmt->store_result();
         $result = $stmt->num_rows;
@@ -219,7 +221,7 @@
             $stmt->bind_param("ss", $periodNamn, $elevID);
             
             if ($stmt->execute()) {
-                echo "Plats har lagts till";
+                echo "$elevID har lagts till ";
 
                 $sql = "SELECT platsID, periodNamn FROM plats WHERE periodNamn IS NOT NULL ORDER BY platsID DESC LIMIT 1";
                 $result = $conn->query($sql) or die($conn->error);

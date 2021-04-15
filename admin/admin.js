@@ -556,7 +556,6 @@ $(document).on('click','.elevTable tbody tr',function(){
         },
 
         success: function(data) {
-            //alert(data);
             $('.narvaroView').html(data);
             $(".elevNarvaro td").each( function() {
                 var thisCell = $(this);
@@ -594,7 +593,6 @@ $(document).on('click','.foretagTable tbody tr',function(){
         },
 
         success: function(data) {
-            //alert(data);
             $('.foretagView').html(data);
             $(".foretagInfo td").each( function() {
                 var thisCell = $(this);
@@ -680,8 +678,13 @@ $("#regElev").submit(function(e) {
 
         success: function(data)
         {
-            alert(data); // show response from the php script.
-            //snackbar();
+            $("#snackbar").append(data);
+            if(data == "Fyll i alla fält") {
+                $("#snackbar").css("background-color", "#FF6961");
+            } else {
+                $("#snackbar").css("background-color", "#77DD77");
+            }
+            snackbar();
             $("#regElev")[0].reset();
         }
     });
@@ -706,7 +709,15 @@ $("#regForetag").submit(function(e) {
 
         success: function(data)
         {
-            alert(data); // show response from the php script.
+            $("#snackbar").append(data);
+            if(data == "Fyll i alla fält") {
+                $("#snackbar").css("background-color", "#FF6961");
+            } else if ((~data.indexOf("är redan registrerad"))) {
+                $("#snackbar").css("background-color", "#FF6961");
+            } else {
+                $("#snackbar").css("background-color", "#77DD77");
+            }
+            snackbar();
             $("#regForetag")[0].reset();
         }
     });
@@ -739,7 +750,17 @@ $("#regHandledare").submit(function(e) {
 
         success: function(data)
         {
-            alert(data); // show response from the php script.
+            $("#snackbar").append(data);
+
+            if(data == "Fyll i alla fält") {
+                $("#snackbar").css("background-color", "#FF6961");
+            } else if ((~data.indexOf("är redan registrerad"))) {
+                $("#snackbar").css("background-color", "#FF6961");
+            } else {
+                $("#snackbar").css("background-color", "#77DD77");
+            }
+
+            snackbar();
             $("#regHandledare")[0].reset();
         }
     });
@@ -767,23 +788,25 @@ $("#regKlass").submit(function(e) {
         }
     });
 });
+
 $("#regPeriod").submit(function(e) {
 
     e.preventDefault();
     
-   var perio = $('#periodnamn').val();
-   var start = $('#startdatum').val();
-   var slut = $('#slutdatum').val();
-   var subin = $('#submin').val();
-   var dag = [];
-   $("input[name='periodDag']:checked").each(function(){
-    dag.push(this.value);
-});
+    var perio = $('#periodnamn').val();
+    var start = $('#startdatum').val();
+    var slut = $('#slutdatum').val();
+    var subin = $('#submin').val();
+    var dag = [];
     
-         $.ajax({
-            url: 'regPeriod.php',
-            type: 'POST',
-            data: {
+    $("input[name='periodDag']:checked").each(function(){
+        dag.push(this.value);
+    });
+    
+    $.ajax({
+        url: 'regPeriod.php',
+        type: 'POST',
+        data: {
             periodnamn: perio,    
             startdatum: start,
             slutdatum: slut,
@@ -791,11 +814,22 @@ $("#regPeriod").submit(function(e) {
             periodDag: dag
         },
     
-      success: function(data) {
-      $('#dagList').html(data);
-      alert(data);
-         }
-  });
+        success: function(data) {
+
+            $("#snackbar").append(data);
+
+            if ((~data.indexOf("perioden har skapats"))) {
+                $("#snackbar").css("background-color", "#77DD77");
+            } else {
+                $("#snackbar").css("background-color", "#FF6961");
+            }
+
+            snackbar();
+
+            $('#dagList').empty();
+            $("#regPeriod")[0].reset();
+        }
+    });
 });
 
 $("#updatePeriod").submit(function(e) {
@@ -881,7 +915,17 @@ $("#regPlats").submit(function(e) {
 
         success: function(data)
         {
-            alert(data); // show response from the php script.
+            //alert(data); // show response from the php script.
+            $("#snackbar").append(data);
+
+            if ((~data.indexOf("har lagts till"))) {
+                $("#snackbar").css("background-color", "#77DD77");
+            } else {
+                $("#snackbar").css("background-color", "#FF6961");
+            }
+
+            snackbar();
+
             $("#regPlats")[0].reset();
         }
     });
@@ -972,16 +1016,28 @@ $(document).ready(function(){
         $("#handledarForm").css("display", "block");
     });
 
-    $('#platsReg').on('click', function() {
+    $('#platsDel1').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
-            $("#platsReg").addClass("active");
+            $("#platsDel1").addClass("active");
         }
 
         $('.regContent').children().hide();
-        $('.regContent').append($('#platsForm'));
-        $("#platsForm").css("display", "block");
+        $('.regContent').append($('#platsDel1Form'));
+        $("#platsDel1Form").css("display", "block");
     });
+
+    $('#platsDel2').on('click', function() {
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#platsDel2").addClass("active");
+        }
+
+        $('.regContent').children().hide();
+        $('.regContent').append($('#platsDel2Form'));
+        $("#platsDel2Form").css("display", "block");
+    });
+    
 
     $('#periodReg').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
@@ -999,6 +1055,10 @@ function snackbar() {
     var x = document.getElementById("snackbar");
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+    setTimeout(function() { 
+        $("#snackbar").empty();
+    }, 3010);
 }
 
 /*$(document).ready(function(){

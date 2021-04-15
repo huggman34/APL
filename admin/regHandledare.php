@@ -1,8 +1,8 @@
 <?php
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
-
-    if(isset($_POST['fornamn'], $_POST['efternamn'], $_POST['epost'], $_POST['telefon'], $_POST['losenord'], $_POST['foretagID'])) {
+    
+    if(!empty($_POST['fornamn']) && !empty($_POST['efternamn']) && !empty($_POST['epost']) && !empty($_POST['telefon']) && !empty($_POST['losenord']) && !empty($_POST['foretagID'])) {
         $foretagID = $_POST['foretagID'];
         $fornamn = $_POST['fornamn'];
         $efternamn = $_POST['efternamn'];
@@ -11,5 +11,8 @@
         $losenord = $_POST['losenord'];
 
         registerHandledare($conn, $foretagID, $fornamn, $efternamn, $epost, $telefon, $losenord);
+
+    } else {
+        echo "Fyll i alla fält";
     }
 ?>
