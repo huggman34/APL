@@ -253,7 +253,7 @@ if(checkAdminLogin()) {
                                     },
 
                                     success: function(data) {
-                                        $('#restElever').append(data);
+                                        $('#restElever').html(data);
                                         //klassPlats(plk);
                                     }
                                 });
