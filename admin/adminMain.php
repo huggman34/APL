@@ -253,8 +253,8 @@ if(checkAdminLogin()) {
                                     },
 
                                     success: function(data) {
-                                        $('#restElever').html(data);
-                                        klassPlats(plk);
+                                        $('#restElever').append(data);
+                                        //klassPlats(plk);
                                     }
                                 });
                             };
@@ -632,6 +632,16 @@ if(checkAdminLogin()) {
                                                 echo "<option disabled selected value=''> Välj Period </option>";
                                                 foreach ($allPeriod as $p) {
                                                     echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <select id="platsKlass" onchange="elevPlatsPeriod();" required>
+                                            <option disabled selected value=''> Välj klass </option>
+                                            <?php
+                                                $klass=selectTabel($conn,"klass");
+                                                foreach ($klass as $kls) {
+                                                    $kl=$kls['klass'];
+                                                    echo"<option value='$kl'>$kl</option>";
                                                 }
                                             ?>
                                         </select>

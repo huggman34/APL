@@ -20,7 +20,7 @@ return $data;
 }
     
     $elev=selectTabel($conn,"elev");
-    $klass=selectTabel($conn,"klass");
+    /*$klass=selectTabel($conn,"klass");
     echo'<select id="platsKlass" onchange="elevPlatsPeriod();">';
     echo "<option disabled selected> Välj klass </option>";
     foreach ($klass as $kls) {
@@ -29,7 +29,7 @@ return $data;
     }
     echo"</select>";
     echo "<table>";
-    echo "<thead><tr><th>Elev</th><th>Klass</th></tr></thead><tbody>";
+    echo "<thead><tr><th>Elev</th><th>Klass</th></tr></thead><tbody>";*/
 
     
     foreach ($elev as $e) {
@@ -55,5 +55,6 @@ return $data;
 
     }
     echo "</tbody></table>";
+
 
 ?>
