@@ -206,10 +206,10 @@
 
     function registerPlats($conn, $elevID, $periodNamn) {
 
-        $dupeCheck = "SELECT * FROM plats WHERE elevID = ?";
+        $dupeCheck = "SELECT * FROM plats WHERE elevID = ? AND periodnamn=?";
     
         $stmt = $conn->prepare($dupeCheck);
-        $stmt->bind_param("s", $elevID);
+        $stmt->bind_param("s", $elevID,$periodNamn);
         $stmt->execute();
         $stmt->store_result();
         $result = $stmt->num_rows;
