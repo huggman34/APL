@@ -24,9 +24,12 @@
         
         if(isset($_GET['subit'])) {
             $login=foretagLogin($conn, $_GET['username'], $_GET['password']);
-            echo $login;
+            $log['login'] = array();
+            $arr= array('svar'=>$login);
+            array_push($log['login'],$arr);
+            echo json_encode($log);
         }
         if(isset($_GET['sub'])){
-            updateNarvaro($conn,$_GET['narvaroID'],$_GET['narvaro']);
+            updateElevNarvaroAPP($conn,$_GET['narvaro'],$_GET['narvaroID']);
         }
     ?>

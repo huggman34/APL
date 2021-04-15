@@ -125,6 +125,18 @@ function updateElevNarvaro($conn, $narvaro, $narvaroID){
     }
 }
 
+function updateElevNarvaroAPP($conn, $narvaro, $narvaroID){
+    $sql = "UPDATE narvaro SET narvaro = ? WHERE narvaroID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $narvaro, $narvaroID);
+
+    if ($stmt->execute()){
+        echo "Elev Narvaro updated";
+    }else{
+       return "Error"; 
+    }
+}
+
 function updateHandledare($conn, $fornamn, $efternamn, $foretagID, $epost, $telefon, $handledarID){
     $sql = "UPDATE handledare SET fornamn = ?, efternamn = ?, foretagID = ?, epost = ?, telefon = ? WHERE handledarID=?";
     $stmt = $conn->prepare($sql);
