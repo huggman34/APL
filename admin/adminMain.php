@@ -42,6 +42,7 @@ if(checkAdminLogin()) {
     </head>
     <body onload="donutChart(); elever();">
         <div id="wrapper">
+            <div id="snackbar">Some text some message..</div>
             <div class="navbar">
                 <div class="logo"></div>
                 <div class="home">
@@ -527,18 +528,22 @@ if(checkAdminLogin()) {
                                     $elevID=$row['elevID'];
                                     $periodNamn=$row['periodNamn'];
                                     $foretagID=$row['foretagID'];
+                                    $handledarID = $row['handledarID'];
+                                    $handledarFornamn = $row['fornamn'];
+                                    $handledarEfternamn = $row['efternamn'];
 
                                     echo "<tr><td>";
                                     echo $row['elevID'];
                                     echo "</td><td>";
                                     echo $row['namn'];
                                     echo "</td><td>";
-                                    echo $row['handledarID'];
+                                    echo "$handledarFornamn $handledarEfternamn";
                                     echo "</td><td>";
                                     echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
                                     echo "<div id='foretagMenu'>";
                                         //echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >Ta bort</button>";
-                                        echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >Update</button>";
+                                        //echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >Update</button>";
+                                        echo "<button type='button' onclick=\"updatePlats('$platsID','$handledarID','$periodNamn');\" >Update</button>";
                                         echo "<button type='button' onclick=\"deletePlats('$platsID');\" >Ta bort</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
@@ -555,100 +560,98 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content7" style='display:none'>
-                    <div class="row1">
-                        <!--Row Holder-->
-                        <div id="elevReg" class="registerBox">
-                            <h1>Register Elev</h1>
-                            <div class="formArea" style="display: none">
-                                <form id="regElev" action="regElev.php" method="POST">
-                                    <input id="namn" type="text" placeholder="Förnamn">
-                                    <input id="efternamn" type="text" placeholder="Efternamn">
-                                    <input id="epost" type="text" placeholder="E-post">
-                                    <input id="nummer" type="tel" placeholder="Nummer">
-                                    <input id="elevKlass" type="text" placeholder="Klass">
-                                    <input id="subElev" type="submit" namn="sub" value="Spara">
-                                </form>
-                                <!--<form id="regKlass" action="regKlass.php" method="POST">
-                                    <input id="klassNamn" type="text" placeholder="Klass">
-                                    <input id="subKlass" type="submit" value="Spara">
-                                </form>-->
-                            </div>
-                        </div>
-                        <div id="foretagReg" class="registerBoxMini">
-                            <h1>Register Företag</h1>
-                            <div class="formArea2" style="display: none">
-                                <form id="regForetag" action="regForetag.php" method="post">
-                                    <input id="Fnamn" type="text" placeholder="Företagsnamn">
-                                    <input id="adress" type="text" placeholder="Adress">
-                                    <input id="subForetag" type="submit" value="Spara">
-                                </form>
-                            </div>
-                        </div>
-                        <div id="handledarReg" class="registerBoxMini">
-                            <h1>Register Handledare</h1>
-                            <div class="formArea2" style="display: none">
-                                <form id="regHandledare" action="regHandledare.php" method="post">
-                                    <input id="Hnamn" type="text" placeholder="Förnamn">
-                                    <input id="Hefternamn" type="text" placeholder="Efternamn">
-                                    <input id="Hepost" type="text" placeholder="E-post">
-                                    <input id="telefon" type="text" placeholder="Tel">
-                                    <input id="losenord" type="password" placeholder="Lösenord">
-                                    <select id="foretagID">
-                                        <?php
-                                            $allForetag = foretag($conn);
+                    <div class="regSida">
+                        <div class="regContent"></div>
+                        <div class="regMenu">
+                            <ul>
+                                <li><div id="elevReg">Elev registrering</div></li>
+                                    <div id="elevForm" class="formArea" style="display: none">
+                                        <form id="regElev" action="regElev.php" method="POST">
+                                            <input id="namn" type="text" placeholder="Förnamn">
+                                            <input id="efternamn" type="text" placeholder="Efternamn">
+                                            <input id="epost" type="email" placeholder="E-post">
+                                            <input id="nummer" type="tel" placeholder="Nummer">
+                                            <input id="elevKlass" type="text" placeholder="Klass">
+                                            <input id="subElev" type="submit" namn="sub" value="Spara">
+                                        </form>
+                                    </div>
+                                <li><div id="foretagReg">Företag registrering</div></li>
+                                    <div id="foretagForm" class="formArea2" style="display: none">
+                                        <form id="regForetag" action="regForetag.php" method="post">
+                                            <input id="Fnamn" type="text" placeholder="Företagsnamn">
+                                            <input id="adress" type="text" placeholder="Adress">
+                                            <input id="subForetag" type="submit" value="Spara">
+                                        </form>
+                                    </div>
+                                <li><div id="handledarReg">Handledar registrering</div></li>
 
-                                            foreach ($allForetag as $f) {
-                                                echo "<option disabled selected>Välj företag</option>";
-                                                echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                    <div id="handledarForm" class="formArea2" style="display: none">
+                                        <form id="regHandledare" action="regHandledare.php" method="post">
+                                            <input id="Hnamn" type="text" placeholder="Förnamn">
+                                            <input id="Hefternamn" type="text" placeholder="Efternamn">
+                                            <input id="Hepost" type="email" placeholder="E-post">
+                                            <input id="telefon" type="text" placeholder="Tel">
+                                            <input id="losenord" type="password" placeholder="Lösenord">
+                                            <select id="foretagID">
+                                                <?php
+                                                    $allForetag = foretag($conn);
+
+                                                    foreach ($allForetag as $f) {
+                                                        echo "<option disabled selected>Välj företag</option>";
+                                                        echo "<option value='".$f['foretagID']."'> ".$f['namn']." </option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                            <input id="subHandledare" type="submit" value="Spara">
+                                        </form>
+                                    </div>
+
+                                <li><div id="periodReg">Period registrering</div></li>
+
+                                    <div id="periodForm" class="formArea" style="display: none">
+                                        <form id="regPeriod" method="post">
+                                            <input type="text" id="periodnamn" name="periodnamn" placeholder="Period namn" required>
+                                            <label for="startDatum">Start Datum</label>
+                                            <input type="date" id="startdatum" name="startdatum" required>
+                                            <label for="slutDatum">Slut Datum</label>
+                                            <input type="date" id="slutdatum" name="slutdatum" onchange="dagPeriod();" required>
+                                        
+                                            <div id="dagList"></div>
+                                        </form>
+                                    </div>
+
+                                <li><div id="platsReg">Plats registrering</div></li>
+
+                                <div id="platsForm" class="formArea" style="display: none">
+                                    <form id="regPlats" action="regPlats.php" method="POST">
+                                
+                                        <select id="platsPeriod" onchange="elevPlatsPeriod();">
+                                            <?php
+                                                $allPeriod = allPeriod($conn);
+                                                echo "<option disabled selected> Välj Period </option>";
+                                                foreach ($allPeriod as $p) {
+                                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div id="restElever"></div>
+                                        <input id="subPlats" type="submit" value="Spara">
+                                    </form>
+                                    <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
+                                        <select id="foretagPeriod" onchange="handledarPlats();">
+                                        <?php
+                                            $hanlnedare = allPeriod($conn);
+                                            echo "<option disabled selected> Välj Företag </option>";
+                                            foreach ($hanlnedare as $f) {
+                                                echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
                                             }
                                         ?>
-                                    </select>
-                                    <input id="subHandledare" type="submit" value="Spara">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row2">
-                        <div class="registerBox">
-                            <h1>Register Period</h1>
-                            <form id="regPeriod" method="post">
-                                <input type="text" id="periodnamn" name="periodnamn" placeholder="namn" required>
-                                <input type="date" id="startdatum" name="startdatum" required>
-                                <input type="date" id="slutdatum" name="slutdatum" onchange="dagPeriod();" required>
-                               
-                                <div id="dagList"></div>
-                            </form>
-                        </div>
-                        <div id="platsReg" class="registerBox">
-                            <h1>Register Plats</h1>
-                            <form id="regPlats" action="regPlats.php" method="POST">
-                            
-                            <select id="platsPeriod" onchange="elevPlatsPeriod();">
-                            <?php
-                                $allPeriod = allPeriod($conn);
-                                echo "<option disabled selected> Välj Period </option>";
-                                foreach ($allPeriod as $p) {
-                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                }
-                            
-                            echo'</select>'
-                            ?>
-                            <div id="restElever"></div>
-                            <input id="subPlats" type="submit" value="Spara">
-                        </form>
-                        <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
-                            <select id="foretagPeriod" onchange="handledarPlats();">
-                            <?php
-                                $hanlnedare = allPeriod($conn);
-                                echo "<option disabled selected> Välj Företag </option>";
-                                foreach ($hanlnedare as $f) {
-                                    echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <div id="platsElever"></div>
-                            <input id="subPlats2" type="submit" value="Spara">
-                            </form>
+                                        </select>
+                                        <div id="platsElever"></div>
+                                        <input id="subPlats2" type="submit" value="Spara">
+                                    </form>
+                                </div>
+                            </ul>
                         </div>
                     </div>
                 </div>

@@ -3,14 +3,15 @@
     require_once '../UpdateFunctions.php';
     require_once '../RegisterFunctions.php';
 
-    if(isset($_POST['elev'],$_POST['period'])) {
-        $elevID = $_POST['elev'];
+    if(isset($_POST['plats'], $_POST['handledare'], $_POST['period'])) {
         $periodNamn = $_POST['period'];
         $handledare= $_POST['handledare'];
         $plats=$_POST['plats'];
         
-        $exist=updatePlats($conn,$periodNamn,$elevID,$handledare,$plats);
+        $exist=updatePlats($conn,$periodNamn,$handledare,$plats);
         echo $exist;
+
+        header('Location: adminMain.php');
   
     }else{
         $elevID = $_POST['elev'];
@@ -20,5 +21,6 @@
             updatePlatsHand($conn,$handledare,$e); 
 
         }
+        header('Location: adminMain.php');
     }
 ?>

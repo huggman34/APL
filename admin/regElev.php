@@ -9,10 +9,11 @@
         $epost = $_POST['epost'];
         $telefon = $_POST['nummer'];
 
-        registerKlass($conn, $klass);
-     
-        registerElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon);        
-        
+        if(!empty($_POST['elevKlass'])) {
+            registerKlass($conn, $klass);
+        }
+
+        registerElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon);      
 
     }
 ?>

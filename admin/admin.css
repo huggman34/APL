@@ -51,7 +51,7 @@ body{
     height: 10%;
     width: 100%;
     background-color: #EC6FE4;
-    margin-bottom: 65%;
+    margin-bottom: 40%;
 }
 
 .home {
@@ -750,13 +750,13 @@ h1 {
 
 .formArea {
     width: 100%;
-    height: 84.5%;
+    height: 100%;
     background-color: white;
     padding: 2%;
     box-sizing: border-box;
 }
 
-.formArea input[type=text], .formArea input[type=tel] {
+.formArea input[type=text], .formArea input[type=tel], .formArea input[type=date], .formArea input[type=email]  {
     width: 100%;
     padding: 2% 2%;
     margin: 1% 0;
@@ -767,13 +767,12 @@ h1 {
 }
 
 .formArea input[type=submit] {
-    width: 20%;
+    width: 100%;
     padding: 1% 1%;
-    margin: 5% 0;
+    margin: 2% 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    float: right;
 }
 
 .formArea #elevKlass {
@@ -792,14 +791,14 @@ h1 {
 
 .formArea2 {
     width: 100%;
-    height: 84.5%;
+    height: 100%;
     background-color: white;
     padding: 2%;
     box-sizing: border-box;
     overflow-y: auto;
 }
 
-.formArea2 input[type=text], .formArea2 input[type=tel] {
+.formArea2 input[type=text], .formArea2 input[type=tel] , .formArea2 input[type=email]{
     width: 100%;
     padding: 2% 2%;
     margin: 1% 0;
@@ -822,9 +821,9 @@ h1 {
 }
 
 .formArea2 input[type=submit] {
-    width: 20%;
+    width: 100%;
     padding: 1% 1%;
-    margin: 5% 0;
+    margin: 2% 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -1098,4 +1097,93 @@ h1 {
     position: absolute;
     background-color: lawngreen;
     visibility: hidden;
+}
+
+.regSida {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2%;
+    display: flex;
+    /*gap: 2%;*/
+}
+
+.regMenu {
+    width: 20%;
+    height: 100%;
+}
+
+.regMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 10%;
+    border-left: 3px solid #EC6FE4;
+}
+
+.regMenu ul li {
+    margin-bottom: 1%;
+}
+
+.regMenu ul li div{
+    font-size: 1em;
+    padding: 1% 1% 1% 5%;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.regMenu ul li div:hover{
+    color: #EC6FE4;
+}
+
+.active {
+    color: #EC6FE4;
+}
+
+.regContent {
+    width: 100%;
+    height: 100%;
+    background-color: aquamarine;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 10px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 12%;
+    font-size: 17px;
+}
+  
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+  
+@-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 12%; opacity: 1;}
+}
+  
+@keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 12%; opacity: 1;}
+}
+  
+@-webkit-keyframes fadeout {
+    from {top: 12%; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+}
+  
+@keyframes fadeout {
+    from {top: 12%; opacity: 1;} 
+    to {top: 0; opacity: 0;}
 }

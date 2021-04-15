@@ -102,7 +102,7 @@
             $stmt->bind_param("ssssss", $elevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
             if ($stmt->execute()){
-                return $elevID;
+                echo "$fornamn $efternamn har lagts till";
             } else{
                 echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
             }
@@ -268,10 +268,10 @@
             $stmt->bind_param("s", $klass);
 
             if($stmt->execute()) {
-                echo "Klassen har lagts till";
+                echo "Klassen $klass har registrerats. ";
             }
         } else {
-            echo "Klassen är redan registrerad";
+            //echo "Klassen är redan registrerad";
         }
     }
 ?>

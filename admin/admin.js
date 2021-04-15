@@ -70,8 +70,8 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
         });
     });
 
-    if($(".updateElev")[0]) {
-        $(".updateElev").remove();
+    if($("#updateElev")[0]) {
+        $("#updateElev").remove();
         document.getElementById("content2").appendChild(update);
 
     } else {
@@ -167,8 +167,25 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
 
 function updatePeriod(periodID,slutdatum, startdatum) {
     var update = document.createElement('div');
+    update.className = "updateForetag";
+    update.id = "updatePeriod";
     update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'><input type='text' id='Uperiodnamn' name='Uperiodnamn' placeholder='namn' value='"+periodID+"' required><input type='date' id='Ustartdatum' name='Ustartdatum' value='"+startdatum+"' required><input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required><div id='UdagList'></div>";
-    document.getElementById("uppDiv").appendChild(update);
+
+    $(document).ready(function(){
+        $('#updatePeriod').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+
+        $(document).on('click', '.exitSvg', function() {
+            $('#updatePeriod').remove();
+        });
+    });
+
+    if($("#updatePeriod")[0]) {
+        $("#updatePeriod").remove();
+        document.getElementById("content4").appendChild(update);
+
+    } else {
+        document.getElementById("content4").appendChild(update);
+    }
 }
 
 function updateForetag(foretagID, namn, adress) {
@@ -240,45 +257,84 @@ function updateKlass(klass) {
     }
 }
 
-function updatePlats(elevID, foretagID, periodNamn) {
+function updatePlats(platsID, handledarID, periodNamn) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
-    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='' type='hidden' name='klass' value='"+klass+"'><input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'><input type='submit'></form>";
+    update.id = "updatePlats";
+    update.innerHTML = "<form action='regPlatsHand.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'><select id='platsHandledare' type='text' name='handledare'></select><select id='platsPeriod' type='text' name='period'></select><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updatePlats').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#updatePlats').remove();
+        });
+
+        $.ajax({  
+            type: "GET",  
+            url: "getForetag.php",  
+            data: "{}",  
+            success: function (data) {
+                var s = '<option disabled value="-1">Välj företag</option>';
+    
+                var myJson = JSON.parse(data);
+    
+                for (var i = 0; i < myJson.length; i++) {  
+                    s += '<option value="' + myJson[i].handledarID + '">'+ myJson[i].namn+' - '+myJson[i].fornamn+' '+myJson[i].efternamn +'</option>';  
+                }
+
+                $("#platsHandledare").html(s);
+                $('#platsHandledare option[value='+handledarID+']').attr('selected','selected');
+    
+                //alert(s);
+                //console.log(myJson);
+            }  
+        });
+
+        $.ajax({  
+            type: "GET",  
+            url: "getPeriod.php",  
+            data: "{}",  
+            success: function (data) {
+                var s = '<option disabled value="-1">Välj period</option>';
+        
+                var myJson = JSON.parse(data);
+        
+                for (var i = 0; i < myJson.length; i++) {  
+                    s += '<option value="' + myJson[i].periodNamn + '">'+ myJson[i].periodNamn +'</option>';  
+                }
+
+                $("#platsPeriod").html(s);
+                $('#platsPeriod option[value='+periodNamn+']').attr('selected','selected');
+            }  
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
-        document.getElementById("content4").appendChild(update);
+    if($("#updatePlats")[0]) {
+        $("#updatePlats").remove();
+        document.getElementById("content6").appendChild(update);
 
     } else {
-        document.getElementById("content4").appendChild(update);
+        document.getElementById("content6").appendChild(update);
     }
 }
 
 function deleteKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deleteKlass";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deleteKlass').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deleteKlass")[0]) {
+        $("#deleteKlass").remove();
         document.getElementById("content4").appendChild(update);
 
     } else {
@@ -289,19 +345,19 @@ function deleteKlass(klass) {
 function deleteHandledare(handledarID) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deleteHandledare";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteHandledare').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deleteHandledare').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deleteHandledare")[0]) {
+        $("#deleteHandledare").remove();
         document.getElementById("content3").appendChild(update);
 
     } else {
@@ -312,19 +368,19 @@ function deleteHandledare(handledarID) {
 function deleteElev(elevID) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deleteElev";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteElev').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deleteElev').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deleteElev")[0]) {
+        $("#deleteElev").remove();
         document.getElementById("content2").appendChild(update);
 
     } else {
@@ -335,19 +391,19 @@ function deleteElev(elevID) {
 function deleteForetag(foretagID) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deleteForetag";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteForetag').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deleteForetag').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deleteForetag")[0]) {
+        $("#deleteForetag").remove();
         document.getElementById("content3").appendChild(update);
 
     } else {
@@ -358,19 +414,19 @@ function deleteForetag(foretagID) {
 function deletePeriod(periodID) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deletePeriod";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deletePeriod').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deletePeriod').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deletePeriod")[0]) {
+        $("#deletePeriod").remove();
         document.getElementById("content4").appendChild(update);
 
     } else {
@@ -381,19 +437,19 @@ function deletePeriod(periodID) {
 function deletePlats(platsID) {
     var update = document.createElement('div');
     update.className = "updateForetag";
-    update.id = "updateKlass";
+    update.id = "deletePlats";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deletePlats').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
 
         $(document).on('click', '.exitSvg', function() {
-            $('#updateKlass').remove();
+            $('#deletePlats').remove();
         });
     });
 
-    if($("#updateKlass")[0]) {
-        $("#updateKlass").remove();
+    if($("#deletePlats")[0]) {
+        $("#deletePlats").remove();
         document.getElementById("content6").appendChild(update);
 
     } else {
@@ -625,6 +681,7 @@ $("#regElev").submit(function(e) {
         success: function(data)
         {
             alert(data); // show response from the php script.
+            //snackbar();
             $("#regElev")[0].reset();
         }
     });
@@ -877,72 +934,74 @@ if($("#regElev").css("display") == "block") {
 }
 
 $(document).ready(function(){
-    var count = 0;
+    $("#elevReg").addClass("active");
+    $('.regContent').children().hide();
+    $('.regContent').append($('#elevForm'));
+    $("#elevForm").css("display", "block");
+
     $('#elevReg').on('click', function() {
-        count++;
-        if (count >= 1) {
-            $('#elevReg').addClass('expand');
-            $(".formArea").css("display", "block");
-            $('#elevReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#elevReg").addClass("active");
         }
-    });
-    $(document).on('click', '.exitSvg', function() {
-        $('#elevReg').removeClass('expand');
-        $('.exit').children().hide();
-        $('#elevReg').children('.formArea').hide();
-        $('#elevReg').children('.exit').hide();
-    });
-});
 
-$(document).ready(function(){
-    var count = 0;
+        $('.regContent').children().hide();
+        $('.regContent').append($('#elevForm'));
+        $("#elevForm").css("display", "block");
+    });
+
     $('#foretagReg').on('click', function() {
-        count++;
-        if (count == 1) {
-            $('#foretagReg').addClass('expand');
-            //$('#foretagReg').append($('.formArea2'));
-            $(".formArea2").css("display", "block");
-            $('#foretagReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-        } else {
-            $('#foretagReg').addClass('expand');
-            $('.exit').children().show();
-            $('#foretagReg').children('.formArea2').show();
-            $('#foretagReg').children('.exit').show();
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#foretagReg").addClass("active");
         }
-    });
-    $(document).on('click', '.exitSvg', function() {
-        $('#foretagReg').removeClass('expand');
-        $('.exit').children().hide();
-        $('#foretagReg').children('.formArea2').hide();
-        $('#foretagReg').children('.exit').hide();
-    });
-});
 
-$(document).ready(function(){
-    var count = 0;
+        $('.regContent').children().hide();
+        $('.regContent').append($('#foretagForm'));
+        $("#foretagForm").css("display", "block");
+    });
+
     $('#handledarReg').on('click', function() {
-        count++;
-        if (count == 1) {
-            $('#handledarReg').addClass('expand');
-            //$('#foretagReg').append($('.formArea2'));
-            $(".formArea2").css("display", "block");
-            $('#handledarReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-        } else {
-            $('#handledarReg').addClass('expand');
-            $('.exit').children().show();
-            $('#handledarReg').children('.formArea2').show();
-            $('#handledarReg').children('.exit').show();
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#handledarReg").addClass("active");
         }
+
+        $('.regContent').children().hide();
+        $('.regContent').append($('#handledarForm'));
+        $("#handledarForm").css("display", "block");
     });
-    $(document).on('click', '.exitSvg', function() {
-        $('#handledarReg').removeClass('expand');
-        $('.exit').children().hide();
-        $('#handledarReg').children('.formArea2').hide();
-        $('#handledarReg').children('.exit').hide();
+
+    $('#platsReg').on('click', function() {
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#platsReg").addClass("active");
+        }
+
+        $('.regContent').children().hide();
+        $('.regContent').append($('#platsForm'));
+        $("#platsForm").css("display", "block");
+    });
+
+    $('#periodReg').on('click', function() {
+        if($('.regMenu li div').hasClass("active")) {
+            $('.regMenu li div').removeClass("active");
+            $("#periodReg").addClass("active");
+        }
+
+        $('.regContent').children().hide();
+        $('.regContent').append($('#periodForm'));
+        $("#periodForm").css("display", "block");
     });
 });
 
-$(document).ready(function(){
+function snackbar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+/*$(document).ready(function(){
     var count = 0;
     $('#platsReg').on('click', function() {
         count++;
@@ -964,9 +1023,9 @@ $(document).ready(function(){
         $('#platsReg').children('.formArea2').hide();
         $('#platsReg').children('.exit').hide();
     });
-});
+});*/
 
-$(document).ready(function () {  
+/*$(document).ready(function () {  
     $.ajax({  
         type: "GET",  
         url: "getForetag.php",  
@@ -977,16 +1036,18 @@ $(document).ready(function () {
             var myJson = JSON.parse(data);
 
             for (var i = 0; i < myJson.length; i++) {  
-                s += '<option value="' + myJson[0].foretagID + '">' + myJson[0].namn + '</option>';  
+                s += '<option value="' + myJson[0].handledarID + '">'+ myJson[0].namn+' - '+myJson[0].fornamn+' '+myJson[0].efternamn +'</option>';  
             }
             //$(".content1").html(data);
 
             //alert(s);
+
+            $("#platsHandledare").html(s);
+
+            //console.log(myJson);
         }  
     });
-});  
-
-
+});*/
 
 
 
