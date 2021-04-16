@@ -24,7 +24,7 @@ return $data;
     echo "<option disabled selected> Välj handledare </option>";
     foreach ($period as $kls) {
     
-        echo"<option value='".$kls['handledarID']."'>".$kls['fornamn'],$kls['efternamn'],$kls['namn']."</option>";
+        echo"<option value='".$kls['handledarID']."'>".$kls['namn'], ' - ', $kls['fornamn'], ' ', $kls['efternamn']."</option>";
     }
     echo"</select>";
     echo "<table>";

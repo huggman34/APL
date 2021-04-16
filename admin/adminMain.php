@@ -37,6 +37,8 @@ if(checkAdminLogin()) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="admin.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
         <title>Admin</title>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
@@ -623,27 +625,31 @@ if(checkAdminLogin()) {
 
                                 <li><div id="platsDel1">Koppla period</div></li>
 
-                                <div id="platsDel1Form" class="formArea" style="display: none">
+                                <div id="platsDel1Form" class="formArea3" style="display: none">
                                     <form id="regPlats" action="regPlats.php" method="POST">
-                                
-                                        <select id="platsPeriod" onchange="elevPlatsPeriod();" required>
-                                            <?php
-                                                $allPeriod = allPeriod($conn);
-                                                echo "<option disabled selected value=''> Välj Period </option>";
-                                                foreach ($allPeriod as $p) {
-                                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                                }
-                                            ?>
-                                        </select>
-                                        <select id="platsKlass" onchange="elevPlatsPeriod();" required>
-                                            <option disabled selected value=''> Välj klass </option>
-                                            <?php
-                                                $klass=selectTabel($conn,"klass");
-                                                foreach ($klass as $kls) {
-                                                    $kl=$kls['klass'];
-                                                    echo"<option value='$kl'>$kl</option>";
-                                                }
-                                            ?>
+                                        <div class="periodSelectMenu">
+                                            <div class="PeriodP">Period</div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="darkgray" class="arrow-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                            </svg>
+                                            <select id="platsKlass" onchange="elevPlatsPeriod();" required>
+                                                <option disabled selected value=''> Välj klass </option>
+                                                <?php
+                                                    $klass=selectTabel($conn,"klass");
+                                                    foreach ($klass as $kls) {
+                                                        $kl=$kls['klass'];
+                                                        echo"<option value='$kl'>$kl</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <select id="platsPeriod" onchange="elevPlatsPeriod();" size="15" required>
+                                                <?php
+                                                    $allPeriod = allPeriod($conn);
+                                                    foreach ($allPeriod as $p) {
+                                                        echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
+                                                    }
+                                                ?>
                                         </select>
                                         <div id="restElever"></div>
                                         <input id="subPlats" type="submit" value="Spara">
@@ -657,7 +663,7 @@ if(checkAdminLogin()) {
                                         <select id="foretagPeriod" onchange="handledarPlats();">
                                         <?php
                                             $hanlnedare = allPeriod($conn);
-                                            echo "<option disabled selected> Välj Företag </option>";
+                                            echo "<option disabled selected> Välj Period </option>";
                                             foreach ($hanlnedare as $f) {
                                                 echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
                                             }

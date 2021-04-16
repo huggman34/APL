@@ -1061,6 +1061,26 @@ function snackbar() {
     }, 3010);
 }
 
+$(function(){
+    $("#elevKlass").autocomplete({
+        source: "autoComplete.php",
+        minLength: 1,
+        appendTo: "#regElev"
+    });
+});
+
+/*$(document).ready(function(){
+    $(function(){
+        var test = localStorage.input === 'true'? true: false;
+        $('input').prop('checked', test || false);
+    });
+    
+    $('input').on('change', function() {
+        localStorage.input = $(this).is(':checked');
+        console.log($(this).is(':checked'));
+    });
+});*/
+
 /*$(document).ready(function(){
     var count = 0;
     $('#platsReg').on('click', function() {
