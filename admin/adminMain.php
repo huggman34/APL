@@ -91,7 +91,7 @@ if(checkAdminLogin()) {
                                 $data = narvaroIdag($conn);
 
                                 echo "<table class='narvaroTable'>";
-                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Narvaro</th><th></th></tr></thead><tbody>";
+                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Närvaro</th><th></th></tr></thead><tbody>";
 
                                 foreach ($data as $row => $column) {
 
@@ -317,8 +317,6 @@ if(checkAdminLogin()) {
                     <div class="elevHolder">
                         <div class="narvaroView">
                             <h1>Klicka på en elev</h1>
-                        </div>
-                        <div class="formHolder">
                         </div>
                     </div>
                 </div>
@@ -552,12 +550,6 @@ if(checkAdminLogin()) {
                                 echo "</tbody></table>";
                             ?>
                         </div>
-                    </div>
-                        
-                    <div class="plats">
-                        <!-- PLATS CONTENT HÄR -->
-                        <h1>Registrera Plats</h1>
-                        
                     </div>
                 </div>
                 <div class="views" id="content7" style='display:none'>
