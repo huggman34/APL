@@ -9,18 +9,14 @@
         $plats=$_POST['plats'];
         
         $exist=updatePlats($conn,$periodNamn,$handledare,$plats);
-        echo $exist;
-
-        header('Location: adminMain.php');
+        //echo $exist;
   
     }else{
         $elevID = $_POST['elev'];
         $handledare=$_POST['handledare'];
 
         foreach ($elevID as $e) {
-            updatePlatsHand($conn,$handledare,$e); 
-
+            updatePlatsHand($conn,$handledare,$e);
         }
-        header('Location: adminMain.php');
     }
 ?>
