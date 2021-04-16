@@ -207,7 +207,7 @@ body{
 .narvaro {
     position: relative;
     width: 50%;
-    height: 50%;
+    height: 100%;
     background-color: white;
     padding: 1%;
     box-sizing: border-box;
@@ -299,7 +299,7 @@ body{
 
 .narvaroTable tbody {
     display: block;
-    height: 25vh;
+    height: 65.5vh;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -376,7 +376,7 @@ body{
 
 .platsList {
     position: relative;
-    width: 48.75%;
+    width: 100%;
     height: 100%;
     background-color: white;
     padding: 1%;
@@ -389,7 +389,6 @@ body{
 .platsList div {
     width: 100%;
     height: 94%;
-    margin-top: 5%;
 }
 
 .registerPage {
@@ -552,7 +551,7 @@ h1 {
 
 .narvaroView {
     width: 100%;
-    height: 48%;
+    height: 100%;
     background-color: #e8e8e8;
     margin-bottom: 2%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -652,7 +651,7 @@ h1 {
 
 .foretagInfo tbody {
     display: block;
-    height: 34vh;
+    height: 74vh;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -681,7 +680,7 @@ h1 {
 
 .foretagView {
     width: 100%;
-    height: 48%;
+    height: 100%;
     background-color: #e8e8e8;
     margin-bottom: 2%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -849,7 +848,7 @@ h1 {
     display: block;
     overflow: auto;
     overflow-x: hidden;
-    height: 32.5vh;
+    height: 74vh;
 }
 
 .elevHolder {
@@ -972,7 +971,6 @@ h1 {
 
 .platsTable {
     border-collapse: collapse;
-    margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
