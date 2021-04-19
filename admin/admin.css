@@ -234,36 +234,71 @@ body{
     background-color: yellow;
 }
 
-.updateElev {
+.updateForetag, .updateElev {
     position: absolute;
-    top: 0;
-    margin-top: 7%;
-    width: 50%;
+    width: 40%;
     height: 40%;
     display: block;
-    background-color: yellowgreen;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+    background-color: white;
     text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2%;
 }
 
-.updateForetag {
-    position: absolute;
-    top: 0;
-    margin-top: 7%;
-    width: 50%;
-    height: 40%;
+#updateForetag form, #updateKlass form, #updatePlats form, #updateElev form, #updateHandledare form {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#updateForetag form input[type=text], #updatePeriod input[type=date], #updatePeriod input[type=text], #updateKlass form input[type=text], #updateElev form input[type=text], #updateHandledare form input[type=text] {
     display: block;
-    background-color: yellowgreen;
-    position: absolute;
     margin-left: auto;
     margin-right: auto;
-    left: 0;
+    width: 100%;
+    height: 4.5vh;
+    padding: 2% 2%;
+    margin: 2% 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#updatePlats form select {
+    width: 100%;
+    padding: 1% 1%;
+    margin: 1% 0%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#updateForetag form input[type=submit], #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElev form input[type=submit], #updateHandledare form input[type=submit] {
+    position: absolute;
     right: 0;
-    text-align: center;
+    bottom: 0;
+    margin: 0% 18% 4% 0%;
+    width: 15%;
+    padding: 1% 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#updateForetag form .cancelButton, #updateKlass form .cancelButton, #updatePlats form .cancelButton, #updateElev form .cancelButton, #updateHandledare form .cancelButton{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0% 0% 4% 0%;
+    width: 15%;
+    padding: 1% 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #elevMenu {
