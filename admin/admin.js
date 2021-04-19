@@ -91,7 +91,7 @@ function updateElevNarvaro(narvaroID, narvaro) {
     <option value='2'>Giltig frånvaro</option>\
     <option value='3'>Ogiltig frånvaro</option>\
     </select>\
-    <input type='submit'></form>";
+    <input type='submit' value='Spara'></form>";
 
     $(document).ready(function(){
         if(narvaro === 'Närvarande') {
@@ -106,10 +106,12 @@ function updateElevNarvaro(narvaroID, narvaro) {
             $('#elevNarvaro option[value=3]').attr('selected','selected');
         }
 
-        $('#updateElevNarvaro').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-
-        $(document).on('click', '.exitSvg', function() {
-            $('#updateElevNarvaro').remove();
+        $(document).ready(function(){
+            $('#updateElevNarvaro form').append('<button type="button" class="cancelButton">Avbryt</button>');
+    
+            $(document).on('click', '.cancelButton', function() {
+                $('#updateElevNarvaro').remove();
+            });
         });
     });
 
@@ -134,7 +136,7 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
     <option value='2'>Giltig frånvaro</option>\
     <option value='3'>Ogiltig frånvaro</option>\
     </select>\
-    <input type='submit'></form>";
+    <input type='submit' value='Spara'></form>";
 
     $(document).ready(function(){
         if(narvaro === 'Närvarande') {
@@ -149,10 +151,12 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
             $('#elevNarvaroIdag option[value=3]').attr('selected','selected');
         }
 
-        $('#updateElevNarvaroIdag').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-
-        $(document).on('click', '.exitSvg', function() {
-            $('#updateElevNarvaroIdag').remove();
+        $(document).ready(function(){
+            $('#updateElevNarvaroIdag form').append('<button type="button" class="cancelButton">Avbryt</button>');
+    
+            $(document).on('click', '.cancelButton', function() {
+                $('#updateElevNarvaroIdag').remove();
+            });
         });
     });
 
@@ -321,14 +325,16 @@ function updatePlats(platsID, handledarID, periodNamn) {
 
 function deleteKlass(klass) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deleteKlass";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><input type='submit' value='Radera'></form>";
     
     $(document).ready(function(){
-        $('#deleteKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-
-        $(document).on('click', '.exitSvg', function() {
+        $('#deleteKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+klass+'?</h1>');
+        $('.deletePopUp form').append('<div>Alla elever som tillhör den klassen kommer att raderas.</div>');
+        
+        $(document).on('click', '.cancelButton', function() {
             $('#deleteKlass').remove();
         });
     });
@@ -342,16 +348,18 @@ function deleteKlass(klass) {
     }
 }
 
-function deleteHandledare(handledarID) {
+function deleteHandledare(handledarID, fornamn, efternamn) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deleteHandledare";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><input type='submit' value='Radera'></form>";
     
     $(document).ready(function(){
-        $('#deleteHandledare').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+fornamn+' '+efternamn+'?</h1>');
+        $('.deletePopUp form').append('<div>Alla platser som handledaren är kopplad till kommer att raderas.</div>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#deleteHandledare').remove();
         });
     });
@@ -367,14 +375,17 @@ function deleteHandledare(handledarID) {
 
 function deleteElev(elevID) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deleteElev";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><input type='submit' value='Radera'></form>";
+    elev = elevID.split('.').join(' ');
     
     $(document).ready(function(){
-        $('#deleteElev').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+elev+'?</h1>');
+        $('.deletePopUp form').append('<div>Alla platser som tillhör '+elev+' kommer att raderas.</div>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#deleteElev').remove();
         });
     });
@@ -388,16 +399,36 @@ function deleteElev(elevID) {
     }
 }
 
-function deleteForetag(foretagID) {
+$(document).mouseup(function(e){
+    var container = $(".updateForetag, .updateElev, .deletePopUp");
+ 
+    // If the target of the click isn't the container
+    if(!container.is(e.target) && container.has(e.target).length === 0){
+        container.remove();
+    }
+});
+
+$(document).mouseup(function(e){
+    var container = $(".elevMenu, .periodMenu");
+ 
+    // If the target of the click isn't the container
+    if(!container.is(e.target) && container.has(e.target).length === 0){
+        container.hide();
+    }
+});
+
+function deleteForetag(foretagID, foretagNamn) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deleteForetag";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><input type='submit' value='Radera'></form>";
     
     $(document).ready(function(){
-        $('#deleteForetag').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deleteForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+foretagNamn+'?</h1>');
+        $('.deletePopUp form').append('<div>Alla handledare och platser som är kopplade till '+foretagNamn+' kommer att raderas.</div>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#deleteForetag').remove();
         });
     });
@@ -413,14 +444,16 @@ function deleteForetag(foretagID) {
 
 function deletePeriod(periodID) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deletePeriod";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><input type='submit' value='Radera'></form>";
     
     $(document).ready(function(){
-        $('#deletePeriod').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deletePeriod form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+periodID+'?</h1>');
+        $('.deletePopUp form').append('<div>Alla platser som tillhör den perioden kommer att raderas.</div>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#deletePeriod').remove();
         });
     });
@@ -434,16 +467,19 @@ function deletePeriod(periodID) {
     }
 }
 
-function deletePlats(platsID) {
+function deletePlats(platsID, elevID) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "deletePopUp";
     update.id = "deletePlats";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><input type='submit' value='Radera'></form>";
+    elev = elevID.split('.').join(' ');
     
     $(document).ready(function(){
-        $('#deletePlats').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#deletePlats form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('.deletePopUp form').append('<h1>Vill du radera '+elev+"s"+' plats?</h1>');
+        $('.deletePopUp form').append('<div>All närvaro som är kopplad till platsen kommer att raderas.</div>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#deletePlats').remove();
         });
     });

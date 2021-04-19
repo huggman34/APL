@@ -360,7 +360,7 @@ if(checkAdminLogin()) {
                                     echo "<div id='foretagMenu'>";
                                         //echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >Ta bort</button>";
                                         echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"deleteForetag('$foretagID');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"event.stopPropagation(); deleteForetag('$foretagID', '$namn');\" >Ta bort</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }
@@ -396,7 +396,7 @@ if(checkAdminLogin()) {
                                     echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
                                     echo "<div id='foretagMenu'>";
                                         echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"deleteHandledare('$handledarID');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"deleteHandledare('$handledarID', '$fornamn', '$efternamn');\" >Ta bort</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }
@@ -442,7 +442,7 @@ if(checkAdminLogin()) {
                                 echo $row['slutdatum'];
                                 echo "</td><td>";
                                 echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                echo "<div id='foretagMenu'>";
+                                echo "<div class='periodMenu'>";
                                     //echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >Ta bort</button>";
                                     echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Update</button>";
                                     echo "<button type='button' onclick=\"deletePeriod('$periodID');\" >Ta bort</button>";
@@ -545,7 +545,7 @@ if(checkAdminLogin()) {
                                         //echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >Ta bort</button>";
                                         //echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >Update</button>";
                                         echo "<button type='button' onclick=\"updatePlats('$platsID','$handledarID','$periodNamn');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"deletePlats('$platsID');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"deletePlats('$platsID','$elevID');\" >Ta bort</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }
