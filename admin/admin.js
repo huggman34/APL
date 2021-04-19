@@ -63,9 +63,9 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     update.innerHTML = "<form action='updateElev.php' method='POST'><input id='elevID' type='hidden' name='elevID' value='"+elevID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='klass' value='"+klass+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
 
     $(document).ready(function(){
-        $('#updateElev').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updateElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updateElev').remove();
         });
     });
@@ -192,12 +192,12 @@ function updateForetag(foretagID, namn, adress) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updateForetag";
-    update.innerHTML = "<form action='updateForetag.php' method='POST'><input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'><input id='' type='text' name='namn' value='"+namn+"'><input id='' type='text' name='adress' value='"+adress+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='updateForetag.php' method='POST'><input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'><input id='' type='text' name='namn' value='"+namn+"'><input id='' type='text' name='adress' value='"+adress+"'><input type='submit' value='Spara'></form>";
 
     $(document).ready(function(){
-        $('#updateForetag').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updateForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updateForetag').remove();
         });
     });
@@ -218,9 +218,9 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
     update.innerHTML = "<form action='updateHandledare.php' method='POST'><input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='foretag' value='"+foretag+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
 
     $(document).ready(function(){
-        $('#updateHandledare').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updateHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updateHandledare').remove();
         });
     });
@@ -241,9 +241,9 @@ function updateKlass(klass) {
     update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='' type='hidden' name='klass' value='"+klass+"'><input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updateKlass').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updateKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updateKlass').remove();
         });
     });
@@ -264,9 +264,9 @@ function updatePlats(platsID, handledarID, periodNamn) {
     update.innerHTML = "<form action='regPlatsHand.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'><select id='platsHandledare' type='text' name='handledare'></select><select id='platsPeriod' type='text' name='period'></select><input type='submit'></form>";
     
     $(document).ready(function(){
-        $('#updatePlats').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updatePlats form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updatePlats').remove();
         });
 
