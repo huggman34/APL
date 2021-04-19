@@ -60,7 +60,7 @@
         echo $telefon;
         echo "</td><td>";
         echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-        echo "<div id='elevMenu'>";
+        echo "<div class='elevMenu'>";
             //echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >Ta bort</button>";
             echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Update</button>";
             echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Ta bort</button>";
