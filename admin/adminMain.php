@@ -384,8 +384,9 @@ if(checkAdminLogin()) {
                             <?php
                                 $data = allHandledare($conn);
                             
-                                echo "<table class='foretagTable'>";
-                                echo "<thead><tr><th>Handledare</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
+
+                                echo "<table class='handledarTable'>";
+                                echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
                             
                                 foreach ($data as $row) {
                                     $handledarID = $row['handledarID'];
@@ -667,9 +668,9 @@ if(checkAdminLogin()) {
                                     <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
                                         <select id="foretagPeriod" onchange="handledarPlats();">
                                         <?php
-                                            $hanlnedare = allPeriod($conn);
+                                            $handledare = allPeriod($conn);
                                             echo "<option disabled selected> Välj Period </option>";
-                                            foreach ($hanlnedare as $f) {
+                                            foreach ($handledare as $f) {
                                                 echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
                                             }
                                         ?>
