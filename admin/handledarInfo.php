@@ -2,33 +2,34 @@
     require_once '../connection.php';
     require_once '../ViewFunctions.php';
 
-    $foretagID = $_POST['foretagID'];
-    
-    function foretagInfo($conn, $foretagID){
+    $handledarID = $_POST['handledarID'];
 
-        $sql = "SELECT foretag.namn,elev.elevID,plats.periodNamn,narvaro.narvaro,dag.datum FROM narvaro 
+    function handledarInfo($conn, $handledarID){
+
+        $sql = "SELECT handledare.fornamn,handledare.efternamn,elev.elevID,plats.periodNamn,narvaro.narvaro,dag.datum FROM narvaro 
         INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
         INNER JOIN plats ON plats.platsID=narvaro.platsID
         INNER JOIN foretag ON foretag.foretagID=plats.foretagID
         INNER JOIN elev ON elev.elevID=plats.elevID
         INNER JOIN dag ON perioddag.dagID=dag.dagID
-        WHERE dag.datum = CURRENT_DATE AND foretag.namn=?";
+        INNER JOIN handledare ON handledare.handledarID=plats.handledarID
+        WHERE dag.datum = CURRENT_DATE AND handledare.fornamn=?";
     
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $foretagID);
+        $stmt->bind_param("s", $handledarID);
         $stmt->execute();
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
     }
 
-    $foretagInfo = foretagInfo($conn, $foretagID);
+    $handledarInfo = handledarInfo($conn, $handledarID);
 
-    if(!empty($foretagInfo)){
-        echo "<table class='foretagInfo'>";
+    if(!empty($handledarInfo)){
+        echo "<table class='handledarInfo'>";
         echo "<thead><tr><th>Elev</th><th>Period</th><th>Närvaro idag</th></tr></thead><tbody>";
 
-        foreach ($foretagInfo as $row => $column) {
+        foreach ($handledarInfo as $row => $column) {
 
             if (is_null($column['narvaro'])) {
                 $column['narvaro'] = "null";
@@ -49,7 +50,6 @@
         }
         echo "</tbody></table>";
     } else {
-        echo "Ingen elev arbetar på detta företag";
+        echo "Ingen elev arbetar med denna handledaren";
     }
-
 ?>
