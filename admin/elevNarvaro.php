@@ -48,7 +48,7 @@
             echo "</td><td>";
             echo $column2['narvaro'];
             echo "</td><td>";
-            echo "<button type='button' onclick=\"updateElevNarvaro('$narvaroID', '$narvaro');\" >Update</button>";
+            echo "<button type='button' onclick=\"updateElevNarvaro('$narvaroID', '$narvaro');\" >Uppdatera</button>";
             echo "</td></tr>";
         }
         echo "</tbody></table>";
