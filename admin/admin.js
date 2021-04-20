@@ -7,42 +7,42 @@ $("#homeIcon").on('click', function() {
     $("#content2, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content1").css("display", "block");
     $("#homeIcon").css("fill", "#EC6FE4");
+    $("#info").html("<p>Hem</p>")
 });
 
 $("#elevIcon").on('click', function() {
     $("#content1, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content2").css("display", "block");
     $("#homeIcon").css("fill", "white");
+    $("#info").html("<p>Elev hantering</p>")
 });
 
 $("#foretagIcon").on('click', function() {
     $("#content1, #content2, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content3").css("display", "block");
     $("#homeIcon").css("fill", "white");
+    $("#info").html("<p>Företag & Handledare</p>")
 });
 
 $("#periodIcon").on('click', function() {
     $("#content1, #content2, #content3, #content5, #content6, #content7").css("display", "none");
     $("#content4").css("display", "block");
     $("#homeIcon").css("fill", "white");
-});
-
-$("#classIcon").on('click', function() {
-    $("#content1, #content2, #content3, #content4, #content6, #content7").css("display", "none");
-    $("#content5").css("display", "block");
-    $("#homeIcon").css("fill", "white");
+    $("#info").html("<p>Period & Klass</p>")
 });
 
 $("#platsIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content7").css("display", "none");
     $("#content6").css("display", "block");
     $("#homeIcon").css("fill", "white");
+    $("#info").html("<p>Plats hantering</p>")
 });
 
 $(".registerPage").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content6").css("display", "none");
     $("#content7").css("display", "block");
     //$("#homeIcon").css("fill", "white");
+    $("#info").html("<p>Registrering</p>")
 });
 
 function toggleMenu(event) {
@@ -60,7 +60,19 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     var update = document.createElement('div');
     update.className = "updateElev";
     update.id = "updateElev";
-    update.innerHTML = "<form action='updateElev.php' method='POST'><input id='elevID' type='hidden' name='elevID' value='"+elevID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='klass' value='"+klass+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='updateElev.php' method='POST'>\
+    <input id='elevID' type='hidden' name='elevID' value='"+elevID+"'>\
+    <label for='fornamn'>Förnamn</label>\
+    <input id='fornamn' type='text' name='fornamn' value='"+fornamn+"'>\
+    <label for='efternamn'>Efternamn</label>\
+    <input id='efternamn' type='text' name='efternamn' value='"+efternamn+"'>\
+    <label for='eKlass'>Klass</label>\
+    <input id='eKlass' type='text' name='klass' value='"+klass+"'>\
+    <label for='epost'>E-post</label>\
+    <input id='epost' type='text' name='epost' value='"+epost+"'>\
+    <label for='telefon'>Telefonnummer</label>\
+    <input id='telefon' type='text' name='telefon' value='"+telefon+"'>\
+    <input type='submit'></form>";
 
     $(document).ready(function(){
         $('#updateElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -173,7 +185,14 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updatePeriod";
-    update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'><input type='text' id='Uperiodnamn' name='Uperiodnamn' placeholder='namn' value='"+periodID+"' required><input type='date' id='Ustartdatum' name='Ustartdatum' value='"+startdatum+"' required><input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required><div id='UdagList'></div>";
+    update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'>\
+    <label for='Uperiodnamn'>Period namn</label>\
+    <input type='text' id='Uperiodnamn' name='Uperiodnamn' placeholder='namn' value='"+periodID+"' required>\
+    <label for='Ustartdatum'>Start datum</label>\
+    <input type='date' id='Ustartdatum' name='Ustartdatum' value='"+startdatum+"' required>\
+    <label for='Uslutdatum'>Slut datum</label>\
+    <input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required>\
+    <div id='UdagList'></div>";
 
     $(document).ready(function(){
         $('#updatePeriod').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
@@ -196,7 +215,13 @@ function updateForetag(foretagID, namn, adress) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updateForetag";
-    update.innerHTML = "<form action='updateForetag.php' method='POST'><input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'><input id='' type='text' name='namn' value='"+namn+"'><input id='' type='text' name='adress' value='"+adress+"'><input type='submit' value='Spara'></form>";
+    update.innerHTML = "<form action='updateForetag.php' method='POST'>\
+    <input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'>\
+    <label for='foretagsNamn'>Företagsnamn</label>\
+    <input id='foretagsNamn' type='text' name='namn' value='"+namn+"'>\
+    <label for='foretagsAdress'>Företagsadress</label>\
+    <input id='foretagsAdress' type='text' name='adress' value='"+adress+"'>\
+    <input type='submit' value='Spara'></form>";
 
     $(document).ready(function(){
         $('#updateForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -219,7 +244,19 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
     var update = document.createElement('div');
     update.className = "updateElev";
     update.id = "updateHandledare";
-    update.innerHTML = "<form action='updateHandledare.php' method='POST'><input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'><input id='' type='text' name='fornamn' value='"+fornamn+"'><input id='' type='text' name='efternamn' value='"+efternamn+"'><input id='' type='text' name='foretag' value='"+foretag+"'><input id='' type='text' name='epost' value='"+epost+"'><input id='' type='text' name='telefon' value='"+telefon+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='updateHandledare.php' method='POST'>\
+    <input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'>\
+    <label for='Hfornamn'>Förnamn</label>\
+    <input id='Hfornamn' type='text' name='fornamn' value='"+fornamn+"'>\
+    <label for='Hefternamn'>Efternamn</label>\
+    <input id='Hefternamn' type='text' name='efternamn' value='"+efternamn+"'>\
+    <label for='Hforetag'>Företag</label>\
+    <input id='Hforetag' type='text' name='foretag' value='"+foretag+"'>\
+    <label for='Hepost'>E-post</label>\
+    <input id='Hepost' type='text' name='epost' value='"+epost+"'>\
+    <label for='Htelefon'>Telefonnummer</label>\
+    <input id='Htelefon' type='text' name='telefon' value='"+telefon+"'>\
+    <input type='submit'></form>";
 
     $(document).ready(function(){
         $('#updateHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -242,7 +279,11 @@ function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updateKlass";
-    update.innerHTML = "<form action='updateKlass.php' method='POST'><input id='' type='hidden' name='klass' value='"+klass+"'><input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'><input type='submit'></form>";
+    update.innerHTML = "<form action='updateKlass.php' method='POST'>\
+    <input id='' type='hidden' name='klass' value='"+klass+"'>\
+    <label for='nyKlass'>Klass namn</label>\
+    <input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'>\
+    <input type='submit'></form>";
     
     $(document).ready(function(){
         $('#updateKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -265,7 +306,12 @@ function updatePlats(platsID, handledarID, periodNamn) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updatePlats";
-    update.innerHTML = "<form action='regPlatsHand.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'><select id='platsHandledare' type='text' name='handledare'></select><select id='platsPeriod' type='text' name='period'></select><input type='submit'></form>";
+    update.innerHTML = "<form action='regPlatsHand.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'>\
+    <label for='platsHandledare'>Företag</label>\
+    <select id='platsHandledare' type='text' name='handledare'></select>\
+    <label for='platsPeriod'>Period</label>\
+    <select id='platsPeriod' type='text' name='period'></select>\
+    <input type='submit'></form>";
     
     $(document).ready(function(){
         $('#updatePlats form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -279,7 +325,7 @@ function updatePlats(platsID, handledarID, periodNamn) {
             url: "getForetag.php",  
             data: "{}",  
             success: function (data) {
-                var s = '<option disabled value="-1">Välj företag</option>';
+                var s = '';
     
                 var myJson = JSON.parse(data);
     
@@ -300,7 +346,7 @@ function updatePlats(platsID, handledarID, periodNamn) {
             url: "getPeriod.php",  
             data: "{}",  
             success: function (data) {
-                var s = '<option disabled value="-1">Välj period</option>';
+                var s = '';
         
                 var myJson = JSON.parse(data);
         
@@ -409,7 +455,7 @@ $(document).mouseup(function(e){
 });
 
 $(document).mouseup(function(e){
-    var container = $(".elevMenu, .periodMenu");
+    var container = $(".elevMenu, .periodMenu, .handledarMenu, .klassMenu, .platsMenu, .foretagMenu");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
@@ -1141,6 +1187,21 @@ $(function(){
         appendTo: "#regElev"
     });
 });
+
+/*$.getJSON("elever.php", function(data) {
+    for (var i = 0; i < data.length; i++) {  
+        //s += '<option value="' + myJson[i].handledarID + '">'+ myJson[i].namn+' - '+myJson[i].fornamn+' '+myJson[i].efternamn +'</option>';  
+        $("#elevList tbody").append("<tr><td>"+data[i].elevID+"</td><td>"+data[i].klass+"</td><td>"+data[i].epost+"</td><td>"+data[i].telefon+"</td><td>\
+        <button type='button' onclick=\"toggleMenu(this);\">...</button>\
+        <div class='elevMenu'>\
+        <button type='button' onclick=\"updateElev("+data[i].elevID+", "+data[i].fornamn+", "+data[i].efternamn+", "+data[i].klass+", "+data[i].epost+", "+data[i].telefon+");\" >Uppdatera</button>\
+        <button type='button' onclick=\"deleteElev("+data[i].elevID+");\" >Radera</button>\
+        </td></tr>\
+        </div>");
+    }
+    //console.log("object: " + data);
+    //alert(data[0]['elevID']);
+})*/
 
 /*$(document).ready(function(){
     $(function(){

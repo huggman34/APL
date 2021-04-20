@@ -45,6 +45,9 @@ if(checkAdminLogin()) {
     <body onload="donutChart(); elever();">
         <div id="wrapper">
             <div id="snackbar"></div>
+            <div id="info">
+                <p>Hem</p>
+            </div>
             <div class="navbar">
                 <div class="logo"></div>
                 <div class="home">
@@ -96,6 +99,8 @@ if(checkAdminLogin()) {
                                 echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Närvaro</th><th></th></tr></thead><tbody>";
 
                                 foreach ($data as $row => $column) {
+                                    $elevID = $column['elevID'];
+                                    $elev = str_replace(".", " ", $elevID);
 
                                     if (is_null($column['narvaro'])) {
                                         $column['narvaro'] = "null";
@@ -110,7 +115,7 @@ if(checkAdminLogin()) {
                                     $narvaro = $column2['narvaro'];
                                     
                                     echo "<tr><td>";
-                                    echo $column['elevID'];
+                                    echo $elev;
                                     echo "</td><td>";
                                     echo $column['namn'];
                                     echo "</td><td>";
@@ -118,7 +123,7 @@ if(checkAdminLogin()) {
                                     echo "</td><td>";
                                     echo $column2['narvaro'];
                                     echo "</td><td>";
-                                    echo "<button type='button' onclick=\"updateElevNarvaroIdag('$narvaroID', '$narvaro');\" >Update</button>";
+                                    echo "<button type='button' onclick=\"updateElevNarvaroIdag('$narvaroID', '$narvaro');\" >Uppdatera</button>";
                                     echo "</td></tr>";
                                 }
                                 echo "</tbody></table>";
@@ -239,6 +244,7 @@ if(checkAdminLogin()) {
 
                                     success: function(data) {
                                         $('#elevList').html(data);
+                                        
                                     }
                                 });
                             };
@@ -313,7 +319,14 @@ if(checkAdminLogin()) {
                                 });
                             };
                         </script>
-                        <div id="elevList"></div>
+                        <div id="elevList">
+                            <table class='elevTable'>
+                                <thead><tr><th>Elev</th><th>Klass</th><th>Epost</th><th>Tel</th><th></th></tr></thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="elevHolder">
@@ -357,10 +370,10 @@ if(checkAdminLogin()) {
                                     echo $row['adress'];
                                     echo "</td><td>";
                                     echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div id='foretagMenu'>";
+                                    echo "<div class='foretagMenu'>";
                                         //echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >Ta bort</button>";
-                                        echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"event.stopPropagation(); deleteForetag('$foretagID', '$namn');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Uppdatera</button>";
+                                        echo "<button type='button' onclick=\"event.stopPropagation(); deleteForetag('$foretagID', '$namn');\" >Radera</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }
@@ -371,6 +384,7 @@ if(checkAdminLogin()) {
                             <?php
                                 $data = allHandledare($conn);
                             
+
                                 echo "<table class='handledarTable'>";
                                 echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
                             
@@ -383,9 +397,7 @@ if(checkAdminLogin()) {
                                     $telefon = $row['telefon'];
 
                                     echo "<tr><td>";
-                                    echo $fornamn;
-                                    echo "</td><td>";
-                                    echo $efternamn;
+                                    echo "$fornamn $efternamn";
                                     echo "</td><td>";
                                     echo $foretag;
                                     echo "</td><td>";
@@ -394,9 +406,9 @@ if(checkAdminLogin()) {
                                     echo $telefon;
                                     echo "</td><td>";
                                     echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div id='foretagMenu'>";
-                                        echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"deleteHandledare('$handledarID', '$fornamn', '$efternamn');\" >Ta bort</button>";
+                                    echo "<div class='handledarMenu'>";
+                                        echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Uppdatera</button>";
+                                        echo "<button type='button' onclick=\"deleteHandledare('$handledarID', '$fornamn', '$efternamn');\" >Radera</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }
@@ -444,8 +456,8 @@ if(checkAdminLogin()) {
                                 echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
                                 echo "<div class='periodMenu'>";
                                     //echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >Ta bort</button>";
-                                    echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Update</button>";
-                                    echo "<button type='button' onclick=\"deletePeriod('$periodID');\" >Ta bort</button>";
+                                    echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Uppdatera</button>";
+                                    echo "<button type='button' onclick=\"deletePeriod('$periodID');\" >Radera</button>";
                                 echo "</div>";
                                 echo "</td></tr>";
                             }
@@ -466,9 +478,9 @@ if(checkAdminLogin()) {
                                 echo $row['klass'];
                                 echo "</td><td>";
                                 echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                echo "<div id='foretagMenu'>";
-                                    echo "<button type='button' onclick=\"updateKlass('$klass');\" >Update</button>";
-                                    echo "<button type='button' onclick=\"deleteKlass('$klass');\" >Ta bort</button>";
+                                echo "<div class='klassMenu'>";
+                                    echo "<button type='button' onclick=\"updateKlass('$klass');\" >Uppdatera</button>";
+                                    echo "<button type='button' onclick=\"deleteKlass('$klass');\" >Radera</button>";
                                 echo "</div>";
                                 echo "</td></tr>";
                             }
@@ -533,19 +545,21 @@ if(checkAdminLogin()) {
                                     $handledarFornamn = $row['fornamn'];
                                     $handledarEfternamn = $row['efternamn'];
 
+                                    $elev = str_replace(".", " ", $elevID);
+
                                     echo "<tr><td>";
-                                    echo $row['elevID'];
+                                    echo $elev;
                                     echo "</td><td>";
                                     echo $row['namn'];
                                     echo "</td><td>";
                                     echo "$handledarFornamn $handledarEfternamn";
                                     echo "</td><td>";
                                     echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div id='foretagMenu'>";
+                                    echo "<div class='platsMenu'>";
                                         //echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >Ta bort</button>";
                                         //echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"updatePlats('$platsID','$handledarID','$periodNamn');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"deletePlats('$platsID','$elevID');\" >Ta bort</button>";
+                                        echo "<button type='button' onclick=\"updatePlats('$platsID','$handledarID','$periodNamn');\" >Uppdatera</button>";
+                                        echo "<button type='button' onclick=\"deletePlats('$platsID','$elevID');\" >Radera</button>";
                                     echo "</div>";
                                     echo "</td></tr>";
                                 }

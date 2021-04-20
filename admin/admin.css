@@ -234,13 +234,26 @@ body{
     background-color: yellow;
 }
 
-.updateForetag, .updateElev {
+.updateForetag {
     position: absolute;
     width: 40%;
     height: 40%;
     display: block;
     background-color: white;
-    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2%;
+    overflow-y: auto;
+}
+
+.updateElev {
+    position: absolute;
+    width: 55%;
+    height: 65%;
+    display: block;
+    background-color: white;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -279,6 +292,12 @@ body{
     width: 100%;
 }
 
+#updateForetag form label, #updateKlass form label, #updatePeriod label, #updatePlats form label, #updateElev form label, #updateHandledare form label  {
+    position: relative;
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+
 #updateForetag form input[type=text], #updatePeriod input[type=date], #updatePeriod input[type=text], #updateKlass form input[type=text], #updateElev form input[type=text], #updateHandledare form input[type=text] {
     display: block;
     margin-left: auto;
@@ -302,7 +321,7 @@ body{
     box-sizing: border-box;
 }
 
-#updateForetag form input[type=submit], #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElev form input[type=submit], #updateHandledare form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
+#updateForetag form input[type=submit], #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -314,7 +333,31 @@ body{
     box-sizing: border-box;
 }
 
-#updateForetag form .cancelButton, #updateKlass form .cancelButton, #updatePlats form .cancelButton, #updateElev form .cancelButton, #updateHandledare form .cancelButton, #updateElevNarvaroIdag form .cancelButton, #updateElevNarvaro form .cancelButton, .deletePopUp form .cancelButton {
+#updateElev form input[type=submit], #updateHandledare form input[type=submit] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0% 18% -2% 0%;
+    width: 15%;
+    padding: 1% 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#updateElev form .cancelButton,  #updateHandledare form .cancelButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0% 0% -2% 0%;
+    width: 15%;
+    padding: 1% 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#updateForetag form .cancelButton, #updateKlass form .cancelButton, #updatePlats form .cancelButton, #updateElevNarvaroIdag form .cancelButton, #updateElevNarvaro form .cancelButton, .deletePopUp form .cancelButton {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -328,35 +371,20 @@ body{
 
 
 
-.elevMenu {
+.elevMenu, .periodMenu, .klassMenu, .handledarMenu, .platsMenu, .foretagMenu {
     position: absolute;
-    height: 55px;
-    width: 75px;
-    margin: 0;
+    height: 65px !important;
+    width: 100px !important;
+    margin: 0% 0% 0% 0%;
+    transform: translateX(-72.5px);
     display: none;
     background-color: yellowgreen;
 }
 
-.periodMenu {
-    position: absolute;
-    height: 55px;
-    width: 75px;
-    margin: 0;
-    display: none;
-    background-color: yellowgreen;
-}
-
-.elevMenu button, .periodMenu button {
+.elevMenu button, .periodMenu button, .handledarMenu button, .klassMenu button, .platsMenu button, .foretagMenu button {
     position: relative;
     width: 100%;
     height: 50%;
-}
-
-#foretagMenu {
-    position: relative;
-    height: 5%;
-    width: 100%;
-    display: none;
 }
 
 .narvaroTable tbody {
@@ -553,7 +581,7 @@ h1 {
 .elevTable th,
 .elevTable td {
     padding: 12px 15px;
-    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .elevTable thead {
@@ -628,7 +656,14 @@ h1 {
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
+}
 
+.foretagTable tr td:last-child, .foretagTable th:last-child, .elevTable tr td:last-child, .elevTable th:last-child, .elevklassTable tr td:last-child, .elevklassTable th:last-child {
+    width: 10%;
+}
+
+.platsTable tr td:last-child, .platsTable th:last-child {
+    width: 5%;
 }
 
 .foretagTable tr:nth-child(even) {
@@ -644,8 +679,8 @@ h1 {
 
 .foretagTable th,
 .foretagTable td {
-    padding: 12px 15px;
-    word-break: break-all
+    padding: 12px 13px;
+    overflow-wrap: break-word
 }
 
 /*.foretagTable th:last-child, .foretagList tbody tr td:last-child {
@@ -1222,7 +1257,9 @@ h1 {
 
 .platsTable th,
 .platsTable td {
+    position: relative;
     padding: 12px 15px;
+    overflow-wrap: break-word
 }
 
 .platsTable thead {
@@ -1407,6 +1444,23 @@ h1 {
     transform: translateX(-50%);
     top: 12%;
     font-size: 17px;
+}
+
+#info {
+    min-width: 20%;
+    color: black;
+    text-align: center;
+    height: 10%;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 17px;
+    font-family: sans-serif;
+}
+
+#info p {
+    margin-top: 8%;
 }
   
 #snackbar.show {

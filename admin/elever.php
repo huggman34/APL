@@ -1,8 +1,8 @@
 <?php
     require_once '../connection.php';
+    header('Content-Type: text/html; charset=utf-8');
 
     $klass = $_POST['klass'];
-
     function elev($conn, $klass) {
 
         if($klass == "All") {
@@ -31,13 +31,7 @@
 
     $elever = elev($conn, $klass);
 
-    /*foreach ($elever as $e) {
-        echo $e['elevID'];
-        echo ';';
-    }*/
-    //print_r($elever);
-    //echo "<button type='button' onclick=\"deletBoxK('$klass');\" >...</button>";
-
+    //echo json_encode($elever, JSON_UNESCAPED_UNICODE);
 
     echo "<table class='elevTable'>";
     echo "<thead><tr><th>Elev</th><th>Klass</th><th>Epost</th><th>Tel</th><th></th></tr></thead><tbody>";
@@ -50,8 +44,10 @@
         $epost = $row['epost'];
         $telefon = $row['telefon'];
 
+        $elev = str_replace(".", " ", $elevID);
+
         echo "<tr><td>";
-        echo $elevID;
+        echo $elev;
         echo "</td><td>";
         echo $klass;
         echo "</td><td>";
@@ -62,8 +58,8 @@
         echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
         echo "<div class='elevMenu'>";
             //echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >Ta bort</button>";
-            echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Update</button>";
-            echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Ta bort</button>";
+            echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Uppdatera</button>";
+            echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Radera</button>";
         echo "</div>";
         echo "</td></tr>";
     }
