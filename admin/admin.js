@@ -745,6 +745,35 @@ $(document).on('click','.handledarTable tbody tr',function(){
 
     $("#handledarSaver").html(handledare);
 
+    $.ajax({
+        url: 'handledarInfo.php',
+        type: 'POST',
+        data: {
+            handledarID: handledare
+        },
+
+        success: function(data) {
+            $('.foretagView').html(data);
+            $(".handledarInfo td").each( function() {
+                var thisCell = $(this);
+                var cellValue = thisCell.text();
+
+                if (cellValue == 'Närvarande') {
+                    thisCell.css("background-color","#77dd77");
+                }
+                if (cellValue == 'Giltig frånvaro') {
+                    thisCell.css("background-color","#FEFE95");
+                }
+                if (cellValue == 'Ogiltig frånvaro') {
+                    thisCell.css("background-color","#ff6961");
+                }
+                if (cellValue == 'Oanmäld') {
+                    thisCell.css("background-color","gainsboro");
+                }
+             }
+            )
+        }
+    })
 });
 
 $("#viewForetag").on('click', function(){

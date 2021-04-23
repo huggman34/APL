@@ -803,6 +803,93 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.handledarTable {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+
+}
+
+.handledarTable tr:nth-child(even) {
+    background-color: #EBEBEB;
+}
+
+.handledarTable tbody {
+    display: block;
+    height: 67vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.handledarTable th,
+.handledarTable td {
+    padding: 12px 15px;
+    word-break: break-all
+}
+
+.handledarTable thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.handledarTable thead, .handledarTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.handledarTable tbody tr {
+    cursor: pointer;
+    /*border-bottom: 2px solid gainsboro;*/
+}
+
+.handledarTable tr:nth-child(even) {
+    background-color: #EBEBEB;
+}
+
+.handledarTable tr:last-child{
+    border-bottom: 2px solid #4C4C4C;
+}
+
+.handledarInfo {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 100%;
+    background-color: white;
+}
+
+.handledarInfo tbody {
+    display: block;
+    height: 74vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.handledarInfo th,
+.handledarInfo td {
+    padding: 12px 15px;
+}
+
+.handledarInfo thead {
+    background-color: #4C4C4C;
+    color: white;
+    text-align: left;
+}
+
+.handledarInfo thead, .handledarInfo tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.handledarInfo tbody tr {
+    border-bottom: 2px solid #4C4C4C;
+    cursor: pointer;
+}
+
 .elevNarvaro {
     border-collapse: collapse;
     font-size: 0.9em;

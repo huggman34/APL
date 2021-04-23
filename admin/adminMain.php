@@ -534,9 +534,9 @@ if(checkAdminLogin()) {
                                     <form id="regPlatsHand" action="regPlatsHand.php" method="POST">
                                         <select id="foretagPeriod" onchange="handledarPlats();">
                                         <?php
-                                            $hanlnedare = allPeriod($conn);
+                                            $handledare = allPeriod($conn);
                                             echo "<option disabled selected> Välj Period </option>";
-                                            foreach ($hanlnedare as $f) {
+                                            foreach ($handledare as $f) {
                                                 echo "<option value='".$f['periodNamn']."'> ".$f['periodNamn']." </option>";
                                             }
                                         ?>
