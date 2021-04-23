@@ -38,16 +38,16 @@ if(checkAdminLogin()) {
         <link rel="stylesheet" type="text/css" href="admin.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
         <title>Admin</title>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
-    <body onload="donutChart(); elever();">
+    <body onload="donutChart(); elever(); loadTables();">
         <div id="wrapper">
+            <div class="savers" id="foretagSaver"></div>
+            <div class="savers" id="handledarSaver"></div>
             <div id="snackbar"></div>
-            <div id="info">
-                <p>Hem</p>
-            </div>
+            
             <div class="navbar">
                 <div class="logo"></div>
                 <div class="home">
@@ -56,7 +56,7 @@ if(checkAdminLogin()) {
                     </svg>
                 </div>
                 <div class="registerElev">
-                    <svg id="elevIcon" xmlns="http://www.w3.org/2000/svg" height="23" width="23" fill="white" viewBox="0 0 512 511">
+                    <svg onclick="elever();" id="elevIcon" xmlns="http://www.w3.org/2000/svg" height="23" width="23" fill="white" viewBox="0 0 512 511">
                         <path d="M428.16,387.74V303.91H388.24v83.83H304.4v39.93h83.84V511.5h39.92V427.67H512V387.74ZM255.5.5C174.05.5,107.79,66.76,107.79,148.21a147.65,147.65,0,0,0,64.14,121.72A255.92,255.92,0,0,0,0,511.5H39.92c0-118.87,96.71-215.58,215.58-215.58,81.45,0,147.71-66.26,147.71-147.71S337,.5,255.5.5Zm0,255.5A107.79,107.79,0,1,1,363.29,148.21,107.91,107.91,0,0,1,255.5,256Z"/>
                     </svg>
                 </div>
@@ -89,8 +89,8 @@ if(checkAdminLogin()) {
                     <!-- STARTSIDA CONTENT HÄR -->
                     <div class="narvaro">
                         <div>
-                            <h1>Närvaro</h1>
-                            <h3><?php echo date("Y-m-d") ?></h3>
+                            <span>Dagens närvaro</span>
+                            <span><?php echo date("Y-m-d") ?></span>
                         </div>
                             <?php
                                 $data = narvaroIdag($conn);
@@ -224,7 +224,7 @@ if(checkAdminLogin()) {
                         ?>
                         <form method="POST">
                             <select id="klass" name="klass" onchange="elever();">
-                                <option>All</option>
+                                <option value="">All</option>
                                 <?php
                                     foreach ($klasser as $k) {
                                         echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
@@ -243,8 +243,7 @@ if(checkAdminLogin()) {
                                     },
 
                                     success: function(data) {
-                                        $('#elevList').html(data);
-                                        
+                                        $("#elevList").html(data);
                                     }
                                 });
                             };
@@ -348,72 +347,14 @@ if(checkAdminLogin()) {
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
                         <div class="foretagListOptions">
+                            <h1 id="fText">Företag</h1>
+                            <h1 style="display:none" id="hText">Handledare</h1>
                             <button id="viewForetag">Företag</button>
                             <button id="viewHandledare">Handledare</button>
                         </div>
-                        <div id="foretagVy">
-                            <?php
-                            
-                                $data = foretag($conn);
-                            
-                                echo "<table class='foretagTable'>";
-                                echo "<thead><tr><th>Företag</th><th>Adress</th><th></th></tr></thead><tbody>";
-                            
-                                foreach ($data as $row) {
-                                    $foretagID = $row['foretagID'];
-                                    $namn = $row['namn'];
-                                    $adress = $row['adress'];
+                        <div id="foretagVy"></div>
 
-                                    echo "<tr><td>";
-                                    echo $row['namn'];
-                                    echo "</td><td>";
-                                    echo $row['adress'];
-                                    echo "</td><td>";
-                                    echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div class='foretagMenu'>";
-                                        //echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >Ta bort</button>";
-                                        echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Uppdatera</button>";
-                                        echo "<button type='button' onclick=\"event.stopPropagation(); deleteForetag('$foretagID', '$namn');\" >Radera</button>";
-                                    echo "</div>";
-                                    echo "</td></tr>";
-                                }
-                                echo "</tbody></table>";
-                            ?>
-                        </div>
-                        <div id="handledarVy" style="display:none">
-                            <?php
-                                $data = allHandledare($conn);
-                            
-                                echo "<table class='foretagTable'>";
-                                echo "<thead><tr><th>Handledare</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
-                            
-                                foreach ($data as $row) {
-                                    $handledarID = $row['handledarID'];
-                                    $fornamn = $row['fornamn'];
-                                    $efternamn = $row['efternamn'];
-                                    $epost = $row['epost'];
-                                    $foretag = $row['namn'];
-                                    $telefon = $row['telefon'];
-
-                                    echo "<tr><td>";
-                                    echo "$fornamn $efternamn";
-                                    echo "</td><td>";
-                                    echo $foretag;
-                                    echo "</td><td>";
-                                    echo $epost;
-                                    echo "</td><td>";
-                                    echo $telefon;
-                                    echo "</td><td>";
-                                    echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div class='handledarMenu'>";
-                                        echo "<button type='button' onclick=\"updateHandledare('$handledarID', '$fornamn', '$efternamn', '$foretag', '$epost', '$telefon');\" >Uppdatera</button>";
-                                        echo "<button type='button' onclick=\"deleteHandledare('$handledarID', '$fornamn', '$efternamn');\" >Radera</button>";
-                                    echo "</div>";
-                                    echo "</td></tr>";
-                                }
-                                echo "</tbody></table>";
-                            ?>
-                        </div>
+                        <div id="handledarVy" style="visibility:hidden"></div>
                     </div>
                     <div class="foretagholder">
                         <div class="foretagView">
@@ -433,58 +374,17 @@ if(checkAdminLogin()) {
                     </form>
                     <!-- PERIOD CONTENT HÄR -->
                     <div class="periodList">
-                        <?php
-                            $period="period";
-                            $data = selectTabel($conn,$period);
-
-                            echo "<table class='elevklassTable'>";
-                            echo "<thead><tr><th>Period</th><th>Startdatum</th><th>Slutdatum</th><th></th></tr></thead><tbody>";
-
-                            foreach($data as $row){
-                                $periodID=$row['periodNamn'];
-                                $slutdatum=$row['slutdatum'];
-                                $startdatum=$row['startdatum'];
-
-                                echo "<tr><td>";
-                                echo $row['periodNamn'];
-                                echo "</td><td>";
-                                echo $row['startdatum'];
-                                echo "</td><td>";
-                                echo $row['slutdatum'];
-                                echo "</td><td>";
-                                echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                echo "<div class='periodMenu'>";
-                                    //echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >Ta bort</button>";
-                                    echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Uppdatera</button>";
-                                    echo "<button type='button' onclick=\"deletePeriod('$periodID');\" >Radera</button>";
-                                echo "</div>";
-                                echo "</td></tr>";
-                            }
-                            echo "</tbody></table>";
-                        ?>
+                        <div class="foretagListOptions">
+                            <h1>Perioder</h1>
+                        </div>
+                        <div id="periodVy"></div>
                     </div>
+                    
                     <div class="klassList">
-                        <?php
-                            $data = allKlass($conn);
-
-                            echo "<table class='elevklassTable'>";
-                            echo "<thead><tr><th>Klass</th><th></th></tr></thead><tbody>";
-
-                            foreach($data as $row){
-                                $klass = $row['klass'];
-
-                                echo "<tr><td>";
-                                echo $row['klass'];
-                                echo "</td><td>";
-                                echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                echo "<div class='klassMenu'>";
-                                    echo "<button type='button' onclick=\"updateKlass('$klass');\" >Uppdatera</button>";
-                                    echo "<button type='button' onclick=\"deleteKlass('$klass');\" >Radera</button>";
-                                echo "</div>";
-                                echo "</td></tr>";
-                            }
-                            echo "</tbody></table>";
-                        ?>
+                        <div class="foretagListOptions">
+                            <h1>Klasser</h1>
+                        </div>
+                        <div id="klassVy"></div>
                     </div>
                 </div>
 
@@ -527,45 +427,12 @@ if(checkAdminLogin()) {
                             <input type="hidden" id="pl">
                             <input id="subPl" type="submit" value="Spara">
                         </form>
-                <div class="platsList">
-                        <div>
-                            <?php
-                                $platser = elevPlats($conn);
-
-                                echo "<table class='platsTable'>";
-                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Handledare</th><th></th></tr></thead><tbody>";
-                            
-                                foreach ($platser as $row) {
-                                    $platsID=$row['platsID'];
-                                    $elevID=$row['elevID'];
-                                    $periodNamn=$row['periodNamn'];
-                                    $foretagID=$row['foretagID'];
-                                    $handledarID = $row['handledarID'];
-                                    $handledarFornamn = $row['fornamn'];
-                                    $handledarEfternamn = $row['efternamn'];
-
-                                    $elev = str_replace(".", " ", $elevID);
-
-                                    echo "<tr><td>";
-                                    echo $elev;
-                                    echo "</td><td>";
-                                    echo $row['namn'];
-                                    echo "</td><td>";
-                                    echo "$handledarFornamn $handledarEfternamn";
-                                    echo "</td><td>";
-                                    echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-                                    echo "<div class='platsMenu'>";
-                                        //echo "<button type='button' onclick=\"deletBoxP('$platsID');\" >Ta bort</button>";
-                                        //echo "<button type='button' onclick=\"updateBP('$elevID','$foretagID','$periodNamn');\" >Update</button>";
-                                        echo "<button type='button' onclick=\"updatePlats('$platsID','$handledarID','$periodNamn');\" >Uppdatera</button>";
-                                        echo "<button type='button' onclick=\"deletePlats('$platsID','$elevID');\" >Radera</button>";
-                                    echo "</div>";
-                                    echo "</td></tr>";
-                                }
-                                echo "</tbody></table>";
-                            ?>
+                        <div class="platsList">
+                            <div class="foretagListOptions">
+                                <h1>Platser</h1>
+                            </div>
+                            <div id="platsVy"></div>
                         </div>
-                    </div>
                 </div>
                 <div class="views" id="content7" style='display:none'>
                     <div class="regSida">

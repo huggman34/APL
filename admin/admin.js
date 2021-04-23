@@ -21,28 +21,63 @@ $("#foretagIcon").on('click', function() {
     $("#content1, #content2, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content3").css("display", "block");
     $("#homeIcon").css("fill", "white");
-    $("#info").html("<p>Företag & Handledare</p>")
+
+    $('#foretagVy').load("foretagTable.php").fadeIn("slow");
+    $('#handledarVy').load("handledarTable.php").fadeIn("slow");
+
+    function loadColor() {
+        if($("#foretagSaver").html().length) {
+            var selectedForetag = $("#foretagSaver").text();
+    
+            var tableRow = $(".foretagTable tbody td").filter(function() {
+                return $(this).text() == selectedForetag;
+            }).closest("tr");
+    
+            tableRow.css("color", "#EC6FE4");
+        }
+
+        if($("#handledarSaver").html().length) {
+            var selectedForetag = $("#handledarSaver").text();
+    
+            var tableRow = $(".handledarTable tbody td").filter(function() {
+                return $(this).text() == selectedForetag;
+            }).closest("tr");
+    
+            tableRow.css("color", "#EC6FE4");
+        }
+    }
+    setTimeout(loadColor, 0045);
 });
+
+function loadTables() {
+    $('#foretagVy').load("foretagTable.php").fadeIn("slow");
+    $('#handledarVy').load("handledarTable.php").fadeIn("slow");
+    $('#periodVy').load("periodTable.php").fadeIn("slow");
+    $('#klassVy').load("klassTable.php").fadeIn("slow");
+    $('#platsVy').load("platsTable.php").fadeIn("slow");
+}
 
 $("#periodIcon").on('click', function() {
     $("#content1, #content2, #content3, #content5, #content6, #content7").css("display", "none");
     $("#content4").css("display", "block");
     $("#homeIcon").css("fill", "white");
-    $("#info").html("<p>Period & Klass</p>")
+
+    $('#periodVy').load("periodTable.php").fadeIn("slow");
+    $('#klassVy').load("klassTable.php").fadeIn("slow");
 });
 
 $("#platsIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content7").css("display", "none");
     $("#content6").css("display", "block");
     $("#homeIcon").css("fill", "white");
-    $("#info").html("<p>Plats hantering</p>")
+
+    $('#platsVy').load("platsTable.php").fadeIn("slow");
 });
 
 $(".registerPage").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content6").css("display", "none");
     $("#content7").css("display", "block");
     //$("#homeIcon").css("fill", "white");
-    $("#info").html("<p>Registrering</p>")
 });
 
 function toggleMenu(event) {
@@ -373,7 +408,7 @@ function deleteKlass(klass) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deleteKlass";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteKlass' value='"+klass+"'><button class='raderaBtn' type='button' onclick='deleteKlassAjax();'>Radera</button></form>";
     
     $(document).ready(function(){
         $('#deleteKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -398,7 +433,7 @@ function deleteHandledare(handledarID, fornamn, efternamn) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deleteHandledare";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><button class='raderaBtn' onclick='deleteHandledareAjax();' type='button'>Radera</button></form>";
     
     $(document).ready(function(){
         $('#deleteHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -423,7 +458,7 @@ function deleteElev(elevID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deleteElev";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><button class='raderaBtn' type='button' onclick='deleteElevAjax();'>Radera</button></form>";
     elev = elevID.split('.').join(' ');
     
     $(document).ready(function(){
@@ -467,7 +502,7 @@ function deleteForetag(foretagID, foretagNamn) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deleteForetag";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form id='raderaForetag' action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteForetag' value='"+foretagID+"'><button class='raderaBtn' type='button' onclick='deleteForetagAjax();'>Radera</button></form>";
     
     $(document).ready(function(){
         $('#deleteForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -492,7 +527,7 @@ function deletePeriod(periodID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deletePeriod";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePeriod' value='"+periodID+"'><button class='raderaBtn' type='button' onclick='deletePeriodAjax();'>Radera</button></form>";
     
     $(document).ready(function(){
         $('#deletePeriod form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -517,7 +552,7 @@ function deletePlats(platsID, elevID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deletePlats";
-    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><input type='submit' value='Radera'></form>";
+    update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deletePlats' value='"+platsID+"'><button class='raderaBtn' type='button' onclick='deletePlatsAjax();'>Radera</button></form>";
     elev = elevID.split('.').join(' ');
     
     $(document).ready(function(){
@@ -593,7 +628,7 @@ function klassPlats(klass) {
 }
 
 $('.navbar svg').click(function() {
-    $(this).toggleClass('toggle-state');
+    $(this).addClass('toggle-state');
     $('.navbar svg').not(this).removeClass('toggle-state');
 });
 
@@ -665,7 +700,10 @@ $(document).on('click','.foretagTable tbody tr',function(){
     var row = $(this);
     row.css("color", "#EC6FE4");
     $(".foretagTable tbody tr").not(this).css("color", "black")
+
     var foretag = row.find("td:first-child").text();
+
+    $("#foretagSaver").html(foretag);
 
     $.ajax({
         url: 'foretagInfo.php',
@@ -698,14 +736,31 @@ $(document).on('click','.foretagTable tbody tr',function(){
     })
 });
 
+$(document).on('click','.handledarTable tbody tr',function(){
+    var row = $(this);
+    row.css("color", "#EC6FE4");
+    $(".handledarTable tbody tr").not(this).css("color", "black")
+
+    var handledare = row.find("td:first-child").text();
+
+    $("#handledarSaver").html(handledare);
+
+});
+
 $("#viewForetag").on('click', function(){
-    $("#handledarVy").css("display", "none");
-    $("#foretagVy").css("display", "block");
+    $("#handledarVy").css("visibility", "hidden");
+    $("#foretagVy").css("visibility", "visible");
+
+    $("#hText").css("display", "none");
+    $("#fText").css("display", "block");
 });
 
 $("#viewHandledare").on('click', function(){
-    $("#foretagVy").css("display", "none");
-    $("#handledarVy").css("display", "block");
+    $("#foretagVy").css("visibility", "hidden");
+    $("#handledarVy").css("visibility", "visible");
+
+    $("#fText").css("display", "none");
+    $("#hText").css("display", "block");
 });
 
 /*$("#subElev").click(function(e){
@@ -758,8 +813,7 @@ $("#regElev").submit(function(e) {
             periodN: periodn
         }, // serializes the form's elements.
 
-        success: function(data)
-        {
+        success: function(data) {
             $("#snackbar").append(data);
             if(data == "Fyll i alla fält") {
                 $("#snackbar").css("background-color", "#FF6961");
@@ -768,6 +822,16 @@ $("#regElev").submit(function(e) {
             }
             snackbar();
             $("#regElev")[0].reset();
+
+            if(!$('#klass').find("option:contains('"+elevKlass+"')").length){
+                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
+                $("#klass").append(newOption);   
+            }
+
+            if(!$('#platsKlass').find("option:contains('"+elevKlass+"')").length){
+                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
+                $("#platsKlass").append(newOption);   
+            }
         }
     });
 });
@@ -910,6 +974,18 @@ $("#regPeriod").submit(function(e) {
 
             $('#dagList').empty();
             $("#regPeriod")[0].reset();
+
+            if(!$('#platsPeriod').find("option:contains('"+perio+"')").length){
+                var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
+                $("#platsPeriod").append(newOption);   
+            }
+
+            if(!$('#foretagPeriod').find("option:contains('"+perio+"')").length){
+                var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
+                $("#foretagPeriod").append(newOption);   
+            }
+
+
         }
     });
 });
@@ -1087,7 +1163,31 @@ $(document).ready(function(){
         $("#foretagForm").css("display", "block");
     });
 
+    function updateForetagSelect() {
+        $.ajax({  
+            type: "GET",  
+            url: "getAllForetag.php",  
+            data: "{}",  
+            success: function (data) {
+                var s = '<option disabled selected>Välj företag</option>';
+    
+                var myJson = JSON.parse(data);
+    
+                for (var i = 0; i < myJson.length; i++) {  
+                    s += '<option value="' + myJson[i].foretagID + '">'+ myJson[i].namn +'</option>';  
+                }
+
+                $("#foretagID").html(s);
+    
+                //alert(s);
+                //console.log(myJson);
+            }  
+        });
+    }
+
     $('#handledarReg').on('click', function() {
+        updateForetagSelect();
+
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
             $("#handledarReg").addClass("active");
@@ -1143,7 +1243,7 @@ function snackbar() {
     }, 3010);
 }
 
-$(function(){
+$(function() {
     $("#elevKlass").autocomplete({
         source: "autoComplete.php",
         minLength: 1,
@@ -1151,20 +1251,113 @@ $(function(){
     });
 });
 
-/*$.getJSON("elever.php", function(data) {
-    for (var i = 0; i < data.length; i++) {  
-        //s += '<option value="' + myJson[i].handledarID + '">'+ myJson[i].namn+' - '+myJson[i].fornamn+' '+myJson[i].efternamn +'</option>';  
-        $("#elevList tbody").append("<tr><td>"+data[i].elevID+"</td><td>"+data[i].klass+"</td><td>"+data[i].epost+"</td><td>"+data[i].telefon+"</td><td>\
-        <button type='button' onclick=\"toggleMenu(this);\">...</button>\
-        <div class='elevMenu'>\
-        <button type='button' onclick=\"updateElev("+data[i].elevID+", "+data[i].fornamn+", "+data[i].efternamn+", "+data[i].klass+", "+data[i].epost+", "+data[i].telefon+");\" >Uppdatera</button>\
-        <button type='button' onclick=\"deleteElev("+data[i].elevID+");\" >Radera</button>\
-        </td></tr>\
-        </div>");
-    }
-    //console.log("object: " + data);
-    //alert(data[0]['elevID']);
-})*/
+function deleteForetagAjax() {
+    var url = "deletePosts.php";
+    var foretagID = $("#deleteForetag form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deleteForetag: foretagID
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deleteForetag").remove();
+            $('#foretagVy').load("foretagTable.php").fadeIn("slow");
+        }
+    });
+}
+
+function deleteHandledareAjax() {
+    var url = "deletePosts.php";
+    var handledarID = $("#deleteHandledare form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deleteHandledare: handledarID
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deleteHandledare").remove();
+            $('#handledarVy').load("handledarTable.php").fadeIn("slow");
+        }
+    });
+}
+
+function deleteKlassAjax() {
+    var url = "deletePosts.php";
+    var klass = $("#deleteKlass form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deleteKlass: klass
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deleteKlass").remove();
+            $('#klassVy').load("klassTable.php").fadeIn("slow");
+        }
+    })
+}
+
+function deletePeriodAjax() {
+    var url = "deletePosts.php";
+    var period = $("#deletePeriod form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deletePeriod: period
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deletePeriod").remove();
+            $('#periodVy').load("periodTable.php").fadeIn("slow");
+        }
+    })
+}
+
+function deletePlatsAjax() {
+    var url = "deletePosts.php";
+    var plats = $("#deletePlats form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deletePlats: plats
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deletePlats").remove();
+            $('#platsVy').load("platsTable.php").fadeIn("slow");
+        }
+    })
+}
+
+function deleteElevAjax() {
+    var url = "deletePosts.php";
+    var elevID = $("#deleteElev form input[type=hidden]").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            deleteElev: elevID
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#deleteElev").remove();
+            elever();
+        }
+    })
+}
 
 /*$(document).ready(function(){
     $(function(){

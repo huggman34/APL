@@ -1,67 +1,74 @@
 <?php
+    session_start();
     require_once '../connection.php';
     header('Content-Type: text/html; charset=utf-8');
 
-    $klass = $_POST['klass'];
-    function elev($conn, $klass) {
+    if(isset($_POST['klass'])) {
 
-        if($klass == "All") {
-            $sql = "SELECT * FROM elev";
+        $klass = $_POST['klass'];
 
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = $result->fetch_all(MYSQLI_ASSOC);
+        //$_SESSION['klassNow'] = $klass;
+        
+        function elev($conn, $klass) {
 
-            return $data;
+            if(empty($klass)) {
+                $sql = "SELECT * FROM elev";
 
-        } else {
-            $sql = "SELECT * FROM elev
-            WHERE klass = ?";
-    
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $klass);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = $result->fetch_all(MYSQLI_ASSOC);
-    
-            return $data;
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+
+                return $data;
+
+            } else {
+                $sql = "SELECT * FROM elev
+                WHERE klass = ?";
+        
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $klass);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+                return $data;
+            }
         }
+
+        $elever = elev($conn, $klass);
+
+        //echo json_encode($elever, JSON_UNESCAPED_UNICODE);
+
+        echo "<table class='elevTable'>";
+        echo "<thead><tr><th>Elev</th><th>Klass</th><th>Epost</th><th>Tel</th><th></th></tr></thead><tbody>";
+
+        foreach ($elever as $row) {
+            $elevID = $row['elevID'];
+            $fornamn = $row['fornamn'];
+            $efternamn = $row['efternamn'];
+            $klass = $row['klass'];
+            $epost = $row['epost'];
+            $telefon = $row['telefon'];
+
+            $elev = str_replace(".", " ", $elevID);
+
+            echo "<tr><td>";
+            echo $elev;
+            echo "</td><td>";
+            echo $klass;
+            echo "</td><td>";
+            echo $epost;
+            echo "</td><td>";
+            echo $telefon;
+            echo "</td><td>";
+            echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
+            echo "<div class='elevMenu'>";
+                //echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >Ta bort</button>";
+                echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Uppdatera</button>";
+                echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Radera</button>";
+            echo "</div>";
+            echo "</td></tr>";
+        }
+        echo "</tbody></table>";
     }
-
-    $elever = elev($conn, $klass);
-
-    //echo json_encode($elever, JSON_UNESCAPED_UNICODE);
-
-    echo "<table class='elevTable'>";
-    echo "<thead><tr><th>Elev</th><th>Klass</th><th>Epost</th><th>Tel</th><th></th></tr></thead><tbody>";
-
-    foreach ($elever as $row) {
-        $elevID = $row['elevID'];
-        $fornamn = $row['fornamn'];
-        $efternamn = $row['efternamn'];
-        $klass = $row['klass'];
-        $epost = $row['epost'];
-        $telefon = $row['telefon'];
-
-        $elev = str_replace(".", " ", $elevID);
-
-        echo "<tr><td>";
-        echo $elev;
-        echo "</td><td>";
-        echo $klass;
-        echo "</td><td>";
-        echo $epost;
-        echo "</td><td>";
-        echo $telefon;
-        echo "</td><td>";
-        echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
-        echo "<div class='elevMenu'>";
-            //echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >Ta bort</button>";
-            echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Uppdatera</button>";
-            echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Radera</button>";
-        echo "</div>";
-        echo "</td></tr>";
-    }
-    echo "</tbody></table>";
 ?>

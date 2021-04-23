@@ -7,6 +7,10 @@ body{
     overflow-x: hidden;
 }
 
+button, input[type=submit] {
+    cursor: pointer;
+}
+
 #wrapper {
     height: 100vh;
     width: 100vw;
@@ -206,14 +210,15 @@ body{
 
 .narvaro {
     position: relative;
-    width: 50%;
+    width: 48.75%;
     height: 100%;
     background-color: white;
-    padding: 1%;
+    padding: 0% 1% 1% 1%;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
 }
 
 .narvaroTable {
@@ -246,6 +251,7 @@ body{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 2%;
     overflow-y: auto;
+    z-index: 2;
 }
 
 .updateElev {
@@ -259,6 +265,7 @@ body{
     transform: translate(-50%, -50%);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 2%;
+    z-index: 2;
 }
 
 .deletePopUp {
@@ -273,6 +280,7 @@ body{
     transform: translate(-50%, -50%);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 2%;
+    z-index: 2;
 }
 
 .deletePopUp form h1{
@@ -321,7 +329,7 @@ body{
     box-sizing: border-box;
 }
 
-#updateForetag form input[type=submit], #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
+.raderaBtn, #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -379,6 +387,7 @@ body{
     transform: translateX(-72.5px);
     display: none;
     background-color: yellowgreen;
+    z-index: 1;
 }
 
 .elevMenu button, .periodMenu button, .handledarMenu button, .klassMenu button, .platsMenu button, .foretagMenu button {
@@ -431,14 +440,34 @@ body{
     fill: #EC6FE4;
 }
 
-.narvaro div{
+.narvaro div {
+    position: relative;
     width: 100%;
+    height: 8%;
     float: left;
-    margin-bottom: 1%;
+    display: flex;
 }
 
-.narvaro h1 {
-    display: inline;
+.narvaro span:first-of-type {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+.narvaro span:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 1.2em;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-weight: normal;
+    margin-left: auto;
 }
 
 .elevKlass {
@@ -476,11 +505,6 @@ body{
     vertical-align: top;
 }
 
-.platsList div {
-    width: 100%;
-    height: 94%;
-}
-
 .registerPage {
     display: flex;
     justify-content: center;
@@ -499,19 +523,10 @@ h1 {
     font-weight: normal;
 }
 
-
-.narvaro h3 {
-    display: inline;
-    margin-left: 69.3%;
-    font-size: 1em;
-    font-family: sans-serif;
-    font-weight: normal;
-}
-
 .periodNarvaro {
     position: relative;
-    width: 47.5%;
-    height: 80%;
+    width: 48.75%;
+    height: 100%;
     background-color: white;
     padding: 1%;
     margin-left: 2%;
@@ -528,27 +543,6 @@ h1 {
     left: 0;
     right: 0;
     text-align: center;
-}
-
-.periodList {
-    width: 48.75%;
-    height: 100%;
-    background-color: white;
-    padding: 1% 1% 1% 1%;
-    box-sizing: border-box;
-    display: inline-block;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin-right: 2%;
-}
-
-.klassList {
-    width: 48.75%;
-    height: 100%;
-    background-color: white;
-    padding: 1% 1% 1% 1%;
-    box-sizing: border-box;
-    display: inline-block;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .elevList {
@@ -622,7 +616,8 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.foretagList {
+.foretagList, .periodList {
+    position: relative;
     width: 48.75%;
     height: 100%;
     background-color: white;
@@ -632,12 +627,52 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.klassList {
+    position: relative;
+    width: 48.75%;
+    height: 100%;
+    background-color: white;
+    padding: 0% 1% 1% 1%;
+    margin-left: 2%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.platsList {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 0% 1% 1% 1%;
+    box-sizing: border-box;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .foretagListOptions {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 99.9%;
     height: 8%;
+}
+
+.periodListHeader {
+    position: relative;
+    width: 99.9%;
+}
+
+#periodVy, #klassVy {
+    width: 100%;
+    height: 94%;
+}
+
+.foretagListOptions h1 {
+    position: absolute;
+    width: 30%;
+    left: 0;
 }
 
 .foretagListOptions button{
@@ -651,14 +686,22 @@ h1 {
     margin-top: 5%;
 }
 
-.foretagTable {
+#handledarVy {
+    position: absolute;
+    top: 0;
+    height: 94%;
+    width: 96%;
+    margin-top: 7%;
+}
+
+.foretagTable, .handledarTable {
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
 }
 
-.foretagTable tr td:last-child, .foretagTable th:last-child, .elevTable tr td:last-child, .elevTable th:last-child, .elevklassTable tr td:last-child, .elevklassTable th:last-child {
+.foretagTable tr td:last-child, .foretagTable th:last-child, .handledarTable tr td:last-child, .handledarTable th:last-child, .elevTable tr td:last-child, .elevTable th:last-child, .elevklassTable tr td:last-child, .elevklassTable th:last-child {
     width: 10%;
 }
 
@@ -666,11 +709,11 @@ h1 {
     width: 5%;
 }
 
-.foretagTable tr:nth-child(even) {
+.foretagTable tr:nth-child(even), .handledarTable tr:nth-child(even) {
     background-color: #EBEBEB;
 }
 
-.foretagTable tbody {
+.foretagTable tbody, .handledarTable tbody {
     display: block;
     height: 67vh;
     overflow: auto;
@@ -678,8 +721,10 @@ h1 {
 }
 
 .foretagTable th,
-.foretagTable td {
-    padding: 12px 13px;
+.foretagTable td,
+.handledarTable th,
+.handledarTable td {
+    padding: 12px 15px;
     overflow-wrap: break-word
 }
 
@@ -687,28 +732,24 @@ h1 {
     width: 10%;
 }*/
 
-.foretagTable thead {
+.foretagTable thead, .handledarTable thead {
     background-color: #4C4C4C;
     color: white;
     text-align: left;
 }
 
-.foretagTable thead, .foretagTable tbody tr {
+.foretagTable thead, .foretagTable tbody tr, .handledarTable thead, .handledarTable tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.foretagTable tbody tr {
+.foretagTable tbody tr, .handledarTable tbody tr{
     cursor: pointer;
     /*border-bottom: 2px solid gainsboro;*/
 }
 
-.foretagTable tr:nth-child(even) {
-    background-color: #EBEBEB;
-}
-
-.foretagTable tr:last-child{
+.foretagTable tr:last-child, .handledarTable tr:last-child {
     border-bottom: 2px solid #4C4C4C;
 }
 
@@ -1107,10 +1148,6 @@ h1 {
     fill: #EC6FE4;
 }
 
-.navbar svg.toggle-state {
-    fill: #EC6FE4;
-}
-
 .elevklassTable {
     border-collapse: collapse;
     height: 100%;
@@ -1144,9 +1181,12 @@ h1 {
     table-layout: fixed;
 }
 
-.elevklassTable tbody tr {
-    cursor: pointer;
-    /*border-bottom: 2px solid gainsboro;*/
+.highlight {
+    color: #EC6FE4;
+}
+
+.savers {
+    display: none;
 }
 
 .elevklassTable tr:nth-child(even) {
