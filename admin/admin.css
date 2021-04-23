@@ -329,7 +329,7 @@ button, input[type=submit] {
     box-sizing: border-box;
 }
 
-.raderaBtn, #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
+.raderaBtn, #updateForetag form input[type=submit], #updateKlass form input[type=submit], #updatePlats form input[type=submit], #updateElevNarvaroIdag form input[type=submit], #updateElevNarvaro form input[type=submit], .deletePopUp form input[type=submit] {
     position: absolute;
     right: 0;
     bottom: 0;

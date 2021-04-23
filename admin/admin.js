@@ -314,11 +314,11 @@ function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updateKlass";
-    update.innerHTML = "<form action='updateKlass.php' method='POST'>\
+    update.innerHTML = "<form onsubmit='return false' action='updateKlass.php' method='POST'>\
     <input id='' type='hidden' name='klass' value='"+klass+"'>\
     <label for='nyKlass'>Klass namn</label>\
     <input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'>\
-    <input type='submit'></form>";
+    <button class='raderaBtn' type='button' onclick='updateKlassAjax();'>Spara</button></form>";
     
     $(document).ready(function(){
         $('#updateKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -910,6 +910,8 @@ $("#regHandledare").submit(function(e) {
     var telefon = $("#telefon").val();
     var losenord = $("#losenord").val();
     var foretagID = $("#foretagID").val();
+
+    var foretagNamn = $( "#foretagID option:selected" ).text();
     
     $.ajax({
         type: "POST",
@@ -937,6 +939,11 @@ $("#regHandledare").submit(function(e) {
 
             snackbar();
             $("#regHandledare")[0].reset();
+
+            /*if(!$('#platsHandledare').find("option:contains('"+fornamn+' '+efternamn+"')").length){
+                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
+                $("#klass").append(newOption);
+            }*/
         }
     });
 });
@@ -1074,6 +1081,7 @@ $("#regPlatsHand").submit(function(e) {
         {
             alert(data); // show response from the php script.
             $("#regPlatsHand")[0].reset();
+            $("#platsElever").empty();
         }
     });
 });
@@ -1292,8 +1300,16 @@ function deleteForetagAjax() {
         }, // serializes the form's elements.
     
         success: function(data) {
+            //alert(data);
+
+            var foretagNamn = data.replace(/ .*/,'');
+
             $("#deleteForetag").remove();
             $('#foretagVy').load("foretagTable.php").fadeIn("slow");
+
+            if($('#foretagID').find("option:contains('"+foretagNamn+"')").length){
+                $('#foretagID').find("option:contains('"+foretagNamn+"')").remove();
+            }
         }
     });
 }
@@ -1330,6 +1346,14 @@ function deleteKlassAjax() {
         success: function(data) {
             $("#deleteKlass").remove();
             $('#klassVy').load("klassTable.php").fadeIn("slow");
+
+            if($('#klass').find("option:contains('"+klass+"')").length){
+                $('#klass').find("option:contains('"+klass+"')").remove(); 
+            }
+
+            if($('#platsKlass').find("option:contains('"+klass+"')").length){
+                $('#platsKlass').find("option:contains('"+klass+"')").remove(); 
+            }
         }
     })
 }
@@ -1348,6 +1372,14 @@ function deletePeriodAjax() {
         success: function(data) {
             $("#deletePeriod").remove();
             $('#periodVy').load("periodTable.php").fadeIn("slow");
+
+            if($('#platsPeriod').find("option:contains('"+period+"')").length){
+                $('#platsPeriod').find("option:contains('"+period+"')").remove();
+            }
+
+            if($('#foretagPeriod').find("option:contains('"+period+"')").length){
+                $('#foretagPeriod').find("option:contains('"+period+"')").remove();
+            }
         }
     })
 }
@@ -1384,6 +1416,26 @@ function deleteElevAjax() {
         success: function(data) {
             $("#deleteElev").remove();
             elever();
+        }
+    })
+}
+
+function updateKlassAjax() {
+    var url = "updateKlass.php";
+    var klass = $("#updateKlass form input[type=hidden]").val();
+    var nyKlass = $("#nyKlass").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            klass: klass,
+            nyKlass: nyKlass
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updateKlass").remove();
+            $('#klassVy').load("klassTable.php").fadeIn("slow");
         }
     })
 }
