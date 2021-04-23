@@ -541,6 +541,17 @@ if(checkAdminLogin()) {
                                             }
                                         ?>
                                         </select>
+                                        <select id="platsHandledare">
+                                            <?php
+                                                $period=allHandledare($conn);
+                                                echo "<option disabled selected> Välj handledare </option>";
+                                                foreach ($period as $kls) {
+                                                
+                                                    echo"<option value='".$kls['handledarID']."'>".$kls['namn'], ' - ', $kls['fornamn'], ' ', $kls['efternamn']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+
                                         <div id="platsElever"></div>
                                         <input id="subPlats2" type="submit" value="Spara">
                                     </form>

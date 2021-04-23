@@ -6,13 +6,16 @@
     
 
 function deleteForetag($conn,$id){
+    $sql = "SELECT namn FROM foretag WHERE foretagID = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_row($result);
+
     $sql = "DELETE FROM foretag WHERE foretagID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i",$id);
-    
             
-    if ($stmt->execute()){
-
+    if ($stmt->execute()) {
+        echo $row[0] . " har raderats";
     } else{
         return "Error deleting record";
     }

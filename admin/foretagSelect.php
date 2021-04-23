@@ -20,13 +20,13 @@ return $data;
 }
 
     $period=allHandledare($conn);
-    echo'<select id="platsHandledare">';
+    /*echo'<select id="platsHandledare">';
     echo "<option disabled selected> Välj handledare </option>";
     foreach ($period as $kls) {
     
         echo"<option value='".$kls['handledarID']."'>".$kls['namn'], ' - ', $kls['fornamn'], ' ', $kls['efternamn']."</option>";
     }
-    echo"</select>";
+    echo"</select>";*/
     echo "<table>";
     echo "<thead><tr><th>Elev</th><th>Klass</th><th>Period</th></tr></thead><tbody>";
 
