@@ -22,7 +22,7 @@
         INNER JOIN handledare ON handledare.handledarID = plats.handledarID
         INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
         INNER JOIN dag ON dag.dagID = perioddag.dagID
-        WHERE dag.datum = CURRENT_DATE AND handledare.epost=?";
+        WHERE dag.datum = CURRENT_DATE AND handledare.epost=? ORDER BY narvaro.narvaro";
       
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $foretag);
