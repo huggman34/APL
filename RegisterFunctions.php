@@ -75,7 +75,11 @@
             $stmt->bind_param("isssss", $foretagID, $fornamn, $efternamn, $epost, $telefon, $hashed_losenord);
             $stmt->execute();
 
+            $last_id = mysqli_insert_id($conn);
+
             echo "$fornamn $efternamn är nu registrerad.";
+
+            echo "$last_id";
             
         } else {
             $namnError = "$fornamn $efternamn är redan registrerad";

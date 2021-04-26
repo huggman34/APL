@@ -1,26 +1,16 @@
-
-if($("#content1").css("display") == "block") {
-    $("#homeIcon").css("fill", "#EC6FE4");
-}
-
 $("#homeIcon").on('click', function() {
     $("#content2, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content1").css("display", "block");
-    $("#homeIcon").css("fill", "#EC6FE4");
-    $("#info").html("<p>Hem</p>")
 });
 
 $("#elevIcon").on('click', function() {
     $("#content1, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content2").css("display", "block");
-    $("#homeIcon").css("fill", "white");
-    $("#info").html("<p>Elev hantering</p>")
 });
 
 $("#foretagIcon").on('click', function() {
     $("#content1, #content2, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content3").css("display", "block");
-    $("#homeIcon").css("fill", "white");
 
     $('#foretagVy').load("foretagTable.php").fadeIn("slow");
     $('#handledarVy').load("handledarTable.php").fadeIn("slow");
@@ -60,7 +50,6 @@ function loadTables() {
 $("#periodIcon").on('click', function() {
     $("#content1, #content2, #content3, #content5, #content6, #content7").css("display", "none");
     $("#content4").css("display", "block");
-    $("#homeIcon").css("fill", "white");
 
     $('#periodVy').load("periodTable.php").fadeIn("slow");
     $('#klassVy').load("klassTable.php").fadeIn("slow");
@@ -69,15 +58,13 @@ $("#periodIcon").on('click', function() {
 $("#platsIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content7").css("display", "none");
     $("#content6").css("display", "block");
-    $("#homeIcon").css("fill", "white");
 
     $('#platsVy').load("platsTable.php").fadeIn("slow");
 });
 
-$(".registerPage").on('click', function() {
+$("#regIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content6").css("display", "none");
     $("#content7").css("display", "block");
-    //$("#homeIcon").css("fill", "white");
 });
 
 function toggleMenu(event) {
@@ -654,7 +641,9 @@ $(document).on('click','.elevTable tbody tr',function(){
     var row = $(this);
     row.css("color", "#EC6FE4");
     $(".elevTable tbody tr").not(this).css("color", "black")
-    var elev = row.find("td:first-child").text();
+    var fornamn = row.find("td:first-child").text();
+    var efternamn = row.find("td:eq(1)").text();
+    var elev = fornamn+'.'+efternamn
     /*$("#update").append('<button id="updateElev" value="'+elev+'">Update</button>');
 
         var updateView = document.createElement('div');
@@ -927,7 +916,10 @@ $("#regHandledare").submit(function(e) {
 
         success: function(data)
         {
-            $("#snackbar").append(data);
+            msg = data.split(".")[0];
+            handledarID = data.split(".")[1];
+
+            $("#snackbar").append(foretagNamn);
 
             if(data == "Fyll i alla fält") {
                 $("#snackbar").css("background-color", "#FF6961");
@@ -940,10 +932,10 @@ $("#regHandledare").submit(function(e) {
             snackbar();
             $("#regHandledare")[0].reset();
 
-            /*if(!$('#platsHandledare').find("option:contains('"+fornamn+' '+efternamn+"')").length){
-                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
-                $("#klass").append(newOption);
-            }*/
+            if(!$('#platsHandledare').find("option:contains('"+fornamn+' '+efternamn+"')").length){
+                var newOption = '<option value="' + handledarID + '">'+foretagNamn+' - '+fornamn+' '+efternamn+'</option>'; 
+                $("#platsHandledare").append(newOption);
+            }
         }
     });
 });
