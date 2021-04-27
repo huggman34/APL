@@ -31,6 +31,23 @@
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
     }
+    function narvaroForetag($conn,$foretag,$dag) {
+        $sql = "SELECT narvaro.narvaroID,plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
+        FROM narvaro
+        INNER JOIN plats ON plats.platsID = narvaro.platsID
+        INNER JOIN foretag ON foretag.foretagID = plats.foretagID
+        INNER JOIN handledare ON handledare.handledarID = plats.handledarID
+        INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
+        INNER JOIN dag ON dag.dagID = perioddag.dagID
+        WHERE dag.datum = ? AND handledare.epost=? ORDER BY narvaro.narvaro";
+      
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss",$dag, $foretag);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
+    }
    
     function elevKlass($conn) {
         $sql = "SELECT plats.elevID, plats.periodNamn
