@@ -12,7 +12,9 @@
         function elev($conn, $klass) {
 
             if(empty($klass)) {
-                $sql = "SELECT * FROM elev";
+                $sql = "SELECT elev.elevID, elev.fornamn, elev.efternamn, klass.klass, elev.epost, elev.telefon
+                FROM elev
+                INNER JOIN klass ON klass.klass = elev.klass";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
@@ -22,8 +24,10 @@
                 return $data;
 
             } else {
-                $sql = "SELECT * FROM elev
-                WHERE klass = ?";
+                $sql = "SELECT elev.elevID, elev.fornamn, elev.efternamn, klass.klass, elev.epost, elev.telefon
+                FROM elev
+                INNER JOIN klass ON klass.klass = elev.klass
+                WHERE klass.klass = ?";
         
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $klass);

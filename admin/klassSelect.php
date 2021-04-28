@@ -3,7 +3,7 @@
     require_once "../ViewFunctions.php";
 
     $klasser = Allklass($conn);
-    $data = json_encode($klasser);
-
-    print_r($data);
+    foreach ($klasser as $k) {
+        echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
+    }
 ?>

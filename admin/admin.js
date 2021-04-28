@@ -85,22 +85,46 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     update.innerHTML = "<form action='updateElev.php' method='POST'>\
     <input id='elevID' type='hidden' name='elevID' value='"+elevID+"'>\
     <label for='fornamn'>Förnamn</label>\
-    <input id='fornamn' type='text' name='fornamn' value='"+fornamn+"'>\
+    <input id='fornamn' type='text' name='fornamn' value='"+fornamn+"' required>\
     <label for='efternamn'>Efternamn</label>\
-    <input id='efternamn' type='text' name='efternamn' value='"+efternamn+"'>\
+    <input id='efternamn' type='text' name='efternamn' value='"+efternamn+"' required>\
     <label for='eKlass'>Klass</label>\
-    <input id='eKlass' type='text' name='klass' value='"+klass+"'>\
+    <select id='eKlass' type='text' name='klass' required></select>\
     <label for='epost'>E-post</label>\
-    <input id='epost' type='text' name='epost' value='"+epost+"'>\
+    <input id='epost' type='email' name='epost' value='"+epost+"' required>\
     <label for='telefon'>Telefonnummer</label>\
-    <input id='telefon' type='text' name='telefon' value='"+telefon+"'>\
-    <input type='submit'></form>";
+    <input id='telefon' type='tel' name='telefon' minlength='10' maxlength='10' value='"+telefon+"' required>\
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
+
+    //<button class='raderaBtn' type='button' onclick='updateElevAjax();'>Spara</button>
+
 
     $(document).ready(function(){
         $('#updateElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
             $('#updateElev').remove();
+        });
+
+        $.ajax({  
+            type: "GET",  
+            url: "getKlass.php",  
+            data: "{}",  
+            success: function (data) {
+                var s = '';
+    
+                var myJson = JSON.parse(data);
+    
+                for (var i = 0; i < myJson.length; i++) {  
+                    s += '<option value="' + myJson[i].klass + '">'+ myJson[i].klass+'</option>';
+                }
+
+                $("#eKlass").html(s);
+                $('#eKlass option').filter(function () { return $(this).html() == klass; }).attr('selected','selected');
+    
+                //alert(s);
+                //console.log(myJson);
+            }  
         });
     });
 
@@ -205,7 +229,7 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
 
 function updatePeriod(periodID,slutdatum, startdatum) {
     var update = document.createElement('div');
-    update.className = "updateForetag";
+    update.className = "updateElev";
     update.id = "updatePeriod";
     update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'>\
     <label for='Uperiodnamn'>Period namn</label>\
@@ -217,9 +241,9 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     <div id='UdagList'></div>";
 
     $(document).ready(function(){
-        $('#updatePeriod').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
+        $('#updatePeriod').append('<button type="button" class="cancelButton">Avbryt</button>');
 
-        $(document).on('click', '.exitSvg', function() {
+        $(document).on('click', '.cancelButton', function() {
             $('#updatePeriod').remove();
         });
     });
@@ -240,10 +264,10 @@ function updateForetag(foretagID, namn, adress) {
     update.innerHTML = "<form action='updateForetag.php' method='POST'>\
     <input id='foretagID' type='hidden' name='foretagID' value='"+foretagID+"'>\
     <label for='foretagsNamn'>Företagsnamn</label>\
-    <input id='foretagsNamn' type='text' name='namn' value='"+namn+"'>\
+    <input id='foretagsNamn' type='text' name='namn' value='"+namn+"' required>\
     <label for='foretagsAdress'>Företagsadress</label>\
-    <input id='foretagsAdress' type='text' name='adress' value='"+adress+"'>\
-    <input type='submit' value='Spara'></form>";
+    <input id='foretagsAdress' type='text' name='adress' value='"+adress+"' required>\
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
 
     $(document).ready(function(){
         $('#updateForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -269,22 +293,43 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
     update.innerHTML = "<form action='updateHandledare.php' method='POST'>\
     <input id='handledarID' type='hidden' name='handledarID' value='"+handledarID+"'>\
     <label for='Hfornamn'>Förnamn</label>\
-    <input id='Hfornamn' type='text' name='fornamn' value='"+fornamn+"'>\
+    <input id='Hfornamn' type='text' name='fornamn' value='"+fornamn+"' required>\
     <label for='Hefternamn'>Efternamn</label>\
-    <input id='Hefternamn' type='text' name='efternamn' value='"+efternamn+"'>\
+    <input id='Hefternamn' type='text' name='efternamn' value='"+efternamn+"' required>\
     <label for='Hforetag'>Företag</label>\
-    <input id='Hforetag' type='text' name='foretag' value='"+foretag+"'>\
+    <select id='Hforetag' type='text' name='foretag' required></select>\
     <label for='Hepost'>E-post</label>\
-    <input id='Hepost' type='text' name='epost' value='"+epost+"'>\
+    <input id='Hepost' type='email' name='epost' value='"+epost+"' required>\
     <label for='Htelefon'>Telefonnummer</label>\
-    <input id='Htelefon' type='text' name='telefon' value='"+telefon+"'>\
-    <input type='submit'></form>";
+    <input id='Htelefon' type='tel' name='telefon' minlength='10' maxlength='10' value='"+telefon+"' required>\
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
 
     $(document).ready(function(){
         $('#updateHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
             $('#updateHandledare').remove();
+        });
+
+        $.ajax({  
+            type: "GET",  
+            url: "getAllForetag.php",  
+            data: "{}",  
+            success: function (data) {
+                var s = '';
+    
+                var myJson = JSON.parse(data);
+    
+                for (var i = 0; i < myJson.length; i++) {  
+                    s += '<option value="' + myJson[i].foretagID + '">'+ myJson[i].namn+'</option>';
+                }
+
+                $("#Hforetag").html(s);
+                $('#Hforetag option').filter(function () { return $(this).html() == foretag; }).attr('selected','selected');
+    
+                //alert(s);
+                //console.log(myJson);
+            }  
         });
     });
 
@@ -304,8 +349,8 @@ function updateKlass(klass) {
     update.innerHTML = "<form onsubmit='return false' action='updateKlass.php' method='POST'>\
     <input id='' type='hidden' name='klass' value='"+klass+"'>\
     <label for='nyKlass'>Klass namn</label>\
-    <input id='nyKlass' type='text' name='nyKlass' value='"+klass+"'>\
-    <button class='raderaBtn' type='button' onclick='updateKlassAjax();'>Spara</button></form>";
+    <input id='nyKlass' type='text' name='nyKlass' value='"+klass+"' required>\
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
     
     $(document).ready(function(){
         $('#updateKlass form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -810,6 +855,11 @@ $(document).ready(function(){
 $("#regElev").submit(function(e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.s
+    $('#elevKlass').blur();
+    $("#klassDropdown").hide();
+    $("#elevKlass").css("border-radius", "4px")
+    $("#klassDropdown option").hide();
+
     var form = $(this);
     var url = form.attr('action');
     var namn = $("#namn").val();
@@ -841,15 +891,53 @@ $("#regElev").submit(function(e) {
             snackbar();
             $("#regElev")[0].reset();
 
-            if(!$('#klass').find("option:contains('"+elevKlass+"')").length){
-                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
-                $("#klass").append(newOption);   
-            }
+            $(function(){
+                var exists = 0;
+                $("#klass option").each(function() {
+                    var values = $(this).val().toLowerCase();
+                    var input = elevKlass.toLowerCase();
+                    if(values === input) {
+                        exists++;
+                        console.log(exists);
+                    }
+                });
+                if(exists == 0) {
+                    var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
+                    $("#klass").append(newOption);
+                }
+            });
 
-            if(!$('#platsKlass').find("option:contains('"+elevKlass+"')").length){
-                var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
-                $("#platsKlass").append(newOption);   
-            }
+            $(function(){
+                var exists = 0;
+                $("#platsKlass option").each(function() {
+                    var values = $(this).val().toLowerCase();
+                    var input = elevKlass.toLowerCase();
+                    if(values === input) {
+                        exists++;
+                        console.log(exists);
+                    }
+                });
+                if(exists == 0) {
+                    var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>'; 
+                    $("#platsKlass").append(newOption); 
+                }
+            });
+
+            $(function(){
+                var exists = 0;
+                $("#klassDropdown option").each(function() {
+                    var values = $(this).val().toLowerCase();
+                    var input = elevKlass.toLowerCase();
+                    if(values === input) {
+                        exists++;
+                        console.log(exists);
+                    }
+                });
+                if(exists == 0) {
+                    var newOption = '<option value="' + elevKlass + '">'+ elevKlass +'</option>';
+                    $("#klassDropdown").append(newOption);  
+                }
+            });
         }
     });
 });
@@ -932,7 +1020,7 @@ $("#regHandledare").submit(function(e) {
             snackbar();
             $("#regHandledare")[0].reset();
 
-            if(!$('#platsHandledare').find("option:contains('"+fornamn+' '+efternamn+"')").length){
+            if(handledarID !== undefined) {
                 var newOption = '<option value="' + handledarID + '">'+foretagNamn+' - '+fornamn+' '+efternamn+'</option>'; 
                 $("#platsHandledare").append(newOption);
             }
@@ -1003,17 +1091,37 @@ $("#regPeriod").submit(function(e) {
             $('#dagList').empty();
             $("#regPeriod")[0].reset();
 
-            if(!$('#platsPeriod').find("option:contains('"+perio+"')").length){
-                var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
-                $("#platsPeriod").append(newOption);   
-            }
+            $(function(){
+                var exists = 0;
+                $("#foretagPeriod option").each(function() {
+                    var values = $(this).val().toLowerCase();
+                    var input = perio.toLowerCase();
+                    if(values === input) {
+                        exists++;
+                        console.log(exists);
+                    }
+                });
+                if(exists == 0) {
+                    var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
+                    $("#foretagPeriod").append(newOption); 
+                }
+            });
 
-            if(!$('#foretagPeriod').find("option:contains('"+perio+"')").length){
-                var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
-                $("#foretagPeriod").append(newOption);   
-            }
-
-
+            $(function(){
+                var exists = 0;
+                $("#platsPeriod option").each(function() {
+                    var values = $(this).val().toLowerCase();
+                    var input = perio.toLowerCase();
+                    if(values === input) {
+                        exists++;
+                        console.log(exists);
+                    }
+                });
+                if(exists == 0) {
+                    var newOption = '<option value="' + perio + '">'+ perio +'</option>'; 
+                    $("#platsPeriod").append(newOption); 
+                }
+            });
         }
     });
 });
@@ -1272,12 +1380,52 @@ function snackbar() {
     }, 3010);
 }
 
-$(function() {
+/*$(function() {
     $("#elevKlass").autocomplete({
         source: "autoComplete.php",
         minLength: 1,
         appendTo: "#regElev"
     });
+});*/
+
+$(document).on('focus', '#elevKlass', function(e) {
+    $("#klassDropdown").show();
+    $("#klassDropdown option").show();
+    $("#elevKlass").css("border-radius", "4px 4px 0px 0px");
+    $("#klassDropdown").css({"padding": "0.5% 0.5%", "border": "1px solid #ccc"});
+});
+
+$(document).on('click', '#klassDropdown option', function(e) {
+    var text = $(e.target).text()
+    var val = $.trim(text)
+    $("#elevKlass").val(val);
+});
+
+$(document).ready(function(){
+    $("#elevKlass").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#klassDropdown option").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        if (!$("#klassDropdown option:visible").length) {
+            $("#klassDropdown").css({"padding": "0", "border": "0"});
+            $("#elevKlass").css("border-radius", "4px")
+        } else {
+            $("#klassDropdown").css({"padding": "0.5% 0.5%", "border": "1px solid #ccc"});
+            $("#elevKlass").css("border-radius", "4px 4px 0px 0px")
+        }
+    });
+});
+
+$(document).mouseup(function(e) 
+{
+    var container = $("#elevKlass");
+    var dropdown = $("#klassDropdown");
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        dropdown.hide();
+        container.css("border-radius", "4px")
+    }
 });
 
 function deleteForetagAjax() {
@@ -1294,14 +1442,14 @@ function deleteForetagAjax() {
         success: function(data) {
             //alert(data);
 
-            var foretagNamn = data.replace(/ .*/,'');
-
             $("#deleteForetag").remove();
             $('#foretagVy').load("foretagTable.php").fadeIn("slow");
 
-            if($('#foretagID').find("option:contains('"+foretagNamn+"')").length){
-                $('#foretagID').find("option:contains('"+foretagNamn+"')").remove();
-            }
+            $("#foretagID option").each(function() {
+                if($(this).val() == foretagID) {
+                    $(this).remove(); 
+                }
+            });
         }
     });
 }
@@ -1320,6 +1468,12 @@ function deleteHandledareAjax() {
         success: function(data) {
             $("#deleteHandledare").remove();
             $('#handledarVy').load("handledarTable.php").fadeIn("slow");
+
+            $("#platsHandledare option").each(function() {
+                if($(this).val() == handledarID) {
+                    $(this).remove(); 
+                }
+            });
         }
     });
 }
@@ -1339,11 +1493,15 @@ function deleteKlassAjax() {
             $("#deleteKlass").remove();
             $('#klassVy').load("klassTable.php").fadeIn("slow");
 
-            if($('#klass').find("option:contains('"+klass+"')").length){
+            if($('#klass').find("option:contains('"+klass+"')").length) {
                 $('#klass').find("option:contains('"+klass+"')").remove(); 
             }
 
-            if($('#platsKlass').find("option:contains('"+klass+"')").length){
+            if($('#klassDropdown').find("option:contains('"+klass+"')").length) {
+                $('#klassDropdown').find("option:contains('"+klass+"')").remove(); 
+            }
+
+            if($('#platsKlass').find("option:contains('"+klass+"')").length) {
                 $('#platsKlass').find("option:contains('"+klass+"')").remove(); 
             }
         }
@@ -1412,7 +1570,33 @@ function deleteElevAjax() {
     })
 }
 
-function updateKlassAjax() {
+$(document).on('submit', '#updateForetag form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updateForetag.php";
+    var foretagID = $("#updateForetag form input[type=hidden]").val();
+    var foretagsNamn = $("#foretagsNamn").val();
+    var foretagsAdress = $("#foretagsAdress").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            foretagID: foretagID,
+            namn: foretagsNamn,
+            adress: foretagsAdress
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updateForetag").remove();
+            $('#foretagVy').load("foretagTable.php").fadeIn("slow");
+        }
+    })
+});
+
+$(document).on('submit', '#updateKlass form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
     var url = "updateKlass.php";
     var klass = $("#updateKlass form input[type=hidden]").val();
     var nyKlass = $("#nyKlass").val();
@@ -1430,7 +1614,67 @@ function updateKlassAjax() {
             $('#klassVy').load("klassTable.php").fadeIn("slow");
         }
     })
-}
+});
+
+$(document).on('submit', '#updateHandledare form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updateHandledare.php";
+    var handledarID = $("#updateHandledare form input[type=hidden]").val();
+    var fornamn = $("#Hfornamn").val();
+    var efternamn = $("#Hefternamn").val();
+    var foretagID = $("#Hforetag").val();
+    var epost = $("#Hepost").val();
+    var tel = $("#Htelefon").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            handledarID: handledarID,
+            fornamn: fornamn,
+            efternamn: efternamn,
+            foretagID: foretagID,
+            epost: epost,
+            telefon: tel
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updateHandledare").remove();
+            $('#handledarVy').load("handledarTable.php").fadeIn("slow");
+        }
+    })
+});
+
+$(document).on('submit', '#updateElev form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updateElev.php";
+    var elevID = $("#updateElev form input[type=hidden]").val();
+    var fornamn = $("#fornamn").val();
+    var efternamn = $("#efternamn").val();
+    var klass = $("#eKlass").val();
+    var epost = $("#epost").val();
+    var tel = $("#telefon").val();
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            elevID: elevID,
+            fornamn: fornamn,
+            efternamn: efternamn,
+            klass: klass,
+            epost: epost,
+            telefon: tel
+        }, // serializes the form's elements.
+
+        success: function(data) {
+            $("#updateElev").remove();
+            elever();
+        }
+    });
+});
 
 /*$(document).ready(function(){
     $(function(){
