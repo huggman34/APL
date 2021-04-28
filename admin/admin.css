@@ -659,6 +659,10 @@ h1 {
     height: 8%;
 }
 
+.handledarTable tr > *:nth-child(1){
+    display:none;
+}
+
 .periodListHeader {
     position: relative;
     width: 99.9%;

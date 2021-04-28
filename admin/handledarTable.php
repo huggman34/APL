@@ -5,7 +5,7 @@
     $data = allHandledare($conn);
                             
     echo "<table class='handledarTable'>";
-    echo "<thead><tr><th>Handledare</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
+    echo "<thead><tr><th>HandledarID</th><th>Handledare</th><th>Företag</th><th>E-post</th><th>Telefon</th><th></th></tr></thead><tbody>";
                             
     foreach ($data as $row) {
         $handledarID = $row['handledarID'];
@@ -16,6 +16,8 @@
         $telefon = $row['telefon'];
 
         echo "<tr><td>";
+        echo "$handledarID";
+        echo "</td><td>";
         echo "$fornamn $efternamn";
         echo "</td><td>";
         echo $foretag;
