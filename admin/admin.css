@@ -305,7 +305,44 @@ button, input[type=submit] {
     font-size: 0.9em;
 }
 
-#updateForetag form input[type=text], #updatePeriod input[type=date], #updatePeriod input[type=text], #updateKlass form input[type=text], #updateElev form input[type=text], #updateHandledare form input[type=text] {
+#UdagList {
+    position: relative;
+    width: 65%;
+    height: 45%;
+    display: inline-block;
+    overflow-y: auto;
+}
+
+.UdagTable {
+    position: relative;
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+.UdagTable th,
+.UdagTable td {
+    text-align: left;
+    padding: 8px 10px;
+}
+
+.UdagTable th {
+    position: sticky;
+    top: 0;
+    background-color: #4C4C4C;
+    color: white;
+    font-family: sans-serif;
+    font-size: 0.875em;
+}
+
+.UdagTable td:nth-child(1), .UdagTable th:nth-child(1) {
+    width: 25%;
+}
+
+.UdagTable tr:nth-child(even) {
+    background-color: #EBEBEB;
+}
+
+#updateForetag form input[type=text], #updatePeriod input[type=date], #updatePeriod input[type=text], #updateKlass form input[type=text], #updateElev form input[type=text], #updateHandledare form input[type=text],  #updateElev form input[type=email], #updateHandledare form input[type=email],  #updateElev form input[type=tel], #updateHandledare form input[type=tel] {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -318,7 +355,7 @@ button, input[type=submit] {
     box-sizing: border-box;
 }
 
-#updatePlats form select, #updateElevNarvaroIdag form select, #updateElevNarvaro form select {
+#updatePlats form select, #updateElevNarvaroIdag form select, #updateElevNarvaro form select, #updateHandledare form select, #updateElev form select {
     width: 100%;
     padding: 1% 1%;
     margin: 1% 0%;
@@ -340,7 +377,7 @@ button, input[type=submit] {
     box-sizing: border-box;
 }
 
-#updateElev form input[type=submit], #updateHandledare form input[type=submit] {
+#updateHandledare form button, #updateElev form button{
     position: absolute;
     right: 0;
     bottom: 0;
@@ -364,7 +401,7 @@ button, input[type=submit] {
     box-sizing: border-box;
 }
 
-#updateForetag form .cancelButton, #updateKlass form .cancelButton, #updatePlats form .cancelButton, #updateElevNarvaroIdag form .cancelButton, #updateElevNarvaro form .cancelButton, .deletePopUp form .cancelButton {
+#updateForetag form .cancelButton, #updateKlass form .cancelButton, #updatePeriod .cancelButton, #updatePlats form .cancelButton, #updateElevNarvaroIdag form .cancelButton, #updateElevNarvaro form .cancelButton, .deletePopUp form .cancelButton {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -760,7 +797,7 @@ h1 {
     /*border-bottom: 2px solid gainsboro;*/
 }
 
-.foretagTable tr:last-child, .handledarTable tr:last-child {
+.foretagTable tr:last-child, .handledarTable tr:last-child, .UdagTable tr:last-child {
     border-bottom: 2px solid #4C4C4C;
 }
 
@@ -1006,13 +1043,35 @@ h1 {
 .formArea #elevKlass {
     width: 20%;
     padding: 1% 1%;
-    margin: 1% 0%;
+    margin: 1% 0% 0% 0%;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
+    outline: none;
     box-sizing: border-box;
 }
 
+#klassDropdown {
+    position: absolute;
+    width: 20%;
+    /*min-height: 6%;*/
+    max-height: 25%;
+    padding: 0.5% 0.5%;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 0px 0px 4px 4px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    display: none;
+    background-color: white;
+    overflow-y: auto;
+}
+
+#klassDropdown option:hover {
+    background-color: #EC6FE4;
+    color: white;
+    cursor: pointer;
+}
 .formArea3 {
     position: relative;
     width: 100%;
@@ -1022,7 +1081,7 @@ h1 {
     box-sizing: border-box;
 }
 
-#regPlats {
+#regPlats, #regElev {
     position: relative;
     height: 100%;
 }

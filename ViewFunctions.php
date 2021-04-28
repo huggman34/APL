@@ -107,8 +107,11 @@
     }
 
     function klass($conn) {
-        $sql = "SELECT DISTINCT elev.klass
-        FROM elev";
+        $sql = "SELECT distinct klass 
+        FROM
+        (SELECT elev.elevID, elev.fornamn, elev.efternamn, klass.klass, elev.epost, elev.telefon
+        FROM elev
+        INNER JOIN klass ON klass.klass = elev.klass) T";
 
         $result = mysqli_query($conn, $sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);

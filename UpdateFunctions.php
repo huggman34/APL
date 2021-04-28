@@ -108,7 +108,46 @@ function updateElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elev
         echo "elev updated";
         header('Location: adminMain.php');
     } else{
-        return "Error"; 
+        return "Error";
+    }
+}
+
+function updateElev2($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID) {
+    $newElevID = ucwords("$fornamn.$efternamn", ".");
+
+    $dupeCheck = "SELECT * FROM elev WHERE fornamn = ? AND efternamn = ?";
+    $stmt = $conn->prepare($dupeCheck);
+    $stmt->bind_param("ss", $fornamn, $efternamn);
+    $stmt->execute();
+    $stmt->store_result();
+    $result = $stmt->num_rows;
+
+    if($result == 0) {
+        $sql = "UPDATE elev SET elevID = ?, fornamn = ?, efternamn = ?, klass = ?, epost = ?, telefon = ? WHERE elevID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssss", $newElevID, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID);
+
+        if ($stmt->execute()) {
+            echo "Eleven har uppdaterats";
+            header('Location: adminMain.php');
+        } else{
+            echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
+        }
+        
+    } else {
+        $count = $result+1;
+        $dupeElevID = $newElevID.$count;
+
+        $sql = "UPDATE elev SET elevID = ?, fornamn = ?, efternamn = ?, klass = ?, epost = ?, telefon = ? WHERE elevID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssss", $dupeElevID, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID);
+
+        if ($stmt->execute()){
+            echo "Eleven har uppdaterats";
+            header('Location: adminMain.php');
+        } else{
+            echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
+        }
     }
 }
 

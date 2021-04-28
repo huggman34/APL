@@ -447,6 +447,15 @@ if(checkAdminLogin()) {
                                             <input id="epost" type="email" placeholder="E-post" required>
                                             <input id="nummer" type="tel" placeholder="Nummer" required>
                                             <input id="elevKlass" type="text" placeholder="Klass" required>
+                                            <div id="klassDropdown">
+                                                <?php
+                                                    $klasser = Allklass($conn);
+                                                    foreach ($klasser as $k) {
+                                                        echo "<option value='".$k['klass']."'> ".$k['klass']." </option>";
+                                                    }
+                                                    
+                                                ?>
+                                            </div>
                                             <input id="subElev" type="submit" namn="sub" value="Spara">
                                         </form>
                                     </div>
