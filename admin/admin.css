@@ -183,7 +183,7 @@ button, input[type=submit] {
     transform: scale(0.45);
 }
 
-.home svg:hover {
+#homeIcon:hover {
     fill: #EC6FE4;
 }
 
@@ -199,12 +199,11 @@ button, input[type=submit] {
     fill: #EC6FE4;
 }
 
-.registerKlass svg:hover {
+.registerPlats svg:hover {
     fill: #EC6FE4;
-    stroke: #EC6FE4;
 }
 
-.registerPlats svg:hover {
+.registerPage svg:hover {
     fill: #EC6FE4;
 }
 
@@ -511,8 +510,12 @@ button, input[type=submit] {
     align-items: center;
     height: 10%;
     width: 100%;
-    background-color: yellow;
     margin-bottom: 15%;
+}
+
+.registerPage svg {
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 h1 {
@@ -574,8 +577,12 @@ h1 {
 
 .elevTable th,
 .elevTable td {
-    padding: 12px 15px;
+    padding: 12px 13px;
     overflow-wrap: break-word;
+}
+
+.elevTable td:nth-child(3), .elevTable th:nth-child(3) {
+    width: 14%;
 }
 
 .elevTable thead {
@@ -706,7 +713,7 @@ h1 {
 }
 
 .foretagTable tr td:last-child, .foretagTable th:last-child, .handledarTable tr td:last-child, .handledarTable th:last-child, .elevTable tr td:last-child, .elevTable th:last-child, .elevklassTable tr td:last-child, .elevklassTable th:last-child {
-    width: 10%;
+    width: 9%;
 }
 
 .platsTable tr td:last-child, .platsTable th:last-child {
@@ -729,7 +736,7 @@ h1 {
 .handledarTable th,
 .handledarTable td {
     padding: 12px 15px;
-    overflow-wrap: break-word
+    overflow-wrap: break-word;
 }
 
 /*.foretagTable th:last-child, .foretagList tbody tr td:last-child {

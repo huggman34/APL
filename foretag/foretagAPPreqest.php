@@ -21,6 +21,18 @@
             }
             echo json_encode($narv);
         }
+        if (isset($_GET['shicka'])) {
+            $datum=strtotime($_GET['datum']);
+            $idag=date("Y-m-d",$datum);
+            $narvaro =narvaroForetag($conn, $_GET['username'],$idag);
+            $narv['dagnarvaro'] = array();
+            foreach ($narvaro as $varo) {
+            
+            array_push($narv['dagnarvaro'],$varo);
+           
+            }
+            echo json_encode($narv);
+        }
         
         if(isset($_GET['subit'])) {
             $login=foretagLogin($conn, $_GET['username'], $_GET['password']);
@@ -31,5 +43,23 @@
         }
         if(isset($_GET['sub'])){
             updateElevNarvaroAPP($conn,$_GET['narvaro'],$_GET['narvaroID']);
+            /*$narvao = narvaroIdagForetag($conn, $_GET['userame']);
+            $i=0;
+            foreach ($narvao as $row) {
+                if (empty($row['narvaro'])) {
+                   $i++;
+                   echo $i;
+                   break;
+                   
+                }
+            }
+            if ($i==0) {
+                $resten['klar'] = array();
+                $ar=array('var'=>'bra');
+                array_push($resten['klar'],$ar);
+
+                echo json_encode($resten);
+            } */
+            
         }
     ?>

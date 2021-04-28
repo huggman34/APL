@@ -40,7 +40,7 @@
         //echo json_encode($elever, JSON_UNESCAPED_UNICODE);
 
         echo "<table class='elevTable'>";
-        echo "<thead><tr><th>Elev</th><th>Klass</th><th>Epost</th><th>Tel</th><th></th></tr></thead><tbody>";
+        echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Klass</th><th>Epost</th><th>Telefon</th><th></th></tr></thead><tbody>";
 
         foreach ($elever as $row) {
             $elevID = $row['elevID'];
@@ -50,10 +50,12 @@
             $epost = $row['epost'];
             $telefon = $row['telefon'];
 
-            $elev = str_replace(".", " ", $elevID);
+            $elevArr = explode('.', $elevID);
 
             echo "<tr><td>";
-            echo $elev;
+            echo $elevArr[0];
+            echo "</td><td>";
+            echo $elevArr[1];
             echo "</td><td>";
             echo $klass;
             echo "</td><td>";
