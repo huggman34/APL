@@ -504,7 +504,7 @@ if(checkAdminLogin()) {
                                         </form>
                                     </div>
 
-                                <li><div id="platsDel1">Koppla period</div></li>
+                                <li><div id="platsDel1">Koppla elever till en period</div></li>
 
                                 <div id="platsDel1Form" class="formArea3" style="display: none">
                                     <form id="regPlats" action="regPlats.php" method="POST">
@@ -537,7 +537,7 @@ if(checkAdminLogin()) {
                                     </form>
                                 </div>
 
-                                <li><div id="platsDel2">Koppla handledare och företag</div></li>
+                                <li><div id="platsDel2">Koppla handledare och elev</div></li>
 
                                 <div id="platsDel2Form" class="formArea" style="display: none">
                                     <form id="regPlatsHand" action="regPlatsHand.php" method="POST">

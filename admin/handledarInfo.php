@@ -13,7 +13,7 @@
         INNER JOIN elev ON elev.elevID=plats.elevID
         INNER JOIN dag ON perioddag.dagID=dag.dagID
         INNER JOIN handledare ON handledare.handledarID=plats.handledarID
-        WHERE dag.datum = CURRENT_DATE AND handledare.fornamn=?";
+        WHERE dag.datum = CURRENT_DATE AND handledare.handledarID=?";
     
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $handledarID);
