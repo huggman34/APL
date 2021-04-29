@@ -775,7 +775,7 @@ $(document).on('click','.foretagTable tbody tr',function(){
     })
 });
 
-$(document).on('click','.handledarTable tbody tr',function(){
+$(document).on('click','.handledarTable tbody tr', function(){
     var row = $(this);
     row.css("color", "#EC6FE4");
     $(".handledarTable tbody tr").not(this).css("color", "black")
@@ -792,7 +792,7 @@ $(document).on('click','.handledarTable tbody tr',function(){
         },
 
         success: function(data) {
-            $('.foretagView').html(data);
+            $('.handledarView').html(data);
             $(".handledarInfo td").each( function() {
                 var thisCell = $(this);
                 var cellValue = thisCell.text();
@@ -821,6 +821,9 @@ $("#viewForetag").on('click', function(){
 
     $("#hText").css("display", "none");
     $("#fText").css("display", "block");
+
+    $(".handledarView").hide();
+    $(".foretagView").show();
 });
 
 $("#viewHandledare").on('click', function(){
@@ -829,6 +832,9 @@ $("#viewHandledare").on('click', function(){
 
     $("#fText").css("display", "none");
     $("#hText").css("display", "block");
+
+    $(".foretagView").hide();
+    $(".handledarView").show();
 });
 
 /*$("#subElev").click(function(e){
