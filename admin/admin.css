@@ -811,6 +811,7 @@ h1 {
 }
 
 .foretagTable tbody, .handledarTable tbody {
+    position: relative;
     display: block;
     height: 67vh;
     overflow: auto;
