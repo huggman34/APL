@@ -5,7 +5,7 @@
     $platser = elevPlats($conn);
 
     echo "<table class='platsTable'>";
-    echo "<thead><tr><th>Elev</th><th>Företag</th><th>Handledare</th><th></th></tr></thead><tbody>";
+    echo "<thead><tr><th>Elev</th><th>Företag</th><th>Handledare</th><th>Period</th><th></th></tr></thead><tbody>";
                             
     foreach ($platser as $row) {
         $platsID=$row['platsID'];
@@ -24,6 +24,8 @@
         echo $row['namn'];
         echo "</td><td>";
         echo "$handledarFornamn $handledarEfternamn";
+        echo "</td><td>";
+        echo "$periodNamn";
         echo "</td><td>";
         echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
         echo "<div class='platsMenu'>";

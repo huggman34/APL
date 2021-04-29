@@ -5,12 +5,12 @@
  * Genom att referera till funktionen kan man uppdatera värdena för en rad i tabbelen baserat på dess ID.
  */
  
-function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag){
-        $sql = "UPDATE period SET periodNamn=?, startdatum=?, slutdatum=? WHERE periodNamn=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss",$newperiod,$startdatum,$slutdatum,$periodnamn);
-        $stmt->execute();
+function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag) {
 
+    $sql = "UPDATE period SET periodNamn=?, startdatum=?, slutdatum=? WHERE periodNamn=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss",$newperiod,$startdatum,$slutdatum,$periodnamn);
+    $stmt->execute();
 
     foreach ($dag as $datum) {
 
@@ -19,31 +19,35 @@ function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag){
         $result = $query->fetch_assoc(); 
         
         if (empty($result)) {
-            
-        $sql="SELECT * FROM dag WHERE datum='$datum'";
-        $query = $conn->query($sql);
-        $resultat = $query->fetch_assoc();
 
-        if (empty($resultat)) {
-            $sql = "INSERT INTO dag(datum) VALUES('$datum')";
+            $sql="SELECT * FROM dag WHERE datum='$datum'";
+            $query = $conn->query($sql);
+            $resultat = $query->fetch_assoc();
+
+            if (empty($resultat)) {
+                $sql = "INSERT INTO dag(datum) VALUES('$datum')";
+                $conn->query($sql);
+            }
+
+            $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$newperiod' AND dag.datum='$datum'";
             $conn->query($sql);
-        }
-           $sql="INSERT INTO perioddag(dagID,periodNamn) SELECT dag.dagID,period.periodNamn FROM dag, period WHERE period.periodNamn='$newperiod' AND dag.datum='$datum'";
-           $conn->query($sql);
-           $sql="SELECT perioddag.perioddagID FROM perioddag INNER JOIN dag ON perioddag.dagID=dag.dagID WHERE perioddag.periodNamn='$newperiod' AND dag.datum='$datum'";
-           $query = $conn->query($sql);
-           $row = $query->fetch_assoc();
+            $sql="SELECT perioddag.perioddagID FROM perioddag INNER JOIN dag ON perioddag.dagID=dag.dagID WHERE perioddag.periodNamn='$newperiod' AND dag.datum='$datum'";
+            $query = $conn->query($sql);
+            $row = $query->fetch_assoc();
             
-           $periodDagID=$row['perioddagID'];
+            $periodDagID=$row['perioddagID'];
 
-           $sql="SELECT platsID FROM plats WHERE periodNamn='$newperiod'";
-           $query = $conn->query($sql);
-           $rw = $query->fetch_assoc();
+            $sql="SELECT platsID FROM plats WHERE periodNamn='$newperiod'";
+            $query = $conn->query($sql);
+            $rw = $query->fetch_assoc();
 
-           $platsID=$rw['platsID'];
-
-           $sql="INSERT INTO narvaro(perioddagID,platsID) VALUES ('$periodDagID','$platsID')";
-    $conn->query($sql);
+            if(!empty($rw)) {
+                $platsID=$rw['platsID'];
+                echo $platsID;
+                $sql="INSERT INTO narvaro(perioddagID,platsID) VALUES ('$periodDagID','$platsID')";
+                $conn->query($sql);
+            }
+            
         }else{
             $sql="SELECT perioddag.perioddagID,dag.datum FROM perioddag INNER JOIN dag ON perioddag.dagID=dag.dagID WHERE perioddag.periodNamn='$newperiod'";
             $query = $conn->query($sql);
@@ -55,9 +59,8 @@ function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag){
                     $conn->query($sql);
                 }
             }
+        }
     }
-    }
-
 }
 
 function updateForetag($conn, $namn, $adress, $foretagsID){
@@ -157,8 +160,11 @@ function updateElevNarvaro($conn, $narvaro, $narvaroID){
     $stmt->bind_param("ii", $narvaro, $narvaroID);
 
     if ($stmt->execute()){
-        echo "Elev Narvaro updated";
-        header('Location: adminMain.php');
+        $elevID = $conn->query("SELECT plats.elevID FROM narvaro INNER JOIN plats ON plats.platsID = narvaro.platsID WHERE narvaro.narvaroID = $narvaroID")->fetch_object()->elevID;
+        //echo "Elev Narvaro updated";
+        echo $elevID;
+        //header('Location: adminMain.php');
+
     }else{
        return "Error"; 
     }
@@ -202,51 +208,6 @@ function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
     }
 }
 
-function updatePlats($conn,$periodNamn,$handledarID,$platsID){
-        
-    $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
-    $result = mysqli_query($conn, $sql);
-    $data =  $result->fetch_assoc();
-    $foretagID=$data['foretagID'];
-
-    $sql = "UPDATE plats SET periodNamn=?, foretagID=?, handledarID=? WHERE platsID=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("siii",$periodNamn,$foretagID,$handledarID,$platsID);
-    
-    $stmt->execute();
-
-    $sql="DELETE FROM narvaro WHERE platsID='$platsID' AND narvaro IS NULL";
-    $conn->query($sql);
-
-    
-            $sql2 = "SELECT perioddag.perioddagID FROM perioddag
-            WHERE perioddag.periodNamn = ?
-            ORDER BY perioddag.perioddagID ASC";
-
-            $stmt2 = $conn->prepare($sql2);
-            $stmt2->bind_param("s", $periodNamn);
-            $stmt2->execute();
-            $result = $stmt2->get_result();
-            $data = $result->fetch_all(MYSQLI_ASSOC);
-
-            $periodDag = array_column($data, 'perioddagID');
-
-            
-            //Sätter in perioddagar i närvaro tabellen
-            foreach ($periodDag as $pDag) {
-
-                $sql= "SELECT * FROM narvaro WHERE perioddagID='$pDag' AND platsID='$platsID'";
-                $result = mysqli_query($conn, $sql);
-                $row =  $result->fetch_assoc();
-
-                echo $row['perioddagID'];
-                if (empty($row)) {
-                     mysqli_query($conn, "INSERT INTO narvaro (platsID, perioddagID)
-                     VALUES ('$platsID', '$pDag')");
-                }
-               
-            }
-}
 function updatePlatsHand($conn,$handledarID,$platsID){
     
     $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
@@ -258,6 +219,53 @@ function updatePlatsHand($conn,$handledarID,$platsID){
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iii",$foretagID,$handledarID,$platsID);
         $stmt->execute();
+}
+
+function updatePlats($conn, $platsID, $handledarID, $periodNamn) {
+        
+    $sql= "SELECT * FROM handledare WHERE handledarID='$handledarID'";
+    $result = mysqli_query($conn, $sql);
+    $data =  $result->fetch_assoc();
+    $foretagID=$data['foretagID'];
+
+    $sql = "UPDATE plats SET periodNamn=?, foretagID=?, handledarID=? WHERE platsID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("siii",$periodNamn, $foretagID, $handledarID, $platsID);
+    
+    if($stmt->execute()) {
+        echo "Records added successfully.";
+        echo $foretagID;
+    }
+
+    $sql="DELETE FROM narvaro WHERE platsID='$platsID' AND narvaro IS NULL";
+    $conn->query($sql);
+
+    
+    $sql2 = "SELECT perioddag.perioddagID FROM perioddag
+    WHERE perioddag.periodNamn = ?
+    ORDER BY perioddag.perioddagID ASC";
+
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("s", $periodNamn);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    $periodDag = array_column($data, 'perioddagID');
+        
+    //Sätter in perioddagar i närvaro tabellen
+    foreach ($periodDag as $pDag) {
+
+        $sql= "SELECT * FROM narvaro WHERE perioddagID='$pDag' AND platsID='$platsID'";
+        $result = mysqli_query($conn, $sql);
+        $row =  $result->fetch_assoc();
+        echo $row['perioddagID'];
+        
+        if (empty($row)) {
+            mysqli_query($conn, "INSERT INTO narvaro (platsID, perioddagID)
+            VALUES ('$platsID', '$pDag')");
+        }          
+    }
 }
 
 ?>

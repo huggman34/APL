@@ -149,7 +149,7 @@ function updateElevNarvaro(narvaroID, narvaro) {
     <option value='2'>Giltig frånvaro</option>\
     <option value='3'>Ogiltig frånvaro</option>\
     </select>\
-    <input type='submit' value='Spara'></form>";
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
 
     $(document).ready(function(){
         if(narvaro === 'Närvarande') {
@@ -231,17 +231,22 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     var update = document.createElement('div');
     update.className = "updateElev";
     update.id = "updatePeriod";
-    update.innerHTML = "<input id='periodID' type='hidden' name='periodID' value='"+periodID+"'>\
+    update.innerHTML = "<form action='updatePeriod.php' method='POST'>\
+    <input id='periodID' type='hidden' name='periodID' value='"+periodID+"'>\
     <label for='Uperiodnamn'>Period namn</label>\
     <input type='text' id='Uperiodnamn' name='Uperiodnamn' placeholder='namn' value='"+periodID+"' required>\
     <label for='Ustartdatum'>Start datum</label>\
     <input type='date' id='Ustartdatum' name='Ustartdatum' value='"+startdatum+"' required>\
     <label for='Uslutdatum'>Slut datum</label>\
     <input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required>\
-    <div id='UdagList'></div>";
+    <div id='UdagList'></div>\
+    <button type='submit' id='Usubmin'>Spara</button></form>";
+
+    //<button class='raderaBtn' type='submit'>Spara</button>
+    //<input type='submit' value='submit' id='Usubmin'></input>
 
     $(document).ready(function(){
-        $('#updatePeriod').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('#updatePeriod form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
             $('#updatePeriod').remove();
@@ -373,12 +378,12 @@ function updatePlats(platsID, handledarID, periodNamn) {
     var update = document.createElement('div');
     update.className = "updateForetag";
     update.id = "updatePlats";
-    update.innerHTML = "<form action='regPlatsHand.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'>\
+    update.innerHTML = "<form action='updatePlats.php' method='POST'><input id='' type='hidden' name='plats' value='"+platsID+"'>\
     <label for='platsHandledare'>Företag</label>\
     <select id='platsHandledare' type='text' name='handledare'></select>\
     <label for='platsPeriod'>Period</label>\
     <select id='platsPeriod' type='text' name='period'></select>\
-    <input type='submit'></form>";
+    <button class='raderaBtn' type='submit'>Spara</button></form>";
     
     $(document).ready(function(){
         $('#updatePlats form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -416,13 +421,14 @@ function updatePlats(platsID, handledarID, periodNamn) {
                 var s = '';
         
                 var myJson = JSON.parse(data);
+
         
                 for (var i = 0; i < myJson.length; i++) {  
                     s += '<option value="' + myJson[i].periodNamn + '">'+ myJson[i].periodNamn +'</option>';  
                 }
 
                 $("#platsPeriod").html(s);
-                $('#platsPeriod option[value='+periodNamn+']').attr('selected','selected');
+                $('#platsPeriod option').filter(function () { return $(this).html() == periodNamn; }).prop("selected", true);
             }  
         });
     });
@@ -724,8 +730,7 @@ $(document).on('click','.elevTable tbody tr',function(){
                 if (cellValue == 'Oanmäld') {
                     thisCell.css("background-color","gainsboro");
                 }
-             }
-            )
+            })
         }
     })
 });
@@ -1126,24 +1131,23 @@ $("#regPeriod").submit(function(e) {
     });
 });
 
-$("#updatePeriod").submit(function(e) {
-
-    e.preventDefault();
+$(document).on('submit', '#updatePeriod form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
     
-   var perio = $('#Uperiodnamn').val();
-   var start = $('#Ustartdatum').val();
-   var slut = $('#Uslutdatum').val();
-   var subin = $('#Usubmin').val();
-   var perioID = $('#periodID').val();
-   var dag = [];
-   $("input[name='UperiodDag']:checked").each(function(){
-    dag.push(this.value);
-});
+    var perio = $('#Uperiodnamn').val();
+    var start = $('#Ustartdatum').val();
+    var slut = $('#Uslutdatum').val();
+    var subin = $('#Usubmin').val();
+    var perioID = $('#periodID').val();
+    var dag = [];
+    $("input[name='UperiodDag']:checked").each(function(){
+        dag.push(this.value);
+    });
     
-         $.ajax({
-            url: 'updatePeriod.php',
-            type: 'POST',
-            data: {
+    $.ajax({
+        url: 'updatePeriod.php',
+        type: 'POST',
+        data: {
             periodnamn: perio,    
             startdatum: start,
             slutdatum: slut,
@@ -1152,11 +1156,13 @@ $("#updatePeriod").submit(function(e) {
             periodID: perioID
         },
     
-      success: function(data) {
-      $('#UdagList').html(data);
-      alert(data);
-    }
-  });
+        success: function(data) {
+            //$('#UdagList').html(data);
+            //alert(data);
+            $("#updatePeriod").remove();
+            $('#periodVy').load("periodTable.php").fadeIn("slow");
+        }
+    });
 });
 
 $("#regPlatsHand").submit(function(e) {
@@ -1570,6 +1576,30 @@ function deleteElevAjax() {
     })
 }
 
+$(document).on('submit', '#updatePlats form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updatePlats.php";
+    var platsID = $("#updatePlats form input[type=hidden]").val();
+    var handledarID = $("#platsHandledare").val();
+    var periodNamn = $("#platsPeriod").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            platsID: platsID,
+            handledarID: handledarID,
+            periodNamn: periodNamn
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updatePlats").remove();
+            $('#platsVy').load("platsTable.php").fadeIn("slow");
+        }
+    })
+});
+
 $(document).on('submit', '#updateForetag form', function(e){
     e.preventDefault(); // avoid to execute the actual submit of the form.s
 
@@ -1615,6 +1645,54 @@ $(document).on('submit', '#updateKlass form', function(e){
         }
     })
 });
+
+$(document).on('submit', '#updateElevNarvaro form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updateElevNarvaro.php";
+    var narvaroID = $("#updateElevNarvaro form input[type=hidden]").val();
+    var narvaro = $("#elevNarvaro").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            narvaroID: narvaroID,
+            narvaro: narvaro
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updateElevNarvaro").remove();
+            updateElevNarvaroView(data);
+        }
+    })
+});
+
+function updateElevNarvaroView(elevID) {
+    $(".narvaroView").load("elevNarvaro.php", {
+        elevID: elevID
+    }).fadeIn("slow");
+
+    setTimeout(function(){
+        $(".elevNarvaro td").each( function() {
+            var thisCell = $(this);
+            var cellValue = thisCell.text();
+        
+            if (cellValue == 'Närvarande') {
+                thisCell.css("background-color","#77dd77");
+            }
+            if (cellValue == 'Giltig frånvaro') {
+                thisCell.css("background-color","#FEFE95");
+            }
+            if (cellValue == 'Ogiltig frånvaro') {
+                thisCell.css("background-color","#ff6961");
+            }
+            if (cellValue == 'Oanmäld') {
+                thisCell.css("background-color","gainsboro");
+            }
+        })
+    }, 0030);
+}
 
 $(document).on('submit', '#updateHandledare form', function(e){
     e.preventDefault(); // avoid to execute the actual submit of the form.s
