@@ -23,7 +23,7 @@
         echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
         echo "<div class='periodMenu'>";
             //echo "<button type='button' onclick=\"deletBoxPr('$periodID');\" >Ta bort</button>";
-            echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum');\" >Uppdatera</button>";
+            echo "<button type='button' onclick=\"updatePeriod('$periodID','$slutdatum','$startdatum'); UdagPeriod()\" >Uppdatera</button>";
             echo "<button type='button' onclick=\"deletePeriod('$periodID');\" >Radera</button>";
         echo "</div>";
         echo "</td></tr>";

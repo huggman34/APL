@@ -305,6 +305,26 @@ button, input[type=submit] {
     font-size: 0.9em;
 }
 
+#regPeriod input[type=text], #regPeriod input[type=date] {
+    width: 50%;
+    padding: 2% 2%;
+    margin: 1% 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#regPeriod{
+    position: relative;
+}
+
+#regPeriod label {
+    width: 50%;
+    height: 5%;
+    display: block;
+    font-family: sans-serif;
+}
+
 #UdagList {
     position: relative;
     width: 65%;
@@ -313,19 +333,48 @@ button, input[type=submit] {
     overflow-y: auto;
 }
 
-.UdagTable {
+#dagList {
+    position: absolute;
+    top: 0;
+    width: 48%;
+    margin: 1% 0;
+    max-height: 73% !important;
+    display: inline-block;
+    overflow-y: auto;
+    margin-left: 2%;
+}
+
+#periodForm {
+    position: relative;
+}
+
+.UdagTable, .dagTable {
     position: relative;
     width: 100%;
     border-collapse: collapse; 
 }
 
+#Usubmin {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0% 18% 3.9% 0%;
+    width: 15%;
+    padding: 1% 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 .UdagTable th,
-.UdagTable td {
+.UdagTable td,
+.dagTable th,
+.dagTable td{
     text-align: left;
     padding: 8px 10px;
 }
 
-.UdagTable th {
+.UdagTable th, .dagTable th {
     position: sticky;
     top: 0;
     background-color: #4C4C4C;
@@ -338,7 +387,7 @@ button, input[type=submit] {
     width: 25%;
 }
 
-.UdagTable tr:nth-child(even) {
+.UdagTable tr:nth-child(even), .dagTable tr:nth-child(even) {
     background-color: #EBEBEB;
 }
 
@@ -797,7 +846,7 @@ h1 {
     /*border-bottom: 2px solid gainsboro;*/
 }
 
-.foretagTable tr:last-child, .handledarTable tr:last-child, .UdagTable tr:last-child {
+.foretagTable tr:last-child, .handledarTable tr:last-child, .UdagTable tr:last-child, .dagTable tr:last-child {
     border-bottom: 2px solid #4C4C4C;
 }
 
@@ -1031,7 +1080,7 @@ h1 {
     box-sizing: border-box;
 }
 
-.formArea input[type=submit] {
+.formArea input[type=submit], .formArea button[type=submit] {
     width: 100%;
     padding: 1% 1%;
     margin: 2% 0;

@@ -48,12 +48,12 @@
             //("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))
             echo"<input id='UperiodDag' type='checkbox' name='UperiodDag' value='$datum' checked>";
         }else {
-            echo"<input id='UperiodDag' type='checkbox' name='UperiodDag' value='$datum'>"; 
+            echo"<input id='UperiodDag' type='checkbox' name='UperiodDag' value='$datum'>";
         }
            echo"</td></tr>";
        }
        
-       echo'<input type="submit" value="submit" id="Usubmin">';
+       //echo'<input type="submit" value="submit" id="Usubmin">';
 
        echo "</tbody></table>";
     }
