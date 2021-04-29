@@ -360,6 +360,9 @@ if(checkAdminLogin()) {
                         <div class="foretagView">
                             <h1>Klicka på ett företag</h1>
                         </div>
+                        <div class="handledarView" style="display: none">
+                            <h1>Klicka på en handledare</h1>
+                        </div>
                     </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
