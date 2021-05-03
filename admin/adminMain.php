@@ -469,7 +469,8 @@ if(checkAdminLogin()) {
                                             <input type="date" id="slutdatum" name="slutdatum" onchange="dagPeriod();" required>
                                             <div id="dagList"></div>
                                             
-                                            <button type='submit' id="submin">Spara</button>
+
+                                            <button type='submit' name="submin" id="submin">Spara</button>
                                         </form>
                                     </div>
 
