@@ -39,13 +39,15 @@ function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag) 
 
             $sql="SELECT platsID FROM plats WHERE periodNamn='$newperiod'";
             $query = $conn->query($sql);
-            $rw = $query->fetch_assoc();
+            $rw = $query->fetch_all(MYSQLI_ASSOC);
 
             if(!empty($rw)) {
-                $platsID=$rw['platsID'];
+                foreach($rw as $rew){
+                $platsID=$rew['platsID'];
                 echo $platsID;
                 $sql="INSERT INTO narvaro(perioddagID,platsID) VALUES ('$periodDagID','$platsID')";
                 $conn->query($sql);
+                }
             }
             
         }else{
