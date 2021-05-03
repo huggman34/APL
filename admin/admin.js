@@ -1779,6 +1779,8 @@ $(document).on('submit', '#updateElevNarvaroIdag form', function(e){
                     }
                 })
             }).fadeIn("slow");
+
+            donutChart();
         }
     })
 });
