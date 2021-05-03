@@ -688,51 +688,94 @@ $(".narvaroTable td").each( function() {
     }
 })
 
-$(document).on('click','.elevTable tbody tr',function(){
+$(document).on('click','.elevTable tbody tr',function() {
     var row = $(this);
-    row.css("color", "#EC6FE4");
-    $(".elevTable tbody tr").not(this).css("color", "black")
-    var fornamn = row.find("td:first-child").text();
-    var efternamn = row.find("td:eq(1)").text();
-    var elev = fornamn+'.'+efternamn
-    /*$("#update").append('<button id="updateElev" value="'+elev+'">Update</button>');
 
-        var updateView = document.createElement('div');
-        updateView.className = "updateview";
+    /*$('.navbar svg').click(function() {
+        $(this).addClass('toggle-state');
+        $('.navbar svg').not(this).removeClass('toggle-state');
+    });*/
 
-        updateView.innerhtml = "<form><input id='elevID' type='hidden' name='elevID' value='"+elev+"'><input id='' type='text' name='fornamn'><input id='' type='text' name='efternamn'></form>";
-        document.getElementById("content2").appendChild(updateView);
-        */
-    
+    if(row.hasClass('secondRow')) {
+        var prevRow = row.prev();
+        console.log(prevRow);
 
-    $.ajax({
+        $(".elevTable tbody tr").not(this, prevRow).css("color", "black");
+        row.css("color", "#EC6FE4");
+        prevRow.css("color", "#EC6FE4");
+
+        var fornamn = prevRow.find("td:first-child").text();
+        var efternamn = prevRow.find("td:eq(1)").text();
+        var elev = fornamn+'.'+efternamn
+
+        $.ajax({
         url: 'elevNarvaro.php',
         type: 'POST',
         data: {
             elevID: elev
         },
+            success: function(data) {
+                $('.narvaroView').html(data);
+                $(".elevNarvaro td").each( function() {
+                    var thisCell = $(this);
+                    var cellValue = thisCell.text();
+                    
+                    if (cellValue == 'Närvarande') {
+                        thisCell.css("background-color","#77dd77");
+                    }
+                    if (cellValue == 'Giltig frånvaro') {
+                        thisCell.css("background-color","#FEFE95");
+                    }
+                    if (cellValue == 'Ogiltig frånvaro') {
+                        thisCell.css("background-color","#ff6961");
+                    }
+                    if (cellValue == 'Oanmäld') {
+                        thisCell.css("background-color","gainsboro");
+                    }
+                })
+            }
+        })
+    } else {
+        var nextRow = row.next();
+        
+        $(".elevTable tbody tr").not(this, nextRow).css("color", "black");
 
-        success: function(data) {
-            $('.narvaroView').html(data);
-            $(".elevNarvaro td").each( function() {
-                var thisCell = $(this);
-                var cellValue = thisCell.text();
-            
-                if (cellValue == 'Närvarande') {
-                    thisCell.css("background-color","#77dd77");
-                }
-                if (cellValue == 'Giltig frånvaro') {
-                    thisCell.css("background-color","#FEFE95");
-                }
-                if (cellValue == 'Ogiltig frånvaro') {
-                    thisCell.css("background-color","#ff6961");
-                }
-                if (cellValue == 'Oanmäld') {
-                    thisCell.css("background-color","gainsboro");
-                }
-            })
-        }
-    })
+        row.css("color", "#EC6FE4");
+        nextRow.css("color", "#EC6FE4");
+
+        var fornamn = row.find("td:first-child").text();
+        var efternamn = row.find("td:eq(1)").text();
+        var elev = fornamn+'.'+efternamn
+
+        $.ajax({
+            url: 'elevNarvaro.php',
+            type: 'POST',
+            data: {
+                elevID: elev
+            },
+
+            success: function(data) {
+                $('.narvaroView').html(data);
+                $(".elevNarvaro td").each( function() {
+                    var thisCell = $(this);
+                    var cellValue = thisCell.text();
+                
+                    if (cellValue == 'Närvarande') {
+                        thisCell.css("background-color","#77dd77");
+                    }
+                    if (cellValue == 'Giltig frånvaro') {
+                        thisCell.css("background-color","#FEFE95");
+                    }
+                    if (cellValue == 'Ogiltig frånvaro') {
+                        thisCell.css("background-color","#ff6961");
+                    }
+                    if (cellValue == 'Oanmäld') {
+                        thisCell.css("background-color","gainsboro");
+                    }
+                })
+            }
+        })
+    }
 });
 
 $(document).on('click','.foretagTable tbody tr',function(){
@@ -1677,9 +1720,7 @@ $(document).on('submit', '#updateElevNarvaro form', function(e){
 function updateElevNarvaroView(elevID) {
     $(".narvaroView").load("elevNarvaro.php", {
         elevID: elevID
-    }).fadeIn("slow");
-
-    setTimeout(function(){
+    }, function() {
         $(".elevNarvaro td").each( function() {
             var thisCell = $(this);
             var cellValue = thisCell.text();
@@ -1697,7 +1738,7 @@ function updateElevNarvaroView(elevID) {
                 thisCell.css("background-color","gainsboro");
             }
         })
-    }, 0030);
+    }).fadeIn("slow");
 }
 
 $(document).on('submit', '#updateHandledare form', function(e){

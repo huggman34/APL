@@ -661,6 +661,10 @@ h1 {
     overflow-x: hidden;
 }
 
+.secondRow {
+    font-size: 0.85em;
+}
+
 .elevTable th,
 .elevTable td {
     padding: 12px 13px;
@@ -688,7 +692,8 @@ h1 {
     /*border-bottom: 2px solid gainsboro;*/
 }
 
-.elevTable tr:nth-child(even) {
+.elevTable tr:nth-child(4n + 3) td,
+.elevTable tr:nth-child(4n + 4) td{
     background-color: #EBEBEB;
 }
 
