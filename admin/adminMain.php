@@ -92,42 +92,7 @@ if(checkAdminLogin()) {
                             <span>Dagens närvaro</span>
                             <span><?php echo date("Y-m-d") ?></span>
                         </div>
-                            <?php
-                                $data = narvaroIdag($conn);
-
-                                echo "<table class='narvaroTable'>";
-                                echo "<thead><tr><th>Elev</th><th>Företag</th><th>Period</th><th>Närvaro</th><th></th></tr></thead><tbody>";
-
-                                foreach ($data as $row => $column) {
-                                    $elevID = $column['elevID'];
-                                    $elev = str_replace(".", " ", $elevID);
-
-                                    if (is_null($column['narvaro'])) {
-                                        $column['narvaro'] = "null";
-                                    }
-                                    
-                                    $str = ['null', '1', '2', '3'];
-                                    $rplc = ['Oanmäld', 'Närvarande', 'Giltig frånvaro', 'Ogiltig frånvaro'];
-                        
-                                    $column2 = str_replace($str, $rplc, $column);
-
-                                    $narvaroID = $column['narvaroID'];
-                                    $narvaro = $column2['narvaro'];
-                                    
-                                    echo "<tr><td>";
-                                    echo $elev;
-                                    echo "</td><td>";
-                                    echo $column['namn'];
-                                    echo "</td><td>";
-                                    echo $column['periodNamn'];
-                                    echo "</td><td>";
-                                    echo $column2['narvaro'];
-                                    echo "</td><td>";
-                                    echo "<button type='button' onclick=\"updateElevNarvaroIdag('$narvaroID', '$narvaro');\" >Uppdatera</button>";
-                                    echo "</td></tr>";
-                                }
-                                echo "</tbody></table>";
-                            ?>
+                        <div id="narvaroIdagVy"></div>
                     </div>
                     <div class="periodNarvaro">
                         <?php 
@@ -448,7 +413,7 @@ if(checkAdminLogin()) {
                                             <input id="namn" type="text" placeholder="Förnamn" required>
                                             <input id="efternamn" type="text" placeholder="Efternamn" required>
                                             <input id="epost" type="email" placeholder="E-post" required>
-                                            <input id="nummer" type="tel" placeholder="Nummer" required>
+                                            <input id="nummer" type="tel" placeholder="Telefonnummer" required>
                                             <input id="elevKlass" type="text" placeholder="Klass" required>
                                             <div id="klassDropdown">
                                                 <?php
@@ -477,7 +442,7 @@ if(checkAdminLogin()) {
                                             <input id="Hnamn" type="text" placeholder="Förnamn" required>
                                             <input id="Hefternamn" type="text" placeholder="Efternamn" required>
                                             <input id="Hepost" type="email" placeholder="E-post" required>
-                                            <input id="telefon" type="text" placeholder="Tel" required>
+                                            <input id="telefon" type="text" placeholder="Telefonnummer" required>
                                             <input id="losenord" type="password" placeholder="Lösenord" required>
                                             <select id="foretagID" required>
                                                 <?php
@@ -504,6 +469,7 @@ if(checkAdminLogin()) {
                                             <input type="date" id="slutdatum" name="slutdatum" onchange="dagPeriod();" required>
                                             <div id="dagList"></div>
                                             
+
                                             <button type='submit' name="submin" id="submin">Spara</button>
                                         </form>
                                     </div>

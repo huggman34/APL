@@ -1,6 +1,26 @@
 $("#homeIcon").on('click', function() {
     $("#content2, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content1").css("display", "block");
+
+    $("#narvaroIdagVy").load("narvaroIdagTable.php", function() {
+        $(".narvaroTable td").each( function() {
+            var thisCell = $(this);
+            var cellValue = thisCell.text();
+    
+            if (cellValue == 'Närvarande') {
+                thisCell.css("background-color","#77dd77");
+            }
+            if (cellValue == 'Giltig frånvaro') {
+                thisCell.css("background-color","#FEFE95");
+            }
+            if (cellValue == 'Ogiltig frånvaro') {
+                thisCell.css("background-color","#ff6961");
+            }
+            if (cellValue == 'Oanmäld') {
+                thisCell.css("background-color","gainsboro");
+            }
+        })
+    }).fadeIn("slow");
 });
 
 $("#elevIcon").on('click', function() {
@@ -12,32 +32,35 @@ $("#foretagIcon").on('click', function() {
     $("#content1, #content2, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content3").css("display", "block");
 
-    $('#foretagVy').load("foretagTable.php").fadeIn("slow");
-    $('#handledarVy').load("handledarTable.php").fadeIn("slow");
-
-    function loadColor() {
-        if($("#foretagSaver").html().length) {
-            var selectedForetag = $("#foretagSaver").text();
-    
-            var tableRow = $(".foretagTable tbody td").filter(function() {
-                return $(this).text() == selectedForetag;
-            }).closest("tr");
-    
-            tableRow.css("color", "#EC6FE4");
-        }
-
-        if($("#handledarSaver").html().length) {
-            var selectedForetag = $("#handledarSaver").text();
-    
-            var tableRow = $(".handledarTable tbody td").filter(function() {
-                return $(this).text() == selectedForetag;
-            }).closest("tr");
-    
-            tableRow.css("color", "#EC6FE4");
-        }
-    }
-    setTimeout(loadColor, 0045);
+    $('#foretagVy').load("foretagTable.php", function() {
+        loadColor();
+    }).fadeIn("slow");
+    $('#handledarVy').load("handledarTable.php", function() {
+        loadColor();
+    }).fadeIn("slow");
 });
+
+function loadColor() {
+    if($("#foretagSaver").html().length) {
+        var selectedForetag = $("#foretagSaver").text();
+
+        var tableRow = $(".foretagTable tbody td").filter(function() {
+            return $(this).text() == selectedForetag;
+        }).closest("tr");
+
+        tableRow.css("color", "#EC6FE4");
+    }
+
+    if($("#handledarSaver").html().length) {
+        var selectedForetag = $("#handledarSaver").text();
+
+        var tableRow = $(".handledarTable tbody td").filter(function() {
+            return $(this).text() == selectedForetag;
+        }).closest("tr");
+
+        tableRow.css("color", "#EC6FE4");
+    }
+}
 
 function loadTables() {
     $('#foretagVy').load("foretagTable.php").fadeIn("slow");
@@ -45,6 +68,26 @@ function loadTables() {
     $('#periodVy').load("periodTable.php").fadeIn("slow");
     $('#klassVy').load("klassTable.php").fadeIn("slow");
     $('#platsVy').load("platsTable.php").fadeIn("slow");
+
+    $("#narvaroIdagVy").load("narvaroIdagTable.php", function() {
+        $(".narvaroTable td").each( function() {
+            var thisCell = $(this);
+            var cellValue = thisCell.text();
+    
+            if (cellValue == 'Närvarande') {
+                thisCell.css("background-color","#77dd77");
+            }
+            if (cellValue == 'Giltig frånvaro') {
+                thisCell.css("background-color","#FEFE95");
+            }
+            if (cellValue == 'Ogiltig frånvaro') {
+                thisCell.css("background-color","#ff6961");
+            }
+            if (cellValue == 'Oanmäld') {
+                thisCell.css("background-color","gainsboro");
+            }
+        })
+    }).fadeIn("slow");
 }
 
 $("#periodIcon").on('click', function() {
@@ -669,24 +712,6 @@ $('.navbar svg').click(function() {
     $(this).addClass('toggle-state');
     $('.navbar svg').not(this).removeClass('toggle-state');
 });
-
-$(".narvaroTable td").each( function() {
-    var thisCell = $(this);
-    var cellValue = thisCell.text();
-
-    if (cellValue == 'Närvarande') {
-        thisCell.css("background-color","#77dd77");
-    }
-    if (cellValue == 'Giltig frånvaro') {
-        thisCell.css("background-color","#FEFE95");
-    }
-    if (cellValue == 'Ogiltig frånvaro') {
-        thisCell.css("background-color","#ff6961");
-    }
-    if (cellValue == 'Oanmäld') {
-        thisCell.css("background-color","gainsboro");
-    }
-})
 
 $(document).on('click','.elevTable tbody tr',function() {
     var row = $(this);
@@ -1713,6 +1738,47 @@ $(document).on('submit', '#updateElevNarvaro form', function(e){
         success: function(data) {
             $("#updateElevNarvaro").remove();
             updateElevNarvaroView(data);
+        }
+    })
+});
+
+$(document).on('submit', '#updateElevNarvaroIdag form', function(e){
+    e.preventDefault(); // avoid to execute the actual submit of the form.s
+
+    var url = "updateElevNarvaro.php";
+    var narvaroID = $("#updateElevNarvaroIdag form input[type=hidden]").val();
+    var narvaro = $("#elevNarvaroIdag").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            narvaroID: narvaroID,
+            narvaro: narvaro
+        }, // serializes the form's elements.
+    
+        success: function(data) {
+            $("#updateElevNarvaroIdag").remove();
+
+            $("#narvaroIdagVy").load("narvaroIdagTable.php", function() {
+                $(".narvaroTable td").each( function() {
+                    var thisCell = $(this);
+                    var cellValue = thisCell.text();
+            
+                    if (cellValue == 'Närvarande') {
+                        thisCell.css("background-color","#77dd77");
+                    }
+                    if (cellValue == 'Giltig frånvaro') {
+                        thisCell.css("background-color","#FEFE95");
+                    }
+                    if (cellValue == 'Ogiltig frånvaro') {
+                        thisCell.css("background-color","#ff6961");
+                    }
+                    if (cellValue == 'Oanmäld') {
+                        thisCell.css("background-color","gainsboro");
+                    }
+                })
+            }).fadeIn("slow");
         }
     })
 });

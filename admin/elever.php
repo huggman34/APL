@@ -54,12 +54,10 @@
             $epost = $row['epost'];
             $telefon = $row['telefon'];
 
-            $elevArr = explode('.', $elevID);
-
             echo "<tr><td>";
-            echo $elevArr[0];
+            echo $fornamn;
             echo "</td><td>";
-            echo $elevArr[1];
+            echo $efternamn;
             echo "</td><td>";
             echo $klass;
             echo "</td><td>";
@@ -73,6 +71,8 @@
             echo "</div>";
             echo "</td></tr>";
             echo "<tr class='secondRow'><td>";
+            echo $elevID;
+            echo "</td><td style='width: 50%'>";
             echo $epost;
             echo "</td></tr>";
         }

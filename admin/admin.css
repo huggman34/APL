@@ -222,11 +222,9 @@ button, input[type=submit] {
 
 .narvaroTable {
     border-collapse: collapse;
-    margin: 3% 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 100%;
-
 }
 
 #update {
@@ -859,6 +857,10 @@ h1 {
 .foretagList select {
     float: right;
     margin-bottom: 2%;
+}
+
+#narvaroIdagVy {
+    height: auto;
 }
 
 .foretagInfo {

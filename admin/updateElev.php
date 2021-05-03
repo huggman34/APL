@@ -10,6 +10,6 @@
         $epost = $_POST['epost'];
         $telefon = $_POST['telefon'];
 
-        updateElev2($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID);
+        updateElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID);
     }
 ?>
