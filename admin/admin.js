@@ -139,8 +139,6 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     <input id='telefon' type='tel' name='telefon' minlength='10' maxlength='10' value='"+telefon+"' required>\
     <button class='raderaBtn' type='submit'>Spara</button></form>";
 
-    //<button class='raderaBtn' type='button' onclick='updateElevAjax();'>Spara</button>
-
 
     $(document).ready(function(){
         $('#updateElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -284,9 +282,6 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     <input onchange='UdagPeriod();' type='date' id='Uslutdatum' name='Uslutdatum' value='"+slutdatum+"' required>\
     <div id='UdagList'></div>\
     <button type='submit' id='Usubmin'>Spara</button></form>";
-
-    //<button class='raderaBtn' type='submit'>Spara</button>
-    //<input type='submit' value='submit' id='Usubmin'></input>
 
     $(document).ready(function(){
         $('#updatePeriod form').append('<button type="button" class="cancelButton">Avbryt</button>');
@@ -451,8 +446,6 @@ function updatePlats(platsID, handledarID, periodNamn) {
                 $("#platsHandledare").html(s);
                 $('#platsHandledare option[value='+handledarID+']').attr('selected','selected');
     
-                //alert(s);
-                //console.log(myJson);
             }  
         });
 
@@ -655,58 +648,6 @@ function deletePlats(platsID, elevID) {
     }
 }
 
-function deletBoxE(ID) {
-    document.getElementById("delet").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet").appendChild(nys);
-}
-function deletBoxF(ID) {
-    document.getElementById("delet2").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet2").appendChild(nys);
-}
-function deletBoxP(ID) {
-    document.getElementById("delet3").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet3").appendChild(nys);
-}
-function deletBoxPr(ID) {
-    document.getElementById("delet4").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet4").appendChild(nys);
-}
-function deletBoxK(ID) {
-    document.getElementById("delet5").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet5").appendChild(nys);
-}
-function deletBoxH(ID) {
-    document.getElementById("delet6").style.visibility="visible";
-    var nys = document.createElement('div');
-    nys.innerHTML ="<input id='del' type='hidden' name='ID' value='"+ID+"'>";
-    document.getElementById("delet6").appendChild(nys);
-}
-function updateBP(elevID,foretagID,periodNamn,plats) {
-    document.getElementById("regPl").style.visibility="visible";
-    let pp = document.getElementById("pp");
-    pp.value = periodNamn;
-    let fp = document.getElementById("fp");
-    fp.value = foretagID;
-    let ep = document.getElementById("ep");
-    ep.value = elevID;
-    let pl = document.getElementById("pl");
-    pl.value = plats;
-}
-
-function klassPlats(klass) {
-    let element = document.getElementById("platsKlass");
-    element.value = klass;
-}
 
 $('.navbar svg').click(function() {
     $(this).addClass('toggle-state');
@@ -716,10 +657,6 @@ $('.navbar svg').click(function() {
 $(document).on('click','.elevTable tbody tr',function() {
     var row = $(this);
 
-    /*$('.navbar svg').click(function() {
-        $(this).addClass('toggle-state');
-        $('.navbar svg').not(this).removeClass('toggle-state');
-    });*/
 
     if(row.hasClass('secondRow')) {
         var prevRow = row.prev();
@@ -905,22 +842,6 @@ $("#viewHandledare").on('click', function(){
     $(".handledarView").show();
 });
 
-/*$("#subElev").click(function(e){
-    e.preventDefault();
-    $.ajax({
-        url: 'regElev.php',
-        type: 'POST',
-        data: {
-            fornamn: 'fornamn',
-            efternamn: 'efternamn',
-            elevKlass: 'elevKlass'
-        },
-
-        success: function(data) {
-            alert(data);
-        }
-    });
-});*/
 
 $(document).ready(function(){
     $("#elevSearch").on("keyup", function() {
@@ -1306,34 +1227,6 @@ $("#regPlats").submit(function(e) {
     });
 });
 
-$("#regPl").submit(function(e) {
-
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
-    var form = $(this);
-    var url = form.attr('action');
-    var elev = $("#ep").val();
-    var foretag = $("#fp").val();
-    var period = $("#pp").val();
-    var plats = $("#pl").val();
-    
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-            elev: elev,
-            handledare: foretag,
-            period: period,
-            plats: plats
-        }, // serializes the form's elements.
-
-        success: function(data)
-        {
-            alert(data); // show response from the php script.
-            $("#regPl")[0].reset();
-        }
-    });
-});
-
 $(".button2").on('click', function() {
     $("#regElev").css("display", "none");
     $("#regKlass").css("display", "block");
@@ -1459,15 +1352,7 @@ function snackbar() {
         $("#snackbar").empty();
     }, 3010);
 }
-
-/*$(function() {
-    $("#elevKlass").autocomplete({
-        source: "autoComplete.php",
-        minLength: 1,
-        appendTo: "#regElev"
-    });
-});*/
-
+    
 $(document).on('focus', '#elevKlass', function(e) {
     $("#klassDropdown").show();
     $("#klassDropdown option").show();
@@ -1868,116 +1753,3 @@ $(document).on('submit', '#updateElev form', function(e){
         }
     });
 });
-
-/*$(document).ready(function(){
-    $(function(){
-        var test = localStorage.input === 'true'? true: false;
-        $('input').prop('checked', test || false);
-    });
-    
-    $('input').on('change', function() {
-        localStorage.input = $(this).is(':checked');
-        console.log($(this).is(':checked'));
-    });
-});*/
-
-/*$(document).ready(function(){
-    var count = 0;
-    $('#platsReg').on('click', function() {
-        count++;
-        if (count == 1) {
-            $('#platsReg').addClass('expand2');
-            //$('#foretagReg').append($('.formArea2'));
-            $(".formArea2").css("display", "block");
-            $('#platsReg').append('<div class="exit"><svg class="exitSvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div>');
-        } else {
-            $('#platsReg').addClass('expand2');
-            $('.exit').children().show();
-            $('#platsReg').children('.formArea2').show();
-            $('#platsReg').children('.exit').show();
-        }
-    });
-    $(document).on('click', '.exitSvg', function() {
-        $('#platsReg').removeClass('expand2');
-        $('.exit').children().hide();
-        $('#platsReg').children('.formArea2').hide();
-        $('#platsReg').children('.exit').hide();
-    });
-});*/
-
-/*$(document).ready(function () {  
-    $.ajax({  
-        type: "GET",  
-        url: "getForetag.php",  
-        data: "{}",  
-        success: function (data) {
-            var s = '<option value="-1">Please Select a Department</option>';
-
-            var myJson = JSON.parse(data);
-
-            for (var i = 0; i < myJson.length; i++) {  
-                s += '<option value="' + myJson[0].handledarID + '">'+ myJson[0].namn+' - '+myJson[0].fornamn+' '+myJson[0].efternamn +'</option>';  
-            }
-            //$(".content1").html(data);
-
-            //alert(s);
-
-            $("#platsHandledare").html(s);
-
-            //console.log(myJson);
-        }  
-    });
-});*/
-
-
-
-/*$(".button").hover(function() {
-    $(this).addClass("hover"); 
-}, function() {
-    $(this).removeClass("hover");
-});*/
-
-/*$('#sel').on('change', function() {
-    var value = $(this).val();
-    $.ajax({
-
-        url: 'periodNarvaro.php',
-        type: 'POST',
-        data: {
-            period: value
-        },
-
-        success: function(data) {
-            alert(data);
-            
-        }
-    });
-})*/
-
-/*$(document).ready(function(e) {
-    $("[name='period']").on('change', function() {
-      var url = "adminMain.php";
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: $("#form").serialize(),
-        success: function(data) {
-          $(".tnxforate").html(data)
-        }
-      });
-    });
-});*/
-	
-/*$("#sel").change(function(){
-    var value = $(this).val();
-
-    $.ajax({
-        type: 'POST',
-        url: 'adminMain.php',
-        data: {period: value}
-    });
-});*/
-
-/*$('#sel').change(function() {
-    this.form.submit();
-});*/
