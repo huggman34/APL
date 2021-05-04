@@ -14,7 +14,7 @@
         $startdatum=$_POST['startdatum'];
         $slutdatum=$_POST['slutdatum'];
     }
-    
+
     if (isset($_POST['submin'])) {
         updatePeriod($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodID'],$_POST['periodDag']);
     } else {
@@ -29,6 +29,7 @@
 
             $gto=strtotime("+$i days",$start);
             $datum=date('Y-m-d',$gto);
+
 
             echo "<tr><td>";
             echo date('W',$gto);
@@ -45,6 +46,7 @@
             }
             echo"</td></tr>";
         }
+
        echo "</tbody></table>";
     }
 ?>

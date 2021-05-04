@@ -43,23 +43,6 @@
         }
         if(isset($_GET['sub'])){
             updateElevNarvaroAPP($conn,$_GET['narvaro'],$_GET['narvaroID']);
-            /*$narvao = narvaroIdagForetag($conn, $_GET['userame']);
-            $i=0;
-            foreach ($narvao as $row) {
-                if (empty($row['narvaro'])) {
-                   $i++;
-                   echo $i;
-                   break;
-                   
-                }
-            }
-            if ($i==0) {
-                $resten['klar'] = array();
-                $ar=array('var'=>'bra');
-                array_push($resten['klar'],$ar);
-
-                echo json_encode($resten);
-            } */
             
         }
     ?>

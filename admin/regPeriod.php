@@ -8,10 +8,11 @@
         $slutdatum=$_POST['slutdatum'];
     }
 
+
     if (isset($_POST['submin'])) {
         periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
     } else {
-
+      
         echo "<table class='dagTable'>";
         echo "<thead><tr><th>Vecka</th><th>Dag</th><th>Datum</th><th></th></tr></thead><tbody>";
         $start=strtotime($startdatum);
@@ -39,6 +40,8 @@
             }
             echo"</td></tr>";
         }
+
         echo "</tbody></table>";
     }
+
 ?>
