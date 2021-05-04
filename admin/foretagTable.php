@@ -19,7 +19,6 @@
         echo "</td><td>";
         echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
         echo "<div class='foretagMenu'>";
-        //echo "<button type='button' onclick=\"deletBoxF('$foretagID');\" >Ta bort</button>";
             echo "<button type='button' onclick=\"updateForetag('$foretagID', '$namn', '$adress');\" >Uppdatera</button>";
             echo "<button type='button' onclick=\"event.stopPropagation(); deleteForetag('$foretagID', '$namn');\" >Radera</button>";
         echo "</div>";

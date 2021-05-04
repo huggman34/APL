@@ -38,18 +38,9 @@
 
             $_SESSION['loggedin'] = true;
             $_SESSION["username"] = $username;
-            //header('Location: ../narvaro/registerNarvaro.php');
             return "valkommen";
         } else {
             return "Felaktiga inloggningsuppgifter";
-        }
-    }
-
-    function checkForetagLogin() {
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-            return true;
-        } else {
-            false;
         }
     }
 

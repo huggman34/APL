@@ -18,7 +18,6 @@
 
     $foretag = foretag($conn, $namn);
 
-
     echo "<table class='foretagTable'>";
     echo "<thead><tr><th>Företag</th><th>Epost</th><th>Telefonnummer</th></tr></thead><tbody>";
 

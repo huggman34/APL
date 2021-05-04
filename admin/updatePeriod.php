@@ -41,8 +41,6 @@
            echo date('l',$gto);
            echo "</td><td>";
            echo $datum;
-           //echo "</td><td>";
-           //echo $periodNamn;
            echo "</td><td>";
            if (!empty(periodDag($conn,$periodNamn,$datum))) {
             //("Saturday"==date("l",$gto)) || ("Sunday"==date("l",$gto))
@@ -52,12 +50,6 @@
         }
            echo"</td></tr>";
        }
-       
-       //echo'<input type="submit" value="submit" id="Usubmin">';
-
        echo "</tbody></table>";
     }
-    
-
-    
 ?>

@@ -33,5 +33,5 @@
         echo "</div>";
         echo "</td></tr>";
     }
-        echo "</tbody></table>";
+    echo "</tbody></table>";
 ?>

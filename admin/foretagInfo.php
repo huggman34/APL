@@ -37,5 +37,4 @@
     } else {
         echo "Ingen elev arbetar på detta företag";
     }
-
 ?>
