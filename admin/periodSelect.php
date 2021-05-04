@@ -20,17 +20,7 @@ return $data;
 }
     
     $elev=selectTabel($conn,"elev");
-    /*$klass=selectTabel($conn,"klass");
-    echo'<select id="platsKlass" onchange="elevPlatsPeriod();">';
-    echo "<option disabled selected> Välj klass </option>";
-    foreach ($klass as $kls) {
-        $kl=$kls['klass'];
-        echo"<option value='$kl'>$kl</option>";
-    }
-    echo"</select>";
-    echo "<table>";
-    echo "<thead><tr><th>Elev</th><th>Klass</th></tr></thead><tbody>";*/
-
+    
     
     foreach ($elev as $e) {
         if (isset($_POST['platsKlass'])) {
@@ -45,7 +35,7 @@ return $data;
         echo "<tr><td>";
         echo $e['elevID'];
         echo "</td><td>";
-        //echo $e['klass'];
+    
         echo "</td><td>";
         echo "<input id='elevPeriod' type='checkbox' name='elevPeriod' value='$elevID'>";
         echo "</td></tr>";

@@ -8,14 +8,11 @@
         $slutdatum=$_POST['slutdatum'];
     }
 
- //if (isset($_POST['submin'])) {
-    
     
         if (isset($_POST['submin'])) {
             periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
         }else{
             
-        //echo $periodNamn;
         echo "<table class='dagTable'>";
         echo "<thead><tr><th>Vecka</th><th>Dag</th><th>Datum</th><th></th></tr></thead><tbody>";
         $start=strtotime($startdatum);
@@ -43,21 +40,12 @@
            echo"</td></tr>";
        }
        
-       //echo'<input type="submit" value="submit" id="submin">';
+    
        echo "</tbody></table>";
      
-    /*echo"<form method='post'>
-    <input type='submit' name='submit' value='börja om'>
-    </form>";*/
+    
     }
     
 
-    /*if(isset($_POST['periodnamn'], $_POST['slutdatum'], $_POST['startdatum'],$_POST['perioddag'])) {
-        $periodNamn = $_POST['periodnamn'];
-        $slutdatum = $_POST['slutdatum'];
-        $startdatum = $_POST['startdatum'];
-        $periodDag = $_POST['perioddag'];
-     onclick=\"return confirm('Är du säker?');\"
-        periodGeneration($conn, $periodNamn, $startdatum, $slutdatum, $periodDag);
-    }*/
+    
 ?>

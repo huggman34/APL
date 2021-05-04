@@ -41,8 +41,6 @@
 
         $elever = elev($conn, $klass);
 
-        //echo json_encode($elever, JSON_UNESCAPED_UNICODE);
-
         echo "<table class='elevTable'>";
         echo "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Klass</th><th>Telefon</th><th></th></tr></thead><tbody>";
 
@@ -65,7 +63,6 @@
             echo "</td><td>";
             echo "<button type='button' onclick=\"toggleMenu(this);\">...</button>";
             echo "<div class='elevMenu'>";
-                //echo "<button type='button' onclick=\"deletBoxE('$elevID');\" >Ta bort</button>";
                 echo "<button type='button' onclick=\"updateElev('$elevID', '$fornamn', '$efternamn', '$klass', '$epost', '$telefon');\" >Uppdatera</button>";
                 echo "<button type='button' onclick=\"deleteElev('$elevID');\" >Radera</button>";
             echo "</div>";
