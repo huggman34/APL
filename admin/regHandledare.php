@@ -11,8 +11,5 @@
         $losenord = $_POST['losenord'];
 
         registerHandledare($conn, $foretagID, $fornamn, $efternamn, $epost, $telefon, $losenord);
-
-    } else {
-        echo "Fyll i alla fält";
     }
 ?>

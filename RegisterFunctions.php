@@ -5,36 +5,6 @@
  * Den kopplar även dagarna med perioden i perioddags tabellen.
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
-    function registerForetag2($conn, $namn, $losenord, $adress) {
-
-        $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
-        $stmt = $conn->prepare($dupeCheck);
-        $stmt->bind_param("s", $namn);
-        $stmt->execute();
-        $stmt->store_result();
-        $result = $stmt->num_rows;
-
-        if($result == 0) {
-            $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
-
-            $stmt = $conn->prepare("INSERT INTO foretag (namn, losenord, adress)
-            VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $namn, $hashed_losenord, $adress);
-
-            if ($stmt->execute()){
-                echo "Records added successfully.";
-                $lastID = $conn->insert_id;
-                return $lastID;
-            } else{
-                echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
-            }
-        } else {
-            $namnError = "Företaget är redan registrerad";
-
-            echo $namnError;
-        }
-    }
-
     function registerForetag($conn, $namn, $adress) {
 
         $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
@@ -122,65 +92,6 @@
             } else{
                 echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
             }
-        }
-    }
-
-    function registerAdmin($conn, $namn, $losenord) {
-        $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
-
-        $stmt = $conn->prepare("INSERT INTO admin (anvnamn, losenord)
-        VALUES (?, ?)");
-        $stmt->bind_param("ss", $namn, $hashed_losenord);
-
-        if ($stmt->execute()){
-            echo "Records added successfully.";
-        } else{
-            echo "ERROR: Was not able to execute $stmt. " . mysqli_error($conn);
-        }
-    }
-
-    function registerNarvaro($conn, $periodDagID,$platsID, $narvaro) {
-        /*
-        $result = $elevID;
-
-        $result_explode = explode('|', $result);
-        
-        $platsID = $result_explode[0];
-        $periodDagID = $result_explode[1];
-        $narvaro = $_POST['narvaro'];
-
-        $dupeCheck = mysqli_query($conn ,"SELECT * FROM narvaro WHERE (platsID = '$platsID' AND periodDagID = '$periodDagID')");
-
-        $result = $dupeCheck->num_rows;
-
-        if($result == 0) {
-            $stmt = $conn->prepare("INSERT INTO narvaro (platsID, periodDagID, narvaro) VALUES (?, ?, ?)");
-            $stmt->bind_param("iii", $platsID, $periodDagID, $narvaro);
-
-            if ($stmt->execute()) {
-                echo "Närvaro har lagts till";
-            } else {
-                echo "Något gick fel";
-            }
-        } else {
-            echo "Eleven har redan registrerats närvaro";
-        }
-
-        $result = $elevID;
-
-        $result_explode = explode('|', $result);
-        
-        $platsID = $result_explode[0];
-        $periodDagID = $result_explode[1];*/
-        //$narvaro = $_GET['narvaro'];
-
-        $stmt = $conn->prepare("UPDATE narvaro SET narvaro = ? WHERE platsID = ? AND periodDagID = ?");
-        $stmt->bind_param("iii", $narvaro, $platsID, $periodDagID);
-
-        if ($stmt->execute()) {
-            echo "Närvaro har lagts till";
-        } else {
-            echo "Något gick fel";
         }
     }
 
@@ -276,8 +187,6 @@
             if($stmt->execute()) {
                 echo "Klassen $klass har registrerats. ";
             }
-        } else {
-            //echo "Klassen är redan registrerad";
         }
     }
 ?>
