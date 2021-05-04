@@ -91,19 +91,6 @@ function updateKlass($conn, $nyKlass, $klassID){
     }
 }
 
-function updateDag($conn,$datum,$dagID){
-        $sql = "UPDATE dag SET datum=? WHERE dagID=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("di",$datum,$dagID);
-    
-            
-    if ($stmt->execute()){
-
-    }else{
-           return "Error"; 
-    }
-}
-
 function updateElev($conn, $fornamn, $efternamn, $klass, $epost, $telefon, $elevID) {
     
     $newElevID = ucwords("$fornamn.$efternamn", ".");
@@ -194,19 +181,6 @@ function updateHandledare($conn, $fornamn, $efternamn, $foretagID, $epost, $tele
         header('Location: adminMain.php');
     } else {
         return "Error"; 
-    }
-}
-
-function updatePeriodDag($conn,$periodNamn,$dagID,$perioddagID){
-        $sql = "UPDATE perioddag SET periodNamn=?, dagID=? WHERE periodDagID=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sii",$periodNamn,$dagID,$perioddagID);
-    
-            
-    if ($stmt->execute()){
-            return "";
-    }else{
-           return "Error"; 
     }
 }
 

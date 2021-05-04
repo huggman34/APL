@@ -20,24 +20,11 @@ function deleteForetag($conn,$id){
         return "Error deleting record";
     }
 }
-
-function deleteNarvaro($conn,$id){
-    $sql = "DELETE FROM narvaro WHERE narvaroID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i",$id);
-    
-            
-    if ($stmt->execute()){
-        
-    } else{
-        return "Error deleting record";
-    }
-}
 /* beskrivning: raderar perioder och perioddagar där periodNamn är $id
                  
 */
 function deletePeriod($conn,$id){
-    $sql = "DELETE period,perioddag FROM period INNER JOIN perioddag ON period.periodNamn = perioddag.periodNamn WHERE period.periodNamn=?";
+    $sql = "DELETE FROM period WHERE periodNamn=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s",$id);
     
@@ -61,34 +48,10 @@ function deleteElev($conn,$id){
     }
 }
 
-function deleteDag($conn,$id){
-    $sql = "DELETE FROM dag WHERE dagID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i",$id);
-    
-            
-    if ($stmt->execute()){
-        
-    } else{
-        return "Error deleting record";
-    }
-}
 function deleteKlass($conn,$id){
     $sql = "DELETE FROM klass WHERE klass = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s",$id);
-    
-            
-    if ($stmt->execute()){
-        
-    } else{
-        return "Error deleting record";
-    }
-}
-function deletePeriodDag($conn,$id){
-    $sql = "DELETE FROM perioddag WHERE perioddagID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i",$id);
     
             
     if ($stmt->execute()){
