@@ -1,4 +1,10 @@
 <?php
+/**
+ * Denna filen används för att skapa en period genom AJAX request via ett formulär som skickar in
+ * period namn, start datum och slut datum. Sedan så skcikas datan till periodGeneration funktionen
+ * som generar alla dagar mellan start och slut datum i en tabell. man kan välja
+ * vilka dagar som ska vara eller inte vara med under perioden.
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
    
@@ -7,7 +13,6 @@
         $startdatum=$_POST['startdatum'];
         $slutdatum=$_POST['slutdatum'];
     }
-
 
     if (isset($_POST['submin'])) {
         periodGeneration($conn,$_POST['periodnamn'],$startdatum,$slutdatum,$_POST['periodDag']);
@@ -40,8 +45,6 @@
             }
             echo"</td></tr>";
         }
-
         echo "</tbody></table>";
     }
-
 ?>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Denna filen används för att ta emot AJAX request via formuläret som skickar in
+ * förnamn, efternamn, klass, epost och telefonnummer,
+ * sedan skapar den klassen om klassen inte redan finns
+ * Därefter använder den registerElev funktionen från
+ * RegisterFunctions.php för att skicka in datan till databasen.
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
 
