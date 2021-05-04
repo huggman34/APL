@@ -1,4 +1,11 @@
 <?php
+/**
+ * Denna filen används för att registrera en handledare genom att 
+ * ta emot AJAX request via ett formulär som skickar in förnamn, efternamn, E-post,
+ * telefonnummer, lösenord och företagID.
+ * Därefter använder den registerHandledare funktionen från
+ * RegisterFunctions.php för att sätta in datan i databasen.
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
     
