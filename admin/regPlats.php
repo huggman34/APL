@@ -6,13 +6,9 @@
     if(isset($_POST['elev'],$_POST['period'])) {
         $elevID = $_POST['elev'];
         $periodNamn = $_POST['period'];
-        
-        
 
-     foreach ($elevID as $e) {
-        registerPlats($conn,$e,$periodNamn);
-            
+        foreach ($elevID as $e) {
+            registerPlats($conn,$e,$periodNamn);
         }
-        
     }
 ?>

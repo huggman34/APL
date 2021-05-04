@@ -21,7 +21,6 @@
     }
 
     $elevNarvaro = elevNarvaro($conn, $elevID);
-    
 
     if(!empty($elevNarvaro)){
         echo "<table class='elevNarvaro'>";

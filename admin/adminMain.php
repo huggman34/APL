@@ -4,31 +4,14 @@
     require_once '../RegisterFunctions.php';
     require_once "../ViewFunctions.php";
     require_once "../DeleteFunctions.php";
-    //require_once "periodNarvaro.php";
+    require_once "periodNarvaro.php";
 
     session_start();
 
 if(checkAdminLogin()) {
     $username = $_SESSION['username'];
-    if (isset($_POST['deletelev'])) {
-        deleteElev($conn,$_POST['deletelev']);
-    }
-    if (isset($_POST['deletforetag'])) {
-        deleteForetag($conn,$_POST['deletforetag']);
-    }
-    if (isset($_POST['deletplats'])) {
-        deletePlats($conn,$_POST['ID']);
-    }
-    if (isset($_POST['deletperiod'])) {
-        deletePeriod($conn,$_POST['ID']);
-    }
-    if (isset($_POST['deletklass'])) {
-        deleteKlass($conn,$_POST['deletklass']);
-    }
-    if (isset($_POST['delethandledare'])) {
-        deleteHandledare($conn,$_POST['delethandledare']);
-    }
     ?>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -37,8 +20,6 @@ if(checkAdminLogin()) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="admin.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
         <title>Admin</title>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
@@ -126,7 +107,7 @@ if(checkAdminLogin()) {
                                 ]);
                                     var options = {
                                     pieHole: 0.4,
-                                    colors: ['#77dd77','#FEFE95','#ff6961','gainsboro'],
+                                    colors: ['#77dd77','#ff6961','#FEFE95','gainsboro'],
                                     chartArea:{
                                         left:70,
                                         width: '75%',
@@ -172,15 +153,6 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content2" style='display:none'>
-                <form action="adminMain.php" method="post">
-                <div id="delet" class="deletbox">
-                <input type="submit" name="deletelev" onclick='return confirm("Är du säker?");' value="submit">
-
-                </div>
-                <div id="delet5" class="deletbox">
-                <input type="submit" name="deletklass" onclick="return confirm('Är du säker?');" value="submit">
-                </div>
-                </form>
                     <!-- ELEV CONTENT HÄR -->
                     <div class="elevList">
                         <input id="elevSearch" type="text" placeholder="Sök efter elever...">
@@ -226,7 +198,6 @@ if(checkAdminLogin()) {
 
                                     success: function(data) {
                                         $('#restElever').html(data);
-                                        //klassPlats(plk);
                                     }
                                 });
                             };
@@ -301,14 +272,6 @@ if(checkAdminLogin()) {
                 </div>
 
                 <div class="views" id="content3" style='display:none'>
-                    <form action="adminMain.php" method="post">
-                    <div id="delet2" class="deletbox">
-                    <input type="submit" name="deletforetag" onclick="return confirm('Är du säker?'); value="submit">
-                    </div>
-                    <div id="delet6" class="deletbox">
-                    <input type="submit" name="delethandledare" onclick="return confirm('Är du säker?');" value="submit">
-                    </div>
-                </form>
                     <!-- FÖRETAG CONTENT HÄR -->
                     <div class="foretagList">
                         <div class="foretagListOptions">
@@ -331,15 +294,6 @@ if(checkAdminLogin()) {
                     </div>
                 </div>
                 <div class="views" id="content4" style='display:none'>
-                    <form action="adminMain.php" method="post">
-                    <div id="delet4" class="deletbox">
-                    <input type="submit" name="deletperiod" onclick="return confirm('Är du säker?');" value="submit">
-                    </div>
-                    </form>
-                    <!--Formen för updatering av period -->
-                    <form id='updatePeriod' method='post'>
-                        <div id="uppDiv"></div>
-                    </form>
                     <!-- PERIOD CONTENT HÄR -->
                     <div class="periodList">
                         <div class="foretagListOptions">
@@ -357,44 +311,6 @@ if(checkAdminLogin()) {
                 </div>
 
                 <div class="views" id="content6" style='display:none'>
-                <form action="adminMain.php" method="post">
-                    <div id="delet3" class="deletbox">
-                    <input type="submit" name="deletplats" onclick="return confirm('Är du säker?');" value="submit">
-                    </div>
-                </form>
-                <form class="uppdatebox" id="regPl" action="regPlatsHand.php" method="POST">
-                            <select id="ep">
-                            <?php
-                                $allElev = allElev($conn);
-
-                                echo "<option disabled selected> Välj Elev </option>";
-                                foreach ($allElev as $e) {
-                                    echo "<option value='".$e['elevID']."'> ".$e['elevID']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <select id="fp">
-                            <?php
-                                $foretag = allHandledare($conn);
-                                echo "<option disabled selected> Välj Företag </option>";
-                                foreach ($foretag as $f) {
-                                    echo "<option value='".$f['handledarID']."'> ".$f['fornamn'],$f['efternamn'],$f['namn']." </option>";
-                                }
-                            ?>
-                            </select>
-                            <select id="pp">
-                            <?php
-                                $allPeriod = allPeriod($conn);
-                                echo "<option disabled selected> Välj Period </option>";
-                                foreach ($allPeriod as $p) {
-                                    echo "<option value='".$p['periodNamn']."'> ".$p['periodNamn']." </option>";
-                                }
-                            
-                            echo'</select>'
-                            ?>
-                            <input type="hidden" id="pl">
-                            <input id="subPl" type="submit" value="Spara">
-                        </form>
                         <div class="platsList">
                             <div class="foretagListOptions">
                                 <h1>Platser</h1>
@@ -545,7 +461,7 @@ if(checkAdminLogin()) {
     </body>
         <script src="admin.js"></script>
     </html>
-    <?php   
+    <?php
 } else {
     echo "Please log in first to see this page <br></br>";
 }

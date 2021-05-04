@@ -6,8 +6,6 @@
     if(isset($_POST['klass'])) {
 
         $klass = $_POST['klass'];
-
-        //$_SESSION['klassNow'] = $klass;
         
         function elev($conn, $klass) {
 

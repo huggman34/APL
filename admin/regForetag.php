@@ -7,8 +7,5 @@
         $adress = $_POST['adress'];
 
         registerForetag($conn, $foretag, $adress);
-
-    } else {
-        echo "Fyll i alla fält";
     }
 ?>

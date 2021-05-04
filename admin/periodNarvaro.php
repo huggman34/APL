@@ -2,7 +2,9 @@
     require_once '../ViewFunctions.php';
     require_once '../connection.php';
 
+    if(isset($_POST['period'])) {
         $period = $_POST['period'];
+
         $narvaroData = periodNarvaro($conn, $period);
 
         $narvaro = array_column($narvaroData, 'narvaro');
@@ -59,4 +61,5 @@
         echo $franvaroCount;
         echo ';';
         echo $nullCount;
+    }
 ?>
