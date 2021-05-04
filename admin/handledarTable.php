@@ -1,4 +1,10 @@
 <?php
+/**
+ * Denna filen används för att kunna uppdatera handledar tabellen utan att behöva uppdatera webbsidan.
+ * handledar data hämtas från databasen med hjälp av allHandledare funktionen i ViewFunctions.php
+ * Sedan skriver den ut datan i en tabell. Denna tabellen visas upp genom att ladda in filen i en div
+ * med hjälp av Jquery load()
+ */
     require_once "../connection.php";
     require_once "../ViewFunctions.php";
 
