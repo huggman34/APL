@@ -1,7 +1,10 @@
 <?php
-    session_start();
+/**
+ * Denna filen används för att kunna filtrera elev tabellen genom AJAX request utan att behöva
+ * uppdatera webbsidan. Beroende på vilket värde som skickas in så skriver den ut tabllen
+ * med eleverna som ska visas upp. Som sedan appendas till en div på hemsidan.
+ */
     require_once '../connection.php';
-    header('Content-Type: text/html; charset=utf-8');
 
     if(isset($_POST['klass'])) {
 
