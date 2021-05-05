@@ -1,7 +1,7 @@
 <?php
 /**
  * Denna filen används för att kunna uppdatera period tabellen utan att behöva uppdatera webbsidan.
- * företags data hämtas från databasen med hjälp av foretag funktionen i ViewFunctions.php
+ * period data hämtas från databasen med hjälp av selectTabel funktionen i ViewFunctions.php
  * Sedan skriver den ut datan i en tabell. Denna tabellen visas upp genom att ladda in filen i en div
  * med hjälp av Jquery load()
  */
