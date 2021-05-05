@@ -5,41 +5,11 @@
  * med eleverna som ska visas upp. Som sedan appendas till en div på hemsidan.
  */
     require_once '../connection.php';
+    require_once '../ViewFunctions.php';
 
     if(isset($_POST['klass'])) {
-
         $klass = $_POST['klass'];
         
-        function elev($conn, $klass) {
-
-            if(empty($klass)) {
-                $sql = "SELECT elev.elevID, elev.fornamn, elev.efternamn, klass.klass, elev.epost, elev.telefon
-                FROM elev
-                INNER JOIN klass ON klass.klass = elev.klass";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $data = $result->fetch_all(MYSQLI_ASSOC);
-
-                return $data;
-
-            } else {
-                $sql = "SELECT elev.elevID, elev.fornamn, elev.efternamn, klass.klass, elev.epost, elev.telefon
-                FROM elev
-                INNER JOIN klass ON klass.klass = elev.klass
-                WHERE klass.klass = ?";
-        
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $klass);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $data = $result->fetch_all(MYSQLI_ASSOC);
-        
-                return $data;
-            }
-        }
-
         $elever = elev($conn, $klass);
 
         echo "<table class='elevTable'>";

@@ -5,26 +5,10 @@
  * Tillslut skrivs datan ut i en tabell som appendas i en div på hemsidan.
  */
     require_once '../connection.php';
+    require_once '../ViewFunctions.php';
 
     $elevID = $_POST['elevID'];
-    function elevNarvaro($conn, $elevID){
-
-        $sql = "SELECT narvaroID, foretag.namn,elev.elevID,narvaro.narvaro,dag.datum FROM narvaro 
-        INNER JOIN perioddag ON perioddag.perioddagID=narvaro.perioddagID
-        INNER JOIN plats ON plats.platsID=narvaro.platsID
-        INNER JOIN foretag ON foretag.foretagID=plats.foretagID
-        INNER JOIN elev ON elev.elevID=plats.elevID
-        INNER JOIN dag ON perioddag.dagID=dag.dagID 
-        WHERE elev.elevID=? ORDER BY dag.datum";
     
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $elevID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
-    }
-
     $elevNarvaro = elevNarvaro($conn, $elevID);
 
     if(!empty($elevNarvaro)){

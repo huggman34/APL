@@ -160,12 +160,10 @@
 
         if ($stmt->execute()){
             $elevID = $conn->query("SELECT plats.elevID FROM narvaro INNER JOIN plats ON plats.platsID = narvaro.platsID WHERE narvaro.narvaroID = $narvaroID")->fetch_object()->elevID;
-            //echo "Elev Narvaro updated";
             echo $elevID;
-            //header('Location: adminMain.php');
 
-        }else{
-        return "Error"; 
+        } else {
+            return "Error"; 
         }
     }
 
@@ -176,8 +174,8 @@
 
         if ($stmt->execute()){
             echo "Elev Narvaro updated";
-        }else{
-        return "Error"; 
+        } else {
+            return "Error"; 
         }
     }
 
