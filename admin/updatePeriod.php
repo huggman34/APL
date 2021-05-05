@@ -1,4 +1,9 @@
 <?php
+/**
+ * Denna fil används för att uppdatera periodtabellen. 
+ * När man klickar på en period för att uppdatera den så skickar den med periodID för att man enkelt ska kunna välja vad man vill uppdatera.
+ * Sedan väljer man start och slutdatum och kryssar i dagarna som man vill ska vara med i perioden.
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
     require_once '../ViewFunctions.php';
