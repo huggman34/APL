@@ -1,4 +1,9 @@
 <?php
+/**
+ * Denna filen används för att kunna koppla elev till en handledare och företag.
+ * periodID postas till filen, ID:et används för att leta efter elever som är kopplade till periodID
+ * men inte har någon handledare och företag.
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
     require_once '../ViewFunctions.php';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Det här filen inneholler alla app reqests.
+ * Det här filen innehåller alla app requests.
  *
  */
     require_once "../connection.php";
