@@ -1,4 +1,9 @@
 <?php
+/**
+ * Denna filen används för att kunna radera saker i databasen genom de olika delete funktionerna som finns
+ * i DeleteFunctions.php
+ * Ett ID skickas till filen via AJAX request som sedan sätter in ID:et i rätt funktion.
+ */
     require_once "../connection.php";
     require_once "../DeleteFunctions.php";
 

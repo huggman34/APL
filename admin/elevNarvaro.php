@@ -1,4 +1,9 @@
 <?php
+/**
+ * Denna filen används för att visa en elevs närvaro data, genom att elevens ID postas via AJAX request
+ * Sedan så används elevID i funktionen för att få fram elevens närvaro från databasen.
+ * Tillslut skrivs datan ut i en tabell som appendas i en div på hemsidan.
+ */
     require_once '../connection.php';
 
     $elevID = $_POST['elevID'];

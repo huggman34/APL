@@ -19,11 +19,7 @@
         return $data;
     }
     
-  $elev=selectTabel($conn,"elev");
-  
-        
-    
-     
+    $elev=selectTabel($conn,"elev");
 
     foreach ($elev as $e) {
         if (isset($_POST['platsKlass'])) {

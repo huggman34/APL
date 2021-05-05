@@ -6,7 +6,7 @@
  * Denna filen kommer att inkluderas i alla formulär filer som används för registrering.
  */
     function registerForetag($conn, $namn, $adress) {
-
+        //Kollar om företag med samma namn finns i databasen
         $dupeCheck = "SELECT * FROM foretag WHERE namn = ?";
         $stmt = $conn->prepare($dupeCheck);
         $stmt->bind_param("s", $namn);
@@ -15,6 +15,7 @@
         $result = $stmt->num_rows;
 
         if($result == 0) {
+            //Registrerar företaget om det inte redans finns
             $stmt = $conn->prepare("INSERT INTO foretag (namn, adress)
             VALUES (?, ?)");
             $stmt->bind_param("ss", $namn, $adress);
@@ -23,13 +24,14 @@
             echo "$namn har registrerats.";
 
         } else {
+            //Om företaget är redan registrerad så skrivs det ut
             $namnError = "$namn är redan registrerad";
             echo $namnError;
         }
     }
 
     function registerHandledare($conn, $foretagID, $fornamn, $efternamn, $epost, $telefon, $losenord) {
-
+        //Kollar om handledare med samma förnamn och efternamn finns
         $dupeCheck = "SELECT * FROM handledare WHERE fornamn = ? AND efternamn = ?";
         $stmt = $conn->prepare($dupeCheck);
         $stmt->bind_param("ss", $fornamn, $efternamn);
@@ -37,14 +39,17 @@
         $stmt->store_result();
         $result = $stmt->num_rows;
 
+        //Om handledaren inte finns
         if($result == 0) {
-            
+            //Hashar handledarens lösenord
             $hashed_losenord = password_hash($losenord, PASSWORD_DEFAULT);
-
+            
+            //Sätter in handledarens data i databasen
             $stmt = $conn->prepare("INSERT INTO handledare (foretagID, fornamn, efternamn, epost, telefon, losenord) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("isssss", $foretagID, $fornamn, $efternamn, $epost, $telefon, $hashed_losenord);
             $stmt->execute();
 
+            //Hämtar handledarens ID
             $last_id = mysqli_insert_id($conn);
 
             echo "$fornamn $efternamn är nu registrerad.";
@@ -52,6 +57,7 @@
             echo "$last_id";
             
         } else {
+            //Skrivs ut om handledaren redan är registrerad
             $namnError = "$fornamn $efternamn är redan registrerad";
             echo $namnError;
         }
@@ -62,6 +68,7 @@
         $efternamn = ucfirst($efternamn);
         $elevID = ucwords("$fornamn.$efternamn", ".");
     
+        //Kollar om elev med samma för och efternamn redan finns
         $dupeCheck = "SELECT * FROM elev WHERE fornamn = ? AND efternamn = ?";
     
         $stmt = $conn->prepare($dupeCheck);
@@ -70,7 +77,9 @@
         $stmt->store_result();
         $result = $stmt->num_rows;
     
+        //Om eleven inte finns
         if($result == 0) {
+            //Sätts elevens data i databasen
             $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass, epost, telefon) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssss", $elevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
@@ -81,9 +90,13 @@
             }
             
         } else {
+            //Om elev/elever med samma namn och efternamn redan finns plusas antalet med 1
             $count = $result+1;
+            
+            //Siffran läggs till i slutet av elevID
             $dupeElevID = $elevID.$count;
     
+            //Sätter elevens data och unika elevID i databasen
             $stmt = $conn->prepare("INSERT INTO elev (elevID, fornamn, efternamn, klass, epost, telefon) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssss", $dupeElevID, $fornamn, $efternamn, $klass, $epost, $telefon);
     
@@ -172,6 +185,7 @@
     }
 
     function registerKlass($conn, $klass) {
+        //Kollar om klassen är redan registrerad
         $dupeCheck = "SELECT * FROM klass WHERE klass = ?";
     
         $stmt = $conn->prepare($dupeCheck);
@@ -181,6 +195,7 @@
         $result = $stmt->num_rows;
 
         if($result == 0) {
+            //Om klassen inte finns registreras klassen
             $stmt = $conn->prepare("INSERT INTO klass (klass) VALUES (?)");
             $stmt->bind_param("s", $klass);
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Denna filen används för att visa upp elever som praktiserar hos ett företag genom att ta emot företagsID
+ * från ett AJAX request och visar alla elever och perioden de praktiserar/praktiserade hos företaget
+ */
     require_once '../connection.php';
     require_once '../ViewFunctions.php';
 

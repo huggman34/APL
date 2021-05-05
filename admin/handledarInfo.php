@@ -1,10 +1,15 @@
 <?php
+/**
+ * Denna filen används för att visa upp vilka elever en handledare har genom att ta emot handledarID
+ * från ett AJAX request för sedan hämta datan genim handledarInfo funktionen
+ * en tabell med datan som hämtas.
+ */
     require_once '../connection.php';
     require_once '../ViewFunctions.php';
 
     $handledarID = $_POST['handledarID'];
 
-    function handledarInfo($conn, $handledarID){
+    function handledarInfo($conn, $handledarID) {
 
         $sql = "SELECT plats.elevID, plats.periodNamn
         FROM plats

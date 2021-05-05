@@ -16,13 +16,10 @@
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
-
-return $data;
-}
+        return $data;
+    }
 
     $period=allHandledare($conn);
-
-
 
     echo "<table>";
     echo "<thead><tr><th>Elev</th><th>Klass</th><th>Period</th></tr></thead><tbody>";
