@@ -1,4 +1,11 @@
 <?php
+/**
+ * Denna filen används för att visa upp period närvaro data i cirkel diagrammet.
+ * En periodID skickas till filen genom ett AJAX request som
+ * används i periodNarvaro funktionen från ViewFunctions.php som hämtar all närvaro under den perioden.
+ * sen beräknas antalet närvarande, frånvarande, ogiltig frånvarande och oanmälda
+ * i närvaro tabellen, samt skriver ut värderna.
+ */
     require_once '../ViewFunctions.php';
     require_once '../connection.php';
 
@@ -11,13 +18,13 @@
         $periodNarvaro = array_filter($narvaro);
 
         function narvaroCount($periodNarvaro) {
-        $count = 0;
-        foreach ($periodNarvaro as $pN) {
-            if(in_array("1", $periodNarvaro)) {
-                $count++;
+            $count = 0;
+            foreach ($periodNarvaro as $pN) {
+                if(in_array("1", $periodNarvaro)) {
+                    $count++;
+                }
             }
-        }
-        return $count;
+            return $count;
         }
         $narvaroCount = narvaroCount($periodNarvaro);
 
@@ -48,9 +55,9 @@
             foreach ($narvaro as $n) {
                 if(is_null($n)) {
                     $null++;
+                }
             }
-        }
-        return $null;
+            return $null;
         }
         $nullCount = nullCount($narvaro);
 
