@@ -1,4 +1,9 @@
 <?php
+/**
+ * Denna fil används för att uppdatera handledartabellen. 
+ * När man klickar på en handledare för att uppdatera den så skickar den med handledarID för att man enkelt ska kunna välja vad man vill uppdatera.
+ * Sedan skriver man in vad man vill att det ska uppdateras till.
+ */
     require_once '../connection.php';
     require_once '../UpdateFunctions.php';
 
