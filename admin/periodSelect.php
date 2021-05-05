@@ -1,4 +1,8 @@
 <?php
+/**
+ * Denna filen används för att kunna koppla en period till elever.
+ * Alla elever från en klass som inte är kopplade till perioden som postas skrivs ut. 
+ */
     require_once '../connection.php';
     require_once '../RegisterFunctions.php';
     require_once '../ViewFunctions.php';
