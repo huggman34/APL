@@ -20,9 +20,7 @@
         return $data;
     }
     
-    /** 
-     * Väljer alla rader i närvaro tabellen där dagens datum är och där handledarens epost som matas in finns 
-     */
+    /**Väljer alla rader i närvaro tabellen där dagens datum är och där handledarens epost som matas in finns */
     function narvaroIdagForetag($conn,$foretag) {
         $sql = "SELECT narvaro.narvaroID,plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID
         FROM narvaro
@@ -43,7 +41,8 @@
     }
 
     /** 
-     * Väljer alla rader i närvaro tabellen där datumet som skickas in finns och där handledarens epost som matas in finns 
+     * Väljer alla rader i närvaro tabellen där datumet som skickas
+     * in finns och där handledarens epost som matas in finns 
      */
     function narvaroForetag($conn,$foretag,$dag) {
         $sql = "SELECT narvaro.narvaroID,plats.elevID, plats.periodNamn, narvaro.narvaro,plats.platsID,perioddag.perioddagID

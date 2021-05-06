@@ -5,14 +5,12 @@
  */
  
     function updatePeriod($conn,$newperiod,$startdatum,$slutdatum,$periodnamn,$dag) {
-
         $sql = "UPDATE period SET periodNamn=?, startdatum=?, slutdatum=? WHERE periodNamn=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssss",$newperiod,$startdatum,$slutdatum,$periodnamn);
         $stmt->execute();
 
         foreach ($dag as $datum) {
-
             $sql="SELECT dag.datum,perioddag.perioddagID FROM perioddag INNER JOIN dag ON perioddag.dagID=dag.dagID WHERE perioddag.periodNamn='$newperiod' AND dag.datum='$datum'";
             $query = $conn->query($sql);
             $result = $query->fetch_assoc(); 
@@ -85,8 +83,8 @@
         if ($stmt->execute()){
             echo "klass updated";
             header('Location: adminMain.php');
-        }else{
-        return "Error"; 
+        } else {
+            return "Error"; 
         }
     }
 
