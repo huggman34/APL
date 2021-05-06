@@ -1,7 +1,9 @@
+/** Onclick function för home ikon */
 $("#homeIcon").on('click', function() {
     $("#content2, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content1").css("display", "block");
 
+    /** Uppdatera dagens närvaro tabell */
     $("#narvaroIdagVy").load("narvaroIdagTable.php", function() {
         $(".narvaroTable td").each( function() {
             var thisCell = $(this);
@@ -23,15 +25,18 @@ $("#homeIcon").on('click', function() {
     }).fadeIn("slow");
 });
 
+/** Onclick function för elev ikon */
 $("#elevIcon").on('click', function() {
     $("#content1, #content3, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content2").css("display", "block");
 });
 
+/** Onclick function för företags ikon */
 $("#foretagIcon").on('click', function() {
     $("#content1, #content2, #content4, #content5, #content6, #content7").css("display", "none");
     $("#content3").css("display", "block");
 
+    /** Uppdatera företag och handledar tabell */
     $('#foretagVy').load("foretagTable.php", function() {
         loadColor();
     }).fadeIn("slow");
@@ -40,6 +45,7 @@ $("#foretagIcon").on('click', function() {
     }).fadeIn("slow");
 });
 
+/** Funktion för att text i tabellen ska behålla färgen när tabellen uppdateras */
 function loadColor() {
     if($("#foretagSaver").html().length) {
         var selectedForetag = $("#foretagSaver").text();
@@ -62,6 +68,7 @@ function loadColor() {
     }
 }
 
+/** Funktion för att ladda in alla tabeller på hemsidan */
 function loadTables() {
     $('#foretagVy').load("foretagTable.php").fadeIn("slow");
     $('#handledarVy').load("handledarTable.php").fadeIn("slow");
@@ -90,26 +97,32 @@ function loadTables() {
     }).fadeIn("slow");
 }
 
+/** Onclick function för period ikon */
 $("#periodIcon").on('click', function() {
     $("#content1, #content2, #content3, #content5, #content6, #content7").css("display", "none");
     $("#content4").css("display", "block");
 
+    /** Uppdatera period och klass tabell */
     $('#periodVy').load("periodTable.php").fadeIn("slow");
     $('#klassVy').load("klassTable.php").fadeIn("slow");
 });
 
+/** Onclick function för plats ikon */
 $("#platsIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content7").css("display", "none");
     $("#content6").css("display", "block");
 
+    /** Uppdatera plats tabellen */
     $('#platsVy').load("platsTable.php").fadeIn("slow");
 });
 
+/** Onclick function för register ikon */
 $("#regIcon").on('click', function() {
     $("#content1, #content2, #content3, #content4, #content5, #content6").css("display", "none");
     $("#content7").css("display", "block");
 });
 
+/** Funktion för att visa dropdown meny när man klickar en meny knapp */
 function toggleMenu(event) {
     var thisCell = event.parentElement;
     var menu = thisCell.lastChild;
@@ -121,6 +134,7 @@ function toggleMenu(event) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera elev data */
 function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     var update = document.createElement('div');
     update.className = "updateElev";
@@ -139,8 +153,7 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     <input id='telefon' type='tel' name='telefon' minlength='10' maxlength='10' value='"+telefon+"' required>\
     <button class='raderaBtn' type='submit'>Spara</button></form>";
 
-
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#updateElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
@@ -153,7 +166,7 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
             data: "{}",  
             success: function (data) {
                 var s = '';
-    
+
                 var myJson = JSON.parse(data);
     
                 for (var i = 0; i < myJson.length; i++) {  
@@ -162,9 +175,6 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
 
                 $("#eKlass").html(s);
                 $('#eKlass option').filter(function () { return $(this).html() == klass; }).attr('selected','selected');
-    
-                //alert(s);
-                //console.log(myJson);
             }  
         });
     });
@@ -178,6 +188,7 @@ function updateElev(elevID, fornamn, efternamn, klass, epost, telefon) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera en elev närvaro */
 function updateElevNarvaro(narvaroID, narvaro) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -205,7 +216,7 @@ function updateElevNarvaro(narvaroID, narvaro) {
             $('#elevNarvaro option[value=3]').attr('selected','selected');
         }
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#updateElevNarvaro form').append('<button type="button" class="cancelButton">Avbryt</button>');
     
             $(document).on('click', '.cancelButton', function() {
@@ -223,6 +234,7 @@ function updateElevNarvaro(narvaroID, narvaro) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera elev närvaro under dagen */
 function updateElevNarvaroIdag(narvaroID, narvaro) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -237,7 +249,7 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
     </select>\
     <input type='submit' value='Spara'></form>";
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         if(narvaro === 'Närvarande') {
             $('#elevNarvaroIdag option[value=1]').attr('selected','selected');
         }
@@ -250,12 +262,10 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
             $('#elevNarvaroIdag option[value=3]').attr('selected','selected');
         }
 
-        $(document).ready(function(){
-            $('#updateElevNarvaroIdag form').append('<button type="button" class="cancelButton">Avbryt</button>');
+        $('#updateElevNarvaroIdag form').append('<button type="button" class="cancelButton">Avbryt</button>');
     
-            $(document).on('click', '.cancelButton', function() {
-                $('#updateElevNarvaroIdag').remove();
-            });
+        $(document).on('click', '.cancelButton', function() {
+            $('#updateElevNarvaroIdag').remove();
         });
     });
 
@@ -268,6 +278,7 @@ function updateElevNarvaroIdag(narvaroID, narvaro) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera en period */
 function updatePeriod(periodID,slutdatum, startdatum) {
     var update = document.createElement('div');
     update.className = "updateElev";
@@ -283,7 +294,7 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     <div id='UdagList'></div>\
     <button type='submit' id='Usubmin'>Spara</button></form>";
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#updatePeriod form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
@@ -300,6 +311,7 @@ function updatePeriod(periodID,slutdatum, startdatum) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera ett företag */
 function updateForetag(foretagID, namn, adress) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -312,7 +324,7 @@ function updateForetag(foretagID, namn, adress) {
     <input id='foretagsAdress' type='text' name='adress' value='"+adress+"' required>\
     <button class='raderaBtn' type='submit'>Spara</button></form>";
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#updateForetag form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
@@ -329,6 +341,7 @@ function updateForetag(foretagID, namn, adress) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera en handledare */
 function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telefon) {
     var update = document.createElement('div');
     update.className = "updateElev";
@@ -347,7 +360,7 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
     <input id='Htelefon' type='tel' name='telefon' minlength='10' maxlength='10' value='"+telefon+"' required>\
     <button class='raderaBtn' type='submit'>Spara</button></form>";
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#updateHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
@@ -369,9 +382,6 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
 
                 $("#Hforetag").html(s);
                 $('#Hforetag option').filter(function () { return $(this).html() == foretag; }).attr('selected','selected');
-    
-                //alert(s);
-                //console.log(myJson);
             }  
         });
     });
@@ -385,6 +395,7 @@ function updateHandledare(handledarID, fornamn, efternamn, foretag, epost, telef
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera en klass */
 function updateKlass(klass) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -412,6 +423,7 @@ function updateKlass(klass) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att uppdatera en plats */
 function updatePlats(platsID, handledarID, periodNamn) {
     var update = document.createElement('div');
     update.className = "updateForetag";
@@ -423,7 +435,7 @@ function updatePlats(platsID, handledarID, periodNamn) {
     <select id='platsPeriod' type='text' name='period'></select>\
     <button class='raderaBtn' type='submit'>Spara</button></form>";
     
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#updatePlats form').append('<button type="button" class="cancelButton">Avbryt</button>');
 
         $(document).on('click', '.cancelButton', function() {
@@ -478,6 +490,7 @@ function updatePlats(platsID, handledarID, periodNamn) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att radera en klass */
 function deleteKlass(klass) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
@@ -503,13 +516,14 @@ function deleteKlass(klass) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att radera en handledare */
 function deleteHandledare(handledarID, fornamn, efternamn) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
     update.id = "deleteHandledare";
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteHandledare' value='"+handledarID+"'><button class='raderaBtn' onclick='deleteHandledareAjax();' type='button'>Radera</button></form>";
     
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#deleteHandledare form').append('<button type="button" class="cancelButton">Avbryt</button>');
         $('.deletePopUp form').append('<h1>Vill du radera '+fornamn+' '+efternamn+'?</h1>');
         $('.deletePopUp form').append('<div>Alla platser som handledaren är kopplad till kommer att raderas.</div>');
@@ -528,6 +542,7 @@ function deleteHandledare(handledarID, fornamn, efternamn) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att radera en elev */
 function deleteElev(elevID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
@@ -535,7 +550,7 @@ function deleteElev(elevID) {
     update.innerHTML = "<form action='deletePosts.php' method='POST'><input id='' type='hidden' name='deleteElev' value='"+elevID+"'><button class='raderaBtn' type='button' onclick='deleteElevAjax();'>Radera</button></form>";
     elev = elevID.split('.').join(' ');
     
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#deleteElev form').append('<button type="button" class="cancelButton">Avbryt</button>');
         $('.deletePopUp form').append('<h1>Vill du radera '+elev+'?</h1>');
         $('.deletePopUp form').append('<div>Alla platser som tillhör '+elev+' kommer att raderas.</div>');
@@ -554,24 +569,25 @@ function deleteElev(elevID) {
     }
 }
 
+/** Funktion för att ta bort pop ups när man klickar utan för pop up rutan */
 $(document).mouseup(function(e){
     var container = $(".updateForetag, .updateElev, .deletePopUp");
  
-    // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
         container.remove();
     }
 });
 
+/** Funktion för att gömma dropdown meny när man klickar utan för dropdown menyn */
 $(document).mouseup(function(e){
     var container = $(".elevMenu, .periodMenu, .handledarMenu, .klassMenu, .platsMenu, .foretagMenu");
- 
-    // If the target of the click isn't the container
+
     if(!container.is(e.target) && container.has(e.target).length === 0){
         container.hide();
     }
 });
 
+/** Funktion för att skapa pop up med ett formulär för att radera ett företag */
 function deleteForetag(foretagID, foretagNamn) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
@@ -597,6 +613,7 @@ function deleteForetag(foretagID, foretagNamn) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att radera en period */
 function deletePeriod(periodID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
@@ -622,6 +639,7 @@ function deletePeriod(periodID) {
     }
 }
 
+/** Funktion för att skapa pop up med ett formulär för att radera en plats */
 function deletePlats(platsID, elevID) {
     var update = document.createElement('div');
     update.className = "deletePopUp";
@@ -648,15 +666,15 @@ function deletePlats(platsID, elevID) {
     }
 }
 
-
+/** Onclick funktion för alla ikoner i navigation bar, där ikonen som klickas ändrar färg */
 $('.navbar svg').click(function() {
     $(this).addClass('toggle-state');
     $('.navbar svg').not(this).removeClass('toggle-state');
 });
 
-$(document).on('click','.elevTable tbody tr',function() {
+/** Onclick funktion för alla rader i elev tabellen */
+$(document).on('click','.elevTable tbody tr', function() {
     var row = $(this);
-
 
     if(row.hasClass('secondRow')) {
         var prevRow = row.prev();
@@ -671,11 +689,12 @@ $(document).on('click','.elevTable tbody tr',function() {
         var elev = fornamn+'.'+efternamn
 
         $.ajax({
-        url: 'elevNarvaro.php',
-        type: 'POST',
-        data: {
-            elevID: elev
-        },
+            url: 'elevNarvaro.php',
+            type: 'POST',
+            data: {
+                elevID: elev
+            },
+
             success: function(data) {
                 $('.narvaroView').html(data);
                 $(".elevNarvaro td").each( function() {
@@ -740,15 +759,20 @@ $(document).on('click','.elevTable tbody tr',function() {
     }
 });
 
-$(document).on('click','.foretagTable tbody tr',function(){
+/** Onclick funktion för alla rader i företags tabellen */
+$(document).on('click','.foretagTable tbody tr', function() {
     var row = $(this);
-    row.css("color", "#EC6FE4");
-    $(".foretagTable tbody tr").not(this).css("color", "black")
 
+    /** Ändra bara färg på texten i raden som klickades */
+    row.css("color", "#EC6FE4");
+    $(".foretagTable tbody tr").not(this).css("color", "black");
+
+    /** Hämta värdet i första rutan från raden som klickades */
     var foretag = row.find("td:first-child").text();
 
     $("#foretagSaver").html(foretag);
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         url: 'foretagInfo.php',
         type: 'POST',
@@ -780,6 +804,7 @@ $(document).on('click','.foretagTable tbody tr',function(){
     })
 });
 
+/** Onclick funktion för alla rader i handledar tabellen */
 $(document).on('click','.handledarTable tbody tr', function(){
     var row = $(this);
     row.css("color", "#EC6FE4");
@@ -814,12 +839,12 @@ $(document).on('click','.handledarTable tbody tr', function(){
                 if (cellValue == 'Oanmäld') {
                     thisCell.css("background-color","gainsboro");
                 }
-             }
-            )
+            })
         }
     })
 });
 
+/** Onclick funktion för viewForetag knappen, för att visa företag vy */
 $("#viewForetag").on('click', function(){
     $("#handledarVy").css("visibility", "hidden");
     $("#foretagVy").css("visibility", "visible");
@@ -831,7 +856,8 @@ $("#viewForetag").on('click', function(){
     $(".foretagView").show();
 });
 
-$("#viewHandledare").on('click', function(){
+/** Onclick funktion för viewHandledare knappen, för att visa handledar vy */
+$("#viewHandledare").on('click', function() {
     $("#foretagVy").css("visibility", "hidden");
     $("#handledarVy").css("visibility", "visible");
 
@@ -842,7 +868,7 @@ $("#viewHandledare").on('click', function(){
     $(".handledarView").show();
 });
 
-
+/** Sök funktion för att filtrera rader i elev tabellen */
 $(document).ready(function(){
     $("#elevSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -852,9 +878,12 @@ $(document).ready(function(){
     });
 });
 
+/** Submit funktion för regElev formuläret */
 $("#regElev").submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
     $('#elevKlass').blur();
     $("#klassDropdown").hide();
     $("#elevKlass").css("border-radius", "4px")
@@ -862,6 +891,8 @@ $("#regElev").submit(function(e) {
 
     var form = $(this);
     var url = form.attr('action');
+
+    /** Hämtar input data från formuläret */
     var namn = $("#namn").val();
     var efternamn = $("#efternamn").val();
     var elevKlass = $("#elevKlass").val();
@@ -869,6 +900,7 @@ $("#regElev").submit(function(e) {
     var nummer = $("#nummer").val();
     var periodn = $("#periodN").val();
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -879,10 +911,10 @@ $("#regElev").submit(function(e) {
             epost: epost,
             nummer: nummer,
             periodN: periodn
-        }, // serializes the form's elements.
+        },
 
         success: function(data) {
-            $("#snackbar").append(data);
+            $("#snackbar").html(data);
             if(data == "Fyll i alla fält") {
                 $("#snackbar").css("background-color", "#FF6961");
             } else {
@@ -942,26 +974,31 @@ $("#regElev").submit(function(e) {
     });
 });
 
+/** Submit funktion för regForetag formuläret */
 $("#regForetag").submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
     var form = $(this);
     var url = form.attr('action');
 
+    /** Hämtar input data från formuläret */
     var namn = $("#Fnamn").val();
     var adress = $("#adress").val();
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             namn: namn,
             adress: adress
-        }, // serializes the form's elements.
+        },
 
         success: function(data)
         {
-            $("#snackbar").append(data);
+            $("#snackbar").html(data);
             if(data == "Fyll i alla fält") {
                 $("#snackbar").css("background-color", "#FF6961");
             } else if ((~data.indexOf("är redan registrerad"))) {
@@ -975,21 +1012,25 @@ $("#regForetag").submit(function(e) {
     });
 });
 
+/** Submit funktion för regHandledare formuläret */
 $("#regHandledare").submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
     var form = $(this);
     var url = form.attr('action');
 
+    /** Hämtar input data från formuläret */
     var fornamn = $("#Hnamn").val();
     var efternamn = $("#Hefternamn").val();
     var epost = $("#Hepost").val();
     var telefon = $("#telefon").val();
     var losenord = $("#losenord").val();
     var foretagID = $("#foretagID").val();
-
     var foretagNamn = $( "#foretagID option:selected" ).text();
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1000,14 +1041,13 @@ $("#regHandledare").submit(function(e) {
             telefon: telefon,
             losenord: losenord,
             foretagID: foretagID
-        }, // serializes the form's elements.
+        },
 
-        success: function(data)
-        {
+        success: function(data) {
             msg = data.split(".")[0];
             handledarID = data.split(".")[1];
 
-            $("#snackbar").append(foretagNamn);
+            $("#snackbar").html(msg);
 
             if(data == "Fyll i alla fält") {
                 $("#snackbar").css("background-color", "#FF6961");
@@ -1028,33 +1068,13 @@ $("#regHandledare").submit(function(e) {
     });
 });
 
-$("#regKlass").submit(function(e) {
-
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
-    var form = $(this);
-    var url = form.attr('action');
-
-    var klass = $("#klassNamn").val();
-    
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-            klassNamn: klass
-        }, // serializes the form's elements.
-
-        success: function(data)
-        {
-            alert(data); // show response from the php script.
-            $("#regKlass")[0].reset();
-        }
-    });
-});
-
+/** Submit funktion för regPeriod formuläret */
 $("#regPeriod").submit(function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
     e.preventDefault();
     
+    /** Hämtar input datan från formuläret */
     var perio = $('#periodnamn').val();
     var start = $('#startdatum').val();
     var slut = $('#slutdatum').val();
@@ -1065,6 +1085,7 @@ $("#regPeriod").submit(function(e) {
         dag.push(this.value);
     });
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         url: 'regPeriod.php',
         type: 'POST',
@@ -1078,7 +1099,7 @@ $("#regPeriod").submit(function(e) {
     
         success: function(data) {
 
-            $("#snackbar").append(data);
+            $("#snackbar").html(data);
 
             if ((~data.indexOf("perioden har skapats"))) {
                 $("#snackbar").css("background-color", "#77DD77");
@@ -1126,19 +1147,25 @@ $("#regPeriod").submit(function(e) {
     });
 });
 
-$(document).on('submit', '#updatePeriod form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera period formuläret */
+$(document).on('submit', '#updatePeriod form', function(e) {
+
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
     
+    /** Hämtar input datan från formuläret */
     var perio = $('#Uperiodnamn').val();
     var start = $('#Ustartdatum').val();
     var slut = $('#Uslutdatum').val();
     var subin = $('#Usubmin').val();
     var perioID = $('#periodID').val();
     var dag = [];
+
     $("input[name='UperiodDag']:checked").each(function(){
         dag.push(this.value);
     });
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         url: 'updatePeriod.php',
         type: 'POST',
@@ -1152,53 +1179,68 @@ $(document).on('submit', '#updatePeriod form', function(e){
         },
     
         success: function(data) {
-            //$('#UdagList').html(data);
-            //alert(data);
             $("#updatePeriod").remove();
             $('#periodVy').load("periodTable.php").fadeIn("slow");
         }
     });
 });
 
+/** Submit funktion för regPlatsHand formuläret */
 $("#regPlatsHand").submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar URL från action attribute i form taggen */
     var form = $(this);
     var url = form.attr('action');
+
+    /** Hämtar input datan från formuläret */
     var hand =$("#platsHandledare").val();
     var elev = [];
-    $("input[name='elevPlats']:checked").each(function(){
-     elev.push(this.value);
- });
+
+    $("input[name='elevPlats']:checked").each(function() {
+        elev.push(this.value);
+    });
+
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             elev: elev,
             handledare: hand
-        }, // serializes the form's elements.
+        },
 
-        success: function(data)
-        {
-            alert(data); // show response from the php script.
+        success: function(data) {
+            alert(data);
             $("#regPlatsHand")[0].reset();
             $("#platsElever").empty();
         }
     });
 });
 
+/** Submit funktion för regPlats formuläret */
 $("#regPlats").submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar URL från action attribute i form taggen */
     var form = $(this);
     var url = form.attr('action');
+
+    /** Hämtar input datan från formuläret */
     var foretag = $("#platsForetag").val();
     var period = $("#platsPeriod").val();
-    var hand =$("#platsHandledare").val();
+    var hand = $("#platsHandledare").val();
     var elev = [];
+
     $("input[name='elevPeriod']:checked").each(function(){
-     elev.push(this.value);
- });
+        elev.push(this.value);
+    });
+
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1207,12 +1249,10 @@ $("#regPlats").submit(function(e) {
             foretag: foretag,
             period: period,
             handledare: hand
-        }, // serializes the form's elements.
+        },
 
-        success: function(data)
-        {
-            //alert(data); // show response from the php script.
-            $("#snackbar").append(data);
+        success: function(data) {
+            $("#snackbar").html(data);
 
             if ((~data.indexOf("har lagts till"))) {
                 $("#snackbar").css("background-color", "#77DD77");
@@ -1227,30 +1267,13 @@ $("#regPlats").submit(function(e) {
     });
 });
 
-$(".button2").on('click', function() {
-    $("#regElev").css("display", "none");
-    $("#regKlass").css("display", "block");
-    $(".button2").css("background-color", "#4C4C4C");
-    $(".button").css("background-color", "darkgray");
-});
-
-$(".button").on('click', function() {
-    $("#regKlass").css("display", "none");
-    $("#regElev").css("display", "block");
-    $(".button").css("background-color", "#4C4C4C");
-    $(".button2").css("background-color", "darkgray");
-});
-
-if($("#regElev").css("display") == "block") {
-    $(".button").css("background-color", "#4C4C4C");
-}
-
 $(document).ready(function(){
     $("#elevReg").addClass("active");
     $('.regContent').children().hide();
     $('.regContent').append($('#elevForm'));
     $("#elevForm").css("display", "block");
 
+    /** Onclick funktion för att visa elev reg formuläret när man klickar på det alternativet i listan */
     $('#elevReg').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
@@ -1262,6 +1285,7 @@ $(document).ready(function(){
         $("#elevForm").css("display", "block");
     });
 
+    /** Onclick funktion för att visa företag reg formuläret när man klickar på det alternativet i listan */
     $('#foretagReg').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
@@ -1273,6 +1297,7 @@ $(document).ready(function(){
         $("#foretagForm").css("display", "block");
     });
 
+    /** Funktion för att uppdatera företag select options när man ska registrera handledare */
     function updateForetagSelect() {
         $.ajax({  
             type: "GET",  
@@ -1288,13 +1313,11 @@ $(document).ready(function(){
                 }
 
                 $("#foretagID").html(s);
-    
-                //alert(s);
-                //console.log(myJson);
             }  
         });
     }
 
+    /** Onclick funktion för att visa handledar reg formuläret när man klickar på det alternativet i listan */
     $('#handledarReg').on('click', function() {
         updateForetagSelect();
 
@@ -1308,6 +1331,10 @@ $(document).ready(function(){
         $("#handledarForm").css("display", "block");
     });
 
+    /**
+     * Onclick funktion för att visa formuläret där man kopplar elever till en period
+     * när man klickar på det alternativet i listan
+     */
     $('#platsDel1').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
@@ -1319,6 +1346,10 @@ $(document).ready(function(){
         $("#platsDel1Form").css("display", "block");
     });
 
+    /**
+     * Onclick funktion för att visa formuläret där man kopplar handledare och företag till en elev
+     * när man klickar på det alternativet i listan
+     */
     $('#platsDel2').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
@@ -1330,7 +1361,11 @@ $(document).ready(function(){
         $("#platsDel2Form").css("display", "block");
     });
     
-
+    
+    /**
+     * Onclick funktion för att visa formuläret där man registrerar en period
+     * Om man klickar på det alternativet i listan.
+     */
     $('#periodReg').on('click', function() {
         if($('.regMenu li div').hasClass("active")) {
             $('.regMenu li div').removeClass("active");
@@ -1343,16 +1378,14 @@ $(document).ready(function(){
     });
 });
 
+/** Snackbar funktion som används när något registreras */
 function snackbar() {
     var x = document.getElementById("snackbar");
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
-    setTimeout(function() { 
-        $("#snackbar").empty();
-    }, 3010);
 }
-    
+
+/** Visa klass dropdown när input field är fokuserad */
 $(document).on('focus', '#elevKlass', function(e) {
     $("#klassDropdown").show();
     $("#klassDropdown option").show();
@@ -1360,12 +1393,17 @@ $(document).on('focus', '#elevKlass', function(e) {
     $("#klassDropdown").css({"padding": "0.5% 0.5%", "border": "1px solid #ccc"});
 });
 
+/**
+ * Onclick funktion för klass dropdown options.
+ * När man klickar på ett alternativ så sätts värdet i input fielden
+ */
 $(document).on('click', '#klassDropdown option', function(e) {
     var text = $(e.target).text()
     var val = $.trim(text)
     $("#elevKlass").val(val);
 });
 
+/** Funktion för att filtrera klasser i klass dropdown meny */
 $(document).ready(function(){
     $("#elevKlass").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -1382,31 +1420,34 @@ $(document).ready(function(){
     });
 });
 
-$(document).mouseup(function(e) 
-{
+/** Funktion för att gömma select klass dropdown när man klickar utanför dropdown menyn */
+$(document).mouseup(function(e) {
     var container = $("#elevKlass");
     var dropdown = $("#klassDropdown");
-    // if the target of the click isn't the container nor a descendant of the container
+
     if (!container.is(e.target) && container.has(e.target).length === 0) {
         dropdown.hide();
         container.css("border-radius", "4px")
     }
 });
 
+/** Funktion för att radera företag via AJAX request */
 function deleteForetagAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar företagID från formuläret */
     var foretagID = $("#deleteForetag form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             deleteForetag: foretagID
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
-            //alert(data);
-
             $("#deleteForetag").remove();
             $('#foretagVy').load("foretagTable.php").fadeIn("slow");
 
@@ -1419,10 +1460,15 @@ function deleteForetagAjax() {
     });
 }
 
+/** Funktion för att radera handledare via AJAX request */
 function deleteHandledareAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar handledarID från formuläret */
     var handledarID = $("#deleteHandledare form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1443,16 +1489,21 @@ function deleteHandledareAjax() {
     });
 }
 
+/** Funktion för att radera klass via AJAX request */
 function deleteKlassAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar klassID från formuläret */
     var klass = $("#deleteKlass form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             deleteKlass: klass
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#deleteKlass").remove();
@@ -1473,16 +1524,21 @@ function deleteKlassAjax() {
     })
 }
 
+/** Funktion för att radera period via AJAX request */
 function deletePeriodAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar periodID från formuläret */
     var period = $("#deletePeriod form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             deletePeriod: period
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#deletePeriod").remove();
@@ -1499,16 +1555,21 @@ function deletePeriodAjax() {
     })
 }
 
+/** Funktion för att radera plats via AJAX request */
 function deletePlatsAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar platsID från formuläret */
     var plats = $("#deletePlats form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             deletePlats: plats
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#deletePlats").remove();
@@ -1517,10 +1578,15 @@ function deletePlatsAjax() {
     })
 }
 
+/** Funktion för att radera elev via AJAX request */
 function deleteElevAjax() {
+
+    /** Filen där AJAX request skickas */
     var url = "deletePosts.php";
+    /** Hämtar elevID från formuläret */
     var elevID = $("#deleteElev form input[type=hidden]").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1535,14 +1601,19 @@ function deleteElevAjax() {
     })
 }
 
-$(document).on('submit', '#updatePlats form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera plats formuläret */
+$(document).on('submit', '#updatePlats form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updatePlats.php";
     var platsID = $("#updatePlats form input[type=hidden]").val();
     var handledarID = $("#platsHandledare").val();
     var periodNamn = $("#platsPeriod").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1550,7 +1621,7 @@ $(document).on('submit', '#updatePlats form', function(e){
             platsID: platsID,
             handledarID: handledarID,
             periodNamn: periodNamn
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updatePlats").remove();
@@ -1559,14 +1630,19 @@ $(document).on('submit', '#updatePlats form', function(e){
     })
 });
 
-$(document).on('submit', '#updateForetag form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera företag formuläret */
+$(document).on('submit', '#updateForetag form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateForetag.php";
     var foretagID = $("#updateForetag form input[type=hidden]").val();
     var foretagsNamn = $("#foretagsNamn").val();
     var foretagsAdress = $("#foretagsAdress").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1574,7 +1650,7 @@ $(document).on('submit', '#updateForetag form', function(e){
             foretagID: foretagID,
             namn: foretagsNamn,
             adress: foretagsAdress
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updateForetag").remove();
@@ -1583,20 +1659,25 @@ $(document).on('submit', '#updateForetag form', function(e){
     })
 });
 
-$(document).on('submit', '#updateKlass form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera klass formuläret */
+$(document).on('submit', '#updateKlass form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateKlass.php";
     var klass = $("#updateKlass form input[type=hidden]").val();
     var nyKlass = $("#nyKlass").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             klass: klass,
             nyKlass: nyKlass
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updateKlass").remove();
@@ -1605,20 +1686,25 @@ $(document).on('submit', '#updateKlass form', function(e){
     })
 });
 
-$(document).on('submit', '#updateElevNarvaro form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera elev närvaro formuläret */
+$(document).on('submit', '#updateElevNarvaro form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateElevNarvaro.php";
     var narvaroID = $("#updateElevNarvaro form input[type=hidden]").val();
     var narvaro = $("#elevNarvaro").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             narvaroID: narvaroID,
             narvaro: narvaro
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updateElevNarvaro").remove();
@@ -1627,20 +1713,25 @@ $(document).on('submit', '#updateElevNarvaro form', function(e){
     })
 });
 
-$(document).on('submit', '#updateElevNarvaroIdag form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för uppdatera elev närvaron idag */
+$(document).on('submit', '#updateElevNarvaroIdag form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateElevNarvaro.php";
     var narvaroID = $("#updateElevNarvaroIdag form input[type=hidden]").val();
     var narvaro = $("#elevNarvaroIdag").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
         data: {
             narvaroID: narvaroID,
             narvaro: narvaro
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updateElevNarvaroIdag").remove();
@@ -1670,6 +1761,7 @@ $(document).on('submit', '#updateElevNarvaroIdag form', function(e){
     })
 });
 
+/** Uppdatera elev narvaro view */
 function updateElevNarvaroView(elevID) {
     $(".narvaroView").load("elevNarvaro.php", {
         elevID: elevID
@@ -1694,9 +1786,13 @@ function updateElevNarvaroView(elevID) {
     }).fadeIn("slow");
 }
 
-$(document).on('submit', '#updateHandledare form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för att uppdatera handledare genom updateHandledare formuläret */
+$(document).on('submit', '#updateHandledare form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateHandledare.php";
     var handledarID = $("#updateHandledare form input[type=hidden]").val();
     var fornamn = $("#Hfornamn").val();
@@ -1705,6 +1801,7 @@ $(document).on('submit', '#updateHandledare form', function(e){
     var epost = $("#Hepost").val();
     var tel = $("#Htelefon").val();
 
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1715,7 +1812,7 @@ $(document).on('submit', '#updateHandledare form', function(e){
             foretagID: foretagID,
             epost: epost,
             telefon: tel
-        }, // serializes the form's elements.
+        },
     
         success: function(data) {
             $("#updateHandledare").remove();
@@ -1724,9 +1821,13 @@ $(document).on('submit', '#updateHandledare form', function(e){
     })
 });
 
-$(document).on('submit', '#updateElev form', function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.s
+/** Submit funktion för att uppdatera elev data genom updateElev formuläret */
+$(document).on('submit', '#updateElev form', function(e) {
 
+    /** Undvik att skicka formuläret genom själv formuläret */
+    e.preventDefault();
+
+    /** Hämtar input datan från formuläret */
     var url = "updateElev.php";
     var elevID = $("#updateElev form input[type=hidden]").val();
     var fornamn = $("#fornamn").val();
@@ -1735,6 +1836,7 @@ $(document).on('submit', '#updateElev form', function(e){
     var epost = $("#epost").val();
     var tel = $("#telefon").val();
     
+    /** AJAX POST request med datan som hämtas */
     $.ajax({
         type: "POST",
         url: url,
@@ -1745,7 +1847,7 @@ $(document).on('submit', '#updateElev form', function(e){
             klass: klass,
             epost: epost,
             telefon: tel
-        }, // serializes the form's elements.
+        },
 
         success: function(data) {
             $("#updateElev").remove();
