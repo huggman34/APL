@@ -10,7 +10,7 @@ function narvaroRap($conn,$fdatum,$sdatum) {
     INNER JOIN perioddag ON perioddag.perioddagID = narvaro.perioddagID
     INNER JOIN dag ON dag.dagID = perioddag.dagID
     INNER JOIN elev ON elev.elevID=plats.elevID
-    WHERE dag.datum >= ? AND dag.datum <= ? AND narvaro.narvaro IS NOT NULL ORDER BY elev.klass";
+    WHERE dag.datum >= ? AND dag.datum <= ? AND narvaro.narvaro IS NOT NULL ORDER BY klass";
   
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $fdatum,$sdatum);
@@ -48,7 +48,7 @@ $elevNarvaro=narvaroRap($conn,$_POST['fdatum'],$_POST['sdatum']);
         echo "<tr><td>";
         echo $column['elevID'];
         echo "</td><td>";
-        echo $column['narvaroID'];
+        echo $column['klass'];
         echo "</td><td>";
         echo $column['periodNamn'];
         echo "</td><td>";
