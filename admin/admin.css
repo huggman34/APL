@@ -1514,12 +1514,9 @@ h1 {
 }
 
 .deletbox{
-    width: 20%;
-    height: 20%;
-    z-index: 4;
-    position: absolute;
+    width: 50%;
+    height: 10%;
     background-color: lawngreen;
-    visibility: hidden;
 }
 
 .exit {
