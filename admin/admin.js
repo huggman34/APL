@@ -470,7 +470,6 @@ function updatePlats(platsID, handledarID, periodNamn) {
         
                 var myJson = JSON.parse(data);
 
-        
                 for (var i = 0; i < myJson.length; i++) {  
                     s += '<option value="' + myJson[i].periodNamn + '">'+ myJson[i].periodNamn +'</option>';  
                 }
