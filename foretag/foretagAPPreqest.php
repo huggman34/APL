@@ -13,12 +13,17 @@
         if(isset($_GET['submit'])) {
             $narvaro =narvaroIdagForetag($conn, $_GET['username']);
             $narv['dagnarvaro'] = array();
+            if (empty($narvaro)) {
+                $noidag= array('svar' =>'no more');
+                array_push($narv['dagnarvaro'],$varo);
+            }else {
+                
             foreach ($narvaro as $varo) {
-            
            
             array_push($narv['dagnarvaro'],$varo);
            
             }
+        }
             echo json_encode($narv);
         }
         if (isset($_GET['shicka'])) {
